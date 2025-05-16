@@ -1,50 +1,35 @@
-<style>
-    .rating01 i{
-        margin-right: 0px;
-    }
- 
-</style>
-
-<div class="text-left d-none">
+<div class="text-left h-100 d-flex flex-column justify-content-between ">
+    <div class="productallDetails">
     <!-- Product Name -->
-    <h2 class="mb-2 fs-16 fw-700 text-dark">
-        {{ $detailedProduct->getTranslation('name') }}
-    </h2>
-
-    <div class="row align-items-center mb-2">
-        <!-- Review -->
-        @if ($detailedProduct->auction_product != 1)
-            <div class="col-12">
-                @php
-                    $total = 0;
-                    $total += $detailedProduct->reviews->count();
-                @endphp
-                <span class="rating rating-mr-1 rating01" >
-                    {{ renderStarRating($detailedProduct->rating) }}
-                </span>
-
-                <span class="ml-1 opacity-50 fs-14">({{ $total }}
-                    {{ translate('reviews') }})</span>
-
-            </div>
-        @endif
-        <!-- Estimate Shipping Time -->
+    <div class="singleproductTitle mb-2">
+        <h1>{{ $detailedProduct->getTranslation('name') }}</h1>
+    </div>
+    
+    {{-- 
+        Commented By DeveloperAK
+    <div class="row align-items-center mb-3"> 
+        <!-- Estimate Shipping Time --> 
+        <!-- Commented By DeveloperAK
         @if ($detailedProduct->est_shipping_days)
             <div class="col-auto fs-14 mt-1">
                 <small class="mr-1 opacity-50 fs-14">{{ translate('Estimate Shipping Time') }}:</small>
                 <span class="fw-500">{{ $detailedProduct->est_shipping_days }} {{ translate('Days') }}</span>
             </div>
-        @endif
+        @endif -->
+
         <!-- In stock -->
+        <!-- Commented By DeveloperAK (if digital is set 1 in product table)
         @if ($detailedProduct->digital == 1)
             <div class="col-12 mt-1">
                 <span class="badge badge-md badge-inline badge-pill badge-success">{{ translate('In stock') }}</span>
             </div>
-        @endif
-    </div>
-    <div class="row align-items-center">
-        @if(get_setting('product_query_activation') == 1)
-            <!-- Ask about this product -->
+        @endif -->
+    </div> --}}
+
+    {{-- Commented By DeveloperAK 
+        <div class="row align-items-center">
+        <!-- Ask about this product - Commented by DeveloperAK  -->
+        <!-- @if(get_setting('product_query_activation') == 1)
             <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 mb-3">
                 <a href="javascript:void();" onclick="goToView('product_query')" class="text-primary fs-14 fw-600 d-flex">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
@@ -65,40 +50,111 @@
                     <span class="ml-2 text-primary animate-underline-blue">{{ translate('Product Inquiry') }}</span>
                 </a>
             </div>
-        @endif
+        @endif -->
         <div class="col mb-3">
-            @if ($detailedProduct->auction_product != 1)
+            <!-- @if ($detailedProduct->auction_product != 1)  Commented By DeveloperAK (we have removed auction system permanently form this project)-->
                 <div class="d-flex">
                     <!-- Add to wishlist button -->
-                    <a href="javascript:void(0)" onclick="addToWishList({{ $detailedProduct->id }})"
+                    <!-- Commented By DeveloperAK
+                     <a href="javascript:void(0)" onclick="addToWishList({{ $detailedProduct->id }})"
                         class="mr-3 fs-14 text-dark opacity-60 has-transitiuon hov-opacity-100">
                         <i class="la la-heart-o mr-1"></i>
                         {{ translate('Add to Wishlist') }}
-                    </a>
+                    </a> -->
                     <!-- Add to compare button -->
-                    <a href="javascript:void(0)" onclick="addToCompare({{ $detailedProduct->id }})"
+                    <!-- Commented By DeveloperAK
+                     <a href="javascript:void(0)" onclick="addToCompare({{ $detailedProduct->id }})"
                         class="fs-14 text-dark opacity-60 has-transitiuon hov-opacity-100">
                         <i class="las la-sync mr-1"></i>
                         {{ translate('Add to Compare') }}
-                    </a>
+                    </a> -->
                 </div>
-            @endif
+            <!-- @endif  Commented By DeveloperAK (we have removed auction system permanently form this project)-->
         </div>
-    </div>
+    </div> --}}
 
+     <!-- Review -->
+        @if ($detailedProduct->auction_product != 1)
+        <div class="row no-gutters mb-3">
+            <div class="col-12 relevents">
+                @php
+                    $total = 0;
+                    $total += $detailedProduct->reviews->count();
+                @endphp
+                <span class="rating rating-mr-1">
+                    {{ renderStarRating($detailedProduct->rating) }} 
+
+                     <div class="ratinghoverBox">
+                        <div> 
+                            <div class="reviewRatings">
+                                <p>Rating(s)</p>
+                                <p>{{ $total }} out of 5 stars</p>
+                            </div>
+                            <div class="d-flex align-items-center progress-container">
+                                <span>5<i class="ri-star-s-fill"></i></span>
+                                <div class="progress progressBar w-100"> 
+                                    <div class="progress-bar progressbars" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                 </div>
+                                 <span> 50</span>
+                            </div>
+
+                            <div class="d-flex align-items-center progress-container">
+                                <span>4<i class="ri-star-s-fill"></i></span>
+                                <div class="progress progressBar w-100"> 
+                                    <div class="progress-bar progressbars" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                 </div>
+                                 <span> 50</span>
+                            </div>
+                           
+                            <div class="d-flex align-items-center progress-container">
+                                <span>3<i class="ri-star-s-fill"></i></span>
+                                <div class="progress progressBar w-100">
+                                    <div class="progress-bar progressbars" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <span> 40</span>
+                            </div>
+
+                            <div class="d-flex align-items-center progress-container">
+                                <span>2<i class="ri-star-s-fill"></i></span>
+                                <div class="progress progressBar w-100">
+                                    <div class="progress-bar progressbars" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <span> 30</span>
+                            </div>
+
+                            <div class="d-flex align-items-center progress-container">
+                                <span>1<i class="ri-star-s-fill"></i></span>
+                                <div class="progress progressBar w-100">
+                                    <div class="progress-bar progressbars" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <span> 20</span>
+                            </div>
+                        </div>
+                     </div>
+                </span>  
+
+                <span class="ml-1 opacity-50 fs-14">{{ $detailedProduct->rating }}/5</span>
+                <span class="ml-1 opacity-50 fs-14">|</span>
+                <span class="ml-1 opacity-50 fs-14">{{ $total }}
+                    {{ translate('rating') }}</span>
+                <span class="ml-1 opacity-50 fs-14">&</span> 
+                    <span class="ml-1 opacity-50 fs-14">{{ $total }}
+                    {{ translate('review') }}</span>
+            </div> 
+        </div>
+        @endif
 
     <!-- Brand Logo & Name -->
+    <!-- Commented By DeveloperAK (brand name and logo is not visible in naykaa thats why removed from here)
     @if ($detailedProduct->brand != null)
         <div class="d-flex flex-wrap align-items-center mb-3">
             <span class="text-secondary fs-14 fw-400 mr-4 w-50px">{{ translate('Brand') }}</span><br>
             <a href="{{ route('products.brand', $detailedProduct->brand->slug) }}"
                 class="text-reset hov-text-primary fs-14 fw-700">{{ $detailedProduct->brand->name }}</a>
         </div>
-    @endif
+    @endif -->
 
-    <!-- Seller Info -->
- {{--
-
+    <!-- Seller Info  if product is added by seller then this section is visible with seller shop name -->
     <div class="d-flex flex-wrap align-items-center">
         <div class="d-flex align-items-center mr-4">
             <!-- Shop Name -->
@@ -106,12 +162,13 @@
                 <span class="text-secondary fs-14 fw-400 mr-4 w-50px">{{ translate('Sold by') }}</span>
                 <a href="{{ route('shop.visit', $detailedProduct->user->shop->slug) }}"
                     class="text-reset hov-text-primary fs-14 fw-700">{{ $detailedProduct->user->shop->name }}</a>
-            @else
-                <p class="mb-0 fs-14 fw-700">{{ translate('Inhouse product') }}</p>
+            {{-- Commented By DeveloperAK
+                    @else
+                <p class="mb-0 fs-14 fw-700">{{ translate('Inhouse product') }}</p> --}}
             @endif
         </div>
-        <!-- Messase to seller -->
-        @if (get_setting('conversation_system') == 1)
+        <!-- Messase to seller Comment by DeveloperAK-->
+        <!-- @if (get_setting('conversation_system') == 1)
             <div class="">
                 <button class="btn btn-sm btn-soft-secondary-base btn-outline-secondary-base hov-svg-white hov-text-white rounded-4"
                     onclick="show_chat_modal()">
@@ -131,13 +188,13 @@
                                 d="M131.349,99.312h5a.5.5,0,1,1,0,1h-5a.5.5,0,1,1,0-1"
                                 transform="translate(-1181 -346.5)" fill="{{ get_setting('secondary_base_color', '#ffc519') }}" />
                         </g>
-                    </svg>
-
+                    </svg> 
                     {{ translate('Message Seller') }}
                 </button>
             </div>
-        @endif
-        <!-- Size guide -->
+        @endif -->
+
+        <!-- Size guide  -->
         @php
             $sizeChartId = ($detailedProduct->main_category && $detailedProduct->main_category->sizeChart) ? $detailedProduct->main_category->sizeChart->id : 0;
             $sizeChartName = ($detailedProduct->main_category && $detailedProduct->main_category->sizeChart) ? $detailedProduct->main_category->sizeChart->name : null;
@@ -147,235 +204,187 @@
                 <a href="javascript:void(1);" onclick='showSizeChartDetail({{ $sizeChartId }}, "{{ $sizeChartName }}")' class="animate-underline-primary">{{ translate('Show size guide') }}</a>
             </div>
         @endif
-    </div>
+    </div> 
+    <!-- <hr> -->
 
-  --}}
-
-    <hr>
-
-    <!-- For auction product -->
-    @if ($detailedProduct->auction_product)
-    {{-- -
+    @if ($detailedProduct->wholesale_product == 1)
+        <!-- Wholesale -->
+        <table class="table mb-3">
+            <thead>
+                <tr>
+                    <th class="border-top-0">{{ translate('Min Qty') }}</th>
+                    <th class="border-top-0">{{ translate('Max Qty') }}</th>
+                    <th class="border-top-0">{{ translate('Unit Price') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($detailedProduct->stocks->first()->wholesalePrices as $wholesalePrice)
+                    <tr>
+                        <td>{{ $wholesalePrice->min_qty }}</td>
+                        <td>{{ $wholesalePrice->max_qty }}</td>
+                        <td>{{ single_price($wholesalePrice->price) }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
+    <!-- Without Wholesale -->
+    @if (home_price($detailedProduct) != home_discounted_price($detailedProduct))
         <div class="row no-gutters mb-3">
-            <div class="col-sm-2">
-                <div class="text-secondary fs-14 fw-400 mt-1">{{ translate('Auction Will End') }}</div>
-            </div>
+            <!-- <div class="col-sm-1">
+                <div class="text-secondary fs-14 fw-400">{{ translate('MRP') }}:</div>
+            </div> -->
             <div class="col-sm-10">
-                @if ($detailedProduct->auction_end_date > strtotime('now'))
-                    <div class="aiz-count-down align-items-center"
-                        data-date="{{ date('Y/m/d H:i:s', $detailedProduct->auction_end_date) }}"></div>
-                @else
-                    <p>{{ translate('Ended') }}</p>
-                @endif
+                <div class="align-items-center">
+                    <span class="opacity-70 fs-16 mr-2 fw-500">{{ translate('MRP') }}: </span>
+                    <del class="opacity-70 fs-16 mr-2">
+                        {{ home_price($detailedProduct) }}
+                    </del>
+                 
+                    <!-- Home Price -->
+                 
+                    <!-- Discount Price -->
+                    <strong class="fs-20 fw-700">
+                        {{ home_discounted_price($detailedProduct) }}
+                    </strong>
+                    
+                    <!-- Unit -->
+                    <!-- Commented By DeveloperAK
+                     @if ($detailedProduct->unit != null)
+                        <span class="opacity-70 ml-1">/{{ $detailedProduct->getTranslation('unit') }}</span>
+                    @endif -->
+                    <!-- Discount percentage -->
+                    @if(discount_in_percentage($detailedProduct) > 0)
+                        <span class="ml-2 fs-16 fw-700 text-center p-1"
+                            style="padding-top:2px;padding-bottom:2px; color:green;">{{ discount_in_percentage($detailedProduct) }}% OFF</span>
+                    @endif  
 
-            </div>
-        </div>
-
-        <div class="row no-gutters mb-3">
-            <div class="col-sm-2">
-                <div class="text-secondary fs-14 fw-400 mt-1">{{ translate('Starting Bid') }}</div>
-            </div>
-            <div class="col-sm-10">
-                <span class="opacity-50 fs-20">
-                    {{ single_price($detailedProduct->starting_bid) }}
-                </span>
-                @if ($detailedProduct->unit != null)
-                    <span class="opacity-70">/{{ $detailedProduct->getTranslation('unit') }}</span>
-                @endif
-            </div>
-        </div>
-     --}}
-
-        @if (Auth::check() &&
-                Auth::user()->product_bids->where('product_id', $detailedProduct->id)->first() != null)
-            <div class="row no-gutters mb-3">
-                <div class="col-sm-2">
-                    <div class="text-secondary fs-14 fw-400 mt-1">{{ translate('My Bidded Amount') }}</div>
+                    <p class="fs-16 fw-400 opacity-60">exclusive of all taxes</p> 
+                    <!-- Club Point -->
+                    <!-- Commented By DeveloperAK
+                    @if (addon_is_activated('club_point') && $detailedProduct->earn_point > 0)
+                        <div class="ml-2 bg-secondary-base d-flex justify-content-center align-items-center px-3 py-1"
+                                    style="width: fit-content;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                        viewBox="0 0 12 12">
+                                        <g id="Group_23922" data-name="Group 23922" transform="translate(-973 -633)">
+                                            <circle id="Ellipse_39" data-name="Ellipse 39" cx="6"
+                                                cy="6" r="6" transform="translate(973 633)"
+                                                fill="#fff" />
+                                            <g id="Group_23920" data-name="Group 23920"
+                                                transform="translate(973 633)">
+                                                <path id="Path_28698" data-name="Path 28698"
+                                                    d="M7.667,3H4.333L3,5,6,9,9,5Z" transform="translate(0 0)"
+                                                    fill="#f3af3d" />
+                                                <path id="Path_28699" data-name="Path 28699"
+                                                    d="M5.33,3h-1L3,5,6,9,4.331,5Z" transform="translate(0 0)"
+                                                    fill="#f3af3d" opacity="0.5" />
+                                                <path id="Path_28700" data-name="Path 28700"
+                                                    d="M12.666,3h1L15,5,12,9l1.664-4Z" transform="translate(-5.995 0)"
+                                                    fill="#f3af3d" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <small class="fs-11 fw-500 text-white ml-2">{{ translate('Club Point') }}:
+                                        {{ $detailedProduct->earn_point }}</small>
+                        </div>
+                    @endif -->
                 </div>
-                <div class="col-sm-10">
-                    <span class="opacity-50 fs-20">
-                        {{ single_price(Auth::user()->product_bids->where('product_id', $detailedProduct->id)->first()->amount) }}
-                    </span>
-                </div>
-            </div>
-            <hr>
-        @endif
-
-        @php $highest_bid = $detailedProduct->bids->max('amount'); @endphp
-        <div class="row no-gutters my-2 mb-3">
-            <div class="col-sm-2">
-                <div class="text-secondary fs-14 fw-400 mt-1">{{ translate('Highest Bid') }}</div>
-            </div>
-            <div class="col-sm-10">
-                <strong class="h3 fw-600 text-primary">
-                    @if ($highest_bid != null)
-                        {{ single_price($highest_bid) }}
-                    @endif
-                </strong>
             </div>
         </div>
     @else
-        <!-- Without auction product -->
-        @if ($detailedProduct->wholesale_product == 1)
-            <!-- Wholesale -->
-            <table class="table mb-3">
-                <thead>
-                    <tr>
-                        <th class="border-top-0">{{ translate('Min Qty') }}</th>
-                        <th class="border-top-0">{{ translate('Max Qty') }}</th>
-                        <th class="border-top-0">{{ translate('Unit Price') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($detailedProduct->stocks->first()->wholesalePrices as $wholesalePrice)
-                        <tr>
-                            <td>{{ $wholesalePrice->min_qty }}</td>
-                            <td>{{ $wholesalePrice->max_qty }}</td>
-                            <td>{{ single_price($wholesalePrice->price) }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @else
-            <!-- Without Wholesale -->
-         @if (home_price($detailedProduct) != home_discounted_price($detailedProduct))
 
-                <div class="row no-gutters mb-3">
-                    <div class="col-sm-2">
-                        <div class="text-secondary fs-14 fw-400">{{ translate('Price') }}</div>
-                    </div>
-                    <div class="col-sm-10">
-                        <div class="d-flex align-items-center">
-                            <!-- Discount Price -->
-                            <strong class="fs-16 fw-700 text-primary">
-                                {{ home_discounted_price($detailedProduct) }}
-                            </strong>
-                            <!-- Home Price -->
-                            <del class="fs-14 opacity-60 ml-2">
-                                {{ home_price($detailedProduct) }}
-                            </del>
-                            <!-- Unit -->
-                            @if ($detailedProduct->unit != null)
-                                <span class="opacity-70 ml-1">/{{ $detailedProduct->getTranslation('unit') }}</span>
-                            @endif
-                            <!-- Discount percentage -->
-                            @if (discount_in_percentage($detailedProduct) > 0)
-                                <span class="bg-primary ml-2 fs-11 fw-700 text-white w-35px text-center p-1"
-                                    style="padding-top:2px;padding-bottom:2px;">-{{ discount_in_percentage($detailedProduct) }}%</span>
-                            @endif
-                            <!-- Club Point -->
-                            @if (addon_is_activated('club_point') && $detailedProduct->earn_point > 0)
-                                <div class="ml-2 bg-secondary-base d-flex justify-content-center align-items-center px-3 py-1"
-                                    style="width: fit-content;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                                        viewBox="0 0 12 12">
-                                        <g id="Group_23922" data-name="Group 23922" transform="translate(-973 -633)">
-                                            <circle id="Ellipse_39" data-name="Ellipse 39" cx="6"
-                                                cy="6" r="6" transform="translate(973 633)"
-                                                fill="#fff" />
-                                            <g id="Group_23920" data-name="Group 23920"
-                                                transform="translate(973 633)">
-                                                <path id="Path_28698" data-name="Path 28698"
-                                                    d="M7.667,3H4.333L3,5,6,9,9,5Z" transform="translate(0 0)"
-                                                    fill="#f3af3d" />
-                                                <path id="Path_28699" data-name="Path 28699"
-                                                    d="M5.33,3h-1L3,5,6,9,4.331,5Z" transform="translate(0 0)"
-                                                    fill="#f3af3d" opacity="0.5" />
-                                                <path id="Path_28700" data-name="Path 28700"
-                                                    d="M12.666,3h1L15,5,12,9l1.664-4Z" transform="translate(-5.995 0)"
-                                                    fill="#f3af3d" />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                    <small class="fs-11 fw-500 text-white ml-2">{{ translate('Club Point') }}:
-                                        {{ $detailedProduct->earn_point }}</small>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
+    <div class="row no-gutters mb-3">
+        <!-- <div class="col-sm-2">
+        <span class="opacity-70 fs-16 mr-2 fw-500">{{ translate('MRP') }}: </span>
+        </div> -->
+        <div class="col-sm-10">
+        <div class="align-items-center">
+              <!-- Discount Price -->
+        <span class="opacity-70 fs-16 mr-2 fw-500">{{ translate('MRP') }}: </span>
+        <strong class="fs-20 fw-700">
+                    {{ home_discounted_price($detailedProduct) }}
+                </strong>
+                <p class="fs-16 fw-400 opacity-60">exclusive of all taxes</p>
+        </div>
+    
+    </div> 
+                
+                <!-- Unit -->
+                <!-- Commented By DeveloperAK
+                @if ($detailedProduct->unit != null)
+                    <span class="opacity-70">/{{ $detailedProduct->getTranslation('unit') }}</span>
+                @endif -->
 
-            @else
-                <div class="row no-gutters mb-3">
+                <!-- Club Point -->
+                <!-- Commented By DeveloperAK
+                @if (addon_is_activated('club_point') && $detailedProduct->earn_point > 0)
+                    <div class="ml-2 bg-secondary-base d-flex justify-content-center align-items-center px-3 py-1"
+                        style="width: fit-content;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                            viewBox="0 0 12 12">
+                            <g id="Group_23922" data-name="Group 23922" transform="translate(-973 -633)">
+                                <circle id="Ellipse_39" data-name="Ellipse 39" cx="6"
+                                    cy="6" r="6" transform="translate(973 633)"
+                                    fill="#fff" />
+                                <g id="Group_23920" data-name="Group 23920"
+                                    transform="translate(973 633)">
+                                    <path id="Path_28698" data-name="Path 28698"
+                                        d="M7.667,3H4.333L3,5,6,9,9,5Z" transform="translate(0 0)"
+                                        fill="#f3af3d" />
+                                    <path id="Path_28699" data-name="Path 28699"
+                                        d="M5.33,3h-1L3,5,6,9,4.331,5Z" transform="translate(0 0)"
+                                        fill="#f3af3d" opacity="0.5" />
+                                    <path id="Path_28700" data-name="Path 28700"
+                                        d="M12.666,3h1L15,5,12,9l1.664-4Z" transform="translate(-5.995 0)"
+                                        fill="#f3af3d" />
+                                </g>
+                            </g>
+                        </svg>
+                        <small class="fs-11 fw-500 text-white ml-2">{{ translate('Club Point') }}:
+                            {{ $detailedProduct->earn_point }}</small>
+                    </div>
+                @endif -->
 
-                {{-- -
-                    <div class="col-sm-2">
-                        <div class="text-secondary fs-14 fw-400">{{ translate('Price') }}</div>
-                    </div>
-              
-                    <div class="col-sm-10">
-                        <div class="d-flex align-items-center">
-                            <!-- Discount Price -->
-                            <strong class="fs-16 fw-700 text-primary">
-                                {{ home_discounted_price($detailedProduct) }}
-                            </strong>
-                            <!-- Unit -->
-                            @if ($detailedProduct->unit != null)
-                                <span class="opacity-70">/{{ $detailedProduct->getTranslation('unit') }}</span>
-                            @endif
-                            <!-- Club Point -->
-                            @if (addon_is_activated('club_point') && $detailedProduct->earn_point > 0)
-                                <div class="ml-2 bg-secondary-base d-flex justify-content-center align-items-center px-3 py-1"
-                                    style="width: fit-content;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                                        viewBox="0 0 12 12">
-                                        <g id="Group_23922" data-name="Group 23922" transform="translate(-973 -633)">
-                                            <circle id="Ellipse_39" data-name="Ellipse 39" cx="6"
-                                                cy="6" r="6" transform="translate(973 633)"
-                                                fill="#fff" />
-                                            <g id="Group_23920" data-name="Group 23920"
-                                                transform="translate(973 633)">
-                                                <path id="Path_28698" data-name="Path 28698"
-                                                    d="M7.667,3H4.333L3,5,6,9,9,5Z" transform="translate(0 0)"
-                                                    fill="#f3af3d" />
-                                                <path id="Path_28699" data-name="Path 28699"
-                                                    d="M5.33,3h-1L3,5,6,9,4.331,5Z" transform="translate(0 0)"
-                                                    fill="#f3af3d" opacity="0.5" />
-                                                <path id="Path_28700" data-name="Path 28700"
-                                                    d="M12.666,3h1L15,5,12,9l1.664-4Z" transform="translate(-5.995 0)"
-                                                    fill="#f3af3d" />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                    <small class="fs-11 fw-500 text-white ml-2">{{ translate('Club Point') }}:
-                                        {{ $detailedProduct->earn_point }}</small>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-   --}}
-                </div>
-            @endif
-        @endif
+            
+    </div>
+    @endif
     @endif
  
-
-    @if ($detailedProduct->auction_product != 1)
+  
         <form id="option-choice-form">
             @csrf
             <input type="hidden" name="id" value="{{ $detailedProduct->id }}">
 
             @if ($detailedProduct->digital == 0)
                 <!-- Choice Options -->
+                <!-- <div class="c0l-12 mt-3">
+                    <div class="size">
+                        <ul class="itemSize selectSize">
+                            <li class="itemSizeList active">M</li>
+                            <li class="itemSizeList">L</li>
+                            <li class="itemSizeList">XL</li>
+                            <li class="itemSizeList 4">S</li>
+                            <li class="itemSizeList">2XL</li>
+                            <li class="itemSizeList">XS</li>
+                        </ul>
+                            </div>
+                </div> -->
                 @if ($detailedProduct->choice_options != null)
                     @foreach (json_decode($detailedProduct->choice_options) as $key => $choice)
                         <div class="row no-gutters mb-3">
-                            <div class="col-sm-2">
+                            <!-- <div class="col-sm-2">
                                 <div class="text-secondary fs-14 fw-400 mt-2 ">
                                     {{ get_single_attribute_name($choice->attribute_id) }}
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-sm-10">
                                 <div class="aiz-radio-inline">
                                     @foreach ($choice->values as $key => $value)
                                         <label class="aiz-megabox pl-0 mr-2 mb-0">
-                                            <input type="radio" name="attribute_id_{{ $choice->attribute_id }}"
-                                                value="{{ $value }}"
+                                            <input type="radio" name="attribute_id_{{ $choice->attribute_id }}" value="{{ $value }}"
                                                 @if ($key == 0) checked @endif>
-                                            <span
-                                                class="aiz-megabox-elem rounded-0 d-flex align-items-center justify-content-center py-1 px-3">
-                                                {{ $value }}
-                                            </span>
+                                            <span class="aiz-megabox-elem rounded-0 d-flex align-items-center justify-content-center py-1 px-3" style="border-radius:30px !important;">{{ $value }}</span>
                                         </label>
                                     @endforeach
                                 </div>
@@ -387,64 +396,90 @@
                 <!-- Color Options -->
                 @if ($detailedProduct->colors != null && count(json_decode($detailedProduct->colors)) > 0)
                     <div class="row no-gutters mb-3">
-                        <div class="col-sm-2">
-                            <div class="text-secondary fs-14 fw-400 mt-2">{{ translate('Color') }}</div>
-                        </div>
-                        <div class="col-sm-10">
-                            <div class="aiz-radio-inline">
-                                @foreach (json_decode($detailedProduct->colors) as $key => $color)
-                                    <label class="aiz-megabox pl-0 mr-2 mb-0" data-toggle="tooltip"
-                                        data-title="{{ get_single_color_name($color) }}">
-                                        <input type="radio" name="color"
-                                            value="{{ get_single_color_name($color) }}"
-                                            @if ($key == 0) checked @endif>
-                                        <span
-                                            class="aiz-megabox-elem rounded-0 d-flex align-items-center justify-content-center p-1">
-                                            <span class="size-25px d-inline-block rounded"
-                                                style="background: {{ $color }};"></span>
-                                        </span>
-                                    </label>
-                                @endforeach
+                        <!-- <div class="col-2">
+                            <div class="text-secondary fs-14 fw-400 mt-2">{{ translate('Color') }}</div> 
+                        </div> -->
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
+                                 <select class="selectColor12">
+                                    <option>Selected item</option>
+                                    <option>Selected item 1</option>
+                                    <option>Selected item 2</option>
+                                    <option>Selected item 3</option>
+                                    <option>Selected item 4</option>
+                                 </select>
+                                 <div>
+                                        <button class="buttonsElement">All Shades (4)</button>
+                                 </div>
                             </div>
                         </div>
+                        <div class="col-12 d-flex" style="gap:15px">
+                            <div class="selectedcolor" style="background:;" ></div>
+                            <div class="w-100 p-3" style="border: 1px solid rgba(111, 121, 129, 0.22);">
+                                <div class="aiz-radio-inline"> 
+                                    @foreach (json_decode($detailedProduct->colors) as $key => $color)
+                                        <label class="aiz-megabox pl-0 mr-2 mb-0" data-toggle="tooltip"
+                                            data-title="{{ get_single_color_name($color) }}">
+                                            <input type="radio" name="color"
+                                                value="{{ get_single_color_name($color) }}"
+                                                @if ($key == 0) checked @endif>
+                                             <span class="aiz-megabox-elem rounded-0 d-flex align-items-center justify-content-center coloractive" style="border: none;">
+                                                <span class="size-25px d-inline-block rounded thiscolor" data-label="{{ $color }}"
+                                                    style="background: {{ $color }};"></span>
+                                            </span>
+                                        </label>
+                                    @endforeach
+                                </div>
+                            </div> 
+                        </div>  
                     </div>
-                @endif  
+                @endif
 
                 <!-- Quantity + Add to cart -->
                 <div class="row no-gutters mb-3">
-                    <div class="col-sm-2">
+                    <!--  Commented By DeveloperAK
+                <div class="col-sm-2">
                         <div class="text-secondary fs-14 fw-400 mt-2">{{ translate('Quantity') }}</div>
-                    </div>
+                    </div> -->
                     <div class="col-sm-10">
                         <div class="product-quantity d-flex align-items-center">
-                            <div class="row no-gutters align-items-center aiz-plus-minus mr-3" style="width: 130px;">
-                                <button class="btn col-auto btn-icon btn-sm btn-light rounded-0" type="button"
-                                    data-type="minus" data-field="quantity" disabled="">
-                                    <i class="las la-minus"></i>
-                                </button>
-                                <input type="number" name="quantity"
+                            <!-- Commented By DeveloperAK
+                                <div class="row no-gutters align-items-center aiz-plus-minus mr-3" style="width: 130px;">
+                                        Commented By DeveloperAK
+                                        <button class="btn col-auto btn-icon btn-sm btn-light rounded-0" type="button"
+                                            data-type="minus" data-field="quantity" disabled="">
+                                            <i class="las la-minus"></i>
+                                        </button>  
+                                        <input type="hidden" name="quantity"
+                                            class="col border-0 text-center flex-grow-1 fs-16 input-number" placeholder="1"
+                                            value="{{ $detailedProduct->min_qty }}" min="{{ $detailedProduct->min_qty }}"
+                                            max="10" lang="en">
+                                        Commented By DeveloperAK
+                                            <button class="btn col-auto btn-icon btn-sm btn-light rounded-0" type="button"
+                                                data-type="plus" data-field="quantity">
+                                                <i class="las la-plus"></i>
+                                            </button>  
+                                    </div> -->
+
+                            <input type="hidden" name="quantity"
                                     class="col border-0 text-center flex-grow-1 fs-16 input-number" placeholder="1"
                                     value="{{ $detailedProduct->min_qty }}" min="{{ $detailedProduct->min_qty }}"
                                     max="10" lang="en">
-                                <button class="btn col-auto btn-icon btn-sm btn-light rounded-0" type="button"
-                                    data-type="plus" data-field="quantity">
-                                    <i class="las la-plus"></i>
-                                </button>
-                            </div>
                             @php
                                 $qty = 0;
                                 foreach ($detailedProduct->stocks as $key => $stock) {
                                     $qty += $stock->qty;
                                 }
                             @endphp
-                            <div class="avialable-amount opacity-60">
+                            
+                             <div class="avialable-amount opacity-60">
                                 @if ($detailedProduct->stock_visibility_state == 'quantity')
                                     (<span id="available-quantity">{{ $qty }}</span>
                                     {{ translate('available') }})
                                 @elseif($detailedProduct->stock_visibility_state == 'text' && $qty >= 1)
                                     (<span id="available-quantity">{{ translate('In Stock') }}</span>)
                                 @endif
-                            </div>
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -454,6 +489,7 @@
             @endif
 
             <!-- Total Price -->
+            <!--  Commented By DeveloperAK
             <div class="row no-gutters pb-3 d-none" id="chosen_price_div">
                 <div class="col-sm-2">
                     <div class="text-secondary fs-14 fw-400 mt-1">{{ translate('Total Price') }}</div>
@@ -465,36 +501,10 @@
                         </strong>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </form>
-    @endif
-
-    @if ($detailedProduct->auction_product)
-        @php
-            $highest_bid = $detailedProduct->bids->max('amount');
-            $min_bid_amount = $highest_bid != null ? $highest_bid + 1 : $detailedProduct->starting_bid;
-        @endphp
-        @if ($detailedProduct->auction_end_date >= strtotime('now'))
-            <div class="mt-4">
-                @if (Auth::check() && $detailedProduct->user_id == Auth::user()->id)
-                    <span
-                        class="badge badge-inline badge-danger">{{ translate('Seller cannot Place Bid to His Own Product') }}</span>
-                @else
-                    <button type="button" class="btn btn-primary buy-now  fw-600 min-w-150px rounded-0"
-                        onclick="bid_modal()">
-                        <i class="las la-gavel"></i>
-                        @if (Auth::check() &&
-                                Auth::user()->product_bids->where('product_id', $detailedProduct->id)->first() != null)
-                            {{ translate('Change Bid') }}
-                        @else
-                            {{ translate('Place Bid') }}
-                        @endif
-                    </button>
-                @endif
-            </div>
-        @endif
-    @else
+    
         <!-- Add to cart & Buy now Buttons -->
         <div class="mt-3">
             @if ($detailedProduct->digital == 0)
@@ -504,20 +514,106 @@
                         <i class="la la-share"></i> {{ translate($detailedProduct->external_link_btn) }}
                     </a>
                 @else
-                    <button type="button"
-                        class="btn btn-primary mb-3 mb-sm-0 btn-block rounded-0"
-                        @if (Auth::check() || get_Setting('guest_checkout_activation') == 1) onclick="addToCart()" @else onclick="showLoginModal()" @endif>
-                        <i class="las la-shopping-bag"></i> {{ translate('Add to cart') }}
-                    </button>
-                    <button type="button" class="btn btn-primary mb-3 mb-sm-0 btn-block rounded-0"
-                        @if (Auth::check() || get_Setting('guest_checkout_activation') == 1) onclick="addToCart()" @else onclick="showLoginModal()" @endif>
-                        <i class="la la-shopping-cart"></i> {{ translate('Buy Now') }}
-                    </button>
-                @endif
-                <button type="button" class="btn btn-secondary out-of-stock fw-600 d-none" disabled>
+                <div class="row">
+            <div class="col-sm-5 d-flex justify-content-center align-items-center">
+                <button type="button"
+                  class="AddToCart add-to-cart"
+                  @if (Auth::check() || get_Setting('guest_checkout_activation') == 1) onclick="addToCart()" @else onclick="showLoginModal()" @endif
+                  >Add To Cart</button>
+                  <button type="button" class="btn btn-secondary out-of-stock fw-600 d-none" disabled>
                     <i class="la la-cart-arrow-down"></i> {{ translate('Out of Stock') }}
                 </button>
-            @elseif ($detailedProduct->digital == 1)
+            </div> 
+
+            <div class="col-sm-7" style="border-left: 1px solid rgb(111 121 129 / 22%);">
+                 <div class="delivery-container">
+                        <div id="deliveryPincode" style="display: nne;">
+                            <div class="areaDetails pincodeDetails textsizeisSame">
+                                <span style="margin-right: 0.25rem;"><i class="ri-map-pin-line"></i></span>
+                                <span>
+                                     Delivery options for
+                                    <span style="color:#f60;" id="userPincode"></span>
+                                </span>
+                                <button class="changepincode" id="changepincode">Change</button>
+                            </div>
+
+                            <div class="shipping-2">
+                                <div class="mtmb2" id="notShipping_pincode">
+                                    <span class="textsizeisSame d-flex align-items-center">
+                                        <span class="text-danger" style="font-size: 16px;"><b>
+                                            <i class="ri-close-fill"></i></b></span>
+                                             Does not ship to pincode
+                                    </span>
+                                </div>
+
+                                <div class="mtmb2" id="Shipping_thisPincode">
+                                    <div class="textsizeisSame">
+                                       <span class="text-success" style="font-size: 16px;"><b><i class="ri-check-line"></i></b></span>
+                                        Shipping to: <span id="placeName"> </span>
+                                     </div>
+                                    <div class="textsizeisSame">
+                                        <span class="text-success" style="font-size: 16px;"><b><i class="ri-check-line"></i></b></span>
+                                        Delivery by: <span>Sun, 23 Mar</span>
+                                     </div>
+                                    <div class="textsizeisSame">
+                                        <span class="text-success" style="font-size: 16px;"><b><i class="ri-check-line"></i></b></span>
+                                        Free delivery above <span>₹299</span>
+                                     </div>
+                                    <div class="textsizeisSame">
+                                       <span class="text-success" style="font-size: 16px;"><b><i class="ri-check-line"></i></b></span>
+                                        COD available 
+                                    </div> 
+                                </div>
+                            </div>
+
+                            <div class="textsizeisSame tooltiptext">
+                                <span class="textsizeisSame d-flex align-items-center">
+                                    <span 
+                                          style="font-size: 19px; margin-right: 3px; cursor: pointer;"
+                                          data-toggle="tooltip" title="Some tooltip text!">
+                                           <i class="ri-information-line"></i>
+                                     </span> Moro info</span> 
+                                    <div class="tooltip bs-tooltip-top" role="tooltip">
+                                        <div class="arrow"></div>
+                                        <div class="tooltip-inner bgwhite" >
+                                            Some tooltip text!
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="inputPincode" id="pincode_element"> 
+                                <div>
+                                    <span class="d-2002"><i class="ri-map-pin-line"></i> Delivery Options</span>
+                                </div>
+
+                                <form id="delivery_option_pincode">
+                                    <div class="areaCheckWith_pincode"> 
+                                        <input type="number" placeholder="Enter Pincode" required id="delivery_pincode">
+                                        <button id="delivery_option" type="submit">Check</button>
+                                    </div>
+                                    <p class="text-danger validPincode" id="validPincode" style="display: none;">Please enter valid pincode</p>
+                                </form>  
+                        </div>
+                 </div>
+            </div>
+        </div>
+
+        <!-- Commented By DeveloperAK
+        <button type="button"
+            class="btn btn-primary mb-3 mb-sm-0 btn-block rounded-0"
+            @if (Auth::check() || get_Setting('guest_checkout_activation') == 1) onclick="addToCart()" @else onclick="showLoginModal()" @endif>
+            <i class="las la-shopping-bag"></i> {{ translate('Add to cart') }}
+        </button> -->
+        <!-- Commented By DeveloperAK
+         <button type="button" class="btn btn-primary mb-3 mb-sm-0 btn-block rounded-0"
+            @if (Auth::check() || get_Setting('guest_checkout_activation') == 1) onclick="addToCart()" @else onclick="showLoginModal()" @endif>
+            <i class="la la-shopping-cart"></i> {{ translate('Buy Now') }}
+        </button> -->
+        @endif
+        
+                <!-- 
+                Commented By DeveloperAK (if digital product is 1 the show this)
+                 @elseif ($detailedProduct->digital == 1)
                 <button type="button"
                     class="btn btn-secondary-base mr-2 add-to-cart fw-600 min-w-150px rounded-0 text-white"
                     @if (Auth::check() || get_Setting('guest_checkout_activation') == 1) onclick="addToCart()" @else onclick="showLoginModal()" @endif>
@@ -527,10 +623,11 @@
                     @if (Auth::check() || get_Setting('guest_checkout_activation') == 1) onclick="addToCart()" @else onclick="showLoginModal()" @endif>
                     <i class="la la-shopping-cart"></i> {{ translate('Buy Now') }}
                 </button>
+                 -->
             @endif
         </div>
-
         <!-- Promote Link -->
+        <!--  Commented By DeveloperAK
         <div class="d-table width-100 mt-3">
             <div class="d-table-cell">
                 @if (Auth::check() &&
@@ -555,9 +652,10 @@
                     </div>
                 @endif
             </div>
-        </div>
+        </div> -->
 
         <!-- Refund -->
+        <!--  Commented By DeveloperAK
         @php
             $refund_sticker = get_setting('refund_sticker');
         @endphp
@@ -582,9 +680,10 @@
                     @endif
                 </div>
             </div>
-        @endif
+        @endif -->
 
         <!-- Seller Guarantees -->
+        <!--  Commented By DeveloperAK
         @if ($detailedProduct->digital == 1)
             @if ($detailedProduct->added_by == 'seller')
                 <div class="row no-gutters mt-3">
@@ -600,11 +699,10 @@
                     </div>
                 </div>
             @endif
-        @endif
-    @endif
-
+        @endif -->
+    
     <!-- Share -->
-      {{-- -
+    <!-- Commentedn By DeveloperAK
     <div class="row no-gutters mt-4">
         <div class="col-sm-2">
             <div class="text-secondary fs-14 fw-400 mt-2">{{ translate('Share') }}</div>
@@ -612,205 +710,40 @@
         <div class="col-sm-10">
             <div class="aiz-share"></div>
         </div>
-    </div> 
-    --}}
-</div>
+    </div> -->
 
 
+ </div>
+   </div>
 
-<!--- new cart section start -->
-
-<div class="cartDetails-newAdd">
-    <div>
-        <div class="singleproductTitle mb-2">
-           <h1>GHD Rise Hot Blow Brushes </h1>
-           <span>(5pc)</span>
-        </div>
-        <div>
-           @if ($detailedProduct->auction_product != 1)
-                <div class="d-flex">
-                    <!-- Add to wishlist button -->
-                     <span class="textsizeisSame">
-                        <a href="javascript:void(0)" onclick="addToWishList({{ $detailedProduct->id }})"
-                            class="mr-3 fs-14 text-dark opacity-60 has-transitiuon hov-opacity-100">
-                            <i class="la la-heart-o mr-1"></i>
-                            {{ translate('Add to Wishlist') }}
-                        </a> 
-                     </span> 
+<!--- new cart section start --> 
+<div class="cartDetails-newAdd d-flex align-items-end w-100">
+    <div class="Return_Policy mt-4 w-100">
+        <div class="row thisrelative">
+            <div class="col-md-4 thisone"> 
+                <div class="genuineProducts d-flex gap-2 align-items-center w-100">
+                    <span class="h-21h"><i class="ri-text-wrap"></i></span>
+                    <span class="genuineProducts" style="display:inline-block">100% Genuine Products</span>
                 </div>
-            @endif
-        </div>
-        <div class="ratings-product mb-3">
-               <span>
-                    <a href="">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-half-line"></i>
-                        <span>4.4/5</span>
-                    </a>
-               </span> 
-               <span>
-                    <a href="" class="productReview">14439 ratings & 1510 reviews</a>
-               </span>        
-        </div>
-        <div>
-            <span class="mrptext">MRP:</span>
-            <span class="productMrp">₹20000 </span>
-            <span class="text-success" style="margin-left: 8px;">30% Off</span>
-            <div class="mrptext">inclusive of all taxes</div>
-        </div>
-        
-        <!--- color section -->
-        <div class="mt-3">
-            <div class="row">
-                <!-- <div class="col-md-2">
-                     <div class="selectedcolor">
-
-                     </div>
-                </div> -->
-                <div class="col-md-8">
-                        <div class="card p-2">
-                                <div class="selectcolor">
-                                        <!-- <span class="youselecthere"></span>
-                                        <span class="youselecthere"></span>-->
-                                         
-                                     @if ($detailedProduct->colors != null && count(json_decode($detailedProduct->colors)) > 0)  
-                                    <div class="aiz-radio-inline">
-                                        @foreach (json_decode($detailedProduct->colors) as $key => $color)
-                                            <label class="aiz-megabox pl-0 mr-2 mb-0" data-toggle="tooltip"
-                                                data-title="{{ get_single_color_name($color) }}">
-                                                <input type="radio" name="color"
-                                                    value="{{ get_single_color_name($color) }}"
-                                                    @if ($key == 0) checked @endif>
-                                                <span
-                                                    class="aiz-megabox-elem rounded-0 d-flex align-items-center justify-content-center p-1">
-                                                    <span class="size-25px d-inline-block rounded"
-                                                        style="background: {{ $color }};"></span>
-                                                </span>
-                                            </label>
-                                        @endforeach
-                                    </div>
-                                    @endif  
-
-                                </div> 
-
-                        </div>
-                </div>
+                <div class="GenuineProducts">
+                     100% Authentic, directly purchased from Kay Beauty.
+                </div> 
             </div>
-        </div>
-          <!--- color section end-->
-
-        <br>
-        <hr>
-        <br>
-
-
-        <div class="row">
-            <div class="col-sm-5 d-flex justify-content-center align-items-center">
-                <button
-                  class="AddToCart"
-                  @if (Auth::check() || get_Setting('guest_checkout_activation') == 1) onclick="addToCart()" @else onclick="showLoginModal()" @endif
-                  >Add To Cart</button>
-            </div>
-            <div class="col-sm-7">
-                 <div>
-                        <div id="deliveryPincode" style="display: none;">
-                            <div class="areaDetails textsizeisSame">
-                                <span style="margin-right: 0.25rem;"><i class="ri-map-pin-line"></i></span>
-                                <span>
-                                    Delivery options for
-                                    <span style="color:  #f60;">22553</span>
-                                </span>
-                                <button class="changepincode">Change</button>
-                            </div>
-
-                            <div >
-                                <div class="mtmb2">
-                                    <span class="textsizeisSame d-flex align-items-center"><span class="text-danger" style="font-size: 16px;"><b><i class="ri-close-fill"></i></b></span> Does not ship to pincode</span>
-                                </div>
-
-                                <div class="mtmb2">
-                                    <div class="textsizeisSame">
-                                       <span class="text-success" style="font-size: 16px;"><b><i class="ri-check-line"></i></b></span>
-                                        Shipping to: <span>Noida, India</span>
-                                     </div>
-                                    <div class="textsizeisSame">
-                                        <span class="text-success" style="font-size: 16px;"><b><i class="ri-check-line"></i></b></span>
-                                        Delivery by: <span>Sun, 23 Mar</span>
-                                     </div>
-                                    <div class="textsizeisSame">
-                                        <span class="text-success" style="font-size: 16px;"><b><i class="ri-check-line"></i></b></span>
-                                        Free delivery above <span>₹299</span>
-                                     </div>
-                                    <div class="textsizeisSame">
-                                       <span class="text-success" style="font-size: 16px;"><b><i class="ri-check-line"></i></b></span>
-                                        COD available 
-                                    </div>
-                                    <span class="textsizeisSame d-flex align-items-center">
-                                        <span class="text-success" 
-                                          style="font-size: 16px; " ><b><i class="ri-check-line"></i></b></span> Does not ship to pincode</span>
-                                </div>
-                            </div>
-
-                            <div class="textsizeisSame">
-                                <span class="textsizeisSame d-flex align-items-center">
-                                    <span 
-                                          style="font-size: 19px; margin-right: 3px; cursor: pointer;"
-                                          data-toggle="tooltip" title="Some tooltip text!">
-                                           <i class="ri-information-line"></i>
-                                     </span> Moro info</span>
-
-                                    <!-- Generated markup by the plugin -->
-                                    <div class="tooltip bs-tooltip-top" role="tooltip">
-                                        <div class="arrow"></div>
-                                        <div class="tooltip-inner bgwhite" >
-                                            Some tooltip text!
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="inputPincode"> 
-                                <div>
-                                    <span class="d-2002"><i class="ri-map-pin-line"></i> Delivery Options</span>
-                                </div>
-                                <div class="areaCheckWith_pincode"> 
-                                    <input type="number" placeholder="Enter Pincode">
-                                    <button >Check</button>
-                                </div>
-                        </div>
-                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="Return_Policy mt-4">
-        <div class="row">
-            <div class="col-md-4">
-                <div>
-                    <span class="genuineProducts">100% Genuine Products</span>
-                    <!-- HTML to write -->
-                        <!-- <a href="#" data-toggle="tooltip" title="Some tooltip text!">Hover over me</a> 
-                      
-                        <div class="tooltip bs-tooltip-top tooltipAddress" role="tooltip" >
-                            <div class="arrow"></div>
-                            <div class="tooltip-inner tooltipAddress">
-                                Some tooltip text!
-                            </div>
-                        </div> -->
-                </div>
-            </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 thisone">
                 <div class="genuineProducts d-flex gap-2 align-items-center">
                     <span class="h-21h"><i class="ri-text-wrap"></i></span>
                     <span class="genuineProducts">Return Policy</span>
+                </div>
+                <div class="GenuineProducts">
+                    Returns/replacements are accepted for unused products only in case of defects,
+                    damages during delivery, missing, or wrong products delivered. 
+                    Return requests can be raised on the 'My Order' section within 15 days of delivery.
                 </div>
             </div>
             
             <div class="col-md-4">
                  <div>
-                    <span class="genuineProducts">Sold by :Nykaa E retail</span>
+                    <span class="genuineProducts">Sold by: Winningkart</span>
                  </div>
             </div>
 
@@ -818,3 +751,4 @@
     </div>
 </div>
 
+</div>

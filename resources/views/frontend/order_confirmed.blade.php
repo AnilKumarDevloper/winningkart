@@ -94,10 +94,10 @@
                                         <td class="w-50 fw-600 border-top-0 pl-0 py-2">{{ translate('Email')}}:</td>
                                         <td class="border-top-0 py-2">{{ json_decode($first_order->shipping_address)->email }}</td>
                                     </tr>
-                                    <tr>
+                                {{-- <tr>
                                         <td class="w-50 fw-600 border-top-0 pl-0 py-2">{{ translate('Shipping address')}}:</td>
                                         <td class="border-top-0 py-2">{{ json_decode($first_order->shipping_address)->address }}, {{ json_decode($first_order->shipping_address)->city }}, {{ json_decode($first_order->shipping_address)->country }}</td>
-                                    </tr>
+                                    </tr> --}}
                                 </table>
                             </div>
                             <div class="col-md-6">

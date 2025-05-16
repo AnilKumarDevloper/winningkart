@@ -79,6 +79,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'prevent-ba
         Route::get('/categories/edit/{id}', 'edit')->name('categories.edit');
         Route::get('/categories/destroy/{id}', 'destroy')->name('categories.destroy');
         Route::post('/categories/featured', 'updateFeatured')->name('categories.featured');
+        Route::post('/categories/is-luxe', 'updateIsLuxe')->name('categories.is_luxe');
+        Route::post('/categories/is-winningkart', 'updateWinningkart')->name('categories.is_winningkart');
+        Route::post('/categories/is-active', 'updateIsActive')->name('categories.is_active');
         Route::post('/categories/categoriesByType', 'categoriesByType')->name('categories.categories-by-type');
 
         // category-wise discount set
@@ -90,6 +93,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'prevent-ba
     Route::controller(BrandController::class)->group(function () {
         Route::get('/brands/edit/{id}', 'edit')->name('brands.edit');
         Route::get('/brands/destroy/{id}', 'destroy')->name('brands.destroy');
+
+        Route::get('/brands-tabs', 'viewAllBrandTabs')->name('brands.view_all_brand_tabs');
     });
     Route::controller(AdminController::class)->group(function () {
         Route::post('/dashboard/top-category-products-section', 'top_category_products_section')->name('dashboard.top_category_products_section');

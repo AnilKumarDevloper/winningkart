@@ -1,5 +1,6 @@
 @php
 use App\Models\Brand;
+use App\Models\Category;
 $topbar_banner = get_setting('topbar_banner');
 $topbar_banner_medium = get_setting('topbar_banner_medium');
 $topbar_banner_small = get_setting('topbar_banner_small');
@@ -7,11 +8,15 @@ $topbar_banner_asset = uploaded_asset($topbar_banner);
 
 $featured_categories = Cache::rememberForever('featured_categories', function ()
 {
-    return Category::with('bannerImage')->where('featured', 1)->get();
+    return Category::with('bannerImage')->where('featured', 1)->where('parent_id', 0)->get();
 });
-
-$brands = Brand::orderBy('name', 'asc');
-$brands = $brands->paginate(15);
+$luxe_categories= Category::with('childrenCategories')->where('parent_id', 0)->where('is_luxe', 1)->get();
+$winningkart_categories= Category::with('childrenCategories')->where('parent_id', 0)->where('winningkart', 1)->get();
+$brands = Brand::with('brandLogo')->orderBy('name', 'asc');
+$brands = $brands->get();
+$brands_luxe = Brand::with('brandLogo')->where('popular', 1)->orderBy('name', 'asc')->get();
+$brands_popular = Brand::with('brandLogo')->where('luxe', 1)->orderBy('name', 'asc')->get();
+$brands_at_winningkart = Brand::with('brandLogo')->where('at_winningkart', 1)->orderBy('name', 'asc')->get();
 
 @endphp
 
@@ -229,12 +234,12 @@ $brands = $brands->paginate(15);
         .tab:hover, .tab.active {
             background:  #ee7626;
         }
-        .tab-content {
+        .tabcontantcontainer {
             display: none;
             padding: 20px;
             border: 1px solid #ddd;
         }
-        .tab-content.active {
+        .tabcontantcontainer.active {
             display: block;
         }
     
@@ -362,10 +367,10 @@ $brands = $brands->paginate(15);
                             <div class="navbar_list">
                                 <ul class="navbar_list_li ga2">
                                      <li>
-                                        <a href="/" class="headerSubMenu">Categories</a> 
+                                        <a href="javascript:void(0)" class="headerSubMenu">Categories</a> 
                                     </li>
                                     <li>
-                                        <a href="/brands" class="headerSubMenu">Brands</a>
+                                        <a  href="javascript:void(0)" class="headerSubMenu">Brands</a>
                                         <div class="menuList">
                                                 <div class="row bgOdd"> 
                                                     <div class="col-4 bg-even">
@@ -374,33 +379,87 @@ $brands = $brands->paginate(15);
                                                                     <i class="ri-search-line"></i>
                                                                     <input type="text" placeholder="Search Brands">
                                                                 </div>
-                                                                <ul class="mt-3">
-                                                                    <li><a href="#"> List 1</a></li>
-                                                                    <li><a href="#"> List 2</a></li> 
-                                                                </ul>
+                                                                <div class="d-flex justify-content-between">
+                                                                    <div class="filteralphabet">
+                                                                        <ul class="mt-3 filtermaxHeight">
+                                                                            <!-- <li><b>B</b></li> -->
+                                                                             @if(count($brands))
+                                                                    @foreach($brands as $brand) 
+                                                                        <li><a href="{{ route('products.brand', [$brand->slug]) }}">{{ $brand->name ?? '' }}</a></li>
+                                                                    @endforeach
+                                                                    @endif 
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="filteralphabet">
+                                                                        <ul class="mt-3 filterWithAlphabet"> 
+                                                                            <li><a href="javascript:void(0)">A</a></li>
+                                                                            <li><a href="javascript:void(0)">B</a></li>
+                                                                            <li><a href="javascript:void(0)">C</a></li>
+                                                                            <li><a href="javascript:void(0)">D</a></li>
+                                                                            <li><a href="javascript:void(0)">E</a></li>
+                                                                            <li><a href="javascript:void(0)">F</a></li>
+                                                                            <li><a href="javascript:void(0)">G</a></li>
+                                                                            <li><a href="javascript:void(0)">H</a></li>
+                                                                            <li><a href="javascript:void(0)">I</a></li>
+                                                                            <li><a href="javascript:void(0)">J</a></li>
+                                                                            <li><a href="javascript:void(0)">K</a></li>
+                                                                            <li><a href="javascript:void(0)">L</a></li>
+                                                                            <li><a href="javascript:void(0)">M</a></li>
+                                                                            <li><a href="javascript:void(0)">N</a></li>
+                                                                            <li><a href="javascript:void(0)">O</a></li>
+                                                                            <li><a href="javascript:void(0)">P</a></li>
+                                                                            <li><a href="javascript:void(0)">Q</a></li>
+                                                                            <li><a href="javascript:void(0)">R</a></li>
+                                                                            <li><a href="javascript:void(0)">S</a></li>
+                                                                            <li><a href="javascript:void(0)">T</a></li> 
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                     </div> 
 
                                                     <div class="col-8 bg-even">
                                                         <div class="tabs">
                                                             <div class="tab tabsection active" data-tab="tab1">POPULAR</div>
-                                                            <div class="tab tabsection " data-tab="tab2">lUXE</div>
+                                                            <div class="tab tabsection " data-tab="tab2">LUXE</div>
                                                             <div class="tab tabsection" data-tab="tab3">ONLY AT WINNING KART</div>
                                                         </div> 
 
                                                         <div class="mt-3">
-                                                            <div class="tab-content active" id="tab1" style="border: none;">
+                                                            <div class="tab-content tabcontantcontainer active" id="tab1" style="border: none;">
                                                                 <div class="row">
-                                                                    <div class="col-2">
-                                                                        <img src="https://icon-library.com/images/brand-icon-png/brand-icon-png-1.jpg" class="w-100">
-                                                                    </div>
-                                                                    <div class="col-2">
-                                                                        <img src="https://icon-library.com/images/brand-icon-png/brand-icon-png-1.jpg" class="w-100">
-                                                                    </div>
+                                                                    @if(count($brands_popular))
+                                                                    @foreach($brands_popular as $brand_popular)
+                                                                    <div class="col-2 mb-2">
+                                                                        <a href="{{ route('products.brand', [$brand_popular->slug]) }}"><img src="{{ static_asset($brand_popular->brandLogo->file_name) }}" class="w-100"></a>
+                                                                    </div>  
+                                                                    @endforeach
+                                                                    @endif
                                                                 </div>
                                                             </div>
-                                                            <div class="tab-content" id="tab2">Content for Tab 2</div>
-                                                            <div class="tab-content" id="tab3">Content for Tab 3</div> 
+                                                            <div class="tab-content tabcontantcontainer" id="tab2"> 
+                                                                <div class="row">
+                                                                         @if(count($brands_luxe))
+                                                                    @foreach($brands_luxe as $brand_luxe)
+                                                                    <div class="col-2 mb-2">
+                                                                        <a href="{{ route('products.brand', [$brand_luxe->slug]) }}"><img src="{{ static_asset($brand_luxe->brandLogo->file_name) }}" class="w-100"></a>
+                                                                    </div>
+                                                                    @endforeach
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-content tabcontantcontainer" id="tab3">
+                                                                    <div class="row"> 
+                                                                       @if(count($brands_at_winningkart))
+                                                                    @foreach($brands_at_winningkart as $brand_at_winningkart)
+                                                                    <div class="col-2 mb-2">
+                                                                        <a href="{{ route('products.brand', [$brand_at_winningkart->slug]) }}"><img src="{{ static_asset($brand_at_winningkart->brandLogo->file_name) }}" class="w-100"></a>
+                                                                    </div>  
+                                                                    @endforeach
+                                                                    @endif
+                                                                         
+                                                                    </div>
+                                                            </div> 
                                                         </div>
 
                                                     </div> 
@@ -408,83 +467,99 @@ $brands = $brands->paginate(15);
                                                 </div>
                                         </div>
                                     </li>
-                                    <li><a href="/categories" class="headerSubMenu">Luxe</a> 
+                                    <li><a href="javascript:void(0)" class="headerSubMenu">Luxe</a> 
                                         <div class="menuList">
-                                                <div class="row bgOdd">  
-                                                    <div class="col-3 bg-even">
-                                                        <div class="submenu_">
-                                                            <b>Accessories</b>
-                                                            <ul class="mt-2">
-                                                                <li><a href="#">  Accessories item 1</a></li>
-                                                                <li><a href="#"> Accessories 2</a></li> 
-                                                            </ul>
-                                                        </div>
-                                                    </div> 
-                                                </div>
-                                        </div>
-                                    </li>
+                                            <ul class="luxeList">
+                                                @foreach($luxe_categories as $luxe_category)
+                                                <li class="luxeItems" data-nav="nav_{{ $luxe_category->id }}"> 
+                                                       {{ $luxe_category->name }}
+                                                </li> 
+                                                @endforeach 
+                                            </ul>
+                                            @foreach($luxe_categories as $index => $luxe_category)
+                                            <div class="datamatch"  data-nav="nav_{{ $luxe_category->id }}" style="margin-top: .5rem; {{ $index != 0 ? 'display: none;':'' }}">
+                                                    <div class="row bgOdd">  
+                                                        @if(count($luxe_category->childrenCategories) > 0)
+                                                        @foreach($luxe_category->childrenCategories as $index2 => $child_cat)
+                                                            @if($child_cat->is_luxe == 1)
+                                                        <div class="col-3 bg-even">
+                                                            <div class="submenu_">
+                                                                <a href="{{ route('products.category', $child_cat->slug) }}">{{ $child_cat->name ?? '' }}</a>
+                                                                @if(count($child_cat->categories) > 0)
+                                                                <ul class="mt-2">
+                                                                @foreach($child_cat->categories as $child_of_child_cat)
+                                                                    @if($child_of_child_cat->is_luxe == 1)
+                                                                        <li><a href="{{ route('products.category', $child_of_child_cat->slug) }}">{{ $child_of_child_cat->name ?? '' }}</a></li> 
+                                                                    @endif
+                                                                @endforeach
+                                                                </ul>
+                                                                @endif
+                                                            </div>
+                                                        </div> 
+                                                        @endif
 
+                                                        @endforeach 
+                                                        @if($index == 0)
+                                                        <div class="col-3 bg-even">
+                                                            <div class="submenu">
+                                                                <img width="w-100" src="https://images.unsplash.com/photo-1483985988355-763728e1935b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D" style="width: 100%; background-size: cover;">
+                                                            </div>
+                                                        </div>
+                                                        @endif
+                                                    @endif
+                                                    </div>
+                                                </div>
+                                                @endforeach  
+                                                 
+                                        </div>
+                                    </li> 
                                     <li>
-                                        <a href="/categories" class="headerSubMenu">Winning kart</a>
+                                        <a href="javascript:void(0)" class="headerSubMenu">Winning kart</a>
                                         <div class="menuList">
                                                 <div class="row bgOdd"> 
-                                                    <div class="col-3 bg-even">
-                                                        <div class="submenu_">
-                                                            <b>Skincare</b>
-                                                            <ul class="mt-2">
-                                                                <li><a href="#"> Skincare item 1</a></li>
-                                                                <li><a href="#"> Skincare item 2</a></li>
-                                                                <li><a href="#">  item 3</a></li>
-                                                                <li><a href="#"> Skincare item 4</a></li>
-                                                                <li><a href="#">  item 5</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div> 
-                                                </div>
-                                        </div>
-                                    </li>
-                                    
-                                  
-                                    <li><a href="/todays-deal" class="headerSubMenu">Todays Deals</a>
-                                        <div class="menuList">
-                                                <div class="row bgOdd"> 
-                                                    <div class="col-3 bg-even">
-                                                        <div class="submenu_">
-                                                            <b>Saree</b>
-                                                            <ul class="mt-2">
-                                                                <li><a href="#"> Saree item 1</a></li> 
-                                                            </ul>
-                                                        </div>
-                                                    </div> 
-                                                    <div class="col-3 bg-even">
-                                                        <div class="submenu_">
-                                                            <b>Kurti</b>
-                                                            <ul class="mt-2">
-                                                                <li><a href="#"> Kurti item 1</a></li>
-                                                                <li><a href="#"> Kurti item 2</a></li>
-                                                                <li><a href="#"> item 3</a></li>
-                                                                <li><a href="#"> Kurti item 4</a></li>
-                                                                
-                                                            </ul>
-                                                        </div>
-                                                    </div> 
-                                                    <div class="col-3 bg-even">
-                                                        <div class="submenu_">
-                                                            <b>Cord Set</b>
-                                                            <ul class="mt-2">
-                                                                <li><a href="#"> Cord Set item 1</a></li> 
-                                                                <li><a href="#"> Cord item 2</a></li> 
-                                                                <li><a href="#"> Cord Set item 2</a></li> 
-                                                            </ul>
-                                                        </div>
-                                                    </div> 
+                                                    @if(count($winningkart_categories) > 0) 
+                                                        @foreach ($winningkart_categories as $wk_category)
+                                                            <div class="col-3 bg-even">
+                                                                <div class="submenu_">
+                                                                    <b>{{ $wk_category->name }}</b>
+                                                                    @if(count($wk_category->childrenCategories) > 0) 
+                                                                        
+                                                                            @foreach($wk_category->childrenCategories as $index => $wk_child_category)
+                                                                                @if($wk_child_category->winningkart == 1)
+                                                                                <ul class="mt-2"> 
+                                                                                    <li><a href="#">{{ $wk_child_category->name ?? '' }}</a></li>
+                                                                                </ul>  
+                                                                                @endif
+                                                                            @endforeach
+                                                                    @endif
+                                                                </div>
+                                                            </div>  
+                                                        @endforeach
+                                                    @endif
                                                 </div>
                                         </div>
                                     </li> 
+                                    
+                                    <li>
+                                        <a href="javascript:void(0)" class="headerSubMenu">Beauty Advice</a>
+                                        <div class="menuList" style="max-width: 500px;"  >
+                                                <div class="row bgOdd mt-4">  
+                                                    <div class="col-6 bg-even">
+                                                        <div class="submenu">
+                                                            <a href="{{ route('blog') }}"><img width="w-100" src="https://images.unsplash.com/photo-1483985988355-763728e1935b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D" style="width: 100%; background-size: cover;"></a>
+                                                        </div>
+                                                    </div> 
+                                                    <div class="col-6 bg-even">
+                                                        <div class="submenu">
+                                                            <img width="w-100" src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D" style="width: 100%; background-size: cover;">
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
-
                 </div>
 
                 <div class="d-flex  align-items-center"> 
@@ -631,8 +706,8 @@ $brands = $brands->paginate(15);
                                             Sign in
                                         </button>
                                 </div> 
-                                <div class="signin_user_element" style="display: none;">
-                                        <div>
+                                <div class="signin_user_element">
+                                        <div class="Signup-container">
                                             <div class="loginTitle">Login or Signup</div>
                                             <span class="loginTitle2"> Register now and get 2000 winningkart reward points instantly!</span>
                                         </div>
@@ -640,7 +715,7 @@ $brands = $brands->paginate(15);
                                             <form action="{{ route('user.login') }}" method="POST">
                                                 <div class="d-flex justify-content-between">
                                                     <span><input type="number" placeholder="Mobile Number" class="registerInputWithOtp" name="phone"></span>
-                                                    <input type="hidden" name="country_code" value="91"> 
+                                                    <input type="hidden" name="country_code" value="+91"> 
                                                     <button type="submit" class="send_otp_button">Send OTP</button>
                                                 </div>
                                             </form>
@@ -656,7 +731,22 @@ $brands = $brands->paginate(15);
                                             <a href="{{ route('user.login') }}" kind="secondary" shape="default" class="signinButton" >
                                                 Sign in with Mobile / Email <i class="ri-arrow-right-wide-line"></i>
                                             </a>
+                                        </div> 
+
+ 
+                                    @if(get_setting('google_login') == 1)
+                                        <div class="css-j662fd mt-2">
+                                            <a href="{{ route('social.login', ['provider' => 'google']) }}" kind="secondary" shape="default" class="signinButton" >
+                                                <div class="d-flex justify-content-center gap-2 w-100">
+                                                    <span>
+                                                       <img src="https://cdn.iconscout.com/icon/free/png-512/free-google-logo-icon-download-in-svg-png-gif-file-formats--brands-pack-logos-icons-189824.png?f=webp&w=256" style="width: 18px;"> Google
+                                                    </span>
+                                                </div>
+                                                 <i class="ri-arrow-right-wide-line"></i>
+                                            </a>
                                         </div>  
+                                     @endif
+
                                 </div>
                                 <!--- login section elemnt end--->
 
@@ -668,18 +758,13 @@ $brands = $brands->paginate(15);
 
                         
                         <div id="cart_items"> 
-                                <!--- right sidebar --> 
-
-                                    @include('frontend.megamart.partials.drawer_cart')
-
-                                    <!--empty cart start -->
-                                    <!--empty cart end -->
+                         <!--- right sidebar --> 
+                            @include('frontend.megamart.partials.drawer_cart')
+                        <!--empty cart start -->
+                        <!--empty cart end -->
                               
-                                  <!--- right sidebar end --> 
-                        </div>
-                       
-
-                        
+                        <!--- right sidebar end --> 
+                        </div> 
                 
                         
                     </div>
@@ -1029,13 +1114,14 @@ $brands = $brands->paginate(15);
                         <div class="menuList header_submenu_list2">
                         <div class="row bgOdd"> 
                             @foreach($category->childrenCategories as $child_cat)
+                            
                             <div class="col-3 bg-even">
                                     <div class="submenu_">
                                         <b>{{ $child_cat->name ?? '' }}</b>
                                         @if(count($child_cat->categories) > 0)
                                         <ul class="mt-2">
                                             @foreach($child_cat->categories as $child_of_child_cat)
-                                            <li><a href="#">{{ $child_of_child_cat->name ?? '' }}</a></li> 
+                                            <li><a href="{{ route('products.category', $child_of_child_cat->slug) }}">{{ $child_of_child_cat->name ?? '' }}</a></li> 
                                             @endforeach 
                                         </ul>
                                         @endif
@@ -1049,6 +1135,11 @@ $brands = $brands->paginate(15);
                 @endforeach
 
             @endif
+                <li>
+                    <a href="{{route('payment.special_offer')}}">
+                         <img src="{{ static_asset('/assets/img/offer1.PNG') }}"  class="" alt="offer img" style="width: 60px;">
+                    </a>
+                 </li>
 
             </ul>
         </div>
@@ -1074,7 +1165,7 @@ $brands = $brands->paginate(15);
                     onerror="this.onerror=null;this.src='{{ static_asset('assets/img/avatar-place.png') }}';">
                 @else
                 <img src="{{ static_asset('assets/img/avatar-place.png') }}" class="image" alt="{{ translate('avatar') }}"
-                    onerror="this.onerror=null;this.src='{{ static_asset('assets/img/avatar-place.png') }}';">
+                    onerror="this.onerror=null;this.src='{{ static_asset('assets/img/avatar-place.png') }}';">   
                 @endif
             </span>
             <!-- Name -->
@@ -1118,36 +1209,24 @@ $brands = $brands->paginate(15);
             <ul class="sidebar-menu">
                 @foreach ($featured_categories as $key => $featured_categories)
                     <li class="has-submenu">
-                        <a href="#" class="sidebar-link">  {{ $featured_categories->getTranslation('name') }} <span class="sb-menu-icon">+</span></a>
+                        <a href="#" class="sidebar-link">{{ $featured_categories->getTranslation('name') }} <span class="sb-menu-icon">+</span></a>
                         <ul class="sub-menu-ullist" id="submenu1">
-
                             @foreach ($featured_categories->childrenCategories as $key => $child_category)
                                 <li><a href="{{ route('products.category', $child_category->slug) }}"> {{ $child_category->getTranslation('name') }}</a></li>
                             @endforeach
                         </ul>
                     </li>
-                @endforeach
-               
-
+                @endforeach 
               </ul>
-        </div>
-
-
-
-
-
+        </div> 
         <div id="brand_categ" class="custom-tab-content">
-            <ul class="sidebar-menu">
-
+            <ul class="sidebar-menu"> 
                 @foreach ($brands as $brand)
                 <li class="has-submenu">
                   <a href="{{ route('products.brand', $brand->slug) }}" class="brand-sidebar-link">{{ $brand->getTranslation('name') }}</a>
-
                 </li>
                 @endforeach
-
-
-              </ul>
+            </ul>
         </div>
     </div>
 
@@ -1319,7 +1398,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <script>
         const tabs = document.querySelectorAll(".tab");
-        const contents = document.querySelectorAll(".tab-content");
+        const contents = document.querySelectorAll(".tabcontantcontainer");
 
         tabs.forEach(tab => {
             tab.addEventListener("mouseenter", () => {

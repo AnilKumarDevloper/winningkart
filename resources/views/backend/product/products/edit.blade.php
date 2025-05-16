@@ -1,6 +1,11 @@
 @extends('backend.layouts.app')
 
 @section('content')
+<style>
+    .hummingbird-treeview label{
+        width: auto !important;
+    }
+</style>
 <div class="page-content">
     <div class="aiz-titlebar text-left mt-2 pb-2 px-3 px-md-2rem border-bottom border-gray">
         <div class="row align-items-center">
@@ -413,7 +418,7 @@
                             <h5 class="mb-3 pb-3 fs-17 fw-700" style="border-bottom: 1px dashed #e4e5eb;">{{translate('Product price & stock')}}</h5>
                             <div class="w-100">
                                 <!-- Colors -->
-                                <div class="form-group row gutters-5">
+                                <!-- <div class="form-group row gutters-5">
                                     <div class="col-md-3">
                                         <input type="text" class="form-control" value="{{translate('Colors')}}" disabled>
                                     </div>
@@ -434,7 +439,7 @@
                                             <span></span>
                                         </label>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- Attributes -->
                                 <div class="form-group row gutters-5">
                                     <div class="col-md-3">
@@ -882,10 +887,10 @@
            data:$('#choice_form').serialize(),
            success: function(data){
                 $('#sku_combination').html(data);
-                setTimeout(() => {
+                // setTimeout(() => {
                         AIZ.uploader.previewGenerate();
                         AIZ.plugins.fooTable();
-                }, "2000");
+                // }, "2000");
                 if (data.trim().length > 1) {
                     $('#show-hide-div').hide();
                 }

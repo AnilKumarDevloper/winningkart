@@ -103,7 +103,7 @@
                                 <div class="pt-3 pt-lg-4 bg-white">
                                     <div class="">
 
-                                         <form id="verifyOTP" action="{{ route('frontend.verify_otp_submit') }}" method="POST">  
+                                         <form id="verifyOTP" action="{{ route('frontend.verify_otp_submit', [$redirection_route]) }}" method="POST">  
                                             <div class="userOtpElements d-flex" id="maxotp">
                                                 <input type="number" name="otp_digit_first" class="form-control otp-input fin" maxlength="1" autocomplete="off">
                                                 <input type="number" name="otp_digit_second" class="form-control otp-input" maxlength="1"  autocomplete="off">

@@ -1,0 +1,1 @@
+<center><h1>{{ $otp_mail_data['otp'] }}</h1></center>

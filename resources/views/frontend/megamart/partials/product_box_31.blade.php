@@ -2,7 +2,6 @@
     $cart_added = [];
 @endphp
 
-
 <div class="carousel-box px-3 position-relative has-transition Product_card">
     <div class="aiz-card-box h-auto bg-white hov-scale-img">
         <div class="position-relative img-fit overflow-hidden">

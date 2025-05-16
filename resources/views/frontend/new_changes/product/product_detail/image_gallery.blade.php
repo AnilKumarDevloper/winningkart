@@ -1,0 +1,79 @@
+<style>
+    .aiz-carousel button{
+        width: 20px !important;
+        height: 20px !important;
+        font-size: 10px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    } 
+    .carousel-box {
+        margin: 5px 0;
+    }
+    .wishlistitems{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        outline: none;
+        border: none;
+        background: transparent;
+        z-index: 99;
+    }
+    .wishlistitems i{
+        font-size: 30px;
+        color: #f60;
+        font-weight: 100;
+    }
+</style>
+
+<div class="sticky-top z-3 row gutters-10">
+    @php
+        $photos = [];
+    @endphp
+    @if ($detailedProduct->photos != null)
+        @php
+            $photos = explode(',', $detailedProduct->photos);
+        @endphp
+    @endif
+    <!-- Gallery Images -->
+    <div class="col-2 mt-3 d-none d-lg-block">
+        <div class="aiz-carousel half-outside-arrow product-gallery-thumb" data-items='5' data-nav-for='.product-gallery' data-focus-select='true' data-arrows='true' data-vertical='true' data-auto-height='true' style="display: flex; flex-direction: column; ">
+            @if($detailedProduct->digital == 0)
+                @foreach($detailedProduct->stocks as $key => $stock)
+                    @if($stock->image != null)
+                        <div class="carousel-box c-pointer rounded-0" data-variation="{{ $stock->variant }}">
+                            <img class="lazyload mw-100 size-60px mx-auto border p-1" src="{{ static_asset('assets/img/placeholder.jpg') }}" data-src="{{ uploaded_asset($stock->image) }}" onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">
+                        </div>
+                    @endif
+                @endforeach
+            @endif
+            @foreach($photos as $key => $photo)
+                <div class="carousel-box c-pointer rounded-0">
+                    <img class="lazyload mw-100 size-60px mx-auto border p-1" src="{{ static_asset('assets/img/placeholder.jpg') }}" data-src="{{ uploaded_asset($photo) }}" onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">
+                </div>
+            @endforeach
+        </div>
+    </div>
+    <div class="col-10" style="overflow: hidden;">
+        <div class="aiz-carousel product-gallery arrow-inactive-transparent arrow-lg-none" data-nav-for='.product-gallery-thumb' data-fade='true' data-auto-height='true' data-arrows='true'>
+            @if($detailedProduct->digital == 0)
+                @foreach($detailedProduct->stocks as $key => $stock)
+                    @if($stock->image != null)
+                        <div class="carousel-box img-zoom rounded-0">
+                            <img class="img-fluid h-auto lazyload mx-auto" src="{{ static_asset('assets/img/placeholder.jpg') }}" data-src="{{ uploaded_asset($stock->image) }}" onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">
+                            <button class="wishlistitems" id="addtowishlist">
+                                <i class="ri-heart-line" id="addTowishlist_icon" ></i>
+                                <i class="ri-heart-fill" id="removeFromWishlist_icon" style="display: none;"></i>
+                            </button>
+                        </div>
+                    @endif
+                @endforeach
+            @endif
+            @foreach($photos as $key => $photo)
+                <div class="carousel-box img-zoom rounded-0">
+                    <img class="img-fluid h-auto lazyload mx-auto" src="{{ static_asset('assets/img/placeholder.jpg') }}" data-src="{{ uploaded_asset($photo) }}" onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">
+                </div>
+            @endforeach 
+        </div>
+    </div>  
+</div>

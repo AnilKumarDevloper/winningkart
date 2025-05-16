@@ -206,18 +206,18 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
-    {
+    public function store(ProductRequest $request){
         $product = $this->productService->store($request->except([
-            '_token', 'sku', 'choice', 'tax_id', 'tax', 'tax_type', 'flash_deal_id', 'flash_discount', 'flash_discount_type'
-        ]));
+            '_token', 'sku', 'choice', 'tax_id', 'tax', 'tax_type', 'flash_deal_id', 
+            'flash_discount', 'flash_discount_type'
+        ])); 
         $request->merge(['product_id' => $product->id]);
 
         //Product categories
         $product->categories()->attach($request->category_ids);
 
         //VAT & Tax
-        if ($request->tax_id) {
+        if($request->tax_id){
             $this->productTaxService->store($request->only([
                 'tax_id', 'tax', 'tax_type', 'product_id'
             ]));
@@ -237,20 +237,14 @@ class ProductController extends Controller
         $this->frequentlyBroughtProductService->store($request->only([
             'product_id', 'frequently_brought_selection_type', 'fq_brought_product_ids', 'fq_brought_product_category_id'
         ]));
-       
         // Product Translations
         $request->merge(['lang' => env('DEFAULT_LANGUAGE')]);
         ProductTranslation::create($request->only([
             'lang', 'name', 'unit', 'description', 'product_id'
         ]));
-        
-        
-        
         flash(translate('Product has been inserted successfully'))->success();
-
         Artisan::call('view:clear');
         Artisan::call('cache:clear');
-
         return redirect()->route('products.admin');
     }
 

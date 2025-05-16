@@ -26,7 +26,7 @@ class AddonController extends Controller
      */
     public function index()
     {
-        $addons = Addon::query()->orderBy('name', 'asc')->get();
+        $addons = Addon::whereIn('id', [1,2,3,6])->orderBy('name', 'asc')->get();
         return view('backend.addons.index', compact('addons'));
     }
 

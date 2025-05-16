@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Upload;
 use Illuminate\Http\Request;
 use App\Models\Search;
 use App\Models\Product;
@@ -15,8 +16,8 @@ use App\Utility\CategoryUtility;
 
 class SearchController extends Controller
 {
-    public function index(Request $request, $category_id = null, $brand_id = null)
-    {
+    // this is old listing funcion commented by DeveloperAnilKumar
+    public function index(Request $request, $category_id = null, $brand_id = null){
         $query = $request->keyword;
         $sort_by = $request->sort_by;
         $min_price = $request->min_price;
@@ -28,32 +29,26 @@ class SearchController extends Controller
         $selected_color = null;
         $category = [];
         $categories = [];
-
         $conditions = [];
 
-        if ($brand_id != null) {
+        if($brand_id != null){
             $conditions = array_merge($conditions, ['brand_id' => $brand_id]);
-        } elseif ($request->brand != null) {
+        }elseif($request->brand != null){
             $brand_id = (Brand::where('slug', $request->brand)->first() != null) ? Brand::where('slug', $request->brand)->first()->id : null;
             $conditions = array_merge($conditions, ['brand_id' => $brand_id]);
         }
-
         // if ($seller_id != null) {
         //     $conditions = array_merge($conditions, ['user_id' => Seller::findOrFail($seller_id)->user->id]);
         // }
-
         $products = Product::where($conditions);
-
-        if ($category_id != null) {
+        if($category_id != null){
             $category_ids = CategoryUtility::children_ids($category_id);
             $category_ids[] = $category_id;
             $category = Category::with('childrenCategories')->find($category_id);
-
             $products = $category->products();
-
             $attribute_ids = AttributeCategory::whereIn('category_id', $category_ids)->pluck('attribute_id')->toArray();
             $attributes = Attribute::whereIn('id', $attribute_ids)->get();
-        } else {
+        }else{
             $categories = Category::with('childrenCategories', 'coverImage')->where('level', 0)->orderBy('order_level', 'desc')->get();
             // if ($query != null) {
             //     foreach (explode(' ', trim($query)) as $word) {
@@ -69,15 +64,12 @@ class SearchController extends Controller
             //     $attributes = Attribute::whereIn('id', $attribute_ids)->get();
             // }
         }
-
         if ($min_price != null && $max_price != null) {
             $products->where('unit_price', '>=', $min_price)->where('unit_price', '<=', $max_price);
         }
-
         if ($query != null) {
             $searchController = new SearchController;
             $searchController->store($request);
-
             $products->where(function ($q) use ($query) {
                 foreach (explode(' ', trim($query)) as $word) {
                     $q->where('name', 'like', '%' . $word . '%')
@@ -90,17 +82,14 @@ class SearchController extends Controller
                         });
                 }
             });
-
             $case1 = $query . '%';
             $case2 = '%' . $query . '%';
-
             $products->orderByRaw("CASE 
                 WHEN name LIKE '$case1' THEN 1 
                 WHEN name LIKE '$case2' THEN 2 
                 ELSE 3 
                 END");
         }
-
         switch ($sort_by) {
             case 'newest':
                 $products->orderBy('created_at', 'desc');
@@ -138,7 +127,98 @@ class SearchController extends Controller
 
         $products = filter_products($products)->with('taxes')->paginate(24)->appends(request()->query());
 
-        return view('frontend.product_listing', compact('products', 'query', 'category', 'categories', 'category_id', 'brand_id', 'sort_by', 'seller_id', 'min_price', 'max_price', 'attributes', 'selected_attribute_values', 'colors', 'selected_color'));
+        return view('frontend.product_listing', compact(
+            'products',
+            'query',
+            'category',
+            'categories',
+            'category_id',
+            'brand_id',
+            'sort_by',
+            'seller_id',
+            'min_price',
+            'max_price',
+            'attributes',
+            'selected_attribute_values',
+            'colors',
+            'selected_color'
+            ));
+    }
+
+    public function filterProductListing(Request $request){
+        $query = $request->keyword;
+        $sort_by = $request->sort_by;
+        $min_price = $request->min_price;
+        $max_price = $request->max_price;
+        $seller_id = $request->seller_id;
+        $attributes = Attribute::all();
+        $selected_attribute_values = array();
+        $colors = Color::all();
+        $selected_color = null;
+        $category = [];
+        $categories = [];
+        $conditions = [];
+
+        $products = Product::get();
+        $category = Category::with('childrenCategories')->find(1);
+        $products = $category->products();
+ 
+        return array(
+            'status' => 1,
+            'message' => 'product list filter applied',
+            'product_list' => view('frontend.new_changes.partials.product_listing', compact('products', 'category'))->render(),
+        );
+
+    }
+
+
+
+    // this is new listing funcion developed by DeveloperAnilKumar
+    public function indexNew(Request $request, $category_id = null, $brand_id = null){
+        $query = $request->keyword;
+        $sort_by = $request->sort_by;
+        $min_price = $request->min_price;
+        $max_price = $request->max_price;
+        $seller_id = $request->seller_id;
+        $attributes = Attribute::all();
+        $selected_attribute_values = array();
+        $colors = Color::all();
+        $selected_color = null;
+        $category = [];
+        $categories = [];
+        $conditions = [];
+
+        $products = Product::where($conditions);
+        if($category_id != null){
+            $category_ids = CategoryUtility::children_ids($category_id);
+            $category_ids[] = $category_id;
+            $category = Category::with('childrenCategories')->find($category_id);
+
+            $products = $category->products();
+
+            $attribute_ids = AttributeCategory::whereIn('category_id', $category_ids)->pluck('attribute_id')->toArray();
+            $attributes = Attribute::whereIn('id', $attribute_ids)->get();
+        }else{
+            $categories = Category::with('childrenCategories', 'coverImage')->where('level', 0)->orderBy('order_level', 'desc')->get();
+        }
+        $products = filter_products($products)->with('taxes')->paginate(24)->appends(request()->query());
+        // return $products;
+        return view('frontend.new_changes.product.product_listing', compact(
+            'products',
+            'query',
+            'category',
+            'categories',
+            'category_id',
+            'brand_id',
+            'sort_by',
+            'seller_id',
+            'min_price',
+            'max_price',
+            'attributes',
+            'selected_attribute_values',
+            'colors',
+            'selected_color'
+        ));
     }
 
     public function listing(Request $request)
@@ -146,19 +226,24 @@ class SearchController extends Controller
         return $this->index($request);
     }
 
-    public function listingByCategory(Request $request, $category_slug)
-    {
+    public function listingByCategory(Request $request, $category_slug){
         $category = Category::where('slug', $category_slug)->first();
-        if ($category != null) {
+        if($category != null){
             return $this->index($request, $category->id);
         }
         abort(404);
     }
+    public function listingByCategoryNew(Request $request, $category_slug){
+        $category = Category::where('slug', $category_slug)->first();
+        if($category != null && $category->is_active == 1){
+            return $this->indexNew($request, $category->id);
+        }
+        abort(404);
+    }
 
-    public function listingByBrand(Request $request, $brand_slug)
-    {
+    public function listingByBrand(Request $request, $brand_slug){
         $brand = Brand::where('slug', $brand_slug)->first();
-        if ($brand != null) {
+        if($brand != null){
             return $this->index($request, null, $brand->id);
         }
         abort(404);
@@ -215,6 +300,7 @@ class SearchController extends Controller
 
         if (sizeof($keywords) > 0 || sizeof($categories) > 0 || sizeof($products) > 0 || sizeof($shops) > 0) {
             return view('frontend.'.get_setting('homepage_select').'.partials.search_content', compact('products', 'categories', 'keywords', 'shops'));
+        
         }
         return '0';
     }
@@ -237,4 +323,96 @@ class SearchController extends Controller
             $search->save();
         }
     }
+
+    public function apitestProductList($category_slug = ''){
+        $product_data = [];
+        if($category_slug != ''){
+            $category = Category::where('slug', $category_slug)->first();
+            if($category != null){
+                $products = Product::select();
+                $category_ids = CategoryUtility::children_ids($category->id);
+                $category_ids[] = $category->id;
+                $category = Category::with('childrenCategories')->find($category->id);
+                $products = $category->products()->select('id','name','unit_price','current_stock','unit','discount','discount_type','discount_start_date','discount_end_date','slug','rating', 'photos', 'colors', 'choice_options');
+                $products = filter_products($products)->with('reviews')->get();
+                foreach($products as $product){
+                    $photo_ids = explode(',', $product->photos);
+                    $photos = Upload::whereIn('id', $photo_ids)
+                        ->pluck('file_name')
+                        ->toArray();
+                    $raw_options = json_decode($product->choice_options, true);
+                    $choice_options = [];
+                    if(is_array($raw_options)){
+                        foreach ($raw_options as $option){
+                            $attribute = Attribute::find($option['attribute_id']);
+                            $choice_options[] = [
+                                'attribute_id' => $option['attribute_id'],
+                                'attribute_name' => $attribute ? $attribute->name : null,
+                                'values' => $product->stocks
+                                //  'values' => $option['values']
+                            ];
+                        }
+                    }
+                    $product_data[] = [
+                        'id' => $product->id,
+                        'name' => $product->name,
+                        'unit_price' => $product->unit_price,
+                        'current_stock' => $product->current_stock,
+                        'unit' => $product->unit,
+                        'discount' => $product->discount,
+                        'discount_type' => $product->discount_type,
+                        'discount_start_date' => $product->discount_start_date,
+                        'discount_end_date' => $product->discount_end_date,
+                        'slug' => $product->slug,
+                        'rating' => $product->rating,
+                        'reviews' => count($product->reviews),
+                        'photos' => $photos,
+                        'choice_options' => $choice_options, 
+                    ];  
+                }
+                return response()->json([
+                    "status" =>  'success',
+                    "status_code" => 200,
+                    "data" => $product_data
+                ], 200);
+            }else{
+                return response()->json([
+                    "status" =>  'not_found',
+                    "status_code" => 404,
+                    "message" => "category_not_found_in_record"
+                ], 404); 
+            }
+        }else{
+            return response()->json([
+                "status" =>  'not_found',
+                "status_code" => 404,
+                "message" => "category_slug_is_not_available"
+            ], 404); 
+        }
+    }
+
+    public function testProductList($category_slug = ''){
+        if($category_slug != ''){
+            return view('frontend.new_changes.product.test_product_listing', compact('category_slug')); 
+        }else{
+            abort('404');
+        }
+    }
+
+    public function apiGetVariantPrice(Request $request){
+        $product_id = '';
+        $color = $request->color;
+        $product = Product::with('stocks')->find($request->product_id);
+
+        if(json_decode($product->choice_options) != null){
+            foreach (json_decode($product->choice_options) as $key => $choice) {
+                if ($str != null) {
+                    $str .= '-' . str_replace(' ', '', $request['attribute_id_' . $choice->attribute_id]);
+                } else {
+                    $str .= str_replace(' ', '', $request['attribute_id_' . $choice->attribute_id]);
+                }
+            }
+        } 
+    }
+
 }

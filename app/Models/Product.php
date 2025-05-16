@@ -10,7 +10,8 @@ class Product extends Model
 
     protected $guarded = ['choice_attributes'];
 
-    protected $with = ['product_translations', 'taxes', 'thumbnail'];
+    // protected $with = ['product_translations', 'taxes', 'thumbnail'];
+    protected $with = ['taxes', 'thumbnail', 'stocks'];
 
     public function getTranslation($field = '', $lang = false)
     {
@@ -19,8 +20,7 @@ class Product extends Model
         return $product_translations != null ? $product_translations->$field : $this->$field;
     }
 
-    public function product_translations()
-    {
+    public function product_translations(){
         return $this->hasMany(ProductTranslation::class);
     }
 
@@ -117,5 +117,5 @@ class Product extends Model
     public function scopeIsApprovedPublished($query)
     {
         return $query->where('approved', '1')->where('published', 1);
-    }
+    } 
 }

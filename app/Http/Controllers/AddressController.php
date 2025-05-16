@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Address;
 use App\Models\City;
 use App\Models\State;
 use Auth;
+use Illuminate\Support\Facades\Crypt;
+use Hash;
+use Session;
+
 
 class AddressController extends Controller
 {
@@ -36,27 +42,84 @@ class AddressController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $address = new Address;
-        if ($request->has('customer_id')) {
+        $isDefaultAddress = 0;
+        if(Auth::check()){
             $address->user_id   = $request->customer_id;
-        } else {
-            $address->user_id   = Auth::user()->id;
+            $isDefaultAddress = $request->has('is_default_address') ? 1 : 0;
+            if($isDefaultAddress == 1){
+                Address::where('user_id', $request->customer_id)->update([
+                    "set_default" => 0
+                ]);
+            }
+        }else{
+            $phone_exists = User::where('phone', $request->country_code.$request->phone)->exists();
+            $user_id = '';
+            $platform = '';
+            $otp = mt_rand(100000, 999999);
+            // send otp on phone number here------------------------------
+            // send otp on phone number here------------------------------
+            if($phone_exists){
+                // login user
+                $platform = 'phone';
+                User::where('phone', $request->country_code.$request->phone)
+                ->update(['verification_code' => $otp]);
+                $user =  User::where('phone', $request->country_code.$request->phone)->first();
+                $address->user_id   = $user->id;
+                Address::where('user_id', $user->id)->update([
+                    "set_default" => 0
+                ]);
+            }else{
+                $platform = 'phone';
+                $password = substr(hash('sha512', rand()), 0, 8);
+                $user = User::create([
+                    "name" => $request->name, 
+                    'phone' => $request->country_code.$request->phone,
+                    'password' => Hash::make($password),
+                    'is_guest' => 1,
+                    'user_type' => 'customer',
+                    'verification_code' => $otp
+                ]);
+                $address->user_id   = $user->id; 
+            }
         }
-        $address->address       = $request->address;
-        $address->country_id    = $request->country_id;
-        $address->state_id      = $request->state_id;
-        $address->city_id       = $request->city_id;
-        $address->longitude     = $request->longitude;
-        $address->latitude      = $request->latitude;
-        $address->postal_code   = $request->postal_code;
-        $address->phone         = $request->phone;
-        $address->save();
+            $address->house_number  = $request->house_number;
+            $address->address       = $request->address;
+            $address->country_id    = $request->country_id;
+            $address->state_id      = $request->state_id;
+            $address->city_id       = $request->city_id;
+            $address->longitude     = $request->longitude;
+            $address->latitude      = $request->latitude;
+            $address->postal_code   = $request->postal_code;
+            $address->area          = $request->area;
+            $address->state         = $request->state;
+            $address->name          = $request->name;
+            $address->email         = $request->email;
+            $address->phone         = $request->phone;
+            $address->set_default   = $isDefaultAddress;
+            $address->save();
+            $address = $address->fresh();
 
-        flash(translate('Address info Stored successfully'))->success();
-        return back();
-    }
+            flash(translate('Address info Stored successfully'))->success();
+            session(['saved_address' => $address]);
+            if(Auth::check()){
+                Cart::where('user_id', Auth::user()->id)->update(['address_id' => $address->id]);
+            }else{
+                if(session('temp_user_id') != null){
+                    Cart::where('temp_user_id', session('temp_user_id'))->update([
+                        'user_id' => $user->id,
+                        'temp_user_id' => null,
+                        'address_id' => $address->id
+                    ]);
+                    Session::forget('temp_user_id');
+                    Address::where('id', $address->id)->update(["set_default" => 1]);
+                }
+                return redirect()->route('frontend.verify_otp', [$platform, Crypt::encrypt($user->id), 'frontend.auth.payment']);
+            }
+            return redirect()->route('frontend.auth.payment');
+        }
+    
 
     /**
      * Display the specified resource.
@@ -64,8 +127,7 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id){
         //
     }
 
@@ -75,28 +137,33 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
         $data['address_data'] = Address::findOrFail($id);
         $data['states'] = State::where('status', 1)->where('country_id', $data['address_data']->country_id)->get();
         $data['cities'] = City::where('status', 1)->where('state_id', $data['address_data']->state_id)->get();
 
         $returnHTML = view('frontend.'.get_setting('homepage_select').'.partials.address_edit_modal', $data)->render();
         return response()->json(array('data' => $data, 'html' => $returnHTML));
-        //        return ;
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $address = Address::findOrFail($id);
+        * Update the specified resource in storage.
+        *
+        * @param  \Illuminate\Http\Request  $request
+        * @param  int  $id
+        * @return \Illuminate\Http\Response
+    */
 
+    public function update(Request $request, $id){
+        $address = Address::findOrFail($id);
+        $isDefaultAddress = $request->has('is_default_address') ? 1 : 0;
+        if($isDefaultAddress == 1){
+            Address::where('user_id', $request->customer_id)->update([
+                "set_default" => 0
+            ]);
+             $address->set_default   = $isDefaultAddress;
+        }
+        $address->house_number  = $request->house_number;
         $address->address       = $request->address;
         $address->country_id    = $request->country_id;
         $address->state_id      = $request->state_id;
@@ -104,12 +171,17 @@ class AddressController extends Controller
         $address->longitude     = $request->longitude;
         $address->latitude      = $request->latitude;
         $address->postal_code   = $request->postal_code;
+        $address->area          = $request->area;
+        $address->state         = $request->state;
+        $address->name          = $request->name;
+        $address->email         = $request->email;
         $address->phone         = $request->phone;
-
+       
         $address->save();
-
+        Cart::where('user_id', Auth::user()->id)->update(['address_id' => $id]);
         flash(translate('Address info updated successfully'))->success();
-        return back();
+        return redirect()->route('frontend.auth.payment');
+        // return back();
     }
 
     /**
@@ -118,16 +190,16 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $address = Address::findOrFail($id);
-        if (!$address->set_default) {
-            $address->delete();
-            return back();
-        }
-        flash(translate('Default address cannot be deleted'))->warning();
-        return back();
-    }
+    // public function destroy($id)
+    // {
+    //     $address = Address::findOrFail($id); 
+    //     if (!$address->set_default) {
+    //         $address->delete();
+    //         return back();
+    //     }
+    //     flash(translate('Default address cannot be deleted'))->warning();
+    //     return back();
+    // }
 
     public function getStates(Request $request)
     {
@@ -140,6 +212,7 @@ class AddressController extends Controller
 
         echo json_encode($html);
     }
+
 
     public function getCities(Request $request)
     {
@@ -165,4 +238,7 @@ class AddressController extends Controller
 
         return back();
     }
+
+
+
 }

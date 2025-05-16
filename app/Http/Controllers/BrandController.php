@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BrandTab;
 use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\BrandTranslation;
@@ -55,6 +56,11 @@ class BrandController extends Controller
         $brand->name = $request->name;
         $brand->meta_title = $request->meta_title;
         $brand->meta_description = $request->meta_description;
+
+        $brand->popular = $request->popular;
+        $brand->luxe = $request->luxe;
+        $brand->at_winningkart = $request->at_winningkart;
+
         if ($request->slug != null) {
             $brand->slug = str_replace(' ', '-', $request->slug);
         }
@@ -71,7 +77,6 @@ class BrandController extends Controller
 
         flash(translate('Brand has been inserted successfully'))->success();
         return redirect()->route('brands.index');
-
     }
 
     /**
@@ -113,6 +118,9 @@ class BrandController extends Controller
         }
         $brand->meta_title = $request->meta_title;
         $brand->meta_description = $request->meta_description;
+        $brand->popular = $request->popular;
+        $brand->luxe = $request->luxe;
+        $brand->at_winningkart = $request->at_winningkart;
         if ($request->slug != null) {
             $brand->slug = strtolower($request->slug);
         }
@@ -148,6 +156,11 @@ class BrandController extends Controller
 
         flash(translate('Brand has been deleted successfully'))->success();
         return redirect()->route('brands.index');
-
     }
+
+    public function viewAllBrandTabs(){
+        $brand_tabs = BrandTab::get();
+        return view('backend.product.brands.brand_tabs', compact('brand_tabs')); 
+    }
+ 
 }

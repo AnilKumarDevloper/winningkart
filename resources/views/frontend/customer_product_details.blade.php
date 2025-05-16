@@ -31,7 +31,7 @@
     <section class="mb-4 pt-3">
         <div class="container">
             <div class="bg-white py-3">
-                <div class="row ">
+                <div class="row">
                     <div class="col-xl-5 col-lg-6 mb-4">
                         <div class="sticky-top z-3 row gutters-10">
                             @if ($customer_product->photos != null)

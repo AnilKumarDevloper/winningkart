@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\GuestAccountOpeningMailManager;
+use App\Mail\OrderConfirmedEmail;
 use App\Utility\PayfastUtility;
 use Illuminate\Http\Request;
 use App\Models\Category;
@@ -53,7 +54,7 @@ class CheckoutController extends Controller
         // Minumum order amount check
         if(get_setting('minimum_order_amount_check') == 1){
             $subtotal = 0;
-            foreach ($carts as $key => $cartItem){ 
+            foreach ($carts as $key => $cartItem){
                 $product = Product::find($cartItem['product_id']);
                 $subtotal += cart_product_price($cartItem, $product, false, false) * $cartItem['quantity'];
             }
@@ -76,10 +77,10 @@ class CheckoutController extends Controller
         if ($request->session()->get('combined_order_id') != null) {
             // If block for Online payment, wallet and cash on delivery. Else block for Offline payment
             $decorator = __NAMESPACE__ . '\\Payment\\' . str_replace(' ', '', ucwords(str_replace('_', ' ', $request->payment_option))) . "Controller";
-            if (class_exists($decorator)) {
+            if(class_exists($decorator)){
                 return (new $decorator)->pay($request);
             }
-            else {
+            else{
                 $combined_order = CombinedOrder::findOrFail($request->session()->get('combined_order_id'));
                 $manual_payment_data = array(
                     'name'   => $request->payment_option,
@@ -87,19 +88,27 @@ class CheckoutController extends Controller
                     'trx_id' => $request->trx_id,
                     'photo'  => $request->photo
                 );
-                foreach ($combined_order->orders as $order) {
+                foreach ($combined_order->orders as $order){
                     $order->manual_payment = 1;
                     $order->manual_payment_data = json_encode($manual_payment_data);
                     $order->save();
                 }
+
+                // Send Order Confirm Email 
+                    // $order_mail_data = [
+                    //     "order_no" => "090909"
+                    // ]; 
+                    // Mail::to(Auth::user()->email)->send(new OrderConfirmedEmail($order_mail_data)); 
+                // Send Order Confirm sms on phone
+                // Send Order Confirm sms on whatsapp
+
                 flash(translate('Your order has been placed successfully. Please submit payment information from purchase history'))->success();
                 return redirect()->route('order_confirmed');
             }
         }
     }
 
-    public function createUser()
-    {
+    public function createUser(){
         $success = 1;
         $guest_shipping_info = Session::get('guest_shipping_info');
         $password = substr(hash('sha512', rand()), 0, 8);
@@ -265,29 +274,25 @@ class CheckoutController extends Controller
         return view('frontend.delivery_info', compact('carts', 'carrier_list'));
     }
 
-    public function store_delivery_info(Request $request)
-    {
-        $carts = auth()->user() != null ?
-                Cart::where('user_id', auth()->user()->id)->get() :
-                Cart::where('temp_user_id', $request->session()->get('temp_user_id'))->get();
 
-        if ($carts->isEmpty()) {
+    public function store_delivery_info(Request $request){
+        $carts = auth()->user() != null ?
+        Cart::where('user_id', auth()->user()->id)->get():
+        Cart::where('temp_user_id', $request->session()->get('temp_user_id'))->get();
+        if($carts->isEmpty()){
             flash(translate('Your cart is empty'))->warning();
             return redirect()->route('home');
         }
-
         $shipping_info = Address::where('id', $carts[0]['address_id'])->first();
         $total = 0;
         $tax = 0;
         $shipping = 0;
         $subtotal = 0;
-
-        if ($carts && count($carts) > 0) {
-            foreach ($carts as $key => $cartItem) {
+        if($carts && count($carts) > 0){
+            foreach($carts as $key => $cartItem){
                 $product = Product::find($cartItem['product_id']);
                 $tax += cart_product_tax($cartItem, $product, false) * $cartItem['quantity'];
                 $subtotal += cart_product_price($cartItem, $product, false, false) * $cartItem['quantity'];
-
                 if (get_setting('shipping_type') != 'carrier_wise_shipping' || $request['shipping_type_' . $product->user_id] == 'pickup_point') {
                     if ($request['shipping_type_' . $product->user_id] == 'pickup_point') {
                         $cartItem['shipping_type'] = 'pickup_point';
@@ -304,26 +309,43 @@ class CheckoutController extends Controller
                     $cartItem['carrier_id'] = $request['carrier_id_' . $product->user_id];
                     $cartItem['shipping_cost'] = getShippingCost($carts, $key, $cartItem['carrier_id']);
                 }
-
                 $shipping += $cartItem['shipping_cost'];
                 $cartItem->save();
             }
             $total = $subtotal + $tax + $shipping;
-
             return view('frontend.payment_select', compact('carts', 'shipping_info', 'total'));
-        } else {
+        }else{
             flash(translate('Your Cart was empty'))->warning();
             return redirect()->route('home');
         }
     }
 
-    public function apply_coupon_code(Request $request)
-    {   
+
+
+    // public function remove_coupon_code(Request $request){ 
+    //     $temp_user  = Session::has('temp_user_id') ? Session::get('temp_user_id') : null; 
+    //     $response_message = array();
+    //     if(Auth::check()){
+    //         Cart::where('user_id', Auth::user()->id)->where('coupon_code', $request->coupon_code)->update([
+    //             "coupon_code" => NULL
+    //         ]);
+    //     }else{
+    //         Cart::where('temp_user_id', $temp_user)->where('coupon_code', $request->coupon_code)->update([
+    //             "coupon_code" => NULL
+    //         ]); 
+    //     }
+    //     $response_message['response'] = 'warning';
+    //     $returnHTML = view('frontend.'.get_setting('homepage_select').'.partials.drawer_cart', compact('coupon', 'carts'))->render();
+    //     return response()->json(array('response_message' => $response_message, 'html'=>$returnHTML));
+    // }
+
+
+    public function apply_coupon_code(Request $request){
         $user       = auth()->user();
         $temp_user  = Session::has('temp_user_id') ? Session::get('temp_user_id') : null;
         $coupon     = Coupon::where('code', $request->code)->first();
         $response_message = array();
-
+        
         // if the Coupon type is Welcome base, check the user has this coupon or not
         $canUseCoupon = true;
         if($coupon && $coupon->type == 'welcome_base'){
@@ -338,14 +360,11 @@ class CheckoutController extends Controller
                 $canUseCoupon = false; 
             }
         }
-        
-        if ($coupon != null && $canUseCoupon) {
-
+        if ($coupon != null && $canUseCoupon){
             //  Coupon expiry Check
             if($coupon->type != 'welcome_base') {
                 $validationDateCheckCondition  = strtotime(date('d-m-Y')) >= $coupon->start_date && strtotime(date('d-m-Y')) <= $coupon->end_date;
-            }
-            else {
+            }else {
                 $validationDateCheckCondition = false;
                 if($userCoupon){
                     $validationDateCheckCondition  = $userCoupon->expiry_date >= strtotime(date('d-m-Y H:i:s')) ;
@@ -354,13 +373,10 @@ class CheckoutController extends Controller
             if ($validationDateCheckCondition) {
                 if (($user == null && Session::has('temp_user_id')) || CouponUsage::where('user_id', $user->id)->where('coupon_id', $coupon->id)->first() == null) {
                     $coupon_details = json_decode($coupon->details);
-
                     $carts = $user != null ?
                             Cart::where('user_id', $user->id)->where('owner_id', $coupon->user_id)->get() :
                             Cart::where('owner_id', $coupon->user_id)->where('temp_user_id', $temp_user)->get();
-
                     $coupon_discount = 0;
-
                     if ($coupon->type == 'cart_base' || $coupon->type == 'welcome_base') {
                         $subtotal = 0;
                         $tax = 0;
@@ -400,13 +416,10 @@ class CheckoutController extends Controller
                             }
                         }
                     }
-
                     if ($coupon_discount > 0) {
-
                         $cart = $user != null ?
                                     Cart::where('user_id', $user->id)->where('owner_id', $coupon->user_id):
                                     Cart::where('temp_user_id', $temp_user)->where('owner_id', $coupon->user_id);
-
                         $cart->update(
                             [
                                 'discount' => $coupon_discount / count($carts),
@@ -414,7 +427,6 @@ class CheckoutController extends Controller
                                 'coupon_applied' => 1
                             ]
                         );
-
                         $response_message['response'] = 'success';
                         $response_message['message'] = translate('Coupon has been applied');
                     } else {
@@ -433,11 +445,10 @@ class CheckoutController extends Controller
             $response_message['response'] = 'danger';
             $response_message['message'] = translate('Invalid coupon!');
         }
-
         $carts = $user != null ? Cart::where('user_id', $user->id)->get() : Cart::where('temp_user_id', $temp_user)->get();
         // $shipping_info = Address::where('id', $carts[0]['address_id'])->first();
-        
-        $returnHTML = view('frontend.'.get_setting('homepage_select').'.partials.cart_summary', compact('coupon', 'carts'))->render();
+        // $returnHTML = view('frontend.'.get_setting('homepage_select').'.partials.cart_summary', compact('coupon', 'carts'))->render();
+        $returnHTML = view('frontend.'.get_setting('homepage_select').'.partials.drawer_cart', compact('coupon', 'carts'))->render();
         return response()->json(array('response_message' => $response_message, 'html'=>$returnHTML));
     }
 
@@ -456,10 +467,14 @@ class CheckoutController extends Controller
 
         $coupon = Coupon::where('code', $request->code)->first();
         $carts = $carts->get();
-
+        $response_message['response'] = 'success';
+        $response_message['message'] = translate('Coupon has been removed');
         // $shipping_info = Address::where('id', $carts[0]['address_id'])->first();
 
-        return view('frontend.'.get_setting('homepage_select').'.partials.cart_summary', compact('coupon', 'carts'));
+        // return view('frontend.'.get_setting('homepage_select').'.partials.cart_summary', compact('coupon', 'carts'));
+        // return view('frontend.'.get_setting('homepage_select').'.partials.drawer_cart', compact('coupon', 'carts'));
+        $returnHTML = view('frontend.'.get_setting('homepage_select').'.partials.drawer_cart', compact('coupon', 'carts'))->render();
+        return response()->json(array('response_message' => $response_message, 'html'=>$returnHTML));
     }
 
     public function order_confirmed()

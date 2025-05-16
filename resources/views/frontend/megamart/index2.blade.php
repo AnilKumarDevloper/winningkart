@@ -3412,7 +3412,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
             <div class="col">
                 <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0 ">
                     <div class="top_heading">
-                        <span class="">Shop By Concern</span>
+                        <span class="">Shop By njf Concern</span>
                         <span></span>
                     </div>
                 </h3>

@@ -67,7 +67,7 @@ class CategoryController extends Controller
         if($request->order_level != null) {
             $category->order_level = $request->order_level;
         }
-        $category->digital = $request->digital;
+        // $category->digital = $request->digital;
         $category->banner = $request->banner;
         $category->icon = $request->icon;
         $category->cover_image = $request->cover_image;
@@ -238,6 +238,27 @@ class CategoryController extends Controller
         Cache::forget('featured_categories');
         return 1;
     }
+    public function updateIsLuxe(Request $request)
+    {
+        $category = Category::findOrFail($request->id);
+        $category->is_luxe = $request->status;
+        $category->save(); 
+        return 1;
+    }
+    public function updateWinningkart(Request $request)
+    {
+        $category = Category::findOrFail($request->id);
+        $category->winningkart = $request->status;
+        $category->save(); 
+        return 1;
+    }
+    public function updateIsActive(Request $request)
+    {
+        $category = Category::findOrFail($request->id);
+        $category->is_active = $request->status;
+        $category->save(); 
+        return 1;
+    }
 
     public function categoriesByType(Request $request)
     {
@@ -259,4 +280,7 @@ class CategoryController extends Controller
         $categories = $categories->paginate(15);
         return view('backend.product.category_wise_discount.set_discount', compact('categories', 'sort_search'));
     }
+
+
+    
 }

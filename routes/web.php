@@ -138,7 +138,8 @@ Route::controller(HomeController::class)->group(function () {
     //Todays Deal Details Page
     Route::get('/todays-deal', 'todays_deal')->name('todays-deal');
 
-    Route::get('/product/{slug}', 'product')->name('product');
+    // Route::get('/product/{slug}', 'product')->name('product');
+    Route::get('/product/{slug}', 'singleProduct')->name('product');
     Route::post('/product/variant-price', 'variant_price')->name('products.variant_price');
     Route::get('/shop/{slug}', 'shop')->name('shop.visit');
     Route::get('/shop/{slug}/{type}', 'filter_shop')->name('shop.visit.type');
@@ -187,9 +188,16 @@ Route::controller(CustomerProductController::class)->group(function () {
 // Search
 Route::controller(SearchController::class)->group(function () {
     Route::get('/search', 'index')->name('search');
+    Route::get('/api/test-product-list/{category_slug}', 'apitestProductList')->name('api_test_product_list');
+
+    Route::get('/test-product-list/{category_slug}', 'testProductList')->name('test_product_list');
+    Route::get('/api/get_variant_price', 'apiGetVariantPrice')->name('api_get_variant_price');
+
     Route::get('/search?keyword={search}', 'index')->name('suggestion.search');
-    Route::post('/ajax-search', 'ajax_search')->name('search.ajax');
+    Route::post('/ajax-search', 'ajax_search')->name(name: 'search.ajax');
     Route::get('/category/{category_slug}', 'listingByCategory')->name('products.category');
+    Route::get('/new-category/{category_slug}', 'listingByCategoryNew')->name('products.category');
+    Route::post('/new-category/filter-product-listing', 'filterProductListing')->name('products.filter_product_listing');
     Route::get('/brand/{brand_slug}', 'listingByBrand')->name('products.brand');
 });
 
@@ -331,20 +339,24 @@ Route::group(['middleware' => ['customer', 'unbanned']], function () {
 });
 
 
+
 Route::get('translation-check/{check}', [LanguageController::class, 'get_translation']);
 
 Route::controller(AddressController::class)->group(function () {
     Route::post('/get-states', 'getStates')->name('get-state');
     Route::post('/get-cities', 'getCities')->name('get-city');
 });
-
+    //Address
+    Route::resource('addresses', AddressController::class);
+    
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('invoice/{order_id}', [InvoiceController::class, 'invoice_download'])->name('invoice.download');
 
     // Reviews
     Route::resource('/reviews', ReviewController::class);
-
+    
+    
     // Product Conversation
     Route::resource('conversations', ConversationController::class);
     Route::controller(ConversationController::class)->group(function () {
@@ -357,8 +369,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('messages', MessageController::class);
 
-    //Address
-    Route::resource('addresses', AddressController::class);
+
     
     Route::controller(AddressController::class)->group(function () {
         // Route::post('/get-states', 'getStates')->name('get-state');
@@ -368,6 +379,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/addresses/set-default/{id}', 'set_default')->name('addresses.set_default');
     });
 });
+Route::get('/all-reviews/{slug}', [ReviewController::class, 'viewAllReviwsOfProduct'])->name('frontend.view_all_review');
 
 Route::resource('shops', ShopController::class)->middleware('handle-demo-login');
 

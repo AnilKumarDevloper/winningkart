@@ -45,7 +45,10 @@
                     <th data-breakpoints="lg">{{translate('Icon')}}</th>
                     <th data-breakpoints="lg">{{translate('Cover Image')}}</th>
                     <th data-breakpoints="lg">{{translate('Featured')}}</th>
-                    <th data-breakpoints="lg">{{translate('Commission')}}</th>
+                    <th data-breakpoints="lg">{{translate('Luxe')}}</th>
+                    <th data-breakpoints="lg">{{translate('Winningkart')}}</th>
+                    <th data-breakpoints="lg">{{translate('Status')}}</th>
+                    <!-- <th data-breakpoints="lg">{{translate('Commission')}}</th> -->
                     <th width="10%" class="text-right">{{translate('Options')}}</th>
                 </tr>
             </thead>
@@ -95,12 +98,34 @@
                             @endif
                         </td>
                         <td>
+                            @if($category->parent_id == 0)
                             <label class="aiz-switch aiz-switch-success mb-0">
                                 <input type="checkbox" onchange="update_featured(this)" value="{{ $category->id }}" <?php if($category->featured == 1) echo "checked";?>>
                                 <span></span>
                             </label>
+                            @else
+                            _
+                            @endif
                         </td>
-                        <td>{{ $category->commision_rate }} %</td>
+                        <td>
+                            <label class="aiz-switch aiz-switch-success mb-0">
+                                <input type="checkbox" onchange="update_luxe(this)" value="{{ $category->id }}" <?php if($category->is_luxe == 1) echo "checked";?>>
+                                <span></span>
+                            </label>
+                        </td>
+                        <td>
+                            <label class="aiz-switch aiz-switch-success mb-0">
+                                <input type="checkbox" onchange="update_winningkart(this)" value="{{ $category->id }}" <?php if($category->winningkart == 1) echo "checked";?>>
+                                <span></span>
+                            </label>
+                        </td>
+                        <td>
+                            <label class="aiz-switch aiz-switch-success mb-0">
+                                <input type="checkbox" onchange="update_is_active(this)" value="{{ $category->id }}" <?php if($category->is_active == 1) echo "checked";?>>
+                                <span></span>
+                            </label>
+                        </td>
+                        <!-- <td>{{ $category->commision_rate }} %</td> -->
                         <td class="text-right">
                             @can('edit_product_category')
                                 <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{route('categories.edit', ['id'=>$category->id, 'lang'=>env('DEFAULT_LANGUAGE')] )}}" title="{{ translate('Edit') }}">
@@ -135,15 +160,57 @@
         function update_featured(el){
             if(el.checked){
                 var status = 1;
-            }
-            else{
+            }else{
                 var status = 0;
             }
             $.post('{{ route('categories.featured') }}', {_token:'{{ csrf_token() }}', id:el.value, status:status}, function(data){
                 if(data == 1){
                     AIZ.plugins.notify('success', '{{ translate('Featured categories updated successfully') }}');
+                }else{
+                    AIZ.plugins.notify('danger', '{{ translate('Something went wrong') }}');
                 }
-                else{
+            });
+        } 
+
+        function update_luxe(el){
+            if(el.checked){
+                var status = 1;
+            }else{
+                var status = 0;
+            }
+            $.post('{{ route('categories.is_luxe') }}', {_token:'{{ csrf_token() }}', id:el.value, status:status}, function(data){
+                if(data == 1){
+                    AIZ.plugins.notify('success', '{{ translate('Luxe categories updated successfully') }}');
+                }else{
+                    AIZ.plugins.notify('danger', '{{ translate('Something went wrong') }}');
+                }
+            });
+        }
+
+           function update_winningkart(el){
+            if(el.checked){
+                var status = 1;
+            }else{
+                var status = 0;
+            }
+            $.post('{{ route('categories.is_winningkart') }}', {_token:'{{ csrf_token() }}', id:el.value, status:status}, function(data){
+                if(data == 1){
+                    AIZ.plugins.notify('success', '{{ translate('Winningkart categories updated successfully') }}');
+                }else{
+                    AIZ.plugins.notify('danger', '{{ translate('Something went wrong') }}');
+                }
+            });
+        }
+           function update_is_active(el){
+            if(el.checked){
+                var status = 1;
+            }else{
+                var status = 0;
+            }
+            $.post('{{ route('categories.is_active') }}', {_token:'{{ csrf_token() }}', id:el.value, status:status}, function(data){
+                if(data == 1){
+                    AIZ.plugins.notify('success', '{{ translate('Active status of categories updated successfully') }}');
+                }else{
                     AIZ.plugins.notify('danger', '{{ translate('Something went wrong') }}');
                 }
             });

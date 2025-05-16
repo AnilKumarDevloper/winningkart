@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Review;
 use Auth;
 use Hash;
 use Mail;
@@ -126,6 +127,7 @@ class HomeController extends Controller
 
     public function registration(Request $request)
     {
+        
         if (Auth::check()) {
             return redirect()->route('home');
         }
@@ -268,64 +270,122 @@ class HomeController extends Controller
         return view('frontend.track_order');
     }
 
-    public function product(Request $request, $slug)
-    {
-        if (!Auth::check()) {
+
+    //old single product function removed by DeveloperAnilKumar
+    public function product(Request $request, $slug){
+        if(!Auth::check()){
             session(['link' => url()->current()]);
         }
-
         $detailedProduct  = Product::with('reviews', 'brand', 'stocks', 'user', 'user.shop')->where('auction_product', 0)->where('slug', $slug)->where('approved', 1)->first();
-
-        if ($detailedProduct != null && $detailedProduct->published) {
-            if ((get_setting('vendor_system_activation') != 1) && $detailedProduct->added_by == 'seller') {
+       
+        if($detailedProduct != null && $detailedProduct->published){
+            if((get_setting('vendor_system_activation') != 1) && $detailedProduct->added_by == 'seller'){
                 abort(404);
             }
-
-            if ($detailedProduct->added_by == 'seller' && $detailedProduct->user->banned == 1) {
+            if($detailedProduct->added_by == 'seller' && $detailedProduct->user->banned == 1){
                 abort(404);
             }
-
-            if (!addon_is_activated('wholesale') && $detailedProduct->wholesale_product == 1) {
+            if(!addon_is_activated('wholesale') && $detailedProduct->wholesale_product == 1){
                 abort(404);
             }
-
             $product_queries = ProductQuery::where('product_id', $detailedProduct->id)->where('customer_id', '!=', Auth::id())->latest('id')->paginate(3);
             $total_query = ProductQuery::where('product_id', $detailedProduct->id)->count();
             $reviews = $detailedProduct->reviews()->paginate(3);
-
+            $all_reviews_images = Review::where('product_id', $detailedProduct->id)->get();
             // Pagination using Ajax
-            if (request()->ajax()) {
-                if ($request->type == 'query') {
+            if(request()->ajax()){
+                if($request->type == 'query'){
                     return Response::json(View::make('frontend.' . get_setting('homepage_select') . '.partials.product_query_pagination', array('product_queries' => $product_queries))->render());
                 }
-                if ($request->type == 'review') {
+                if($request->type == 'review'){
                     return Response::json(View::make('frontend.product_details.reviews', array('reviews' => $reviews))->render());
                 }
             }
-
             // review status
             $review_status = 0;
-            if (Auth::check()) {
+            if(Auth::check()){
                 $OrderDetail = OrderDetail::with(['order' => function ($q) {
                     $q->where('user_id', Auth::id());
                 }])->where('product_id', $detailedProduct->id)->where('delivery_status', 'delivered')->first();
                 $review_status = $OrderDetail ? 1 : 0;
             }
-            if ($request->has('product_referral_code') && addon_is_activated('affiliate_system')) {
+            if($request->has('product_referral_code') && addon_is_activated('affiliate_system')){
                 $affiliate_validation_time = AffiliateConfig::where('type', 'validation_time')->first();
                 $cookie_minute = 30 * 24;
-                if ($affiliate_validation_time) {
+                if($affiliate_validation_time){
                     $cookie_minute = $affiliate_validation_time->value * 60;
                 }
                 Cookie::queue('product_referral_code', $request->product_referral_code, $cookie_minute);
                 Cookie::queue('referred_product_id', $detailedProduct->id, $cookie_minute);
-
                 $referred_by_user = User::where('referral_code', $request->product_referral_code)->first();
-
                 $affiliateController = new AffiliateController;
                 $affiliateController->processAffiliateStats($referred_by_user->id, 1, 0, 0, 0);
             }
-            return view('frontend.product_details', compact('detailedProduct', 'product_queries', 'total_query', 'reviews', 'review_status'));
+            return view('frontend.product_details', compact('detailedProduct', 'product_queries', 'total_query', 'reviews', 'review_status', 'all_reviews_images'));
+        }
+        abort(404);
+    }
+
+    //new product single detail function added by DeveloperAnilKumar
+    public function singleProduct(Request $request, $slug){
+        if(!Auth::check()){
+            session(['link' => url()->current()]);
+        }
+        $detailedProduct  = Product::with('reviews', 'brand', 'stocks', 'user', 'user.shop')
+        ->where('auction_product', 0)->where('slug', $slug)
+        ->where('approved', 1)->first();
+        if($detailedProduct != null && $detailedProduct->published){
+            if((get_setting('vendor_system_activation') != 1) && $detailedProduct->added_by == 'seller'){
+                abort(404);
+            }
+            if($detailedProduct->added_by == 'seller' && $detailedProduct->user->banned == 1){
+                abort(404);
+            }
+            if(!addon_is_activated('wholesale') && $detailedProduct->wholesale_product == 1){
+                abort(404);
+            }
+            $reviews = $detailedProduct->reviews()->paginate(3);
+            $all_reviews_images = Review::where('product_id', $detailedProduct->id)->get();
+            $one_star = Review::where('product_id', $detailedProduct->id)->where('rating', 1)->count();
+            $two_star = Review::where('product_id', $detailedProduct->id)->where('rating', 2)->count();
+            $three_star = Review::where('product_id', $detailedProduct->id)->where('rating', 3)->count();
+            $four_star = Review::where('product_id', $detailedProduct->id)->where('rating', 4)->count();
+            $five_star = Review::where('product_id', $detailedProduct->id)->where('rating', 5)->count();
+            // Pagination using Ajax
+            // if(request()->ajax()){
+            //     if($request->type == 'review'){
+            //         return Response::json(View::make('frontend.product_details.reviews', array('reviews' => $reviews))->render());
+            //     }
+            // }
+            // review status
+            $review_status = 0;
+            if(Auth::check()){
+                $OrderDetail = OrderDetail::with(['order' => function ($q) {
+                    $q->where('user_id', Auth::id());
+                }])->where('product_id', $detailedProduct->id)->where('delivery_status', 'delivered')->first();
+                $review_status = $OrderDetail ? 1 : 0;
+            }
+            if($request->has('product_referral_code') && addon_is_activated('affiliate_system')){
+                $affiliate_validation_time = AffiliateConfig::where('type', 'validation_time')->first();
+                $cookie_minute = 30 * 24;
+                if($affiliate_validation_time){
+                    $cookie_minute = $affiliate_validation_time->value * 60;
+                }
+                Cookie::queue('product_referral_code', $request->product_referral_code, $cookie_minute);
+                Cookie::queue('referred_product_id', $detailedProduct->id, $cookie_minute);
+                $referred_by_user = User::where('referral_code', $request->product_referral_code)->first();
+                $affiliateController = new AffiliateController;
+                $affiliateController->processAffiliateStats($referred_by_user->id, 1, 0, 0, 0);
+            }
+            return view('frontend.new_changes.product.view_single_product', compact(
+                'detailedProduct',
+                   'reviews',
+                   'one_star',
+                   'two_star',
+                   'three_star',
+                   'four_star',
+                   'five_star',
+                    'review_status', 'all_reviews_images'));
         }
         abort(404);
     }
@@ -463,19 +523,16 @@ class HomeController extends Controller
         return redirect()->route('home_settings.index');
     }
 
-    public function variant_price(Request $request)
-    {
-        $product = Product::find($request->id);
+    public function variant_price(Request $request){
+        $product = Product::with('stocks')->find($request->id);
         $str = '';
         $quantity = 0;
         $tax = 0;
         $max_limit = 0;
-
-        if ($request->has('color')) {
+        if($request->has('color')){
             $str = $request['color'];
         }
-
-        if (json_decode($product->choice_options) != null) {
+        if(json_decode($product->choice_options) != null){
             foreach (json_decode($product->choice_options) as $key => $choice) {
                 if ($str != null) {
                     $str .= '-' . str_replace(' ', '', $request['attribute_id_' . $choice->attribute_id]);
@@ -484,28 +541,24 @@ class HomeController extends Controller
                 }
             }
         }
-
+        // return array( 
+        //     'product' => $product, 
+        // );
         $product_stock = $product->stocks->where('variant', $str)->first();
-
         $price = $product_stock->price;
-
-
-        if ($product->wholesale_product) {
+        if ($product->wholesale_product){
             $wholesalePrice = $product_stock->wholesalePrices->where('min_qty', '<=', $request->quantity)->where('max_qty', '>=', $request->quantity)->first();
-            if ($wholesalePrice) {
+            if($wholesalePrice){
                 $price = $wholesalePrice->price;
             }
         }
-
         $quantity = $product_stock->qty;
         $max_limit = $product_stock->qty;
-
-        if ($quantity >= 1 && $product->min_qty <= $quantity) {
+        if($quantity >= 1 && $product->min_qty <= $quantity){
             $in_stock = 1;
-        } else {
+        }else{
             $in_stock = 0;
         }
-
         //Product Stock Visibility
         if ($product->stock_visibility_state == 'text') {
             if ($quantity >= 1 && $product->min_qty < $quantity) {
@@ -514,10 +567,8 @@ class HomeController extends Controller
                 $quantity = translate('Out Of Stock');
             }
         }
-
         //discount calculation
         $discount_applicable = false;
-
         if ($product->discount_start_date == null) {
             $discount_applicable = true;
         } elseif (
@@ -526,7 +577,6 @@ class HomeController extends Controller
         ) {
             $discount_applicable = true;
         }
-
         if ($discount_applicable) {
             if ($product->discount_type == 'percent') {
                 $price -= ($price * $product->discount) / 100;
@@ -534,18 +584,15 @@ class HomeController extends Controller
                 $price -= $product->discount;
             }
         }
-
         // taxes
         foreach ($product->taxes as $product_tax) {
-            if ($product_tax->tax_type == 'percent') {
+            if($product_tax->tax_type == 'percent'){
                 $tax += ($price * $product_tax->tax) / 100;
-            } elseif ($product_tax->tax_type == 'amount') {
+            }elseif($product_tax->tax_type == 'amount'){
                 $tax += $product_tax->tax;
             }
         }
-
         $price += $tax;
-
         return array(
             'price' => single_price($price * $request->quantity),
             'quantity' => $quantity,

@@ -1,6 +1,5 @@
 
 
-
 <!-- footer Description -->
 @if (get_setting('footer_title') != null || get_setting('footer_description') != null)
     <section class="bg-light border-top border-bottom mt-auto">
@@ -13,11 +12,9 @@
     </section>
 @endif
 
-
 <!-- footer subscription & icons -->
 <section class="py-3 text-light footer-widget border-bottom" style="background-color: #F3F3F3 !important;">
-    
-    {
+    <!-- {
     "data": [
         {
             "event_name": "Purchase",
@@ -41,8 +38,8 @@
             }
         }
     ]
-}
-    
+} -->
+
     <div class="container">
         <!-- footer logo -->
      
@@ -62,11 +59,13 @@
                             </div>
                             <div class="col-4">
                                 <button type="submit" class="btn btn-primary rounded-0 w-100" style="
-    background: #EF7528;
-    border-radius: 37px!important;
-    border: none;
-    text-transform: uppercase;
-">{{ translate('Subscribe') }}</button>
+                                        background: #EF7528;
+                                        border-radius: 37px!important;
+                                        border: none;
+                                        text-transform: uppercase;
+                                    ">
+                                    {{ translate('Subscribe') }}
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -343,8 +342,8 @@
                             <p  class="fs-13 text-soft-light">{{ get_setting('contact_phone') }}</p>
                         </li>
                         <li class="mb-2">
-                            <p  class="fs-13 text-secondary mb-1">{{ translate('Email') }}</p>
-                            <p  class="">
+                            <p class="fs-13 text-secondary mb-1">{{ translate('Email') }}</p>
+                            <p class="">
                                 <a href="mailto:{{ get_setting('contact_email') }}" class="fs-13 text-soft-light hov-text-primary">{{ get_setting('contact_email')  }}</a>
                             </p>
                         </li>
@@ -614,7 +613,7 @@
         </div>
 
         <!-- Notifications -->
-        <div class="col">
+        <!-- <div class="col">
             <a href="{{ route('all-notifications') }}" class="text-secondary d-block text-center pb-2 pt-3 {{ areActiveRoutes(['all-notifications'],'svg-active')}}">
                 <span class="d-inline-block position-relative px-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13.6" height="16" viewBox="0 0 13.6 16">
@@ -626,7 +625,7 @@
                 </span>
                 <span class="d-block mt-1 fs-10 fw-600 text-reset {{ areActiveRoutes(['all-notifications'],'text-primary')}}">{{ translate('Notifications') }}</span>
             </a>
-        </div>
+        </div> -->
 
         <!-- Account -->
         <div class="col">

@@ -96,6 +96,40 @@
 							<label for="name">{{translate('Meta Description')}}</label>
 							<textarea name="meta_description" rows="5" class="form-control"></textarea>
 						</div>
+						
+						<div class="form-group row">
+                            <label class="col-md-3 col-from-label">{{translate('Popular')}}</label>
+                            <div class="col-md-9">
+                                <label class="aiz-switch aiz-switch-success mb-0 d-block">
+                                    <input type="checkbox" name="popular" value="1">
+                                    <span></span>
+                                </label>
+                                <!-- <small class="text-muted">{{ translate('If you enable this, this product will be granted as a featured product.') }}</small> -->
+                            </div>
+                        </div>
+
+						<div class="form-group row">
+                            <label class="col-md-3 col-from-label">{{translate('Luxe')}}</label>
+                            <div class="col-md-9">
+                                <label class="aiz-switch aiz-switch-success mb-0 d-block">
+                                    <input type="checkbox" name="luxe" value="1">
+                                    <span></span>
+                                </label>
+                                <!-- <small class="text-muted">{{ translate('If you enable this, this product will be granted as a featured product.') }}</small> -->
+                            </div>
+                        </div>
+
+						<div class="form-group row">
+                            <label class="col-md-3 col-from-label">{{translate('Only on Winningkart')}}</label>
+                            <div class="col-md-9">
+                                <label class="aiz-switch aiz-switch-success mb-0 d-block">
+                                    <input type="checkbox" name="at_winningkart" value="1">
+                                    <span></span>
+                                </label>
+                                <!-- <small class="text-muted">{{ translate('If you enable this, this product will be granted as a featured product.') }}</small> -->
+                            </div>
+                        </div>
+
 						<div class="form-group mb-3 text-right">
 							<button type="submit" class="btn btn-primary">{{translate('Save')}}</button>
 						</div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coupon;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
@@ -50,7 +51,7 @@ class CartController extends Controller
     }
 
     public function addToCart(Request $request)
-    {
+    { 
         if(auth()->user() != null) {
             $user_id = Auth::user()->id;
             $data['user_id'] = $user_id;
@@ -160,16 +161,35 @@ class CartController extends Controller
     }
 
     //removes from Cart
-    public function removeFromCart(Request $request)
-    {
+    public function removeFromCart(Request $request){
+        $item = Cart::where('id', $request->id)->first();
+        if($item->coupon_applied == 1){
+            $applied_coupon = Coupon::where('code', $item->coupon_code)->first();
+            if($applied_coupon->type == "product_base"){
+                $details = json_decode($applied_coupon->details, true);
+                if ($details[0]['product_id'] == $item->product_id) {
+                    $update_coupon =  auth()->user() != null ? Cart::where('user_id', Auth::user()->id) : Cart::where('temp_user_id', $request->session()->get('temp_user_id'));
+                    $update_coupon->update(
+                        [
+                            'discount' => 0.00,
+                            'coupon_code' => '',
+                            'coupon_applied' => 0
+                        ]
+                    );
+                }    
+            } 
+        }
+        
         Cart::destroy($request->id);
-        if (auth()->user() != null) {
+        if(auth()->user() != null){
             $user_id = Auth::user()->id;
             $carts = Cart::where('user_id', $user_id)->get();
-        } else {
+            
+        }else{
             $temp_user_id = $request->session()->get('temp_user_id');
             $carts = Cart::where('temp_user_id', $temp_user_id)->get();
         }
+
 
         return array(
             'cart_count' => count($carts),
@@ -186,19 +206,15 @@ class CartController extends Controller
     }
 
     //updated the quantity for a cart item
-    public function updateQuantity(Request $request)
-    {
-        $cartItem = Cart::findOrFail($request->id);
-
+    public function updateQuantity(Request $request){
+        $cartItem = Cart::findOrFail($request->id); 
         if ($cartItem['id'] == $request->id) {
             $product = Product::find($cartItem['product_id']);
             $product_stock = $product->stocks->where('variant', $cartItem['variation'])->first();
             $quantity = $product_stock->qty;
-            $price = $product_stock->price;
-
+            $price = $product_stock->price; 
             //discount calculation
-            $discount_applicable = false;
-
+            $discount_applicable = false; 
             if ($product->discount_start_date == null) {
                 $discount_applicable = true;
             } elseif (
@@ -206,45 +222,40 @@ class CartController extends Controller
                 strtotime(date('d-m-Y H:i:s')) <= $product->discount_end_date
             ) {
                 $discount_applicable = true;
-            }
-
+            } 
             if ($discount_applicable) {
                 if ($product->discount_type == 'percent') {
                     $price -= ($price * $product->discount) / 100;
                 } elseif ($product->discount_type == 'amount') {
                     $price -= $product->discount;
                 }
-            }
-
+            } 
             if ($quantity >= $request->quantity) {
                 if ($request->quantity >= $product->min_qty) {
                     $cartItem['quantity'] = $request->quantity;
                 }
-            }
-
+            } 
             if ($product->wholesale_product) {
                 $wholesalePrice = $product_stock->wholesalePrices->where('min_qty', '<=', $request->quantity)->where('max_qty', '>=', $request->quantity)->first();
                 if ($wholesalePrice) {
                     $price = $wholesalePrice->price;
                 }
-            }
-
+            } 
             $cartItem['price'] = $price;
             $cartItem->save();
-        }
-
+        } 
         if (auth()->user() != null) {
             $user_id = Auth::user()->id;
             $carts = Cart::where('user_id', $user_id)->get();
         } else {
             $temp_user_id = $request->session()->get('temp_user_id');
             $carts = Cart::where('temp_user_id', $temp_user_id)->get();
-        }
-
+        } 
         return array(
             'cart_count' => count($carts),
             'cart_view' => view('frontend.'.get_setting('homepage_select').'.partials.cart_details', compact('carts'))->render(),
-            'nav_cart_view' => view('frontend.'.get_setting('homepage_select').'.partials.cart')->render(),
+           'nav_cart_view' => view('frontend.megamart.partials.drawer_cart')->render(),
         );
+        
     }
 }

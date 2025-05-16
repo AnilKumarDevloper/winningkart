@@ -185,6 +185,12 @@
                                         <span class="aiz-side-nav-text">{{translate('Brand')}}</span>
                                     </a>
                                 </li>
+                                <li class="aiz-side-nav-item">
+                                    <a href="{{route('brands.view_all_brand_tabs')}}" class="aiz-side-nav-link {{ areActiveRoutes(['brands.view_all_brand_tabs'])}}" >
+                                        <span class="aiz-side-nav-text">{{translate('Brand Tabs')}}</span>
+                                    </a>
+                                </li>
+
                             @endcan
                             @can('view_product_attributes')
                                 <li class="aiz-side-nav-item">
@@ -1192,13 +1198,14 @@
                             <span class="aiz-side-nav-arrow"></span>
                         </a>
                         <ul class="aiz-side-nav-list level-2">
+                        <!-- Commented By DeveloperAK
                             @can('select_homepage')
                                 <li class="aiz-side-nav-item">
                                     <a href="{{ route('website.select-homepage') }}" class="aiz-side-nav-link">
                                         <span class="aiz-side-nav-text">{{translate('Select Homepage')}}</span>
                                     </a>
                                 </li>
-                            @endcan
+                            @endcan -->
                             @can('edit_website_page')
                                 <li class="aiz-side-nav-item">
                                     <a href="{{ route('custom-pages.edit', ['id'=>'home', 'lang'=>env('DEFAULT_LANGUAGE'), 'page'=>'home']) }}" 
@@ -1207,13 +1214,14 @@
                                     </a>
                                 </li>
                             @endcan
+                            <!-- Commented By DeveloperAK
                             @can('authentication_layout_settings')
                                 <li class="aiz-side-nav-item">
                                     <a href="{{ route('website.authentication-layout-settings') }}" class="aiz-side-nav-link">
                                         <span class="aiz-side-nav-text">{{translate('Authentication Layout & Settings')}}</span>
                                     </a>
                                 </li>
-                            @endcan
+                            @endcan -->
                             @can('header_setup')
                                 <li class="aiz-side-nav-item">
                                     <a href="{{ route('website.header') }}" class="aiz-side-nav-link">
@@ -1262,13 +1270,13 @@
                             <span class="aiz-side-nav-arrow"></span>
                         </a>
                         <ul class="aiz-side-nav-list level-2">
-                            {{-- @can('general_settings')
+                             @can('general_settings')
                                 <li class="aiz-side-nav-item">
                                     <a href="{{route('general_setting.index')}}" class="aiz-side-nav-link">
                                         <span class="aiz-side-nav-text">{{translate('General Settings')}}</span>
                                     </a>
                                 </li>
-                            @endcan --}}
+                            @endcan  
                             @can('features_activation')
                                 <li class="aiz-side-nav-item">
                                     <a href="{{route('activation.index')}}" class="aiz-side-nav-link">
@@ -1276,13 +1284,14 @@
                                     </a>
                                 </li>
                             @endcan
+                            <!-- Commented By DeveloperAK
                             @can('language_setup')
                                 <li class="aiz-side-nav-item">
                                     <a href="{{route('languages.index')}}" class="aiz-side-nav-link {{ areActiveRoutes(['languages.index', 'languages.create', 'languages.store', 'languages.show', 'languages.edit'])}}">
                                         <span class="aiz-side-nav-text">{{translate('Languages')}}</span>
                                     </a>
                                 </li>
-                            @endcan
+                            @endcan -->
                             @can('currency_setup')
                                 <li class="aiz-side-nav-item">
                                     <a href="{{route('currency.index')}}" class="aiz-side-nav-link">
@@ -1531,13 +1540,15 @@
                             <span class="aiz-side-nav-arrow"></span>
                         </a>
                         <ul class="aiz-side-nav-list level-2">
-                            @can('system_update')
+                            <!-- 
+                        Commented By DeveloperAK
+                        @can('system_update')
                                 <li class="aiz-side-nav-item">
                                     <a href="{{ route('system_update') }}" class="aiz-side-nav-link">
                                         <span class="aiz-side-nav-text">{{translate('Update')}}</span>
                                     </a>
                                 </li>
-                            @endcan
+                            @endcan -->
                             @can('server_status')
                             <li class="aiz-side-nav-item">
                                 <a href="{{route('system_server')}}" class="aiz-side-nav-link">
@@ -1545,13 +1556,15 @@
                                 </a>
                             </li>
                             @endcan
+                            <!-- 
+                            Commented By DeveloperAK
                             @can('server_status')
                             <li class="aiz-side-nav-item">
                                 <a href="{{route('import_demo_data')}}" class="aiz-side-nav-link">
                                     <span class="aiz-side-nav-text">{{translate('Import Demo Data')}}</span>
                                 </a>
                             </li>
-                            @endcan
+                            @endcan -->
                         </ul>
                     </li>
                 @endcanany

@@ -61,6 +61,38 @@
                         <input type="text" placeholder="{{translate('Slug')}}" id="slug" name="slug" value="{{ $brand->slug }}" class="form-control">
                     </div>
                 </div>
+                <div class="form-group row">
+                            <label class="col-md-3 col-from-label">{{translate('Popular')}}</label>
+                            <div class="col-md-9">
+                                <label class="aiz-switch aiz-switch-success mb-0 d-block">
+                                    <input type="checkbox" name="popular" value="1" {{ $brand->popular == 1 ? 'checked':'' }}>
+                                    <span></span>
+                                </label>
+                                <!-- <small class="text-muted">{{ translate('If you enable this, this product will be granted as a featured product.') }}</small> -->
+                            </div>
+                        </div>
+
+						<div class="form-group row">
+                            <label class="col-md-3 col-from-label">{{translate('Luxe')}}</label>
+                            <div class="col-md-9">
+                                <label class="aiz-switch aiz-switch-success mb-0 d-block">
+                                    <input type="checkbox" name="luxe" value="1" {{ $brand->luxe == 1 ? 'checked':'' }}>
+                                    <span></span>
+                                </label>
+                                <!-- <small class="text-muted">{{ translate('If you enable this, this product will be granted as a featured product.') }}</small> -->
+                            </div>
+                        </div>
+
+						<div class="form-group row">
+                            <label class="col-md-3 col-from-label">{{translate('Only on Winningkart')}}</label>
+                            <div class="col-md-9">
+                                <label class="aiz-switch aiz-switch-success mb-0 d-block">
+                                    <input type="checkbox" name="at_winningkart" value="1" {{ $brand->at_winningkart == 1 ? 'checked':'' }}>
+                                    <span></span>
+                                </label>
+                                <!-- <small class="text-muted">{{ translate('If you enable this, this product will be granted as a featured product.') }}</small> -->
+                            </div>
+                        </div>
                 <div class="form-group mb-0 text-right">
                     <button type="submit" class="btn btn-primary">{{translate('Save')}}</button>
                 </div>

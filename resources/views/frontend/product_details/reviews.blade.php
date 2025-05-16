@@ -1,4 +1,4 @@
-<div class="py-3 reviews-area">
+<div class="p-3 reviews-area">
     <ul class="list-group list-group-flush">
         @foreach ($reviews as $key => $review)
             @if ($review->user != null)
@@ -10,7 +10,7 @@
                             onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';"
                             @if ($review->user->avatar_original != null) data-src="{{ uploaded_asset($review->user->avatar_original) }}"
                         @else
-                            data-src="{{ static_asset('assets/img/placeholder.jpg') }}" @endif>
+                            data-src="{{ static_asset('assets/img/placeholder.jpg') }}" @endif >
                     </span>
                     <div class="media-body text-left">
                         <!-- Review User Name -->
@@ -30,9 +30,7 @@
                             @endfor
                         </span>
                         <!-- Review Comment -->
-                        <p class="comment-text mt-2 fs-14">
-                            {{ $review->comment }}
-                        </p>
+                        <p class="comment-text mt-2 fs-14">{{ $review->comment }}</p>
                         <!-- Review Images -->
                         <div class="spotlight-group d-flex flex-wrap">
                             @if($review->photos != null)
@@ -61,7 +59,7 @@
         
     <?php echo $detailedProduct->getTranslation('description'); ?>
         
-    @if (count($reviews) <= 0)
+    @if (count($reviews) <= 0)  
         <div class="text-center fs-18 opacity-70">
             {{ translate('There have been no reviews for this product yet.') }}
         </div>

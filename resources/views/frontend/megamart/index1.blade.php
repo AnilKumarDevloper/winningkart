@@ -1017,14 +1017,6 @@
         </div>
     @endif
 
-
-
-
-
-
-
-
-
      <!-- Top Sellers -->
     @if (get_setting('vendor_system_activation') == 1)
         @php

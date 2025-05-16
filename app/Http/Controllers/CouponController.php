@@ -121,9 +121,8 @@ class CouponController extends Controller
         }
     }
 
-    public function get_coupon_form_edit(Request $request)
-    {
-        if($request->coupon_type == "product_base") {
+    public function get_coupon_form_edit(Request $request){
+        if($request->coupon_type == "product_base"){
             $coupon = Coupon::findOrFail($request->id);
             $admin_id = \App\Models\User::where('user_type', 'admin')->first()->id;
             $products = filter_products(\App\Models\Product::where('user_id', $admin_id))->get();

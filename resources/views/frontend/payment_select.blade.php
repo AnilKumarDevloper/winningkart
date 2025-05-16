@@ -640,7 +640,7 @@
 
                 <!-- Cart Summary -->
                 <div class="col-lg-4 mt-lg-0 mt-4" id="cart_summary">
-                    @include('frontend.'.get_setting('homepage_select').'.partials.cart_summary')
+                    @include('frontend.megamart.partials.cart_summary')
                 </div>
             </div>
         </div>
@@ -705,8 +705,7 @@
         }
 
         $(document).on("click", "#coupon-apply", function() {
-            var data = new FormData($('#apply-coupon-form')[0]);
-
+            var data = new FormData($('#apply-coupon-form')[0]); 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -725,8 +724,7 @@
         });
 
         $(document).on("click", "#coupon-remove", function() {
-            var data = new FormData($('#remove-coupon-form')[0]);
-
+            var data = new FormData($('#remove-coupon-form')[0]); 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -739,6 +737,7 @@
                 processData: false,
                 success: function(data, textStatus, jqXHR) {
                     $("#cart_summary").html(data);
+                    
                 }
             })
         })

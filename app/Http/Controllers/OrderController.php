@@ -108,8 +108,10 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail(decrypt($id));
         $order_shipping_address = json_decode($order->shipping_address);
-        $delivery_boys = User::where('city', $order_shipping_address->city)
-            ->where('user_type', 'delivery_boy')
+        // $delivery_boys = User::where('city', $order_shipping_address->city)
+        //     ->where('user_type', 'delivery_boy')
+        //     ->get();
+        $delivery_boys = User::where('user_type', 'delivery_boy')
             ->get();
 
         $order->viewed = 1;
@@ -147,15 +149,15 @@ class OrderController extends Controller
 
         $shippingAddress = [];
         if ($address != null) {
-            $shippingAddress['name']        = Auth::user()->name;
-            $shippingAddress['email']       = Auth::user()->email;
-            $shippingAddress['address']     = $address->address;
-            $shippingAddress['country']     = $address->country->name;
-            $shippingAddress['state']       = $address->state->name;
-            $shippingAddress['city']        = $address->city->name;
-            $shippingAddress['postal_code'] = $address->postal_code;
+            $shippingAddress['name']        = $address->name;
+            $shippingAddress['email']       = $address->email;
             $shippingAddress['phone']       = $address->phone;
-            if ($address->latitude || $address->longitude) {
+            $shippingAddress['address']     = $address->address;
+            // $shippingAddress['country']     = $address->country->name;
+            // $shippingAddress['state']       = $address->state->name;
+            // $shippingAddress['city']        = $address->city->name;
+            $shippingAddress['postal_code'] = $address->postal_code;
+            if($address->latitude || $address->longitude){
                 $shippingAddress['lat_lang'] = $address->latitude . ',' . $address->longitude;
             }
         }
@@ -169,7 +171,7 @@ class OrderController extends Controller
         foreach ($carts as $cartItem) {
             $product_ids = array();
             $product = Product::find($cartItem['product_id']);
-            if (isset($seller_products[$product->user_id])) {
+            if(isset($seller_products[$product->user_id])) {
                 $product_ids = $seller_products[$product->user_id];
             }
             array_push($product_ids, $cartItem);

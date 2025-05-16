@@ -104,13 +104,13 @@
                 $('.email-form-group').removeClass('d-none');
                 $('input[name=phone]').val('');
                 isPhoneShown = false;   
-                $(el).html('*{{ translate('Use Phone Number Instead') }}');
+                $(el).html('{{ translate('Use Phone Number') }}');
             } else {
                 $('.phone-form-group').removeClass('d-none');
                 $('.email-form-group').addClass('d-none');
                 $('input[name=email]').val('');
                 isPhoneShown = true;
-                $(el).html('<i>*{{ translate('Use Email Instead') }}</i>');
+                $(el).html('{{ translate('Use Email ID') }}');
             }
         }
     </script> 

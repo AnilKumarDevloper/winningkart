@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Upload;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Product;
 use Auth;
+use App\Models\OrderDetail;
+use Symfony\Component\Routing\Matcher\ExpressionLanguageProvider;
 
 class ReviewController extends Controller
 {
@@ -21,14 +24,34 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request){
         $reviews = Review::query();
         if ($request->rating) {
             $reviews->orderBy('rating', explode(",", $request->rating)[1]);
         }
         $reviews = $reviews->orderBy('created_at', 'desc')->paginate(15);
         return view('backend.product.reviews.index', compact('reviews'));
+    }
+
+
+    public function viewAllReviwsOfProduct($slug){
+        try{
+            $detailedProduct  = Product::with('reviews', 'brand', 'stocks', 'user', 'user.shop')
+            ->where('auction_product', 0)
+            ->where('slug', $slug)
+            ->where('approved', 1)->first();
+            $reviews = Review::with('user')->where('product_id', $detailedProduct->id)->orderBy('rating', 'desc')->get();
+            $review_status = 0;
+            if (Auth::check()) {
+                $OrderDetail = OrderDetail::with(['order' => function ($q) {
+                    $q->where('user_id', Auth::id());
+                }])->where('product_id', $detailedProduct->id)->where('delivery_status', 'delivered')->first();
+                $review_status = $OrderDetail ? 1 : 0;
+            }
+            return view('frontend.new_changes.all_reviews', compact('detailedProduct', 'reviews', 'review_status'));
+        }catch(\Exception $e){
+            abort('500');
+        }
     }
 
     /**
@@ -134,7 +157,6 @@ class ReviewController extends Controller
             $product->rating = 0;
         }
         $product->save();
-
         if ($product->added_by == 'seller') {
             $seller = $product->user->shop;
             if ($review->status) {
@@ -144,17 +166,42 @@ class ReviewController extends Controller
                 $seller->rating = (($seller->rating * $seller->num_of_reviews) - $review->rating) / max(1, $seller->num_of_reviews - 1);
                 $seller->num_of_reviews -= 1;
             }
-
             $seller->save();
         }
-
         return 1;
     }
 
-    public function product_review_modal(Request $request)
-    {
+    public function product_review_modal(Request $request){
         $product = Product::where('id', $request->product_id)->first();
         $review = Review::where('user_id', Auth::user()->id)->where('product_id', $product->id)->first();
         return view('frontend.user.product_review_modal', compact('product', 'review'));
+    }
+
+    public function getAllReviewOnProductPage(Request $request){
+        try{
+            $review_data = [];
+            $reviews = Review::with('user:id,name')->where('product_id', $request->product_id)->get();
+            foreach($reviews as $review){
+                $images_ids = explode(',', $review->photos);
+                $images = Upload::select('file_name')->whereIn('id', $images_ids)->get();
+                  $img = [];
+                foreach($images as $image){
+                $img[] = $image->file_name;
+               }
+                $review_data[] = [
+                    "images" => $img,
+                    "review" => $review
+                ];
+            }
+            return response()->json([
+                "status_message" => "success",
+                "data" => $review_data
+            ], 200);
+        }catch(\Exception $e){
+            return response()->json([
+                "status_message" => 'something_went_wrong',
+                "error" => $e->getMessage(),
+            ], 500);
+        }
     }
 }

@@ -6,7 +6,7 @@
                 @php
                     $photos = explode(',',$product->photos);
                 @endphp
-                <div class="col">
+                <div class="col" >
                     <div class="aiz-carousel product-gallery" data-nav-for='.product-gallery-thumb' data-fade='true' data-auto-height='true'>
                         @foreach ($photos as $key => $photo)
                         <div class="carousel-box img-zoom rounded-0">

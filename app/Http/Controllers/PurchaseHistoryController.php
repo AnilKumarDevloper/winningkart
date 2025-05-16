@@ -45,6 +45,7 @@ class PurchaseHistoryController extends Controller
         $order->delivery_viewed = 1;
         $order->payment_status_viewed = 1;
         $order->save();
+        
         return view('frontend.user.order_details_customer', compact('order'));
     }
 

@@ -6,7 +6,11 @@
     CoreComponentRepository::instantiateShopRepository();
     CoreComponentRepository::initializeCache();
 @endphp
-
+<style>
+    .hummingbird-treeview label{
+        width: auto !important;
+    }
+</style>
 <div class="page-content">
     <div class="aiz-titlebar text-left mt-2 pb-2 px-3 px-md-2rem border-bottom border-gray">
         <div class="row align-items-center">
@@ -188,7 +192,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <div class="h-300px overflow-auto c-scrollbar-light">
-                                                    <ul class="hummingbird-treeview-converter list-unstyled" data-checkbox-name="category_ids[]" data-radio-name="category_id">
+                                                    <ul class="hummingbird-treeview-converter list-unstyled" data-checkbox-name="category_ids[]" data-radio-name="category_id" id="treeview" >
                                                         @foreach ($categories as $category)
                                                         <li id="{{ $category->id }}">{{ $category->getTranslation('name') }}</li>
                                                             @foreach ($category->childrenCategories as $childCategory)
@@ -384,9 +388,8 @@
                         <div class="bg-white p-3 p-sm-2rem">
                             <!-- tab Title -->
                             <h5 class="mb-3 pb-3 fs-17 fw-700" style="border-bottom: 1px dashed #e4e5eb;">{{translate('Product price & stock')}}</h5>
-                            <div class="w-100">
-                                <!-- Colors -->
-                                <div class="form-group row gutters-5">
+                            <div class="w-100"> 
+                                <!-- <div class="form-group row gutters-5">
                                     <div class="col-md-3">
                                         <input type="text" class="form-control" value="{{translate('Colors')}}" disabled>
                                     </div>
@@ -403,14 +406,15 @@
                                             <span></span>
                                         </label>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- Attributes -->
                                 <div class="form-group row gutters-5">
                                     <div class="col-md-3">
                                         <input type="text" class="form-control" value="{{translate('Attributes')}}" disabled>
                                     </div>
                                     <div class="col-md-8">
-                                        <select name="choice_attributes[]" id="choice_attributes" class="form-control aiz-selectpicker" data-selected-text-format="count" data-live-search="true" multiple data-placeholder="{{ translate('Choose Attributes') }}">
+                                        <select name="choice_attributes[]" id="choice_attributes" class="form-control aiz-selectpicker" data-selected-text-format="count" data-live-search="true" data-placeholder="{{ translate('Choose Attributes') }}">
+                                            <option value="">--Select Variant--</option>    
                                             @foreach (\App\Models\Attribute::all() as $key => $attribute)
                                             <option value="{{ $attribute->id }}">{{ $attribute->getTranslation('name') }}</option>
                                             @endforeach
@@ -905,11 +909,14 @@
 
     $('#choice_attributes').on('change', function() {
         $('#customer_choice_options').html(null);
+        let choice_option_val = $(this).val();
+        if(choice_option_val != ""){
         $.each($("#choice_attributes option:selected"), function(){
             add_more_customer_choice_option($(this).val(), $(this).text());
         });
 
-        update_sku();
+    }
+    update_sku();
     });
 
     function fq_brought_product_selection_type(){

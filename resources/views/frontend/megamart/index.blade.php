@@ -92,6 +92,10 @@
     .vd_radius23{
         border-radius: 23px;
     }
+   
+    .homeSlider .slick-slide{
+        width: 300px !important;
+    }
 </style>
 
 <!-- Fix Page menu -->
@@ -236,9 +240,6 @@
 </section>
 @endif -->
 
-
-
-
 <!-- Sliders -->
 <div class="home-banner-area mb-3 web_home_banner" style="background-color: {{ get_setting('slider_section_bg_color', '#dedede') }}">
 
@@ -281,6 +282,7 @@
 
 <!--Mobile Screen Banner Start-->
 <!-- Sliders -->
+ 
 <div class="home-banner-area mb-3 mob_home_banner" style="background-color: {{ get_setting('slider_section_bg_color', '#dedede') }};">
 
     <div class="sub-cat-menu sub-cat-menu-new more c-scrollbar-light border p-4 shadow-none d-none">
@@ -393,7 +395,7 @@
 
 <!--Mobile Sreen Banner End-->
 
-
+ 
 <section class="bg-light mt-auto tc_section_bg">
     <div class="container px-xs-0">
         <div class="row no-gutters">
@@ -434,6 +436,8 @@
 
 <!-- Category wise Products -->
 <!-- ----------------------------------------------------- -->
+
+ 
 <div>
     <section class="py-md-5 py-sm-3">
         <div class="container-fluid">
@@ -481,7 +485,7 @@
                             @php
                                 $category_name = $category->getTranslation('name');
                             @endphp
-
+                                
                             <div class="city-content @if($i == 0) active @endif" id="{{ $category_name }}"  style="@if($i != 0)display:none;@endif">
                                 <!-- city card -->
                                 <div class="col-lg-3 col-md-4 d-flex justify-content-center p-0">
@@ -501,16 +505,20 @@
                                 </div>
                                 <!--  carousel -->
                                 <div class="col-lg-9 col-md-8 col-sm-6 col-xs-6 product_card_contianer">
-                                    <div class="w-100 h-100 overflow-hidden dfd degf">
-                                        <div class="aiz-carousel aiz-carousell2 aiz-web-resp arrow-x-0 arrow-inactive-none" data-items="3.5"
+                                    <div class="w-100 h-100 overflow-hidden">
+                                        <div class="aiz-carousel aiz-carousell2 aiz-web-resp arrow-x-0 arrow-inactive-none homeSlider" data-items="3.5"
                                             data-xxl-items="3" data-xl-items="2.8" data-lg-items="2" data-md-items="1.5" data-sm-items="1"
                                             data-xs-items="1.2" data-arrows='true' data-infinite='false'>
+                                            
                                             @foreach (get_cached_products($category->id) as $product_key => $product)
-                                                @include('frontend.'.get_setting('homepage_select').'.partials.product_box_3', ['product' => $product])
-                                            @endforeach
+                                            <div class=""> 
+                                                @include('frontend.new_changes.partials.single_product_box', ['product' => $product]) 
+                                            </div>
+                                            @endforeach 
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             @php
                                 $i++;
@@ -557,6 +565,7 @@
     </marquee>
 </section>
 
+
 <!-- Flash Deal -->
 @php
 $flash_deal = get_featured_flash_deal();
@@ -596,10 +605,9 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                 </div>
             </div>
 
-            <div class="row no-gutters align-items-center border" style="background: {{ $flash_deal_bg }};">
+            <div class="row no-gutters align-items-center border" style="background: {{ $flash_deal_bg }}">
                 <!-- Flash Deals Baner & Countdown -->
-                <div class="col-xxl-2 col-md-3 col-sm-4 col-5 h-150px h-md-200px h-lg-240px">
-             h-md-200px h-lg-s="h-100 w-100 w-xl-auto"
+                <div class="col-xxl-2 col-md-3 col-sm-4 col-5 h-150px h-md-200px h-lg-240px  h-md-200px"
                         style="background-image: url('{{ uploaded_asset($flash_deal->banner) }}'); background-size: cover; background-position: center center;">
                     </div>
                 </div>
@@ -665,20 +673,21 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 <section class="shopbyconcern d-lg-block d-md-block d-sm-none d-none">
     <div class="container">
         <div class="row">
-            <div class="col pl-0">
+            <div class="col pl-0 col-12">
                 <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0 ">
                     <div class="top_heading">
                         <span class="">Shop By Concern</span>
                         <span></span>
                     </div>
                 </h3>
-            </div>
+            </div> 
+  
+
             <div class="col-md-12 my-md-4 my-3 ">
                 <div class="row">
                     <div class="col">
                         <div class="row justify-content-end">
-                            <div class="img_col1 shoBy">
-                                
+                            <div class="img_col1 shoBy"> 
                                 <img src=" {{asset('public/assets/img/decor-1.webp')}}" alt="" class="img-fluid img1">
                                 <span><a href="{{ route('products.category', "decor-2jywo") }}" class="text-white">Decor</a></span>
                             </div>
@@ -720,6 +729,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 <section class="shopbyconcern d-lg-none d-md-none d-sm-block d-block">
     <div class="container">
         <div class="row">
+
             <div class="col">
                 <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0 ">
                     <div class="top_heading">
@@ -727,15 +737,16 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                         <span></span>
                     </div>
                 </h3>
-            </div>
-            <div class="col-md-12 my-md-4 my-3 ">
+            </div> 
+
+            <div class="col-md-12 my-md-4 my-3 d-none">
                 <div class="row justify-content-center mobShoBy">
                     <div class="img_col1 shoBy">
                         <img src=" {{asset('public/assets/img/decor-1.jpg')}}" alt="" class="img-fluid img1">
                         <span><a href="{{ route('products.category', "decor-2jywo") }}" class="text-white">Decor</a></span>
                     </div>
 
-                    <div class=" img_co2l shoBy">
+                    <div class="img_co2l shoBy">
                         <img src="https://img.freepik.com/premium-photo/woman-with-yellow-coat-red-background-with-yellow-background_972478-15634.jpg" alt="" class="img-fluid d-flex img2">
                         <span><a href="{{ route('products.category', "women-clothings") }}" class="text-white">Women Clothing</a></span>
                     </div>
@@ -891,8 +902,7 @@ $best_selers = get_best_sellers(5);
                     <source src="{{ static_asset('assets/img/i1.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
-            </div>
-            
+            </div> 
             
             <div class="carousel-box position-relative p-0 has-transition">
                 <video class="col-md-12 vd_radius23"  width="100%" height="100%" controls autoplay muted playsinline>
@@ -1305,12 +1315,7 @@ $best_selers = get_best_sellers(5);
 
         </div>
 
-
-
         <!-- Item1 Ends -->
-
-
-
 
     </div>
     <!-- Owl Carousel Slider Ends -->

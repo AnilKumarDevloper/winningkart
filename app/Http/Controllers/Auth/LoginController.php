@@ -39,8 +39,7 @@ class LoginController extends Controller
     /**
      * Redirect the user to the social login authentication page.
      */
-    public function redirectToProvider($provider)
-    {
+    public function redirectToProvider($provider){
         if (request()->get('query') == 'mobile_app') {
             request()->session()->put('login_from', 'mobile_app');
         }
@@ -50,8 +49,7 @@ class LoginController extends Controller
     /**
      * Handle callback from social login providers.
      */
-    public function handleProviderCallback(Request $request, $provider)
-    {
+    public function handleProviderCallback(Request $request, $provider){
         if (session('login_from') == 'mobile_app') {
             return $this->mobileHandleProviderCallback($request, $provider);
         }
@@ -72,6 +70,15 @@ class LoginController extends Controller
             $existingUser->access_token = $user->token;
             $existingUser->save();
             Auth::login($existingUser, true);
+            if(session('temp_user_id') != null){
+                Cart::where('temp_user_id', session('temp_user_id'))
+                        ->update([
+                            'user_id' => $existingUser->id,
+                            'temp_user_id' => null
+                ]);
+                Session::forget('temp_user_id');
+            }
+
         } else {
             $newUser = User::create([
                 'name' => $user->name,
@@ -80,8 +87,17 @@ class LoginController extends Controller
                 'provider' => $provider,
                 'access_token' => $user->token,
             ]);
+            if(session('temp_user_id') != null){
+                Cart::where('temp_user_id', session('temp_user_id'))
+                        ->update([
+                            'user_id' => $newUser->id,
+                            'temp_user_id' => null
+                ]);
+                Session::forget('temp_user_id');
+            }
             Auth::login($newUser, true);
         }
+        
 
         return $this->redirectToDashboard();
     }

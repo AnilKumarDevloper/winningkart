@@ -21,7 +21,7 @@
                             @endphp
                             <a href="{{ $route }}">
                         @endif
-
+                                
                         {{ $notification->data['order_code'] }}
 
                         @if ($is_linkable)

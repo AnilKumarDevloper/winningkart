@@ -56,17 +56,32 @@
 @endsection
 
 @section('content')
-    <section class="mb-4 pt-3">
-        <div class="container">
-            <div class="bg-white py-3">
+    <section class="mb-4"> 
+
+        <div class="w-100">
+            <img class="w-100" src="https://images-static.nykaa.com/uploads/f8a7a511-fd88-4f0c-9bdd-8aa46c714a71.jpg?tr=cm-pad_resize,w-1200" alt="">
+        </div>
+
+        <div class="container">    
+            <div class="mt-2">
+                <nav aria-label="breadcrumb">  
+                    <ol class="breadcrumb d-flex bg-white mb-0 pt-0 pb-0" style="display: block; font-weight: 600;"> 
+                        <li class=" text-black"><a href="#" class="text-dark">Home <i class="ri-arrow-right-s-line"></i></a></li>
+                        <li><a href="#" class="text-dark">Product</a> <i class="ri-arrow-right-s-line"></i></li>
+                        <li class="active" aria-current="page"><a href="#">Product Detail</a> </li>
+                    </ol>
+                </nav> 
+            </div>
+             
+            <div class="bg-white py-3">  
                 <div class="row">
                     <!-- Product Image Gallery -->
-                    <div class="col-xl-5 col-lg-6 mb-4">
+                    <div class="col-xl-5 col-lg-6"> 
                         @include('frontend.product_details.image_gallery')
                     </div>
 
                     <!-- Product Details -->
-                    <div class="col-xl-7 col-lg-6">
+                    <div class="col-xl-7 col-lg-6" style="border-left: 1px solid rgb(111 121 129 / 22%);">
                         @include('frontend.product_details.details')
                     </div>
                 </div>
@@ -74,7 +89,7 @@
         </div>
     </section>
 
-    <section class="mb-4">
+    <section class="mb-4 mt-4">
         <div class="container">
             @if ($detailedProduct->auction_product)
                 <!-- Reviews & Ratings -->
@@ -87,8 +102,30 @@
                 @include('frontend.product_details.product_queries')
             @else
                 <div class="row gutters-16">
-                    <!-- Left side -->
-                    <div class="col-lg-3">
+                    <!-- Left side -->  
+                    <!-- Right side -->
+                    <div class="col-lg-9">
+                        
+                        <!-- Reviews & Ratings -->
+                        @include('frontend.product_details.review_section')
+
+                        <!-- Description, Video, Downloads -->
+                       {{-- @include('frontend.product_details.description') --}}
+                        
+                        <!-- Related products -->
+                       {{-- @include('frontend.product_details.frequently_brought_products') --}}
+
+                        <!-- Product Query -->
+                        {{-- @include('frontend.product_details.product_queries') --}}
+                        
+                        <!-- Top Selling Products  -->
+                        <div class="d-lg-none">
+                             @include('frontend.product_details.top_selling_products')
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3" >
                         <!-- Seller Info -->
                         @include('frontend.product_details.seller_info')
 
@@ -98,32 +135,10 @@
                        </div>
                     </div>
 
-                    <!-- Right side -->
-                    <div class="col-lg-9">
-                        
-                        <!-- Reviews & Ratings -->
-                        @include('frontend.product_details.review_section')
-
-                        <!-- Description, Video, Downloads -->
-                        @include('frontend.product_details.description')
-                        
-                        <!-- Related products -->
-                        @include('frontend.product_details.frequently_brought_products')
-
-                        <!-- Product Query -->
-                        @include('frontend.product_details.product_queries')
-                        
-                        <!-- Top Selling Products -->
-                        <div class="d-lg-none">
-                             @include('frontend.product_details.top_selling_products')
-                        </div>
-
-                    </div>
                 </div>
             @endif
         </div>
-    </section>
-
+    </section> 
 @endsection
 
 @section('modal')
@@ -220,8 +235,7 @@
                 </div>
             </div>
         </div>
-    @endif
-    
+    @endif 
     <!-- Product Review Modal -->
     <div class="modal fade" id="product-review-modal">
         <div class="modal-dialog">
@@ -317,13 +331,14 @@
             @endif
         }
 
-        function product_review(product_id) {
+        function product_review(product_id){
             @if (isCustomer())
                 @if ($review_status == 1)
                     $.post('{{ route('product_review_modal') }}', {
                         _token: '{{ @csrf_token() }}',
                         product_id: product_id
                     }, function(data) {
+                        console.log(data);
                         $('#product-review-modal-content').html(data);
                         $('#product-review-modal').modal('show', {
                             backdrop: 'static'
@@ -336,7 +351,9 @@
             @elseif (Auth::check() && !isCustomer())
                 AIZ.plugins.notify('warning', '{{ translate("Sorry, Only customers can give review.") }}');
             @else
-                $('#login_modal').modal('show');
+                let url = "{{ route('user.login') }}";
+                window.location.href = url;
+                // $('#login_modal').modal('show');
             @endif
         }
 

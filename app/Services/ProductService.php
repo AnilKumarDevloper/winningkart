@@ -15,17 +15,16 @@ use Illuminate\Support\Str;
 
 class ProductService
 {
-    public function store(array $data)
-    {
+    public function store(array $data){
         $collection = collect($data);
 
         $approved = 1;
-        if (auth()->user()->user_type == 'seller') {
+        if(auth()->user()->user_type == 'seller'){
             $user_id = auth()->user()->id;
             if (get_setting('product_approve_by_admin') == 1) {
                 $approved = 0;
             }
-        } else {
+        }else{
             $user_id = User::where('user_type', 'admin')->first()->id;
         }
         $tags = array();
@@ -123,7 +122,7 @@ class ProductService
         if (isset($collection['choice_no']) && $collection['choice_no']) {
             $attributes = json_encode($collection['choice_no']);
             unset($collection['choice_no']);
-        } else {
+        }else{
             $attributes = json_encode(array());
         }
 
@@ -175,9 +174,7 @@ class ProductService
         }
         if(!isset($collection['todays_deal'])){
             $collection['todays_deal'] = 0;
-        }
-
-
+        } 
         $tags = array();
         if ($collection['tags'][0] != null) {
             foreach (json_decode($collection['tags'][0]) as $key => $tag) {

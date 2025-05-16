@@ -108,7 +108,6 @@ class RegisterController extends Controller
                         'user_id' => $user->id,
                         'temp_user_id' => null
             ]);
-
             Session::forget('temp_user_id');
         }
 

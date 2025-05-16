@@ -5,8 +5,11 @@
     }
 @endphp
 <option value="{{ $child_category->id }}">{{ $value." ".$child_category->getTranslation('name') }}</option>
-@if ($child_category->categories)
-    @foreach ($child_category->categories as $childCategory)
-        @include('categories.child_category', ['child_category' => $childCategory])
+  @if($child_category->categories)
+    @foreach($child_category->categories as $childCategory) 
+        @if($childCategory->level < 2)
+            @include('categories.child_category', ['child_category' => $childCategory])
+        @endif 
     @endforeach
-@endif
+@endif 
+ 

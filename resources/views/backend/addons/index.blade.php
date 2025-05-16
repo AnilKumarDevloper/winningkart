@@ -4,18 +4,18 @@
 
     <div class="">
         <div class="row ">
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
                 <div class="nav border-bottom aiz-nav-tabs">
                     <a class="p-3 fs-16 text-reset show active" data-toggle="tab" href="#installed">{{ translate('Installed Addon')}}</a>
                     <a class="p-3 fs-16 text-reset" data-toggle="tab" href="#available">{{ translate('Available Addon')}}</a>
                 </div>
-            </div>
+            </div> -->
 			{{-- <div class="col mt-3 mt-md-0 text-center text-md-right">
                 
             </div> --}}
-            <div class="col mt-3 mt-md-0 text-center text-md-right">
+            <!-- <div class="col mt-3 mt-md-0 text-center text-md-right">
                 <a href="{{ route('addons.create')}}" class="btn btn-primary mx-3 mx-md-0">{{ translate('Install/Update Addon')}}</a>
-            </div>
+            </div> -->
         </div>
     </div>
     <br>
