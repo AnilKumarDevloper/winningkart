@@ -537,6 +537,27 @@ $brands_at_winningkart = Brand::with('brandLogo')->where('at_winningkart', 1)->o
                                                         @endforeach
                                                     @endif
                                                 </div>
+
+                                               <!---------->
+                                                <!-- <div class="row bgOdd">   
+                                                    <div class="col-3 bg-even">
+                                                        <div class="submenu_">
+                                                            <b> items 1</b>   
+                                                            <ul class="mt-2"> 
+                                                                <li><a href="#">list item 1</a></li> 
+                                                            </ul>   
+                                                            <div class="mt-2">
+                                                                <b class=""> items 2</b>   
+                                                                <ul class="m-0"> 
+                                                                    <li><a href="#">list item 1</a></li>
+                                                                    <li><a href="#">list item 1</a></li> 
+                                                                    <li><a href="#">list item 1</a></li> 
+                                                                </ul> 
+                                                            </div>
+                                                        </div>
+                                                    </div>    
+                                                </div> -->
+                                                <!----------->
                                         </div>
                                     </li> 
                                     
@@ -715,7 +736,7 @@ $brands_at_winningkart = Brand::with('brandLogo')->where('at_winningkart', 1)->o
                                             <form action="{{ route('user.login') }}" method="POST">
                                                 <div class="d-flex justify-content-between">
                                                     <span><input type="number" placeholder="Mobile Number" class="registerInputWithOtp" name="phone"></span>
-                                                    <input type="hidden" name="country_code" value="+91"> 
+                                                    <input type="hidden" name="country_code" id="country_code_signIn"  value=""> 
                                                     <button type="submit" class="send_otp_button">Send OTP</button>
                                                 </div>
                                             </form>
@@ -1310,9 +1331,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    var tabs = document.querySelectorAll('.custom-tab');
-    var contents = document.querySelectorAll('.custom-tab-content');
+     document.addEventListener('DOMContentLoaded', function() {
+         document.getElementById("country_code_signIn").value = "+91"
+
+         var tabs = document.querySelectorAll('.custom-tab');
+        var contents = document.querySelectorAll('.custom-tab-content'); 
+
 
     tabs.forEach(function(tab) {
         tab.addEventListener('click', function() {

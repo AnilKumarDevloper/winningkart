@@ -96,6 +96,10 @@
             border-color: #f60;
             color: #f60;
         }
+        #shipaddress:disabled{
+            background: #c68860;
+            color: gainsboro;
+        }
     </style>
 </head>
 <body>
@@ -261,6 +265,7 @@
                                     <input type="number" id="phone" name="phone" placeholder="&nbsp;" required>
                                     <span class="label">Phone</span> 
                                 </label>
+                                <p style="font-size: 12px;" id="error_number" class="text-danger">Please Enter 10 Digits Number</p>
                             </div>
                             <div>
                                 <label for="email" class="inp mb-1">
@@ -271,7 +276,7 @@
                         </div>
                         <div class="cart_footer"> 
                             <div class="proceed_cart" style="width: 100%;">
-                                <input type="submit" class="shipaddress" value="SHIP TO THIS ADDRESS">
+                                <input type="submit" id="shipaddress" class="shipaddress" value="SHIP TO THIS ADDRESS">
                             </div> 
                         </div> 
                     </form>
@@ -284,6 +289,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
     <script>
         $(document).ready(function(){
+            $("#error_number").hide();
             $('#add_new_address_box').on('click', function(){
                 $(".right_sidebarAdress").toggleClass("showSidebarAddress");
                 $(".overlayer-02").toggleClass("showOverlayAddress");
@@ -363,9 +369,25 @@
                 }catch(error){
                     console.log(error);
                 }
-            });
-
+            }); 
         }); 
+        
     </script> 
+    <script>
+        document.getElementById("phone").addEventListener('input', function(e){ 
+             let value = e.target.value; 
+             value = value.replace(/\D/g, ''); 
+            
+            if (value.length > 10) {
+                value = value.slice(0, 10);
+                $("#shipaddress").prop('disabled', false);
+                $("#error_number").hide();
+            }else{
+                  $("#shipaddress").prop('disabled', true);
+                  $("#error_number").show();
+            }
+            e.target.value = value; 
+        });
+    </script>
 </body>
 </html>

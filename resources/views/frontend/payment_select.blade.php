@@ -483,7 +483,7 @@
                                                 if ($product['cash_on_delivery'] == 0) {
                                                     $cod_on = 0;
                                                 }
-                                            }
+                                            }   
                                         @endphp
                                         @if ($digital != 1 && $cod_on == 1)
                                             <div class="col-6 col-xl-3 col-md-4">
@@ -658,12 +658,11 @@
 
         var minimum_order_amount_check = {{ get_setting('minimum_order_amount_check') == 1 ? 1 : 0 }};
         var minimum_order_amount =
-            {{ get_setting('minimum_order_amount_check') == 1 ? get_setting('minimum_order_amount') : 0 }};
+        {{ get_setting('minimum_order_amount_check') == 1 ? get_setting('minimum_order_amount') : 0 }};
 
         function use_wallet() {
             $('input[name=payment_option]').val('wallet');
-            if ($('#agree_checkbox').is(":checked")) {
-                ;
+            if ($('#agree_checkbox').is(":checked")) { 
                 if (minimum_order_amount_check && $('#sub_total').val() < minimum_order_amount) {
                     AIZ.plugins.notify('danger',
                         '{{ translate('You order amount is less then the minimum order amount') }}');

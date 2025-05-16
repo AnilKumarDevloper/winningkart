@@ -135,18 +135,13 @@ class OrderController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $carts = Cart::where('user_id', Auth::user()->id)
-            ->get();
-
-        if ($carts->isEmpty()) {
+    public function store(Request $request){
+        $carts = Cart::where('user_id', Auth::user()->id)->get();
+        if($carts->isEmpty()){
             flash(translate('Your cart is empty'))->warning();
             return redirect()->route('home');
         }
-
         $address = Address::where('id', $carts[0]['address_id'])->first();
-
         $shippingAddress = [];
         if ($address != null) {
             $shippingAddress['name']        = $address->name;
@@ -161,7 +156,6 @@ class OrderController extends Controller
                 $shippingAddress['lat_lang'] = $address->latitude . ',' . $address->longitude;
             }
         }
-
         $combined_order = new CombinedOrder;
         $combined_order->user_id = Auth::user()->id;
         $combined_order->shipping_address = json_encode($shippingAddress);
@@ -178,7 +172,7 @@ class OrderController extends Controller
             $seller_products[$product->user_id] = $product_ids;
         }
 
-        foreach ($seller_products as $seller_product) {
+        foreach($seller_products as $seller_product){
             $order = new Order;
             $order->combined_order_id = $combined_order->id;
             $order->user_id = Auth::user()->id;
@@ -374,8 +368,7 @@ class OrderController extends Controller
         return view('seller.order_details_seller', compact('order'));
     }
 
-    public function update_delivery_status(Request $request)
-    {
+    public function update_delivery_status(Request $request){
         $order = Order::findOrFail($request->order_id);
         $order->delivery_viewed = '0';
         $order->delivery_status = $request->status;

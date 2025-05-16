@@ -677,8 +677,7 @@
                     }else{
                         ratingHtml += '<i class="las la-star"></i>'
                     } 
-                } 
-
+                }  
               
                 let select_sizeColor = "";
                 let add_cart = "";
@@ -690,56 +689,59 @@
                     
                     let sizeColor_select = element.choice_options[0].values; 
                     selectText = element.choice_options[0].attribute_name; 
-                  
-                    let selected_discount = element.discount;   
-                  
-              
+
+
+                    let selected_after_discount=""; 
+                    let selected_parcent_discount = "";
+                    let selected_after_discount_price = "";
+                    let selected_discount_percentage_By_amount ="";
+                    let selected_discount = element.discount;  
                     let firstPrice = "";
+                    let selected_price ="";
 
                      sizeColor_select.forEach((each, index) =>{   
-                        let selected_price = each.price;  
-                        console.log(parcent_discount) 
-                        after_discount = selected_price - 500;  
-                        
+                        selected_price = each.price; 
+                 
                         let ischecked =  index === 0 ? "checked" : ""; 
-                         price_after_discount_sizeColor = selected_price - selected_discount; 
-
+                         selected_after_discount_price = selected_price - selected_discount;  
 
                         if(discount > 0){
-                             if(element.discount_type === "amount"){
+                             if(element.discount_type === "amount"){  
 
-                                console.log("amount discount ");
+                                selected_parcent_discount = Math.round(selected_discount / selected_price * 100);
+                                selected_after_discount_price = selected_price - selected_discount;   
+
                             }else if(element.discount_type === "percent"){
                                 console.log("percent discount");
+                                selected_discount_percentage_By_amount =  Math.round((selected_discount / 100) * selected_price);  
+                                selected_after_discount_price = selected_price - selected_discount_percentage_By_amount;  
+                               console.log(discount)
+                               selected_parcent_discount = discount;
                             } 
                         }else{
                             console.log("else discounts ");
-                        }
-                       
-                        
-                        // let selected_discount_parcentage =  Math.round((selected_discount / selected_price )* 100);
-                        //  console.log(selected_discount_parcentage, "selected_discount_parcentage");
-                  
-
+                        } 
 
                          if(index === 0){
-                            firstPrice = price_after_discount_sizeColor;
-                         } 
+                            firstPrice = selected_after_discount_price; 
+                         }  
                       
                         select_sizeColorHtml += `
                             <li class="select_customSize_list" id="${each.id}">
                                 <div class="form-check d-flex align-items-center">
                                     <input class="form-check-input sizeWise" 
                                        type="radio" name="attribute_id_${element.id}"
-                                        value="" onchange="variantSelect(this, ${element.id})"
-                                        data-price="${price_after_discount_sizeColor}" ${ischecked}
+                                        value="" onchange="variantSelect(this, ${element.id}, ${selected_price}, ${selected_parcent_discount})"
+                                        data-price="${selected_after_discount_price}" ${ischecked}
                                         >
                                     <label class="form-check-label" for="sizeM"> ${each.sku}</label>
                                 </div> 
                             </li> `
                      });
 
-                    /// size color select option elements start 
+                     console.log(selected_parcent_discount, "selected_parcent_discount selected_parcent_discount")
+                    /// size color select option elements start  
+                     
                     colorSize_elemetHtml = `
                          <div> 
                             <div class="header_select">
@@ -748,14 +750,14 @@
                             </div> 
                             <div class="select_customSize">
                                 <ul class="selectYourSize">  
-                                        ${select_sizeColorHtml}
+                                    ${select_sizeColorHtml}
                                 </ul>
                             </div>
                             <div class="sizeContainer"> 
                                 <div class="reviews_div d-flex justify-content-center flex-wrap"> 
-                                    <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2"> 878</del></span></span>
+                                    <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2" id="main_price_${element.id}">₹ ${selected_price}</del></span></span>
                                     <span class="current_mrp mrp_m_${element.id}">₹ ${firstPrice}</span>            
-                                    <span class="price_off"> 44 % Off</span>   
+                                    <span class="price_off" id="selected_off_parcent_${element.id}"> ${selected_parcent_discount} % Off</span>   
                                 </div> 
                             </div> 
                         </div>
@@ -787,8 +789,8 @@
                             </div>
                         </div>  
                      `
-                }  
-               
+                } 
+
                 html += ` 
                     <div class="col-md-4" id="${element.id}">
                         <div class="pr_height bg-white">
@@ -911,14 +913,17 @@
        
         $(document).ready(function () { 
             fetchApiData();
-        });
-     
-
+        }); 
         
-        function variantSelect(el, id, selected_discount_parcentage){  
+        function variantSelect(el, id, selected_price, selected_parcent_discount){  
            let price = el.getAttribute('data-price');
            document.querySelector(`.mrp_m_${id}`).textContent = `₹ ${price}`;
-           console.log(selected_discount_parcentage)
+           document.getElementById(`main_price_${id}`).textContent = `₹ ${selected_price}`; 
+           document.getElementById(`selected_off_parcent_${id}`).textContent = `${selected_parcent_discount} % Off`; 
+
+           console.log(selected_parcent_discount,"selected_parcent_discount", selected_parcent_discount);
+
+
         }
      
 

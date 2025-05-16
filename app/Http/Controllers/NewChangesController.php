@@ -52,19 +52,11 @@ class NewChangesController extends Controller
     }
 
     public function authPayment(){
-        // try{
-            $savedAddress = session('saved_address');  
-            $payment_track = array();
-            $api = new Api(env('RAZOR_KEY'), env('RAZOR_SECRET'));
-            // $combined_order = CombinedOrder::findOrFail(Session::get('combined_order_id'));
-            $combined_order = (object)[
-                "grand_total" => 1
-            ];
-            $res = $api->order->create(array('receipt' => '123', 'amount' => round($combined_order->grand_total) * 100, 'currency' => 'INR', 'notes' => array('key1' => 'value3', 'key2' => 'value2')));
-            return view('frontend.new_changes.payment', compact('combined_order', 'res', 'savedAddress'));
-        // }catch(\Exception $e){
-        //     abort('404');
-        // }
+        try{ 
+            return view('frontend.new_changes.payment');
+        }catch(\Exception $e){
+            abort('404');
+        }
     }
    
 //login code----------------------------------------------------------(start)

@@ -43,7 +43,7 @@ class CheckoutController extends Controller
                 return redirect()->route('checkout.shipping_info');
             }
         }
-
+        
         if ($request->payment_option == null) {
             flash(translate('There is no payment option is selected.'))->warning();
             return redirect()->route('checkout.shipping_info');
@@ -66,7 +66,7 @@ class CheckoutController extends Controller
         // Minumum order amount check end
         
         (new OrderController)->store($request);
-
+        
         if(count($carts) > 0){
             Cart::where('user_id', $user->id)->delete();
         }
@@ -77,7 +77,8 @@ class CheckoutController extends Controller
         if ($request->session()->get('combined_order_id') != null) {
             // If block for Online payment, wallet and cash on delivery. Else block for Offline payment
             $decorator = __NAMESPACE__ . '\\Payment\\' . str_replace(' ', '', ucwords(str_replace('_', ' ', $request->payment_option))) . "Controller";
-            if(class_exists($decorator)){
+ 
+            if(class_exists($decorator)){ 
                 return (new $decorator)->pay($request);
             }
             else{
@@ -93,7 +94,6 @@ class CheckoutController extends Controller
                     $order->manual_payment_data = json_encode($manual_payment_data);
                     $order->save();
                 }
-
                 // Send Order Confirm Email 
                     // $order_mail_data = [
                     //     "order_no" => "090909"
@@ -103,7 +103,7 @@ class CheckoutController extends Controller
                 // Send Order Confirm sms on whatsapp
 
                 flash(translate('Your order has been placed successfully. Please submit payment information from purchase history'))->success();
-                return redirect()->route('order_confirmed');
+                // return redirect()->route('order_confirmed');
             }
         }
     }
@@ -323,20 +323,20 @@ class CheckoutController extends Controller
 
 
     // public function remove_coupon_code(Request $request){ 
-    //     $temp_user  = Session::has('temp_user_id') ? Session::get('temp_user_id') : null; 
-    //     $response_message = array();
-    //     if(Auth::check()){
-    //         Cart::where('user_id', Auth::user()->id)->where('coupon_code', $request->coupon_code)->update([
-    //             "coupon_code" => NULL
-    //         ]);
-    //     }else{
-    //         Cart::where('temp_user_id', $temp_user)->where('coupon_code', $request->coupon_code)->update([
-    //             "coupon_code" => NULL
-    //         ]); 
-    //     }
-    //     $response_message['response'] = 'warning';
-    //     $returnHTML = view('frontend.'.get_setting('homepage_select').'.partials.drawer_cart', compact('coupon', 'carts'))->render();
-    //     return response()->json(array('response_message' => $response_message, 'html'=>$returnHTML));
+        //     $temp_user  = Session::has('temp_user_id') ? Session::get('temp_user_id') : null; 
+        //     $response_message = array();
+        //     if(Auth::check()){
+        //         Cart::where('user_id', Auth::user()->id)->where('coupon_code', $request->coupon_code)->update([
+        //             "coupon_code" => NULL
+        //         ]);
+        //     }else{
+        //         Cart::where('temp_user_id', $temp_user)->where('coupon_code', $request->coupon_code)->update([
+        //             "coupon_code" => NULL
+        //         ]); 
+        //     }
+        //     $response_message['response'] = 'warning';
+        //     $returnHTML = view('frontend.'.get_setting('homepage_select').'.partials.drawer_cart', compact('coupon', 'carts'))->render();
+        //     return response()->json(array('response_message' => $response_message, 'html'=>$returnHTML));
     // }
 
 

@@ -2823,6 +2823,8 @@
 	outline: none;
 	border: none;
 	width: 85%;
+	font-weight: 500;
+	font-size: 14px;
 }
 
 .css-description{

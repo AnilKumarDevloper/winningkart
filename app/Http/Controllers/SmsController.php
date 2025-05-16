@@ -25,12 +25,10 @@ class SmsController extends Controller
     }
 
     //send message to multiple users
-    public function send(Request $request)
-    {
+    public function send(Request $request){
         foreach ($request->user_phones as $key => $phone) {
             (new SendSmsService())->sendSMS($phone, env('APP_NAME'), $request->content, $request->template_id);
         }
-
     	flash(translate('SMS has been sent.'))->success();
     	return redirect()->route('admin.dashboard');
     }
