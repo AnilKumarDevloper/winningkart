@@ -6,8 +6,7 @@ $topbar_banner_medium = get_setting('topbar_banner_medium');
 $topbar_banner_small = get_setting('topbar_banner_small');
 $topbar_banner_asset = uploaded_asset($topbar_banner);
 
-$featured_categories = Cache::rememberForever('featured_categories', function ()
-{
+$featured_categories = Cache::rememberForever('featured_categories', function (){
     return Category::with('bannerImage')->where('featured', 1)->where('parent_id', 0)->get();
 });
 $luxe_categories= Category::with('childrenCategories')->where('parent_id', 0)->where('is_luxe', 1)->get();
@@ -17,7 +16,7 @@ $brands = $brands->get();
 $brands_luxe = Brand::with('brandLogo')->where('popular', 1)->orderBy('name', 'asc')->get();
 $brands_popular = Brand::with('brandLogo')->where('luxe', 1)->orderBy('name', 'asc')->get();
 $brands_at_winningkart = Brand::with('brandLogo')->where('at_winningkart', 1)->orderBy('name', 'asc')->get();
-
+$new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)->get();
 @endphp
 
 <style>
@@ -423,6 +422,7 @@ $brands_at_winningkart = Brand::with('brandLogo')->where('at_winningkart', 1)->o
                                                             <div class="tab tabsection active" data-tab="tab1">POPULAR</div>
                                                             <div class="tab tabsection " data-tab="tab2">LUXE</div>
                                                             <div class="tab tabsection" data-tab="tab3">ONLY AT WINNING KART</div>
+                                                            <div class="tab tabsection" data-tab="tab4">NEW LAUNCHES</div>
                                                         </div> 
 
                                                         <div class="mt-3">
@@ -448,12 +448,25 @@ $brands_at_winningkart = Brand::with('brandLogo')->where('at_winningkart', 1)->o
                                                                     @endif
                                                                 </div>
                                                             </div>
+
                                                             <div class="tab-content tabcontantcontainer" id="tab3">
                                                                     <div class="row"> 
                                                                        @if(count($brands_at_winningkart))
                                                                     @foreach($brands_at_winningkart as $brand_at_winningkart)
                                                                     <div class="col-2 mb-2">
                                                                         <a href="{{ route('products.brand', [$brand_at_winningkart->slug]) }}"><img src="{{ static_asset($brand_at_winningkart->brandLogo->file_name) }}" class="w-100"></a>
+                                                                    </div>  
+                                                                    @endforeach
+                                                                    @endif 
+                                                                    </div>
+                                                            </div> 
+
+                                                            <div class="tab-content tabcontantcontainer" id="tab4">
+                                                                    <div class="row"> 
+                                                                       @if(count($new_arrival_brands))
+                                                                    @foreach($new_arrival_brands as $new_arrival_brand)
+                                                                    <div class="col-2 mb-2">
+                                                                        <a href="{{ route('products.brand', [$new_arrival_brand->slug]) }}"><img src="{{ static_asset($new_arrival_brand->brandLogo->file_name) }}" class="w-100"></a>
                                                                     </div>  
                                                                     @endforeach
                                                                     @endif

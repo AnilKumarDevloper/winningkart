@@ -7,8 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class InvoiceEmailManager extends Mailable
-{
+class InvoiceEmailManager extends Mailable{
     use Queueable, SerializesModels;
     /**
      * Create a new message instance.
@@ -17,8 +16,7 @@ class InvoiceEmailManager extends Mailable
      */
     public $array;
 
-    public function __construct($array)
-    {
+    public function __construct($array){
         $this->array = $array;
     }
     /**
@@ -26,13 +24,14 @@ class InvoiceEmailManager extends Mailable
      *
      * @return $this
      */
-     public function build()
-     {
-         return $this->view($this->array['view'])
-                     ->from($this->array['from'], env('MAIL_FROM_NAME'))
-                     ->subject($this->array['subject'])
-                     ->with([
-                         'order' => $this->array['order']
-                     ]);
-     }
+     public function build(){
+        return $this->view($this->array['view'])
+        ->from($this->array['from'], env('MAIL_FROM_NAME'))
+        ->subject($this->array['subject'])
+        ->with([
+            'order' => $this->array['order']
+        ]);
+    }
+
+
 }

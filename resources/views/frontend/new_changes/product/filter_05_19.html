@@ -33,14 +33,14 @@
                             </div>
                             <div id="categoryCollapse" class="collapse">
                                 <ul class="list-group">
-                                    <!-- <li class="list-group-item list-groupitem2 list_elements"> 
+                                    <li class="list-group-item list-groupitem2 list_elements"> 
                                         <div class="form-check d-flex justify-content-between align-items-center itemFilter"> 
                                             <label class="form-check-label" for="filter1">
                                                 Popularity
                                             </label> 
                                             <span> <input class="form-check-input filterCheckbox" type="checkbox" value="" id="filter1"> </span>
                                         </div> 
-                                    </li> -->
+                                    </li>
                                     <li class="list-group-item list-groupitem2"> 
                                         <div class="form-check d-flex justify-content-between align-items-center itemFilter"> 
                                             <label class="form-check-label" for="filter2">
@@ -49,7 +49,14 @@
                                             <span> <input class="form-check-input filterCheckbox" type="checkbox" value="2" id="filter2"> </span>
                                         </div> 
                                     </li>
-                                    
+                                    <li class="list-group-item list-groupitem2"> 
+                                        <div class="form-check d-flex justify-content-between align-items-center itemFilter"> 
+                                            <label class="form-check-label" for="filter3">
+                                                Name
+                                            </label> 
+                                            <span> <input class="form-check-input filterCheckbox" type="checkbox" value="" id="filter3"> </span>
+                                        </div> 
+                                    </li>
                                     <li class="list-group-item list-groupitem2"> 
                                         <div class="form-check d-flex justify-content-between align-items-center itemFilter"> 
                                             <label class="form-check-label" for="filter4">
@@ -58,14 +65,14 @@
                                             <span> <input class="form-check-input filterCheckbox" type="checkbox" value="" id="filter4"> </span>
                                         </div> 
                                     </li>
-                                    <!-- <li class="list-group-item list-groupitem2"> 
+                                    <li class="list-group-item list-groupitem2"> 
                                         <div class="form-check d-flex justify-content-between align-items-center itemFilter"> 
                                             <label class="form-check-label" for="filter5">
                                                 New Arrivals
                                             </label> 
                                             <span> <input class="form-check-input filterCheckbox" type="checkbox" value="" id="filter5"> </span>
                                         </div> 
-                                    </li> -->
+                                    </li>
                                     <li class="list-group-item list-groupitem2"> 
                                         <div class="form-check d-flex justify-content-between align-items-center itemFilter"> 
                                             <label class="form-check-label" for="filter6">
@@ -754,93 +761,72 @@
 
 
         // filter product functions  
-            const filterByuser = () => { 
+        const filterByuser = () =>{  
 
-                let checkedPrice = Array.from(document.querySelectorAll('.filterWith_price:checked')).map(el => el.value);
-                let checkedColor = Array.from(document.querySelectorAll('.filterWith_color:checked')).map(el => el.value);
+            console.log("filter element is worrkings..")
+             let checkedPrice = Array.from( document.querySelectorAll('.filterWith_element:checked')).map(price => price.value);  
 
-                let filterList_container = document.getElementById('filterList');
-                let filter_html = '';
+             let filterList_container = document.getElementById('filterList');
+             let filter_html = '';  
+            
+             if(checkedPrice.length === 0){
+                filter_html  = ''; 
+                 filterList_container.innerHTML = filter_html;
+                renderProduct(AllProduct);
+                return true;
+             } 
+             
+             let filterByPrice = AllProduct.filter(productItem => {
+                return checkedPrice.some(priceRange =>{
+                    const [min, max] = priceRange.includes('-') ? priceRange.split('-').map(Number) : [Number(priceRange),  Infinity];
+                    return productItem.unit_price >= min && productItem.unit_price <= max; 
+                });  
+             });   
 
-                if (checkedPrice.length === 0 && checkedColor.length === 0) {
-                    filterList_container.innerHTML = '';
-                    renderProduct(AllProduct);
-                    return;
+            /// filter child eleemnts start 
+             let filter_result = checkedPrice.map(price =>{
+                 if(price.includes('-')){  
+                    return {'between_mrp': price};
+                }else{
+                    return { between_mrp: `${price}-above` };
                 }
+             });  
 
-                let filteredProducts = AllProduct;
+             filter_result.forEach(childs =>{ 
+                filter_html += `
+                    <li >
+                        <span>Rs ${childs.between_mrp} </span>
+                        <span class="deleteItem delete_filter_items" data-value="${childs.between_mrp}"><i class="ri-close-circle-line"></i></span>
+                    </li> 
+                `
+             }) 
+             filterList_container.innerHTML = filter_html; 
+            /// filter child eleemnts end  
+             
+            /// deleteFilter_item function 
+            document.querySelectorAll('.delete_filter_items').forEach(deleteItem =>{
+                deleteItem.addEventListener('click', function (e) { 
+                    const valueToRemove = e.currentTarget.dataset.value;
 
-                // ✅ Price filtering
-                if (checkedPrice.length > 0) {
-                    filteredProducts = filteredProducts.filter(productItem => {
-                        return checkedPrice.some(priceRange => {
-                            const [min, max] = priceRange.includes('-')
-                                ? priceRange.split('-').map(Number)
-                                : [Number(priceRange), Infinity];
-                            return productItem.unit_price >= min && productItem.unit_price <= max;
-                        });
-                    });
-                }
-
-                // ✅ Color filtering
-                if (checkedColor.length > 0) {
-                    filteredProducts = filteredProducts.filter(productItem => {
-                        const colorVariants = productItem.choice_options?.find(opt => opt.attribute_name === "Color")?.values || [];
-                        const availableColors = colorVariants.map(val => val.variant);
-                        return checkedColor.some(color => availableColors.includes(color));
-                    });
-                }
-
-                // ✅ Render selected price filters
-                checkedPrice.forEach(price => {
-                    const display = price.includes('-') ? price : `${price}-above`;
-                    filter_html += `
-                        <li>
-                            <span>Rs ${display}</span>
-                            <span class="deleteItem delete_filter_items" data-type="price" data-value="${price}">
-                                <i class="ri-close-circle-line"></i>
-                            </span>
-                        </li>
-                    `;
-                });
-
-                // ✅ Render selected color filters
-                checkedColor.forEach(color => {
-                    filter_html += `
-                        <li>
-                            <span>${color}</span>
-                            <span class="deleteItem delete_filter_items" data-type="color" data-value="${color}">
-                                <i class="ri-close-circle-line"></i>
-                            </span>
-                        </li>
-                    `;
-                });
-
-                filterList_container.innerHTML = filter_html;
-
-                // ✅ Remove filter logic
-                document.querySelectorAll('.delete_filter_items').forEach(deleteItem => {
-                    deleteItem.addEventListener('click', function (e) {
-                        const valueToRemove = e.currentTarget.dataset.value;
-                        const type = e.currentTarget.dataset.type;
-
-                        let selector = type === 'price' ? '.filterWith_price' : '.filterWith_color';
-
-                        document.querySelectorAll(selector).forEach(cb => {
-                            if (cb.value === valueToRemove) {
+                        // Convert '1000-above' format to get the checkbox value
+                        let checkboxValue = valueToRemove.includes('-above') 
+                            ? valueToRemove.replace('-above', '') 
+                            : valueToRemove; 
+                      
+                        document.querySelectorAll('.filterWith_price').forEach(cb => { 
+                            if (cb.value === checkboxValue) {
                                 cb.checked = false;
                             }
                         });
 
-                        filterByuser(); // Re-filter
-                    });
-                });
+                        // Re-trigger filtering
+                        filterByuser();
+                 });
+            }); 
 
-                renderProduct(filteredProducts);
-            };
-
-       
-       
+             renderProduct(filterByPrice);
+         };
+        
          document.querySelectorAll('.filterWith_price').forEach(checkBox =>{
             checkBox.addEventListener('change', filterByuser);
         }); 

@@ -162,5 +162,7 @@ class BrandController extends Controller
         $brand_tabs = BrandTab::get();
         return view('backend.product.brands.brand_tabs', compact('brand_tabs')); 
     }
+
+ 
  
 }

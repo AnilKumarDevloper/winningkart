@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Mail\OtpEmailManager;
 use App\Models\Address;
+use App\Models\AttributeValue;
+use App\Models\Brand;
 use App\Models\Cart;
+use App\Models\FlashDeal;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\User;
@@ -53,8 +56,21 @@ class NewChangesController extends Controller
 
     public function authPayment(){
         try{ 
+            if(auth()->user() != null){
+            $cart = Cart::where('user_id', Auth::user()->id)->first(); 
+        }else{
+            $temp_user_id = Session()->get('temp_user_id');
+            if($temp_user_id){
+                $cart = Cart::where('temp_user_id', $temp_user_id)->first(); 
+            }
+        }
+        if($cart != ''){
             return view('frontend.new_changes.payment');
-        }catch(\Exception $e){
+        }else{
+             return redirect('/');
+        }
+
+        }catch(\Exception $e){ 
             abort('404');
         }
     }
@@ -81,13 +97,15 @@ class NewChangesController extends Controller
             if($request->phone != null){
                 $check_user_with_phone = User::where('phone', $request->country_code.$request->phone)->exists();
                 if($check_user_with_phone){
+                    
+                    User::where('phone', $request->country_code.$request->phone)->update(['verification_code' => $otp]);
                     $user = User::where('phone', $request->country_code.$request->phone)->first();
                     $user_id = $user->id;
                     $platform = 'phone';
                     //send otp on sms here----------------------------
-                    
+                    $otpController = new OTPVerificationController;
+                    $otpController->send_code($user);
                     //send otp on sms here----------------------------
-                    User::where('phone', $request->country_code.$request->phone)->update(['verification_code' => $otp]);
                 }else{
                     $user = User::create([
                         'name' => 'Winningkart User',
@@ -124,7 +142,6 @@ class NewChangesController extends Controller
                     // send otp on email here---------------------------
                         Mail::to($request->email)->queue(new OtpEmailManager($otp_mail_data));
                     // send otp on email here---------------------------
-                    // return back()->withErrors(['custom_error' => 'User Not Found. Please register first.'])->withInput();
                 }
                 if(session('temp_user_id') != null){
                     Cart::where('temp_user_id', session('temp_user_id'))
@@ -196,13 +213,23 @@ class NewChangesController extends Controller
     }
 
     public function resendOtp($platform, $user_id){
-        try{    
+        try{
             $otp = mt_rand(100000, 999999);
-            if($platform == 'email'){
-                // send OTP on email--------------------------------------
-                // send OTP on email--------------------------------------
+             User::where('id', $user_id)->update([
+                'verification_code' => $otp
+            ]);
+            $user = User::where('id', $user_id)->first();
+            if($platform == 'email'){ 
+                     $otp_mail_data = [
+                        "otp" => $otp
+                    ];
+                // send otp on email here---------------------------
+                    Mail::to($user->email)->queue(new OtpEmailManager($otp_mail_data));
+                // send otp on email here--------------------------- 
             }elseif($platform == 'phone'){
                 // send OTP on sms----------------------------------------
+                    $otpController = new OTPVerificationController;
+                    $otpController->send_code($user);
                 // send OTP on sms----------------------------------------
             }else{
                 return back();
@@ -219,13 +246,6 @@ class NewChangesController extends Controller
 //login code----------------------------------------------------------(end)
 
 // Admin Login---------------------------------------------------------(start)
-    // public function redirectAdminLogin(){ 
-    //     try{
-    //         return redirect()->route('backend.admin_login_view');
-    //     }catch(\Exception $e){
-    //         abort('404');
-    //     }
-    // }
     public function adminLoginView(){
         try{
             return view('frontend.new_changes.auth.admin_login');
@@ -260,113 +280,67 @@ class NewChangesController extends Controller
 // Admin Login---------------------------------------------------------(end)
 
 
-
-
-// custom payment page test purpose(start)
- 
-
-public function createOrder(Request $request)
-{
-    $api = new Api(env('RAZOR_KEY'), env('RAZOR_SECRET'));
-
-    $amount = $request->amount * 100; // Convert to paise
-
-    // ✅ Create Order in Razorpay
-    $order = $api->order->create([
-        'amount' => $amount,
-        'currency' => 'INR',
-        'payment_capture' => 1
-    ])->toArray();
-
-    // 🟢 **UPI Payment: Process Immediately**
-    if ($request->payment_method === 'upi') {
-        $payment = $api->payment->create([  // ✅ Use `payment`, NOT `payments`
-            'amount' => $amount,
-            'currency' => 'INR',
-            'method' => 'upi',
-            'vpa' => $request->upi_id, // User's UPI ID
-            'order_id' => $order['id']
-        ]);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'UPI Payment Initiated',
-            'payment_id' => $payment['id']
-        ]);
-    }
-
-    // 🟢 **Card Payment: Process Immediately**
-    if ($request->payment_method === 'card') {
-        $payment = $api->payment->create([  // ✅ Use `payment`, NOT `payments`
-            'amount' => $amount,
-            'currency' => 'INR',
-            'method' => 'card',
-            'card' => [
-                'number' => $request->card_number,
-                'expiry_month' => $request->expiry_month,
-                'expiry_year' => $request->expiry_year,
-                'cvv' => $request->cvv
-            ],
-            'order_id' => $order['id']
-        ]);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Card Payment Initiated',
-            'payment_id' => $payment['id']
-        ]);
-    }
-
-    return response()->json($order);
-}
- public function verifyPayment(Request $request)
-{
-    $api = new Api(env('RAZOR_KEY'), env('RAZOR_SECRET'));
-
-    try {
-        $attributes = [
-            'razorpay_order_id' => $request->order_id,
-            'razorpay_payment_id' => $request->payment_id,
-            'razorpay_signature' => $request->signature
-        ];
-
-        $api->utility->verifyPaymentSignature($attributes);
-
-        return response()->json(['success' => true, 'message' => 'Payment verified successfully']);
-    } catch (\Exception $e) {
-        return response()->json(['success' => false, 'message' => 'Payment verification failed']);
-    }
-}
-
-public function specialOffer(){
-    try{
-        return view('frontend.new_changes.special-offers');
-    }catch (\Exception $e){
-       abort('500');
-    }
-}
-
-public function deliverHere($id){
-    try{
-        Cart::where('user_id', Auth::user()->id)->update(['address_id' => $id]);
-        return redirect()->route('frontend.auth.payment');
-    }catch(\Exception $e){
+    public function specialOffer(){
+        try{
+            $today = strtotime(date('Y-m-d H:i:s'));
+            $flash_deals = FlashDeal::where('status', 1)->where('start_date', "<=", $today)
+            ->where('end_date', ">", $today)
+            ->get(); 
+            return view('frontend.new_changes.special-offers', compact('flash_deals'));
+        }catch (\Exception $e){
         abort('500');
+        }
     }
-}
-public function reviewImages($slug){
-    try{
-        $detailedProduct  = Product::with('reviews', 'brand', 'stocks', 'user', 'user.shop')->where('auction_product', 0)->where('slug', $slug)->where('approved', 1)->first();
-        $all_reviews_images = Review::with('user:id,name')->where('product_id', $detailedProduct->id)->get();
-        // return $all_reviews_images;
-        return view('frontend.new_changes.review_image', compact(
-        'detailedProduct',
-        'all_reviews_images'
-        ));
-    }catch(\Exception $e){
-        abort('500');
-    }
-}
 
-// custom payment page test purpose(end)
+    public function deliverHere($id){
+        try{
+            Cart::where('user_id', Auth::user()->id)->update(['address_id' => $id]);
+            return redirect()->route('frontend.auth.payment');
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+    public function reviewImages($slug){
+        try{
+            $detailedProduct  = Product::with('reviews', 'brand', 'stocks', 'user', 'user.shop')->where('auction_product', 0)->where('slug', $slug)->where('approved', 1)->first();
+            $all_reviews_images = Review::with('user:id,name')->where('product_id', $detailedProduct->id)->get();
+            // return $all_reviews_images;
+            return view('frontend.new_changes.review_image', compact(
+            'detailedProduct',
+            'all_reviews_images'
+            ));
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+
+   public function getBrandListFromFilter(Request $request){
+        try{
+            $brands = Brand::select('id', 'name', 'slug', )->where('name', 'LIKE', '%'.$request->brand)->get();
+             return response()->json([
+                "status" => "success",
+                "data" => $brands
+            ], 200);
+        }catch(\Exception $e){
+            return response()->json([
+                "status" => "failed",
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+   public function getAllColorList(){
+        try{
+           $colors = AttributeValue::select('id', 'value')->where('attribute_id', 3)->get();
+             return response()->json([
+                "status" => "success",
+                "data" => $colors
+            ], 200);
+        }catch(\Exception $e){
+            return response()->json([
+                "status" => "failed",
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+    
 }

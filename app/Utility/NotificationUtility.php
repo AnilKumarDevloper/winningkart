@@ -3,6 +3,7 @@
 namespace App\Utility;
 
 use App\Mail\InvoiceEmailManager;
+use App\Mail\OrderConfirmedEmail;
 use App\Models\User;
 use App\Models\SmsTemplate;
 use App\Http\Controllers\OTPVerificationController;
@@ -19,14 +20,14 @@ class NotificationUtility
         $array['view'] = 'emails.invoice';
         $array['subject'] = translate('A new order has been placed') . ' - ' . $order->code;
         $array['from'] = env('MAIL_FROM_ADDRESS');
-        $array['order'] = $order;
+        $array['order'] = $order;  
         try {
             if ($order->user->email != null) {
-                Mail::to($order->user->email)->queue(new InvoiceEmailManager($array));
+                Mail::to($order->user->email)->queue(new OrderConfirmedEmail($array));
             }
-            Mail::to($order->orderDetails->first()->product->user->email)->queue(new InvoiceEmailManager($array));
+            Mail::to($order->orderDetails->first()->product->user->email)->queue(new OrderConfirmedEmail($array));
         } catch (\Exception $e) {
-
+            return $e->getMessage();
         }
 
         if (addon_is_activated('otp_system') && SmsTemplate::where('identifier', 'order_placement')->first()->status == 1) {
@@ -47,8 +48,7 @@ class NotificationUtility
 
             $request->type = "order";
             $request->id = $order->id;
-            $request->user_id = $order->user->id;
-
+            $request->user_id = $order->user->id;  
             self::sendFirebaseNotification($request);
         }
     }

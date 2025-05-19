@@ -15,8 +15,7 @@ use Razorpay\Api\Api;
 use Session;
 
 
-class RazorpayController extends Controller
-{
+class RazorpayController extends Controller{
     public function pay(Request $request){
         $payment_track = array();
         $api = new Api(env('RAZOR_KEY'), env('RAZOR_SECRET'));

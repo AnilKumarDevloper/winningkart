@@ -280,7 +280,4 @@ class CategoryController extends Controller
         $categories = $categories->paginate(15);
         return view('backend.product.category_wise_discount.set_discount', compact('categories', 'sort_search'));
     }
-
-
-    
 }

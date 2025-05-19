@@ -171,13 +171,13 @@
                                     </a>
                                 </li>
                             @endcan
-                            @can('set_category_wise_discount')
+                            <!-- @can('set_category_wise_discount')
                                 <li class="aiz-side-nav-item">
                                     <a href="{{route('categories_wise_product_discount')}}" class="aiz-side-nav-link">
                                         <span class="aiz-side-nav-text">{{translate('Category Wise Discount')}}</span>
                                     </a>
                                 </li>
-                            @endcan
+                            @endcan -->
 
                             @can('view_all_brands')
                                 <li class="aiz-side-nav-item">
@@ -190,7 +190,6 @@
                                         <span class="aiz-side-nav-text">{{translate('Brand Tabs')}}</span>
                                     </a>
                                 </li>
-
                             @endcan
                             @can('view_product_attributes')
                                 <li class="aiz-side-nav-item">

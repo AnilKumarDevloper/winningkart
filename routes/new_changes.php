@@ -26,18 +26,20 @@ Route::middleware('guest')->group(function () {
     // Route::get('/admin', [NewChangesController::class, 'redirectAdminLogin'])->name('frontend.redirect_admin_login');
     // Route::get('/admin/login', [NewChangesController::class, 'adminLoginView'])->name('frontend.admin_login_view');
     
-    
     Route::get('/auth/address', [NewChangesController::class, 'authAddress'])->name('frontend.auth.address');
     Route::get('/auth/payment', [NewChangesController::class, 'authPayment'])->name('frontend.auth.payment');
     Route::get('/auth/deliver-here/{id}', [NewChangesController::class, 'deliverHere'])->name('frontend.auth.deliver_here');
  
-    Route::post('/payment/create-razorpay-order', [NewChangesController::class, 'createOrder'])->name('payment.create_razorpay_order');
-    Route::post('/payment/verify-razorpay-payment', [NewChangesController::class, 'verifyPayment'])->name('payment.verify_razorpay_payment');
+    // Route::post('/payment/create-razorpay-order', [NewChangesController::class, 'createOrder'])->name('payment.create_razorpay_order');
+    // Route::post('/payment/verify-razorpay-payment', [NewChangesController::class, 'verifyPayment'])->name('payment.verify_razorpay_payment');
     Route::get('/offers/special-offer', [NewChangesController::class, 'specialOffer'])->name('payment.special_offer');
     Route::get('/review/all-images/{slug}', [NewChangesController::class, 'reviewImages'])->name('product.review_images');
    
     Route::get('/product_review/get-all-review-on-product-page', [ReviewController::class, 'getAllReviewOnProductPage'])->name('get_all_review_on_product_page');
+    Route::get('/api/brand-list', [NewChangesController::class, 'getBrandListFromFilter'])->name('get_brand_list_from_filter');
+    Route::get('/api/color-list', [NewChangesController::class, 'getAllColorList'])->name('get_all_color_list');
  
+    
     Route::middleware(['auth', 'web'])->group(function () {
     });
 

@@ -377,8 +377,8 @@
         document.getElementById("phone").addEventListener('input', function(e){ 
              let value = e.target.value; 
              value = value.replace(/\D/g, ''); 
-            
-            if (value.length > 10) {
+          
+            if (value.length >= 10) {
                 value = value.slice(0, 10);
                 $("#shipaddress").prop('disabled', false);
                 $("#error_number").hide();

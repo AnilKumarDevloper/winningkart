@@ -57,9 +57,7 @@ class AddressController extends Controller
             $phone_exists = User::where('phone', $request->country_code.$request->phone)->exists();
             $user_id = '';
             $platform = '';
-            $otp = mt_rand(100000, 999999);
-            // send otp on phone number here------------------------------
-            // send otp on phone number here------------------------------
+            $otp = mt_rand(100000, 999999); 
             if($phone_exists){
                 // login user
                 $platform = 'phone';
@@ -70,6 +68,10 @@ class AddressController extends Controller
                 Address::where('user_id', $user->id)->update([
                     "set_default" => 0
                 ]);
+                   //send otp on sms here----------------------------
+                    $otpController = new OTPVerificationController;
+                    $otpController->send_code($user);
+                    //send otp on sms here----------------------------
             }else{
                 $platform = 'phone';
                 $password = substr(hash('sha512', rand()), 0, 8);
@@ -82,6 +84,10 @@ class AddressController extends Controller
                     'verification_code' => $otp
                 ]);
                 $address->user_id   = $user->id; 
+                   //send otp on sms here----------------------------
+                    $otpController = new OTPVerificationController;
+                    $otpController->send_code($user);
+                    //send otp on sms here----------------------------
             }
         }
             $address->house_number  = $request->house_number;

@@ -79,7 +79,7 @@
                                                         @error('custom_error')
                                                             <p style="color:red;"><strong>{{ $message }}</strong></p>
                                                         @enderror   
-                                                    </div> 
+                                                    </div>
 
                                                     <!-- <div class="mb-4 mt-4">
                                                         <button type="submit" class="btn btn-primary btn-block fw-700 fs-14 rounded-0">{{  translate('Login') }}</button>

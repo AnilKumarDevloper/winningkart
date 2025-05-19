@@ -101,9 +101,7 @@
                 $address = Address::where('id', $cart->address_id)->first();
             }
         }
-        if(!$cart){
-            return redirect('/home');
-        }
+       
     @endphp
 <header class="loginHeader">
         <div class="container" style="max-width:1140px">

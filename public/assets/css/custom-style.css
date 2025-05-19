@@ -3428,6 +3428,7 @@ button.tab-link.tab_link.active {
 	align-items: center;
 }
  .hover_content{
+	z-index: 999;
 	display: none;
 }
 .productWrapper:hover .hover_content{
@@ -3523,6 +3524,12 @@ button.tab-link.tab_link.active {
     border: none;
     cursor: pointer;
 	outline: none;
+}
+.addToCart_button:disabled{
+	background: #EF7528;
+    color: rgb(255, 255, 255);
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 .addToCart_button span{
 	font-size: 14px;
