@@ -816,7 +816,7 @@
                 @endcanany
 
                 <!-- Support -->
-                @canany(['view_all_support_tickets','view_all_product_conversations','view_all_product_queries'])
+                <!-- @canany(['view_all_support_tickets','view_all_product_conversations','view_all_product_queries'])
                     <li class="aiz-side-nav-item">
                         <a href="#" class="aiz-side-nav-link">
                             <div class="aiz-side-nav-icon">
@@ -872,7 +872,7 @@
                             @endif
                         </ul>
                     </li>
-                @endcanany
+                @endcanany -->
 
                 <!-- Affiliate Addon -->
                 @if (addon_is_activated('affiliate_system'))

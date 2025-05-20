@@ -1530,6 +1530,7 @@
 }
 
 .signin_user_element{
+	display: none;
     position: absolute;
     top: 65px;
     z-index: 6;
