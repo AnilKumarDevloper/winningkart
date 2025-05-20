@@ -699,7 +699,7 @@
                 renderProduct(filteredProducts);
             };
 
-       
+    
        
          document.querySelectorAll('.filterWith_price, .filterWith_sortDiscount').forEach(checkBox =>{
             checkBox.addEventListener('change', filterByuser);
