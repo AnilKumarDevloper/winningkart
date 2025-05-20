@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\CombinedOrder;
 use App\Http\Controllers\CheckoutController;
@@ -66,6 +67,7 @@ class RazorpayController extends Controller{
                     $api->utility->verifyPaymentSignature($attributes);
                     //End of  Verify Payment Signature
                     $response = $api->payment->fetch($input['razorpay_payment_id'])->capture(array('amount' => $payment['amount']));
+                    // Order::where('id', $input['order_id'])->update(['delivery_status', 'canceled']);
                 }catch(\Exception $e){
                     Session::put('error', $e->getMessage());
                     return redirect()->route('home');

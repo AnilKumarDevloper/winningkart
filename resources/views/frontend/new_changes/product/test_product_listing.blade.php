@@ -55,7 +55,7 @@
                                             <label class="form-check-label" for="filter4">
                                                 Customer Top Rated
                                             </label> 
-                                            <span> <input class="form-check-input filterCheckbox filterWith_sortDiscount" type="checkbox" value="" id="filter4"> </span>
+                                            <span> <input class="form-check-input filterCheckbox filterWith_sortDiscount" type="checkbox" value="topRated" id="filter4"> </span>
                                         </div> 
                                     </li>
                                     <!-- <li class="list-group-item list-groupitem2"> 
@@ -71,7 +71,7 @@
                                             <label class="form-check-label" for="filter6">
                                                 Price: High To Low
                                             </label> 
-                                            <span><input class="form-check-input filterCheckbox filterWith_sortDiscount" type="checkbox" value="" id="filter6"> </span>
+                                            <span><input class="form-check-input filterCheckbox filterWith_sortDiscount" type="checkbox" value="priceHighToLow" > </span>
                                         </div> 
                                     </li>
                                     <li class="list-group-item list-groupitem2"> 
@@ -79,7 +79,7 @@
                                             <label class="form-check-label" for="filter7">
                                                 Price: Low To High
                                             </label> 
-                                            <span> <input class="form-check-input filterCheckbox filterWith_sortDiscount" type="checkbox" value="" id="filter7"> </span>
+                                            <span> <input class="form-check-input filterCheckbox filterWith_sortDiscount" type="checkbox" value="priceLowToHigh"  > </span>
                                         </div> 
                                     </li>  
                                 </ul>
@@ -99,7 +99,7 @@
                                         <ul class="listStyles p-0">
                                             <li class="filterPadding">
                                                 <div class="form-check p-0 d-flex justify-content-between"> 
-                                                    <label class="form-check-label">Rs. 500 - Rs. 999 <span class="productIttem">2</span></label>
+                                                    <label class="form-check-label">Rs. 500 - Rs. 999 </label>
                                                     <span>
                                                         <input class="form-check-input checkboxFilter filterWith_price filterWith_element" 
                                                             type="checkbox" 
@@ -111,7 +111,7 @@
                                             </li>
                                             <li class="filterPadding">
                                                 <div class="form-check p-0 d-flex justify-content-between"> 
-                                                    <label class="form-check-label">Rs. 1000 - Rs. 2999 <span class="productIttem">9</span></label>
+                                                    <label class="form-check-label">Rs. 1000 - Rs. 2999 </label>
                                                     <span>
                                                         <input class="form-check-input checkboxFilter filterWith_price filterWith_element" 
                                                             type="checkbox" 
@@ -123,7 +123,9 @@
                                             </li>
                                             <li class="filterPadding">
                                                 <div class="form-check p-0 d-flex justify-content-between"> 
-                                                    <label class="form-check-label">Rs. 4000 & Above <span class="productIttem">12</span></label>
+                                                    <label class="form-check-label">Rs. 4000 & Above 
+                                                        <!-- <span class="productIttem">12</span> -->
+                                                    </label>
                                                     <span>
                                                         <input class="form-check-input checkboxFilter filterWith_price filterWith_element"  
                                                             type="checkbox" 
@@ -159,6 +161,19 @@
                 <div class="col-xl-9">
                     
                     <div class="row" id="products"> 
+                         
+                            <!-- <div class="col-md-4" id="loader">
+                                <div class="movie--isloading" >
+                                    <div class="loading-image"></div>
+                                    <div class="loading-content d-flex flex-column justify-content-center align-items-center"> 
+                                        <div class="loading-main-text"></div>
+                                        <div class="loading-main-text w-25"></div>
+                                        <div class="loading-sub-text mt-2"></div>  
+                                    </div>
+                                </div>
+                            </div>  -->
+                            
+                        
                     </div>
                 </div>
                 <!-- <div class="col-3">
@@ -265,10 +280,25 @@
 
  <script>
  
- 
+    function getProductLoaderTemplate() {
+        return `
+            <div class="col-md-4 col-sm-6 mb-4 loader">
+                <div class="movie--isloading">
+                    <div class="loading-image"></div>
+                    <div class="loading-content d-flex flex-column justify-content-center align-items-center"> 
+                        <div class="loading-main-text"></div>
+                        <div class="loading-main-text w-25"></div>
+                        <div class="loading-sub-text mt-2"></div>  
+                    </div>
+                </div>
+            </div>
+        `;
+     } 
+   
 
           // color filter append
         const colorappend = async () =>{
+
             let colorUrl = "{{route('get_all_color_list')}}";
             let color_container = document.getElementById("color_container");
              color_container.innerHTML = '';
@@ -397,16 +427,17 @@
                     // index check if qut > 0 
                     let ischeckedArray =  new Array(sizeColor_select.length).fill("");
                     
-                    if(sizeColor_select[0].qty > 0){
+                    if(sizeColor_select[0].qty > 0 && sizeColor_select[0]?.qty > 0){
                         ischeckedArray[0] = "checked";
                     }else{
-                        for(let check = 1; check <= sizeColor_select.length; check++){
-                            if(sizeColor_select[check].qty > 0){
+                        for(let check = 1; check < sizeColor_select.length; check++){
+                            if(sizeColor_select[check]?.qty > 0){
                                 ischeckedArray[check] = "checked";
                                 break;
                             }
                         }
-                    }
+                    }  
+                     
 
                      sizeColor_select.forEach((each, index) =>{   
 
@@ -419,10 +450,9 @@
                         
                         if(each.qty && each.qty >= 0){
                             allZero = false;  
-                        }
+                        }  
+                       
 
-                        //   ischecked =  index === 0 ? "checked" : "";
-                        
                          selected_after_discount_price = selected_price - selected_discount;  
 
                         if(discount > 0){
@@ -448,7 +478,7 @@
                          }
                          if(stockText == ''){
                             stockText = '';
-                         }
+                         } 
                       
                         select_sizeColorHtml += `
                             <li class="select_customSize_list" id="${each.id}">
@@ -457,22 +487,20 @@
                                        type="radio" name="attribute_id_${element.id}"
                                        data-price="${selected_after_discount_price}"
                                         ${ischecked}
-                                       value="" onchange="variantSelect(this, ${element.id}, ${selected_price}, '${selected_parcent_discount}', ${each.id}, ${qty}, ${stockText} )"
+                                       value="" onchange="variantSelect(this, ${element.id}, ${selected_price}, '${selected_parcent_discount}', ${each.id}, '${qty}', ${stockText} )"
                                     > 
                                     <label class="form-check-label" for="sizeM"> ${each.sku}</label>
                                 </div> 
                             </li> `
-                           
                      });  
-
                      
                      if(allZero){
                         stockText = stockOutText;
-                        disabledQty = "disabled"
-                        
+                        disabledQty = "disabled";
+
                      }else{
-                         stockText = addCartText;  
-                          disabledQty = "" 
+                          stockText = addCartText;  
+                          disabledQty = "";
                      }
                      /// size color select option elements start   
                     colorSize_elemetHtml = `
@@ -526,15 +554,17 @@
                             </div>
                         </div>  
                      `
-                } 
+                }
 
+                let single_p_url = "{{ route('product', [':slug']) }}";
+                single_p_url = single_p_url.replace(':slug', element.slug);
                 html += ` 
                     <div class="col-md-4" id="${element.id}">
                         <div class="pr_height bg-white">
                             <div class="productWrapper d-flex flex-column justify-content-between">
                                 <div class="productDetails productDetail_element"> 
                                     <div class="bestsell"> 
-                                        <a href=" #">
+                                        <a href="${single_p_url}">
                                             <div class="productImages">
                                                 <img src="${product_url}/public/${product_img}"
                                                 alt=" " class="css-11gn9r6">
@@ -577,25 +607,31 @@
         }
 
 
-        // filter product functions  
-            const filterByuser = () => {
+        // filter product functions   
+          
+   
+           const $productsContainer = $('#products');
+                $productsContainer.html(''); 
+            for (let i = 0; i < 10; i++) {
+                $productsContainer.append(getProductLoaderTemplate());
+            }
+
+            const filterByuser = () => { 
+
+                let filteredProducts = [...AllProduct];
 
                 let checkedPrice = Array.from(document.querySelectorAll('.filterWith_price:checked')).map(el => el.value);
                 let checkedColor = Array.from(document.querySelectorAll('.filterWith_color:checked')).map(el => el.value);
-                let checkedSortDiscount = Array.from(document.querySelectorAll('.filterWith_sortDiscount:checked')).map(el => el.value); 
-              
-               
+                let checkedDiscount = Array.from(document.querySelectorAll('.filterWith_sortDiscount:checked')).map(el => el.value); 
 
                 let filterList_container = document.getElementById('filterList');
                 let filter_html = '';
 
-                if (checkedPrice.length === 0 && checkedColor.length === 0 && checkedSortDiscount.length === 0) {
+                if (checkedPrice.length === 0 && checkedColor.length === 0 && checkedDiscount.length === 0) {
                     filterList_container.innerHTML = '';
                     renderProduct(AllProduct);
                     return;
-                }
-
-                let filteredProducts = AllProduct;
+                } 
 
                 // ✅ Price filtering
                 if (checkedPrice.length > 0) {
@@ -620,13 +656,23 @@
 
                  // ✅ Sort By : Discount filtering
                 
-                 if(checkedSortDiscount.length > 0){
+                 if(checkedDiscount.includes('discount')){
                       filteredProducts = filteredProducts.filter(productItem => {
                             return productItem.discount > 0;
                       }); 
                  }
-                //   console.log(checkedSortDiscount, 'checked');
+
+                 if(checkedDiscount.includes('topRated')){
+                      filteredProducts = filteredProducts.filter(productItem => {
+                            return productItem.rating >= 4.0;
+                      }); 
+                 }
                
+                if (checkedDiscount.includes("priceHighToLow")){
+                   filteredProducts = filteredProducts.sort((a, b) => b.unit_price - a.unit_price);
+                }else if(checkedDiscount.includes("priceLowToHigh")){
+                      filteredProducts = filteredProducts.sort((a, b) => a.unit_price - b.unit_price);
+                } 
 
                 // ✅ Render selected price filters
                 checkedPrice.forEach(price => {
@@ -654,11 +700,11 @@
                 });
 
                 // ✅ Render selected color filters
-                checkedSortDiscount.forEach(discount =>{
+                checkedDiscount.forEach(discount =>{
                      filter_html += `
                         <li>
                             <span>${discount}</span>
-                            <span class="deleteItem delete_filter_items" data-type="color" data-value="${discount}">
+                            <span class="deleteItem delete_filter_items" data-type="discount" data-value="${discount}">
                                 <i class="ri-close-circle-line"></i>
                             </span>
                         </li>
@@ -697,15 +743,11 @@
                 });
 
                 renderProduct(filteredProducts);
-            };
-
-    
+            }; 
        
-         document.querySelectorAll('.filterWith_price, .filterWith_sortDiscount').forEach(checkBox =>{
-            checkBox.addEventListener('change', filterByuser);
-        }); 
-
-
+            document.querySelectorAll('.filterWith_price, .filterWith_sortDiscount').forEach(checkBox =>{
+                checkBox.addEventListener('change', filterByuser);
+            });  
        
         $(document).ready(function () { 
             fetchApiData();
@@ -732,6 +774,14 @@
          }
      
   
+         document.getElementById('clearAllFilter').addEventListener('click', function(){
+                 document.querySelectorAll('.filterWith_sortDiscount, .filterWith_price, .filterWith_color').forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                filterByuser();
+         });
+
+         $('#loading').hide();
 
  </script> 
 

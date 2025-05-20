@@ -205,9 +205,8 @@
                             <input type="hidden" name="quantity" class="col border-0 text-center flex-grow-1 fs-16 input-number" placeholder="1" value="{{ $detailedProduct->min_qty }}" min="{{ $detailedProduct->min_qty }}" max="10" lang="en">
                             @php
                                 $qty = 0;
-                                foreach($detailedProduct->stocks as $key => $stock){
-                                    $qty += $stock->qty;
-                                }
+                                    $qty += $detailedProduct->stocks[0]->qty;
+                                
                             @endphp
                              <div class="avialable-amount opacity-60">
                                 @if($detailedProduct->stock_visibility_state == 'quantity')
@@ -236,12 +235,11 @@
                 @else
                 <div class="row">
                     <div class="col-sm-5 d-flex justify-content-center align-items-center">
-                        <button type="button" class="AddToCart add-to-cart"
-                        @if (Auth::check() || get_Setting('guest_checkout_activation') == 1) onclick="addToCart({{ $detailedProduct->id }})" @else onclick="showLoginModal()" @endif
-                        >Add To Cart</button>
-                        <button type="button" class="btn btn-secondary out-of-stock fw-600 d-none" disabled>
-                            <i class="la la-cart-arrow-down"></i> {{ translate('Out of Stock') }}
-                        </button>
+                
+                        <button type="button" class="AddToCart add-to-cart {{ $qty < 1 ? "d-none":""}}" onclick="addToCart({{ $detailedProduct->id }})" >Add To Cart</button>
+                
+                        <button type="button" class="btn btn-secondary out-of-stock fw-600 {{ $qty > 0 ? "d-none":""}}" disabled><i class="la la-cart-arrow-down"></i> {{ translate('Out of Stock') }}</button>
+                
                     </div>  
                     <div class="col-sm-7" style="border-left: 1px solid rgb(111 121 129 / 22%);">
                         <div class="delivery-container">

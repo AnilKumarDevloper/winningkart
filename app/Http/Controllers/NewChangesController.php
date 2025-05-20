@@ -316,7 +316,7 @@ class NewChangesController extends Controller
 
    public function getBrandListFromFilter(Request $request){
         try{
-            $brands = Brand::select('id', 'name', 'slug', )->where('name', 'LIKE', '%'.$request->brand)->get();
+            $brands = Brand::select('id', 'name', 'slug', )->where('name', 'LIKE', $request->brand.'%')->get();
              return response()->json([
                 "status" => "success",
                 "data" => $brands

@@ -91,13 +91,20 @@
                         <input type="text" class="form-control" id="update_tracking_code"
                             value="{{ $order->tracking_code }}">
                     </div>
+                    <div class="col-md-3 ml-auto">
+                        <label for="update_tracking_code">
+                            {{ translate('Order Status') }}
+                        </label>
+                        <h3>{{ strtoupper($order->order_status) }}</h3> 
+                    </div>
                 @endif
             </div>
             <div class="mb-3">
                 @php
                     $removedXML = '<?xml version="1.0" encoding="UTF-8"?>';
                 @endphp
-                {!! str_replace($removedXML, '', QrCode::size(100)->generate($order->code)) !!}
+                {!! str_replace($removedXML, '', QrCode::size(100)->generate(route('orders.track').'?order_code='.$order->code)) !!}
+
             </div>
             <div class="row gutters-5">
                 <div class="col text-md-left text-center">

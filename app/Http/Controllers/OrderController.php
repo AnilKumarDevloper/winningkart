@@ -38,7 +38,6 @@ class OrderController extends Controller
     public function all_orders(Request $request)
     {
         CoreComponentRepository::instantiateShopRepository();
-
         $date = $request->date;
         $sort_search = null;
         $delivery_status = null;
@@ -104,8 +103,7 @@ class OrderController extends Controller
         return view('backend.sales.index', compact('orders', 'sort_search', 'payment_status', 'delivery_status', 'date'));
     }
 
-    public function show($id)
-    {
+    public function show($id){
         $order = Order::findOrFail(decrypt($id));
         $order_shipping_address = json_decode($order->shipping_address);
         // $delivery_boys = User::where('city', $order_shipping_address->city)
@@ -113,7 +111,6 @@ class OrderController extends Controller
         //     ->get();
         $delivery_boys = User::where('user_type', 'delivery_boy')
             ->get();
-
         $order->viewed = 1;
         $order->save();
         return view('backend.sales.show', compact('order', 'delivery_boys'));

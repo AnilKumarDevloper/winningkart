@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('content')
+ 
 
 @endsection
 
@@ -26,7 +27,13 @@
         },
         "theme": {
             "color": "#ff7529"
+        },
+        "modal": {
+        "ondismiss": function(){
+            // Redirect when modal is closed
+            window.location.href = "{{ route('frontend.auth.payment') }}";
         }
+    }
     };
     var rzp1 = new Razorpay(options);   
 
@@ -34,8 +41,8 @@
         rzp1.open();
         e.preventDefault();
     });
-    $('#modal-close').click(function(){
-        window.location = "{{ route('wallet.index') }}";
+    $('#modal-close').click(function(){  
+        window.location = "{{ route('frontend.auth.payment') }}";
     });
 </script>
 @endsection

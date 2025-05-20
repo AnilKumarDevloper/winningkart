@@ -356,7 +356,7 @@ class SearchController extends Controller
                     $product_data[] = [
                         'id' => $product->id,
                         'name' => $product->name,
-                        'unit_price' => $product->unit_price,
+                        'unit_price' => count($choice_options) < 1 ? $product->unit_price : $product->stocks[0]->price,
                         'current_stock' => $product->current_stock,
                         'unit' => $product->unit,
                         'discount' => $product->discount,
@@ -368,6 +368,7 @@ class SearchController extends Controller
                         'reviews' => count($product->reviews),
                         'photos' => $photos,
                         'choice_options' => $choice_options, 
+                        // 'stock' => $product->stocks
                     ];  
                 }
                 return response()->json([

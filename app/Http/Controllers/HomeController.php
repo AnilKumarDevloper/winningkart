@@ -377,6 +377,7 @@ class HomeController extends Controller
                 $affiliateController = new AffiliateController;
                 $affiliateController->processAffiliateStats($referred_by_user->id, 1, 0, 0, 0);
             }
+            // return $detailedProduct;
             return view('frontend.new_changes.product.view_single_product', compact(
                 'detailedProduct',
                    'reviews',
@@ -540,10 +541,7 @@ class HomeController extends Controller
                     $str .= str_replace(' ', '', $request['attribute_id_' . $choice->attribute_id]);
                 }
             }
-        }
-        // return array( 
-        //     'product' => $product, 
-        // );
+        } 
         $product_stock = $product->stocks->where('variant', $str)->first();
         $price = $product_stock->price;
         if ($product->wholesale_product){
@@ -591,8 +589,9 @@ class HomeController extends Controller
             }elseif($product_tax->tax_type == 'amount'){
                 $tax += $product_tax->tax;
             }
-        }
-        $price += $tax;
+        } 
+        // $price += $tax; 
+        // DevAK removed tax when change variant in old it was adding tax in price when on product
         return array(
             'price' => single_price($price * $request->quantity),
             'quantity' => $quantity,

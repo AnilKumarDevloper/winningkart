@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app')
+    @extends('frontend.layouts.app')
 
 @section('content')
     <section class="pt-4 mb-4">
@@ -67,7 +67,7 @@
                                     </tr>
                                     <tr>
                                         <td class="w-50 fw-600">{{ translate('Shipping address')}}:</td>
-                                        <td>{{ json_decode($order->shipping_address)->address }}, {{ json_decode($order->shipping_address)->city }}, {{ json_decode($order->shipping_address)->country }}</td>
+                                        <td>{{ json_decode($order->shipping_address)->address }}</td>
                                     </tr>
                                 </table>
                             </div>

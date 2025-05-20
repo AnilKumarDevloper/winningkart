@@ -93,14 +93,7 @@ class CheckoutController extends Controller
                     $order->manual_payment = 1;
                     $order->manual_payment_data = json_encode($manual_payment_data);
                     $order->save();
-                }
-                // Send Order Confirm Email 
-                    // $order_mail_data = [
-                    //     "order_no" => "090909"
-                    // ]; 
-                    // Mail::to(Auth::user()->email)->send(new OrderConfirmedEmail($order_mail_data)); 
-                // Send Order Confirm sms on phone
-                // Send Order Confirm sms on whatsapp
+                } 
 
                 flash(translate('Your order has been placed successfully. Please submit payment information from purchase history'))->success();
                 return redirect()->route('order_confirmed');
@@ -485,16 +478,19 @@ class CheckoutController extends Controller
         Session::forget('club_point');
         Session::forget('combined_order_id'); 
         foreach($combined_order->orders as $order){
+            Order::where('id', $order->id)->update([
+                "order_status" => "confirmed"
+            ]);
             if($order->notified == 0){
                 NotificationUtility::sendOrderPlacedNotification($order);
                 $order->notified = 1;
                 $order->save();
             }
-        } 
+        }
         return view('frontend.order_confirmed', compact('combined_order'));
-    }else{
-        return redirect('/');
-    }
+        }else{
+            return redirect('/');
+        }
     }
 
     public function guestCustomerInfoCheck(Request $request){
