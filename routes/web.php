@@ -191,12 +191,16 @@ Route::controller(SearchController::class)->group(function () {
     Route::get('/api/test-product-list/{category_slug}', 'apitestProductList')->name('api_test_product_list');
 
     Route::get('/test-product-list/{category_slug}', 'testProductList')->name('test_product_list');
+    // Route::get('/category/{category_slug}', 'listingByCategory')->name('products.category');
+
+    // Route::get('/new-category/{category_slug}', 'listingByCategoryNew')->name('products.category');
+    Route::get('/category/{category_slug}', 'testProductList')->name('products.category');
+    
     Route::get('/api/get_variant_price', 'apiGetVariantPrice')->name('api_get_variant_price');
 
     Route::get('/search?keyword={search}', 'index')->name('suggestion.search');
     Route::post('/ajax-search', 'ajax_search')->name(name: 'search.ajax');
-    Route::get('/category/{category_slug}', 'listingByCategory')->name('products.category');
-    Route::get('/new-category/{category_slug}', 'listingByCategoryNew')->name('products.category');
+
     Route::post('/new-category/filter-product-listing', 'filterProductListing')->name('products.filter_product_listing');
     Route::get('/brand/{brand_slug}', 'listingByBrand')->name('products.brand');
 });

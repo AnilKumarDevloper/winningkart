@@ -1,10 +1,51 @@
-@extends('frontend.layouts.app')
+@extends('frontend.layouts.app') 
+@section('content') 
+<style>
+  #fullscreen-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.85); /* slightly transparent white */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-@section('content')
- 
+  .loader-content {
+    text-align: center;
+  }
 
-@endsection
+  .spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #ccc;
+    border-top: 6px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+  }
 
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  #fullscreen-loader p {
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+  }
+</style>  
+<div id="fullscreen-loader">
+  <div class="loader-content">
+    <div class="spinner"></div>
+    <p>Processing, please wait...</p>
+  </div>
+</div>
+@endsection 
 @section('script')
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
@@ -29,8 +70,7 @@
             "color": "#ff7529"
         },
         "modal": {
-        "ondismiss": function(){
-            // Redirect when modal is closed
+        "ondismiss": function(){ 
             window.location.href = "{{ route('frontend.auth.payment') }}";
         }
     }

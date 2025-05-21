@@ -91,12 +91,7 @@
                         <input type="text" class="form-control" id="update_tracking_code"
                             value="{{ $order->tracking_code }}">
                     </div>
-                    <div class="col-md-3 ml-auto">
-                        <label for="update_tracking_code">
-                            {{ translate('Order Status') }}
-                        </label>
-                        <h3>{{ strtoupper($order->order_status) }}</h3> 
-                    </div>
+                    
                 @endif
             </div>
             <div class="mb-3">
@@ -148,8 +143,23 @@
                                 <td class="text-main text-bold">{{ translate('Order #') }}</td>
                                 <td class="text-info text-bold text-right"> {{ $order->code }}</td>
                             </tr>
+                            
                             <tr>
                                 <td class="text-main text-bold">{{ translate('Order Status') }}</td>
+                                <td class="text-right">
+                                    @if ($order->order_status == 'confirmed')
+                                        <span class="badge badge-inline badge-success">
+                                            {{ translate(ucwords(str_replace('_', ' ', $order->order_status))) }}
+                                        </span>
+                                    @else
+                                        <span class="badge badge-inline badge-danger">
+                                            {{ translate(ucwords(str_replace('_', ' ', $order->order_status))) }}
+                                        </span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-main text-bold">{{ translate('Delivery Status') }}</td>
                                 <td class="text-right">
                                     @if ($delivery_status == 'delivered')
                                         <span class="badge badge-inline badge-success">
