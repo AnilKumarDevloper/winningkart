@@ -1,14 +1,14 @@
 
 @extends('frontend.layouts.app') 
 @section('content') 
-<section>
+<!-- <section>
         <div class="image-wrapper_offer">
             <a href="">
                 <img src="https://images-static.nykaa.com/uploads/d2a744d2-a722-4149-91b6-49dae9b91f0c.gif" class="offer_Banner">
             </a>
         </div>
-</section> 
-<section class="proVideoSec pb-4">
+</section>  -->
+<!-- <section class="proVideoSec pb-4">
     <div class="container" style="max-width: 90%;">
             <h2 class="offer_title">Top-To-Toe Treats</h2>
 
@@ -101,8 +101,8 @@
 
         </div>
     </div>
-</section>
- 
+</section> -->
+ @if(count($flash_deals) > 0)
 @foreach($flash_deals as $flash_deal)
     <section>
         <div class="image-wrapper_offer">
@@ -113,7 +113,7 @@
     </section> 
     <section class="proVideoSec pb-4">
         <div class="container" style="max-width: 98%;"> 
-            <div class="aiz-carousel aiz-carousel1 sm-gutters-17" data-items="3" data-xxl-items="3" data-xl-items="3"
+            <!-- <div class="aiz-carousel aiz-carousel1 sm-gutters-17" data-items="3" data-xxl-items="3" data-xl-items="3"
                     data-lg-items="3" data-md-items="2" data-sm-items="2" data-xs-items="1" data-arrows="true"
                     data-dots="false" data-autoplay="false" data-infinite="true"> 
                 <div class="carousel-box position-relative p-0 has-transition">
@@ -146,7 +146,7 @@
                         alt="Product 1" width="100%" height="100%">
                     </a>  
                 </div>   
-            </div>
+            </div> -->
         </div>
     </section> 
     <section class="proVideoSec pb-4">
@@ -172,10 +172,17 @@
                 @endforeach   
             </div>
         </div>
-    </section>
- 
+    </section> 
 @endforeach
-
+@else
+<section>
+        <div class="image-wrapper_offer">
+            <a href="">
+                <img src="https://images-static.nykaa.com/uploads/d2a744d2-a722-4149-91b6-49dae9b91f0c.gif" class="offer_Banner">
+            </a>
+        </div>
+</section> 
+@endif
  
 @endsection 
 @section('script') 

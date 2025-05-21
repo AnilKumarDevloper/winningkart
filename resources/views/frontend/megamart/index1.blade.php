@@ -1206,9 +1206,7 @@
                 
               </div>
             </a>
-        </div>
-       
-                                            
+        </div>                         
                                             
                                            <!-- <a href="{{ route('products.brand', $brand->slug) }}" class="d-block p-sm-2">
                                                 <img src="{{ isset($brand->brandLogo->file_name) ? my_asset($brand->brandLogo->file_name) : static_asset('assets/img/placeholder.jpg') }}"

@@ -121,8 +121,7 @@ class PurchaseHistoryController extends Controller
         $failed_msgs = [];
         $data['user_id'] = $user_id;
         foreach ($order->orderDetails as $key => $orderDetail) {
-            $product = $orderDetail->product;
-
+            $product = $orderDetail->product; 
             if (
                 !$product || $product->published == 0 ||
                 $product->approved == 0 || ($product->wholesale_product && !addon_is_activated("wholesale"))

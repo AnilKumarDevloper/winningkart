@@ -1,12 +1,13 @@
+ 
 
 @extends('frontend.layouts.app')
 
 @section('content')
 
-   <section> 
-        <div class="container">
-           <div class="row">
-            
+   <section class="mb-4 pt-4" style="background: rgb(243 243 243);"> 
+        <div class="container"> 
+           <div class="row"> 
+
                 <div class="col-xl-3"> 
                     <!--- new sidebar filter start --->
                     <div class="sticky-top z-0 topStickyfilter"> 
@@ -159,8 +160,19 @@
                     <!--- new sidebar filter end ---> 
                 </div> 
                 <div class="col-xl-9">
-                    
-                    <div class="row" id="products"> 
+
+                     <div class="col-12">
+                                <h1 class="fs-20 fs-md-24 fw-700 text-dark text=center">
+                                    @if(isset($category_id))
+                                        {{ $category->getTranslation('name') }}
+                                    @elseif(isset($query))
+                                        {{ translate('Search result for ') }}"{{ $query }}"
+                                    @else
+                                        {{ translate('All Products') }}
+                                    @endif
+                                </h1>                  
+                        </div>
+                    <div class="row" id="products">  
                          
                             <!-- <div class="col-md-4" id="loader">
                                 <div class="movie--isloading" >
@@ -282,7 +294,7 @@
  
     function getProductLoaderTemplate() {
         return `
-            <div class="col-md-4 col-sm-6 mb-4 loader">
+            <div class="col-md-4 col-sm-6 mb-4 loader_product">
                 <div class="movie--isloading">
                     <div class="loading-image"></div>
                     <div class="loading-content d-flex flex-column justify-content-center align-items-center"> 
@@ -293,8 +305,7 @@
                 </div>
             </div>
         `;
-     } 
-   
+     }  
 
           // color filter append
         const colorappend = async () =>{
@@ -307,7 +318,7 @@
                 let response = await fetch(colorUrl);
                 let responseData = await response.json();
                 if(responseData.status != "success") return;
-                console.log(responseData.data);
+             
 
                 responseData.data.forEach((colorElement) => { 
                     colorHTML += ` 
@@ -332,7 +343,6 @@
             }catch (error){
                 console.log(error);
             }
-
         }  
      
        colorappend();  
@@ -348,13 +358,14 @@
                 }
                 let responseData = await response.json();  
                 AllProduct = responseData.data;
-                console.log(AllProduct);
+             
                 renderProduct(AllProduct);
                
             }catch(error){
                 console.log(error)
             } 
         } 
+       
 
         // render product function
         const renderProduct = (product) =>{
@@ -406,6 +417,10 @@
                 let stockOutText = "Out of Stock";
                 let addCartText = "Add to Cart";
                 let stockText ="";
+
+                  let single_p_url = "{{ route('product', [':slug']) }}";
+                  single_p_url = single_p_url.replace(':slug', element.slug);
+
                 if (element.choice_options.length > 0) { 
                     
                     let sizeColor_select = element.choice_options[0].values; 
@@ -436,11 +451,12 @@
                                 break;
                             }
                         }
-                    }  
-                     
+                    }   
 
-                     sizeColor_select.forEach((each, index) =>{   
-
+                    let attributs_id = element.choice_options[0].attribute_id;
+                    
+                     sizeColor_select.forEach((each, index) =>{     
+                        
                         let ischecked = ischeckedArray[index]; 
                       
                          selected_price = each.price;   
@@ -483,11 +499,11 @@
                         select_sizeColorHtml += `
                             <li class="select_customSize_list" id="${each.id}">
                                 <div class="form-check d-flex align-items-center">
-                                    <input class="form-check-input sizeWise" 
-                                       type="radio" name="attribute_id_${element.id}"
+                                    <input class="form-check-input sizeWise" id="${each.variant}"
+                                       type="radio" name="attribute_id_${attributs_id}"
                                        data-price="${selected_after_discount_price}"
-                                        ${ischecked}
-                                       value="" onchange="variantSelect(this, ${element.id}, ${selected_price}, '${selected_parcent_discount}', ${each.id}, '${qty}', ${stockText} )"
+                                        ${ischecked} 
+                                       value="${each.variant}" onchange="variantSelect(this, ${element.id}, ${selected_price}, '${selected_parcent_discount}', ${each.id}, '${qty}', ${stockText} )"
                                     > 
                                     <label class="form-check-label" for="sizeM"> ${each.sku}</label>
                                 </div> 
@@ -528,7 +544,7 @@
                    select_sizeColor += `  
                         <div class="hover_content variant_preview_btn "  > 
                             <div class="actionSection_1">
-                                <button type="button" class="wishlist_button_text" >
+                                <button type="button" class="wishlist_button_text" onclick="addToWishList(${element.id})" >
                                     <span><i class="ri-heart-line"></i></span>
                                 </button>
                                 <button type="button" class="preview_button">Preview Size</button>
@@ -536,8 +552,8 @@
                         </div> 
                         <div class="hover_content variant_add_to_cart_btn" style="display:none">
                             <div class="detail_and_addToCart">
-                                <a href="#" class="view_detail_2"><button class="" type="button">View Details</button></a>
-                                <button type="button" class="addToCart_button" ${disabledQty} id="addToCart_btn_${element.id}" >${stockText}</button>
+                                <a href="${single_p_url}" class="view_detail_2"><button class="" type="button" >View Details</button></a>
+                                <button type="button" class="addToCart_button" onclick="addToCart(${element.id})" ${disabledQty} id="addToCart_btn_${element.id}"   >${stockText}</button>
                             </div>
                         </div>  
                      `
@@ -547,8 +563,8 @@
                      add_cart += `
                         <div class="hover_content variant_add_to_cart_btn">
                             <div class="detail_and_addToCart">
-                                <a href="#" class="view_detail_2"><button class="" type="button">View Details</button></a>
-                                <button type="button" class="addToCart_button" 
+                                <a href="${single_p_url}" class="view_detail_2"><button class="" type="button" >View Details</button></a>
+                                <button type="button" class="addToCart_button" onclick="addToCart(${element.id})" 
                                  ${stockzero}
                                 ><span> ${stockText} </span></button>
                             </div>
@@ -556,10 +572,16 @@
                      `
                 }
 
-                let single_p_url = "{{ route('product', [':slug']) }}";
-                single_p_url = single_p_url.replace(':slug', element.slug);
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+              
                 html += ` 
+               
                     <div class="col-md-4" id="${element.id}">
+                     <form id="option-choice-form_${element.id}">
+                       <input type="hidden" name="_token" value="${csrfToken}">
+                           <input type="hidden" name="id" value="${element.id}">
+                            <input type="hidden" name="quantity" value="1">
                         <div class="pr_height bg-white">
                             <div class="productWrapper d-flex flex-column justify-content-between">
                                 <div class="productDetails productDetail_element"> 
@@ -600,7 +622,9 @@
                                 
                            </div>
                         </div> 
+                    </form>
                     </div>
+                
                 `
             });  
             product_container.innerHTML = html;
@@ -616,6 +640,7 @@
                 $productsContainer.append(getProductLoaderTemplate());
             }
 
+            $(".loader_product").show();
             const filterByuser = () => { 
 
                 let filteredProducts = [...AllProduct];
@@ -781,7 +806,7 @@
                 filterByuser();
          });
 
-         $('#loading').hide();
+          $(".loader_product").hide();
 
  </script> 
 

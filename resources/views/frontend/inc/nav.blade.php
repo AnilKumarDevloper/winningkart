@@ -370,51 +370,55 @@ $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)
                                     </li>
                                     <li>
                                         <a  href="javascript:void(0)" class="headerSubMenu">Brands</a>
-                                        <div class="menuList">
+                                         <!-- <div class="overlay12"></div> -->
+                                         <div class="menuList" style="display: blck;">
                                                 <div class="row bgOdd"> 
                                                     <div class="col-4 bg-even">
-                                                            <div class="submenu_">
-                                                                <div class="searchBrands">  
-                                                                    <i class="ri-search-line"></i>
-                                                                    <input type="text" placeholder="Search Brands">
+                                                        <div class="submenu_">
+                                                            <div class="searchBrands">  
+                                                                <i class="ri-search-line"></i>
+                                                                <input type="text" placeholder="Search Brands" id="brand">
+                                                            </div>
+                                                            <div class="d-flex justify-content-between">
+                                                                <div class="filteralphabet">
+                                                                    <ul class="mt-3 filtermaxHeight brandName" id="brand_name">  
+                                                                        <li class="mb-3 text-muted"><b>TOPNRANDS</b></li>
+
+                                                                        <!-- <li><b>B</b></li> -->
+                                                                            <!-- @if(count($brands))
+                                                                            @foreach($brands as $brand) 
+                                                                                <li><a href="{{ route('products.brand', [$brand->slug]) }}">{{ $brand->name ?? '' }}</a></li>
+                                                                            @endforeach
+                                                                            @endif   -->
+                                                                    </ul>
                                                                 </div>
-                                                                <div class="d-flex justify-content-between">
-                                                                    <div class="filteralphabet">
-                                                                        <ul class="mt-3 filtermaxHeight">
-                                                                            <!-- <li><b>B</b></li> -->
-                                                                             @if(count($brands))
-                                                                    @foreach($brands as $brand) 
-                                                                        <li><a href="{{ route('products.brand', [$brand->slug]) }}">{{ $brand->name ?? '' }}</a></li>
-                                                                    @endforeach
-                                                                    @endif 
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="filteralphabet">
-                                                                        <ul class="mt-3 filterWithAlphabet"> 
-                                                                            <li><a href="javascript:void(0)">A</a></li>
-                                                                            <li><a href="javascript:void(0)">B</a></li>
-                                                                            <li><a href="javascript:void(0)">C</a></li>
-                                                                            <li><a href="javascript:void(0)">D</a></li>
-                                                                            <li><a href="javascript:void(0)">E</a></li>
-                                                                            <li><a href="javascript:void(0)">F</a></li>
-                                                                            <li><a href="javascript:void(0)">G</a></li>
-                                                                            <li><a href="javascript:void(0)">H</a></li>
-                                                                            <li><a href="javascript:void(0)">I</a></li>
-                                                                            <li><a href="javascript:void(0)">J</a></li>
-                                                                            <li><a href="javascript:void(0)">K</a></li>
-                                                                            <li><a href="javascript:void(0)">L</a></li>
-                                                                            <li><a href="javascript:void(0)">M</a></li>
-                                                                            <li><a href="javascript:void(0)">N</a></li>
-                                                                            <li><a href="javascript:void(0)">O</a></li>
-                                                                            <li><a href="javascript:void(0)">P</a></li>
-                                                                            <li><a href="javascript:void(0)">Q</a></li>
-                                                                            <li><a href="javascript:void(0)">R</a></li>
-                                                                            <li><a href="javascript:void(0)">S</a></li>
-                                                                            <li><a href="javascript:void(0)">T</a></li> 
-                                                                        </ul>
-                                                                    </div>
+                                                                <div class="filteralphabet">
+                                                                    <ul class="mt-3 filterWithAlphabet"> 
+                                                                        <li class="mb-3"><a href="javascript:void(0)">*</a></li>
+                                                                        <li><a href="javascript:void(0)">A</a></li>
+                                                                        <li><a href="javascript:void(0)">B</a></li>
+                                                                        <li><a href="javascript:void(0)">C</a></li>
+                                                                        <li><a href="javascript:void(0)">D</a></li>
+                                                                        <li><a href="javascript:void(0)">E</a></li>
+                                                                        <li><a href="javascript:void(0)">F</a></li>
+                                                                        <li><a href="javascript:void(0)">G</a></li>
+                                                                        <li><a href="javascript:void(0)">H</a></li>
+                                                                        <li><a href="javascript:void(0)">I</a></li>
+                                                                        <li><a href="javascript:void(0)">J</a></li>
+                                                                        <li><a href="javascript:void(0)">K</a></li>
+                                                                        <li><a href="javascript:void(0)">L</a></li>
+                                                                        <li><a href="javascript:void(0)">M</a></li>
+                                                                        <li><a href="javascript:void(0)">N</a></li>
+                                                                        <li><a href="javascript:void(0)">O</a></li>
+                                                                        <li><a href="javascript:void(0)">P</a></li>
+                                                                        <li><a href="javascript:void(0)">Q</a></li>
+                                                                        <li><a href="javascript:void(0)">R</a></li>
+                                                                        <li><a href="javascript:void(0)">S</a></li>
+                                                                        <li><a href="javascript:void(0)">T</a></li> 
+                                                                    </ul>
                                                                 </div>
                                                             </div>
+                                                        </div>
                                                     </div> 
 
                                                     <div class="col-8 bg-even">
@@ -478,14 +482,14 @@ $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)
                                                     </div> 
 
                                                 </div>
-                                        </div>
+                                         </div>
                                     </li>
                                     <li><a href="javascript:void(0)" class="headerSubMenu">Luxe</a> 
                                         <div class="menuList">
                                             <ul class="luxeList">
                                                 @foreach($luxe_categories as $luxe_category)
                                                 <li class="luxeItems" data-nav="nav_{{ $luxe_category->id }}"> 
-                                                       {{ $luxe_category->name }}
+                                                       <a href="{{ route('products.category', $luxe_category->slug) }}">{{ $luxe_category->name }}</a>
                                                 </li> 
                                                 @endforeach 
                                             </ul>
@@ -534,9 +538,8 @@ $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)
                                                         @foreach ($winningkart_categories as $wk_category)
                                                             <div class="col-3 bg-even">
                                                                 <div class="submenu_">
-                                                                    <b>{{ $wk_category->name }}</b>
+                                                                    <b><a href="{{ route('products.category', $wk_category->slug) }}">{{ $wk_category->name }}</a></b>
                                                                     @if(count($wk_category->childrenCategories) > 0) 
-                                                                        
                                                                             @foreach($wk_category->childrenCategories as $index => $wk_child_category)
                                                                                 @if($wk_child_category->winningkart == 1)
                                                                                 <ul class="mt-2"> 
@@ -549,28 +552,7 @@ $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)
                                                             </div>  
                                                         @endforeach
                                                     @endif
-                                                </div>
-
-                                               <!---------->
-                                                <!-- <div class="row bgOdd">   
-                                                    <div class="col-3 bg-even">
-                                                        <div class="submenu_">
-                                                            <b> items 1</b>   
-                                                            <ul class="mt-2"> 
-                                                                <li><a href="#">list item 1</a></li> 
-                                                            </ul>   
-                                                            <div class="mt-2">
-                                                                <b class=""> items 2</b>   
-                                                                <ul class="m-0"> 
-                                                                    <li><a href="#">list item 1</a></li>
-                                                                    <li><a href="#">list item 1</a></li> 
-                                                                    <li><a href="#">list item 1</a></li> 
-                                                                </ul> 
-                                                            </div>
-                                                        </div>
-                                                    </div>    
-                                                </div> -->
-                                                <!----------->
+                                                </div> 
                                         </div>
                                     </li> 
                                     
@@ -690,7 +672,7 @@ $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="">
+                                                <a href="{{ route('wallet.index') }}">
                                                     <div class="d-flex detailList1">
                                                         <span><i class="ri-wallet-line"></i></span>
                                                         <span>My Wallet</span>
@@ -698,7 +680,7 @@ $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="">
+                                                <a href="{{ route('wishlists.index') }}">
                                                     <div class="d-flex detailList1">
                                                         <span><i class="ri-heart-line"></i></span>
                                                         <span>My Wishlist</span>
@@ -1151,7 +1133,7 @@ $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)
                             
                             <div class="col-3 bg-even">
                                     <div class="submenu_">
-                                        <b>{{ $child_cat->name ?? '' }}</b>
+                                        <b><a href="{{ route('products.category', $child_cat->slug) }}">{{ $child_cat->name ?? '' }}</a></b>
                                         @if(count($child_cat->categories) > 0)
                                         <ul class="mt-2">
                                             @foreach($child_cat->categories as $child_of_child_cat)
@@ -1446,7 +1428,61 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById(tab.dataset.tab).classList.add("active");
             });
         });
-    </script>
+</script>
+
+
+<!----- Brand search functions ------>
+<script>
+    
+
+     let brandData = []; 
+ 
+    const fetch_brandApi = async (url) => {  
+
+        console.log(url);
+
+        try{ 
+            const response = await fetch(url);
+            const response_data = await response.json();
+            if(response_data.status != "success"){
+                console.log("your response is not ok!");
+                return;
+            }  
+            brandData = response_data.data; 
+            render_brand_name(); 
+          
+        }catch(error){
+            console.log(error)
+        }
+    };  
+
+    const render_brand_name = () =>{  
+
+         let brand_name = document.getElementById("brand_name");
+         let brand_html = "";  
+         
+            brandData.forEach((brand) =>{ 
+                brand_html +=`
+                     <li id="${brand.id}"><a href="">${brand.name}</a></li>
+                `
+            });   
+         brand_name.innerHTML = brand_html;  
+    }; 
+    
+     document.getElementById('brand').addEventListener('input', function(){
+        const brand_val = this.value;  
+
+        // let brand_url = `{{route('get_brand_list_from_filter')}}?brand=${brand_val}`;  
+      
+        // fetch_brandApi(base_url); 
+    }); 
+ 
+    document.addEventListener('DOMContentLoaded', function(){
+        let base_url = "{{route('get_brand_list_from_filter')}}?brand";
+        fetch_brandApi(base_url);
+    });
+
+</script>
  
 
 @section('script')

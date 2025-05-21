@@ -97,6 +97,7 @@
                             <th data-breakpoints="md">{{ translate('Delivery Status') }}</th>
                             <th data-breakpoints="md">{{ translate('Payment method') }}</th>
                             <th data-breakpoints="md">{{ translate('Payment Status') }}</th>
+                            <th data-breakpoints="md">{{ translate('Order Status') }}</th>
                             @if (addon_is_activated('refund_request'))
                                 <th>{{ translate('Refund') }}</th>
                             @endif
@@ -161,6 +162,13 @@
                                         <span class="badge badge-inline badge-success">{{ translate('Paid') }}</span>
                                     @else
                                         <span class="badge badge-inline badge-danger">{{ translate('Unpaid') }}</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($order->order_status == 'confirmed')
+                                        <span class="badge badge-inline badge-success">{{ translate('Confirmed') }}</span>
+                                    @else
+                                        <span class="badge badge-inline badge-danger">{{ translate('Not Confirmed') }}</span>
                                     @endif
                                 </td>
                                 @if (addon_is_activated('refund_request'))
