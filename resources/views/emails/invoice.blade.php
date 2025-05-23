@@ -156,7 +156,7 @@
 			        </tr>
 			        <tr>
 			            <th class="gry-color text-left">{{ translate('Shipping Cost') }}</th>
-			            <td class="currency">{{ single_price($order->orderDetails->sum('shipping_cost')) }}</td>
+			            <td class="currency">{{ single_price($shipping_charge) }}</td>
 			        </tr>
 			        <tr class="border-bottom">
 			            <th class="gry-color text-left">{{ translate('Total Tax') }}</th>
@@ -168,7 +168,7 @@
 			        </tr>
 			        <tr>
 			            <th class="text-left strong">{{ translate('Grand Total') }}</th>
-			            <td class="currency">{{ single_price($order->grand_total) }}</td>
+			            <td class="currency">{{ single_price($order->grand_total + $shipping_charge) }}</td>
 			        </tr>
 		        </tbody>
 		    </table>

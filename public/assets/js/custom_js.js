@@ -1,37 +1,4 @@
 
-
-// document.addEventListener('DOMContentLoaded', function () { 
-
-
-//     let customSize = ['M', 'XL', 'L', 'S', 'XS', '2XL'];
-//     let selectYourSize = document.querySelectorAll('.selectYourSize');
-  
-//     let selectYourSizeContant = '';  
-//     customSize.forEach((size) => { 
-//        selectYourSizeContant += ` 
-//             <li class="select_customSize_list"">
-//                 <div class="form-check d-flex align-items-center">
-//                     <input class="form-check-input sizeWise customerselectedSize" 
-//                         type="radio" 
-//                         name="customSize" 
-//                         value="${size}" 
-//                         id="size${size}" 
-//                         >
-//                     <label class="form-check-label" for="sizeM">
-//                         ${size}
-//                     </label>
-//                 </div> 
-//             </li>  
-//           `
-//       }); 
-
-//       selectYourSize.forEach((element) =>{ 
-//         element.innerHTML += selectYourSizeContant;
-//       });
-
-//  }); 
-
-
 // product customer image view function\
 
 let arraysource = [];
@@ -71,22 +38,36 @@ document.querySelectorAll('.nextPrevBtn').forEach(function(prev_nex_btn){
      });
 });
 
-// all image function 
+ 
 
-/// product filter js start  // 
-// document.addEventListener('DOMContentLoaded', function () { 
-//     let productApiUrl = "{{route('api_test_product_list')}}";
-//     console.log(productApiUrl);
-//     const products = async () =>{
-//         try{
-//             const response = await  fetch(productApiUrl);
-//             console.log(response);
-//         }catch(error){
-//             console.log(error)
-//         }
-//     }
-//     products() 
-//  })
+
+/// review page scripts functions start....
+
+document.addEventListener("DOMContentLoaded", function () { 
+   customer_reviewsApi();
+ });
+
+
+ 
+ const customer_reviewsApi = async () =>{
+    const app_url = document.querySelector('meta[name="app-url"]').getAttribute('content'); 
+    let review_url = ` ${app_url}api/get-all-review-of-product/3`;   
+     
+     try{
+        let response = await fetch(review_url).then((data) => data.json());
+        if(!response.status) return; 
+
+        let responseData = response.data;
+        console.log(responseData);
+    
+     }catch(error){
+        console.log(error)
+     }
+      
+ };
+ 
+ 
+
  
   
   

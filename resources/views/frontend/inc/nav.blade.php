@@ -384,7 +384,6 @@ $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)
                                                                     <ul class="mt-3 filtermaxHeight brandName">  
                                                                         <li class="mb-3 text-muted"><b id="hover_text">TOPNRANDS</b></li>
                                                                         <ul id="brand_name">
-
                                                                             <!-- <li><b>B</b></li> -->
                                                                             <!-- @if(count($brands))
                                                                             @foreach($brands as $brand) 
@@ -443,6 +442,7 @@ $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)
                                                                     @endif
                                                                 </div>
                                                             </div>
+
                                                             <div class="tab-content tabcontantcontainer" id="tab2"> 
                                                                 <div class="row">
                                                                          @if(count($brands_luxe))
@@ -456,33 +456,30 @@ $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)
                                                             </div>
 
                                                             <div class="tab-content tabcontantcontainer" id="tab3">
-                                                                    <div class="row"> 
-                                                                       @if(count($brands_at_winningkart))
-                                                                    @foreach($brands_at_winningkart as $brand_at_winningkart)
-                                                                    <div class="col-2 mb-2">
-                                                                        <a href="{{ route('products.brand', [$brand_at_winningkart->slug]) }}"><img src="{{ static_asset($brand_at_winningkart->brandLogo->file_name) }}" class="w-100"></a>
-                                                                    </div>  
-                                                                    @endforeach
+                                                                <div class="row"> 
+                                                                    @if(count($brands_at_winningkart))
+                                                                        @foreach($brands_at_winningkart as $brand_at_winningkart)
+                                                                        <div class="col-2 mb-2">
+                                                                            <a href="{{ route('products.brand', [$brand_at_winningkart->slug]) }}"><img src="{{ static_asset($brand_at_winningkart->brandLogo->file_name) }}" class="w-100"></a>
+                                                                        </div>  
+                                                                        @endforeach
                                                                     @endif 
-                                                                    </div>
-                                                            </div> 
+                                                                </div>
+                                                            </div>
 
                                                             <div class="tab-content tabcontantcontainer" id="tab4">
-                                                                    <div class="row"> 
-                                                                       @if(count($new_arrival_brands))
-                                                                    @foreach($new_arrival_brands as $new_arrival_brand)
-                                                                    <div class="col-2 mb-2">
-                                                                        <a href="{{ route('products.brand', [$new_arrival_brand->slug]) }}"><img src="{{ static_asset($new_arrival_brand->brandLogo->file_name) }}" class="w-100"></a>
-                                                                    </div>  
-                                                                    @endforeach
+                                                                <div class="row"> 
+                                                                   @if(count($new_arrival_brands))
+                                                                        @foreach($new_arrival_brands as $new_arrival_brand)
+                                                                        <div class="col-2 mb-2">
+                                                                            <a href="{{ route('products.brand', [$new_arrival_brand->slug]) }}"><img src="{{ static_asset($new_arrival_brand->brandLogo->file_name) }}" class="w-100"></a>
+                                                                        </div>  
+                                                                        @endforeach
                                                                     @endif
-                                                                         
-                                                                    </div>
+                                                                </div>
                                                             </div> 
                                                         </div>
-
                                                     </div> 
-
                                                 </div>
                                          </div>
                                     </li>
@@ -497,26 +494,25 @@ $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)
                                             </ul>
                                             @foreach($luxe_categories as $index => $luxe_category)
                                             <div class="datamatch"  data-nav="nav_{{ $luxe_category->id }}" style="margin-top: .5rem; {{ $index != 0 ? 'display: none;':'' }}">
-                                                    <div class="row bgOdd">  
+                                                    <div class="row bgOdd">
                                                         @if(count($luxe_category->childrenCategories) > 0)
                                                         @foreach($luxe_category->childrenCategories as $index2 => $child_cat)
                                                             @if($child_cat->is_luxe == 1)
-                                                        <div class="col-3 bg-even">
-                                                            <div class="submenu_">
-                                                                <a href="{{ route('products.category', $child_cat->slug) }}">{{ $child_cat->name ?? '' }}</a>
-                                                                @if(count($child_cat->categories) > 0)
-                                                                <ul class="mt-2">
-                                                                @foreach($child_cat->categories as $child_of_child_cat)
-                                                                    @if($child_of_child_cat->is_luxe == 1)
-                                                                        <li><a href="{{ route('products.category', $child_of_child_cat->slug) }}">{{ $child_of_child_cat->name ?? '' }}</a></li> 
-                                                                    @endif
-                                                                @endforeach
-                                                                </ul>
-                                                                @endif
-                                                            </div>
-                                                        </div> 
-                                                        @endif
-
+                                                                <div class="col-3 bg-even">
+                                                                    <div class="submenu_">
+                                                                        <a href="{{ route('products.category', $child_cat->slug) }}">{{ $child_cat->name ?? '' }}</a>
+                                                                        @if(count($child_cat->categories) > 0)
+                                                                        <ul class="mt-2">
+                                                                        @foreach($child_cat->categories as $child_of_child_cat)
+                                                                            @if($child_of_child_cat->is_luxe == 1)
+                                                                                <li><a href="{{ route('products.category', $child_of_child_cat->slug) }}">{{ $child_of_child_cat->name ?? '' }}</a></li> 
+                                                                            @endif
+                                                                        @endforeach
+                                                                        </ul>
+                                                                        @endif
+                                                                    </div>
+                                                                </div> 
+                                                            @endif
                                                         @endforeach 
                                                         @if($index == 0)
                                                         <div class="col-3 bg-even">

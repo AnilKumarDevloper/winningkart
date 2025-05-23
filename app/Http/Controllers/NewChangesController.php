@@ -10,6 +10,7 @@ use App\Models\Cart;
 use App\Models\FlashDeal;
 use App\Models\Product;
 use App\Models\Review;
+use App\Models\Upload;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -328,7 +329,7 @@ class NewChangesController extends Controller
             ], 500);
         }
     }
-   public function getAllColorList(){
+    public function getAllColorList(){
         try{
            $colors = AttributeValue::select('id', 'value')->where('attribute_id', 3)->get();
              return response()->json([
@@ -342,5 +343,34 @@ class NewChangesController extends Controller
             ], 500);
         }
     }
+
+    public function getAllReviewsOfProduct($product_id){
+         try{
+            $data = [];
+           $reviews = Review::with('user')->where('product_id', $product_id)->where('status', 1)->get();
+           foreach($reviews as $review){ 
+            $photosArray = explode(',', $review->photos);
+            $photos = Upload::select('file_name')->whereIn('id', $photosArray)->get();
+            $data[] = [
+                "id" => $review->id,
+                "user" =>  $review->user->name,
+                "review" => $review->comment,
+                "created_at" => $review->created_at,
+                "rating" => $review->rating,
+                "photos" => $photos,
+            ];
+           }
+             return response()->json([
+                "status" => "success",
+                "data" => $data
+            ], 200);
+        }catch(\Exception $e){
+            return response()->json([
+                "status" => "failed",
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+
     
 }

@@ -112,19 +112,40 @@ b, strong {
       	<tbody class="strong">
 	                @foreach ($order->orderDetails as $key => $orderDetail)
 		                @if ($orderDetail->product != null)
-							<tr class="">
-								<td>{{ $orderDetail->product->getTranslation('name') }} @if($orderDetail->variation != null) ({{ $orderDetail->variation }}) @endif</td>
-								<td class="gry-color">{{ $orderDetail->quantity }}</td>
-								<td class="gry-color currency">Rs. {{ $orderDetail->price/$orderDetail->quantity }}</td>
-								<td class="gry-color currency">Rs. {{ $orderDetail->tax/$orderDetail->quantity }}</td>
-			                    <td class="text-right currency">Rs. {{ $orderDetail->price+$orderDetail->tax }}</td>
-							</tr>
+                    <tr class="">
+                      <td>{{ $orderDetail->product->getTranslation('name') }} @if($orderDetail->variation != null) ({{ $orderDetail->variation }}) @endif</td>
+                      <td class="gry-color">{{ $orderDetail->quantity }}</td>
+                      <td class="gry-color currency">Rs. {{ $orderDetail->price/$orderDetail->quantity }}</td>
+                      <td class="gry-color currency">Rs. {{ $orderDetail->tax/$orderDetail->quantity }}</td>
+                      <td class="text-right currency">Rs. {{ $orderDetail->price+$orderDetail->tax }}</td>
+                    </tr>
 		                @endif
 					@endforeach
-	            </tbody>
+	      </tbody>
     </table>
-   <script> 
-        window.onload = function() {
-            window.print();
-        }
-    </script>  
+     <div style="padding:0 1.5rem;">
+	        <table style="width: 40%;margin-left:auto;" class="text-right sm-padding small strong">
+		        <tbody>
+			        <tr>
+			            <th class="gry-color text-left">{{ translate('Sub Total') }}</th>
+			            <td class="currency">Rs. {{ $order->orderDetails->sum('price') }}</td>
+			        </tr>
+			        <tr>
+			            <th class="gry-color text-left">{{ translate('Shipping Cost') }}</th>
+			            <td class="currency">Rs. {{ $shipping_cost }}</td>
+			        </tr>
+			        <tr class="border-bottom">
+			            <th class="gry-color text-left">{{ translate('Total Tax') }}</th>
+			            <td class="currency">Rs. {{ $order->orderDetails->sum('tax') }}</td>
+			        </tr>
+                    <tr class="border-bottom">
+			            <th class="gry-color text-left">{{ translate('Coupon') }}</th>
+			            <td class="currency">Rs. {{ $order->coupon_discount }}</td>
+			        </tr>
+			        <tr>
+			            <th class="text-left strong">{{ translate('Grand Total') }}</th>
+			            <td class="currency">Rs. {{ $order->grand_total + $shipping_cost }}</td>
+			        </tr>
+		        </tbody>
+		    </table>
+	    </div>

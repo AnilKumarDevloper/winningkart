@@ -189,6 +189,7 @@ Route::controller(CustomerProductController::class)->group(function () {
 Route::controller(SearchController::class)->group(function () {
     Route::get('/search', 'index')->name('search');
     Route::get('/api/test-product-list/{category_slug}', 'apitestProductList')->name('api_test_product_list');
+   
 
     Route::get('/test-product-list/{category_slug}', 'testProductList')->name('test_product_list');
     // Route::get('/category/{category_slug}', 'listingByCategory')->name('products.category');

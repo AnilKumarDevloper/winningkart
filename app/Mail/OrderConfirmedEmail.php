@@ -21,16 +21,16 @@ class OrderConfirmedEmail extends Mailable
      *
      * @return void
      */
-    public function __construct($array, $path, $file)
-    {
-         $this->view($array['view'])
-         ->subject($array['subject'])
-         ->from($array['from'])
-         ->with([
-            'order' => $array['order'], 
-            ]);
-            $this->file = $file;
-            $this->path = $path;
+    public function __construct($array, $path, $file){
+        $this->view($array['view'])
+        ->subject($array['subject'])
+        ->from($array['from'])
+        ->with([
+           'order' => $array['order'], 
+           'shipping_charge' => $array['shipping_charge']
+        ]);
+        $this->file = $file;
+        $this->path = $path;
     }
 
     /**

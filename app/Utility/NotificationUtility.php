@@ -4,6 +4,7 @@ namespace App\Utility;
 
 use App\Mail\InvoiceEmailManager;
 use App\Mail\OrderConfirmedEmail;
+use App\Models\BusinessSetting;
 use App\Models\User;
 use App\Models\SmsTemplate;
 use App\Http\Controllers\OTPVerificationController;
@@ -22,7 +23,17 @@ class NotificationUtility
         $array['subject'] = translate('A new order has been placed') . ' - ' . $order->code;
         $array['from'] = env('MAIL_FROM_ADDRESS');
         $array['order'] = $order;
-       
+        
+        $shipping_cost = 0;
+        $free_shipping_over_order_cost = BusinessSetting::where('type', 'free_shipping_over_order_cost')->first();
+        $shipping_type = BusinessSetting::where('type', 'shipping_type')->first();
+        $flat_rate_shipping_cost = BusinessSetting::where('type', 'flat_rate_shipping_cost')->first();
+        if($order->grand_total < $free_shipping_over_order_cost->value){   
+            if($shipping_type->value == 'flat_rate'){
+                $shipping_cost = $flat_rate_shipping_cost->value;
+            }
+        }
+    $array['shipping_charge'] = $shipping_cost;
  
         
          $imagePath = public_path('uploads/all/DOpocsFF5UbkkXMXjmOHv8h4TGg0yB5GJ0tVZ3Ri.webp');
@@ -30,7 +41,7 @@ class NotificationUtility
         $imageSrc = 'data:image/jpeg;base64,' . $imageData; 
 
         $file_name = 'invoice_'.time().'.pdf';
-        $html = view('emails.invoice_pdf', compact('order', 'imageSrc'))->render(); 
+        $html = view('emails.invoice_pdf', compact('order', 'imageSrc', 'shipping_cost'))->render(); 
         $dompdf = new Dompdf();
 
         $dompdf->loadHtml($html);

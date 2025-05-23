@@ -220,10 +220,10 @@
                                                     @endforeach 
                                                 </ul> 
                                             @endif 
-                                            <div class="d-flex gap-2 align-items-center ">
+                                            <!-- <div class="d-flex gap-2 align-items-center ">
                                                 <button type="button" class="write_review mt-2"><i class="ri-thumb-up-line"></i> Helpful </button>
                                                 <span class="people_rev"><b>11 </b>people found this helpful</span>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -303,6 +303,9 @@
                 // $('#login_modal').modal('show');
             @endif
         }
+
+
+
 
 </script>
 @endsection

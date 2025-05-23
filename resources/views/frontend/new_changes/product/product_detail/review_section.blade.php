@@ -164,6 +164,10 @@
        </div>
     </div>
  </section>
+
+ <script>
+      const review_url = "{{route('get_all_review_of_product')}}" ;
+ </script>
   
 @include('frontend.new_changes.customer_review_modal') 
  

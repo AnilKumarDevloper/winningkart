@@ -145,19 +145,19 @@
                    <div class="row">  
                         <div class="col-sm-6"> 
                              <!-- Paypal --> 
-                             @if (get_setting('paypal_payment') == 1)
+                             @if (get_setting('paypal_payment') == 1)  
+
                                 <div class="d-flex payment_options">
                                     <span>
-                                    <img src="https://adn-static1.nykaa.com/media/wysiwyg/Payments/DesktopRevamp_icons/card-debit-credit-24_2.svg" class="paymentimg" >
+                                      <img src="https://adn-static1.nykaa.com/media/wysiwyg/Payments/DesktopRevamp_icons/card-debit-credit-24_2.svg" class="paymentimg" >
                                     </span>
                                     <div class="d-flex">
                                          <input value="paypal" class="online_payment" type="radio" name="payment_option" checked>
-                                    <p class="subtitle " color="">{{ translate('Paypal') }}</p> 
+                                         <p class="subtitle " color="">{{ translate('Paypal') }}</p>  
                                     </div>
-                                </div>
-                            @endif
- 
+                                </div> 
 
+                            @endif 
                                      <!-- razorpay -->
                                     @if (get_setting('razorpay') == 1)
                                         <div class="d-flex payment_options">

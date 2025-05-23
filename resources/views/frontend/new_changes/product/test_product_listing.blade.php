@@ -380,18 +380,19 @@
                 let response = await fetch(productApiUrl);
                 if(!response){
                     console.log('your response is not ok!');
+                    return;
                 }
-                let responseData = await response.json();  
-                AllProduct = responseData.data;
-             
-                renderProduct(AllProduct);
+                let responseData = await response.json();   
+                AllProduct = responseData.data;   
+                renderProduct(AllProduct); 
+
+                console.log(AllProduct, "AllProduct")
                
             }catch(error){
                 console.log(error)
             } 
         } 
-       
-
+        
  
         const renderProduct = (product) =>{
         
@@ -598,7 +599,6 @@
                 }
 
                 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
               
                 html += ` 
                
@@ -661,8 +661,7 @@
                 $productsContainer.html(''); 
             for (let i = 0; i < 10; i++) {
                 $productsContainer.append(getProductLoaderTemplate());
-            };
-            
+            }; 
 
             $(".loader_product").show();
             const filterByuser = () => { 
