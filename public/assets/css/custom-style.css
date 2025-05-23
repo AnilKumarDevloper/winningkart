@@ -2493,10 +2493,12 @@
 }
 
 .filterWithAlphabet li, .filterWithAlphabet li a{
-	padding: 0px !important;
+	padding: 0px 7px !important;
 	width: fit-content;
-	font-size: 10px;
- 
+	font-size: 10px; 
+}
+.firstAlphabet.active {
+   	color: #f60; 
 }
 .filtermaxHeight{
 	max-height: 430px; 
@@ -3404,6 +3406,7 @@ button.tab-link.tab_link.active {
     max-height: 215px;
 }
 
+
 .reviews_div{
 	margin-bottom: 0.75rem;
 }
@@ -4180,7 +4183,7 @@ button.tab-link.tab_link.active {
           animation: shine-loading-container-items 2s infinite ease-out;
 }
 
-
+ 
 @-webkit-keyframes shine-loading-image {
   0% {
     background-position: -32px;

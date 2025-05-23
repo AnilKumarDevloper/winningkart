@@ -7,6 +7,7 @@ use App\Mail\OrderConfirmedEmail;
 use App\Models\User;
 use App\Models\SmsTemplate;
 use App\Http\Controllers\OTPVerificationController;
+use Dompdf\Dompdf;
 use Mail;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\OrderNotification;
@@ -20,13 +21,34 @@ class NotificationUtility
         $array['view'] = 'emails.invoice';
         $array['subject'] = translate('A new order has been placed') . ' - ' . $order->code;
         $array['from'] = env('MAIL_FROM_ADDRESS');
-        $array['order'] = $order;  
+        $array['order'] = $order;
+       
+ 
+        
+         $imagePath = public_path('uploads/all/DOpocsFF5UbkkXMXjmOHv8h4TGg0yB5GJ0tVZ3Ri.webp');
+        $imageData = base64_encode(file_get_contents($imagePath));
+        $imageSrc = 'data:image/jpeg;base64,' . $imageData; 
+
+        $file_name = 'invoice_'.time().'.pdf';
+        $html = view('emails.invoice_pdf', compact('order', 'imageSrc'))->render(); 
+        $dompdf = new Dompdf();
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $pdfOutput = $dompdf->output();
+        $filePath = 'invoice/'.$file_name;
+        $publicPath = public_path($filePath);
+
+        file_put_contents($publicPath, $pdfOutput);
+        $path = $publicPath;
+             
         try {
             if ($order->user->email != null) {
-                Mail::to($order->user->email)->queue(new OrderConfirmedEmail($array));
+                Mail::to($order->user->email)->queue(new OrderConfirmedEmail($array, $path, $file_name));
             }
-            Mail::to($order->orderDetails->first()->product->user->email)->queue(new OrderConfirmedEmail($array));
-        } catch (\Exception $e) {
+            Mail::to($order->orderDetails->first()->product->user->email)->queue(new OrderConfirmedEmail($array, $path, $file_name));
+        }catch (\Exception $e){
             return $e->getMessage();
         }
 

@@ -444,7 +444,7 @@
             <div class="row justify-content-evenly">
                 <div class="col-12">
                     <div class="col-lg-8 col-md-8 my-md-8 my-3 mx-auto cities">
-                        <!-- Title -->
+                        <!-- Title --> 
                         <div class="aiz-carousel " data-items="8"
                             data-xxl-items="4" data-xl-items="4" data-lg-items="3" data-md-items="3" data-sm-items="3"
                             data-xs-items="3" data-arrows='false' data-infinite='false'>
@@ -455,6 +455,7 @@
                                     $categories = get_category($home_categories);
                                     $i = 0;
                                     @endphp
+                                
                                 @foreach ($categories as $category_key => $category)
                                     @php
                                         $category_name = $category->getTranslation('name');
@@ -465,16 +466,15 @@
                                     @php
                                         $i++;
                                     @endphp
-                                @endforeach
-                            @endif
-
+                                @endforeach 
+                            @endif 
                         </div>
                         <hr class="m-0 hrclass">
                     </div>
                 </div>
                 <!-- container of cites -->
                 <div class="city_container col-md-12 mt-4">
-
+                   
                     @if (get_setting('home_categories') != null)
                         @php
                             $home_categories = json_decode(get_setting('home_categories'));
@@ -509,12 +509,11 @@
                                         <div class="aiz-carousel aiz-carousell2 aiz-web-resp arrow-x-0 arrow-inactive-none homeSlider" data-items="3.5"
                                             data-xxl-items="3" data-xl-items="2.8" data-lg-items="2" data-md-items="1.5" data-sm-items="1"
                                             data-xs-items="1.2" data-arrows='true' data-infinite='false'>
-                                            
                                             @foreach (get_cached_products($category->id) as $product_key => $product)
                                             <div class=""> 
                                                 @include('frontend.new_changes.partials.single_product_box', ['product' => $product]) 
                                             </div>
-                                            @endforeach 
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>

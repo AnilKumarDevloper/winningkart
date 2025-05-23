@@ -13,8 +13,8 @@ $luxe_categories= Category::with('childrenCategories')->where('parent_id', 0)->w
 $winningkart_categories= Category::with('childrenCategories')->where('parent_id', 0)->where('winningkart', 1)->get();
 $brands = Brand::with('brandLogo')->orderBy('name', 'asc');
 $brands = $brands->get();
-$brands_luxe = Brand::with('brandLogo')->where('popular', 1)->orderBy('name', 'asc')->get();
-$brands_popular = Brand::with('brandLogo')->where('luxe', 1)->orderBy('name', 'asc')->get();
+$brands_luxe = Brand::with('brandLogo')->where('luxe', 1)->orderBy('name', 'asc')->get();
+$brands_popular = Brand::with('brandLogo')->where('popular', 1)->orderBy('name', 'asc')->get();
 $brands_at_winningkart = Brand::with('brandLogo')->where('at_winningkart', 1)->orderBy('name', 'asc')->get();
 $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)->get();
 @endphp
@@ -371,50 +371,52 @@ $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)
                                     <li>
                                         <a  href="javascript:void(0)" class="headerSubMenu">Brands</a>
                                          <!-- <div class="overlay12"></div> -->
-                                         <div class="menuList" style="display: blck;">
+                                         <div class="menuList" style="display: bloc;">
                                                 <div class="row bgOdd"> 
                                                     <div class="col-4 bg-even">
                                                         <div class="submenu_">
                                                             <div class="searchBrands">  
                                                                 <i class="ri-search-line"></i>
-                                                                <input type="text" placeholder="Search Brands" id="brand">
+                                                                <input type="text" placeholder="Search Brands" id="brand_search">
                                                             </div>
                                                             <div class="d-flex justify-content-between">
                                                                 <div class="filteralphabet">
-                                                                    <ul class="mt-3 filtermaxHeight brandName" id="brand_name">  
-                                                                        <li class="mb-3 text-muted"><b>TOPNRANDS</b></li>
+                                                                    <ul class="mt-3 filtermaxHeight brandName">  
+                                                                        <li class="mb-3 text-muted"><b id="hover_text">TOPNRANDS</b></li>
+                                                                        <ul id="brand_name">
 
-                                                                        <!-- <li><b>B</b></li> -->
+                                                                            <!-- <li><b>B</b></li> -->
                                                                             <!-- @if(count($brands))
                                                                             @foreach($brands as $brand) 
                                                                                 <li><a href="{{ route('products.brand', [$brand->slug]) }}">{{ $brand->name ?? '' }}</a></li>
                                                                             @endforeach
                                                                             @endif   -->
+                                                                        </ul> 
                                                                     </ul>
                                                                 </div>
                                                                 <div class="filteralphabet">
                                                                     <ul class="mt-3 filterWithAlphabet"> 
-                                                                        <li class="mb-3"><a href="javascript:void(0)">*</a></li>
-                                                                        <li><a href="javascript:void(0)">A</a></li>
-                                                                        <li><a href="javascript:void(0)">B</a></li>
-                                                                        <li><a href="javascript:void(0)">C</a></li>
-                                                                        <li><a href="javascript:void(0)">D</a></li>
-                                                                        <li><a href="javascript:void(0)">E</a></li>
-                                                                        <li><a href="javascript:void(0)">F</a></li>
-                                                                        <li><a href="javascript:void(0)">G</a></li>
-                                                                        <li><a href="javascript:void(0)">H</a></li>
-                                                                        <li><a href="javascript:void(0)">I</a></li>
-                                                                        <li><a href="javascript:void(0)">J</a></li>
-                                                                        <li><a href="javascript:void(0)">K</a></li>
-                                                                        <li><a href="javascript:void(0)">L</a></li>
-                                                                        <li><a href="javascript:void(0)">M</a></li>
-                                                                        <li><a href="javascript:void(0)">N</a></li>
-                                                                        <li><a href="javascript:void(0)">O</a></li>
-                                                                        <li><a href="javascript:void(0)">P</a></li>
-                                                                        <li><a href="javascript:void(0)">Q</a></li>
-                                                                        <li><a href="javascript:void(0)">R</a></li>
-                                                                        <li><a href="javascript:void(0)">S</a></li>
-                                                                        <li><a href="javascript:void(0)">T</a></li> 
+                                                                        <li class="mb-3"><a href="javascript:void(0)" class="firstAlphabet" data-val="All" id="all_brand">All</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="A">A</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="B">B</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="C">C</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="D">D</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="E">E</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="F">F</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="G">G</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="H">H</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="I">I</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="J">J</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="K">K</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="L">L</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="M">M</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="N">N</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="O">O</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="P">P</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="Q">Q</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="R">R</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="S">S</a></li>
+                                                                        <li><a href="javascript:void(0)" class="firstAlphabet" data-val="T">T</a></li> 
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -1432,14 +1434,41 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 <!----- Brand search functions ------>
-<script>
+<script> 
+
+    document.addEventListener("DOMContentLoaded", function(){  
+      fetch_brandApi('');
+    });
+
+     document.getElementById("brand_search").addEventListener("input",  function(e){
+        const brand_val =  e.target.value;  
+        fetch_brandApi(brand_val);
+    }); 
+
+    document.querySelectorAll('.firstAlphabet').forEach(function(firstAlpha){
+        let hover_text = document.getElementById('hover_text');
+        firstAlpha.addEventListener('mouseover', function(e){  
+           
+            let hoverValue = e.target.getAttribute('data-val'); 
+            hover_text.textContent = hoverValue; 
+            
+            if(hoverValue === "All"){ 
+                fetch_brandApi('');
+            }
+            document.querySelectorAll(".firstAlphabet.active").forEach(function(activeElement){
+                activeElement.classList.remove("active");
+            });
+            
+            e.target.classList.add("active");
+         
+              fetch_brandApi(hoverValue);
+        });
+    });
+
     
+    const fetch_brandApi = async (brand_val) => {   
 
-     let brandData = []; 
- 
-    const fetch_brandApi = async (url) => {  
-
-        console.log(url);
+          let url = `{{route('get_brand_list_from_filter')}}?brand=${brand_val}`;  
 
         try{ 
             const response = await fetch(url);
@@ -1448,39 +1477,33 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.log("your response is not ok!");
                 return;
             }  
-            brandData = response_data.data; 
-            render_brand_name(); 
-          
+
+            let data = response_data.data;
+            let brandData = data.sort((a,b) =>  a.name.localeCompare(b.name));   
+            render_brand(brandData);
+
         }catch(error){
             console.log(error)
-        }
+        } 
     };  
 
-    const render_brand_name = () =>{  
-
-         let brand_name = document.getElementById("brand_name");
-         let brand_html = "";  
-         
-            brandData.forEach((brand) =>{ 
-                brand_html +=`
-                     <li id="${brand.id}"><a href="">${brand.name}</a></li>
-                `
-            });   
-         brand_name.innerHTML = brand_html;  
-    }; 
     
-     document.getElementById('brand').addEventListener('input', function(){
-        const brand_val = this.value;  
 
-        // let brand_url = `{{route('get_brand_list_from_filter')}}?brand=${brand_val}`;  
-      
-        // fetch_brandApi(base_url); 
-    }); 
- 
-    document.addEventListener('DOMContentLoaded', function(){
-        let base_url = "{{route('get_brand_list_from_filter')}}?brand";
-        fetch_brandApi(base_url);
-    });
+    const render_brand = (responseData) =>{
+        let brand_name_html = "";
+        let brand_name = document.getElementById("brand_name");
+
+        if(!responseData || responseData.length === 0){
+            brand_name_html += `<li><b>No brands found</b></li>`
+        }else{
+             responseData.forEach((brands) =>{  
+                brand_name_html += `
+                    <li><a href="#">${brands.name}</a></li>
+                `
+            }); 
+        }  
+        brand_name.innerHTML = brand_name_html; 
+    }  
 
 </script>
  

@@ -34,55 +34,80 @@
                             </div>
                             <div id="categoryCollapse" class="collapse">
                                 <ul class="list-group">
-                                    <!-- <li class="list-group-item list-groupitem2 list_elements"> 
-                                        <div class="form-check d-flex justify-content-between align-items-center itemFilter"> 
-                                            <label class="form-check-label" for="filter1">
-                                                Popularity
-                                            </label> 
-                                            <span> <input class="form-check-input filterCheckbox" type="checkbox" value="" id="filter1"> </span>
-                                        </div> 
-                                    </li> -->
-                                    <li class="list-group-item list-groupitem2"> 
+                                    
+                                    <!-- <li class="list-group-item list-groupitem2"> 
                                         <div class="form-check d-flex justify-content-between align-items-center itemFilter"> 
                                             <label class="form-check-label" for="filter2">
                                                 Discount
                                             </label> 
                                             <span> <input class="form-check-input filterCheckbox filterWith_sortDiscount" type="checkbox" value="discount" id="filter2"> </span>
                                         </div> 
+                                    </li> -->  
+
+                                     <li class="list-group-item list-groupitem2">
+                                        <div class="form-check d-flex justify-content-between align-items-center itemFilter">
+                                           
+                                            <label class="form-check-label" >
+                                               Discount
+                                            </label>
+                                             <span><input class="form-check-input filterCheckbox filterWith_sortDiscount" type="radio" value="discount" name="radioDefault" ></span>
+                                        </div>
                                     </li>
+                                     <li class="list-group-item list-groupitem2">
+                                        <div class="form-check d-flex justify-content-between align-items-center itemFilter">
+                                           
+                                            <label class="form-check-label" >
+                                                Customer Top Rated
+                                            </label>
+                                             <span><input class="form-check-input filterCheckbox filterWith_sortDiscount" type="radio" value="topRated" name="radioDefault" ></span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item list-groupitem2">
+                                        <div class="form-check d-flex justify-content-between align-items-center itemFilter">
+                                           
+                                            <label class="form-check-label" >
+                                                Price: High To Low
+                                            </label>
+                                             <span><input class="form-check-input filterCheckbox filterWith_sortDiscount" type="radio" value="priceHighToLow" name="radioDefault" ></span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item list-groupitem2">
+                                        <div class="form-check d-flex justify-content-between align-items-center itemFilter"> 
+                                            <label class="form-check-label"  >
+                                                Price: Low To High
+                                            </label>
+                                            <span><input class="form-check-input filterCheckbox filterWith_sortDiscount" type="radio"  value="priceLowToHigh" name="radioDefault"  ></span>
+                                        </div>
+                                    </li> 
+
                                     
-                                    <li class="list-group-item list-groupitem2"> 
+                                    <!-- <li class="list-group-item list-groupitem2"> 
                                         <div class="form-check d-flex justify-content-between align-items-center itemFilter"> 
                                             <label class="form-check-label" for="filter4">
                                                 Customer Top Rated
                                             </label> 
                                             <span> <input class="form-check-input filterCheckbox filterWith_sortDiscount" type="checkbox" value="topRated" id="filter4"> </span>
                                         </div> 
-                                    </li>
+                                    </li>  -->
+
                                     <!-- <li class="list-group-item list-groupitem2"> 
-                                        <div class="form-check d-flex justify-content-between align-items-center itemFilter"> 
-                                            <label class="form-check-label" for="filter5">
-                                                New Arrivals
-                                            </label> 
-                                            <span> <input class="form-check-input filterCheckbox" type="checkbox" value="" id="filter5"> </span>
-                                        </div> 
-                                    </li> -->
-                                    <li class="list-group-item list-groupitem2"> 
                                         <div class="form-check d-flex justify-content-between align-items-center itemFilter"> 
                                             <label class="form-check-label" for="filter6">
                                                 Price: High To Low
                                             </label> 
                                             <span><input class="form-check-input filterCheckbox filterWith_sortDiscount" type="checkbox" value="priceHighToLow" > </span>
                                         </div> 
-                                    </li>
-                                    <li class="list-group-item list-groupitem2"> 
+                                    </li> -->
+
+                                    <!-- <li class="list-group-item list-groupitem2"> 
                                         <div class="form-check d-flex justify-content-between align-items-center itemFilter"> 
                                             <label class="form-check-label" for="filter7">
                                                 Price: Low To High
                                             </label> 
                                             <span> <input class="form-check-input filterCheckbox filterWith_sortDiscount" type="checkbox" value="priceLowToHigh"  > </span>
                                         </div> 
-                                    </li>  
+                                    </li>   -->
+
                                 </ul>
                             </div>  
                         </div>
@@ -294,7 +319,7 @@
  
     function getProductLoaderTemplate() {
         return `
-            <div class="col-md-4 col-sm-6 mb-4 loader_product">
+            <div class="col-md-4 col-sm-6 mb-4 loader_product" style="display:none">
                 <div class="movie--isloading">
                     <div class="loading-image"></div>
                     <div class="loading-content d-flex flex-column justify-content-center align-items-center"> 
@@ -307,7 +332,7 @@
         `;
      }  
 
-          // color filter append
+      
         const colorappend = async () =>{
 
             let colorUrl = "{{route('get_all_color_list')}}";
@@ -367,7 +392,7 @@
         } 
        
 
-        // render product function
+ 
         const renderProduct = (product) =>{
         
             let product_container = document.getElementById('products'); 
@@ -628,17 +653,16 @@
                 `
             });  
             product_container.innerHTML = html;
-        }
+        } 
 
-
-        // filter product functions   
-          
+        // filter product functions    
    
            const $productsContainer = $('#products');
                 $productsContainer.html(''); 
             for (let i = 0; i < 10; i++) {
                 $productsContainer.append(getProductLoaderTemplate());
-            }
+            };
+            
 
             $(".loader_product").show();
             const filterByuser = () => { 
@@ -658,7 +682,7 @@
                     return;
                 } 
 
-                // ✅ Price filtering
+              
                 if (checkedPrice.length > 0) {
                     filteredProducts = filteredProducts.filter(productItem => {
                         return checkedPrice.some(priceRange => {
@@ -670,7 +694,7 @@
                     });
                 }
 
-                // ✅ Color filtering
+            
                 if (checkedColor.length > 0) {
                     filteredProducts = filteredProducts.filter(productItem => {
                         const colorVariants = productItem.choice_options?.find(opt => opt.attribute_name === "Color")?.values || [];
@@ -679,8 +703,7 @@
                     });
                 }
 
-                 // ✅ Sort By : Discount filtering
-                
+                 
                  if(checkedDiscount.includes('discount')){
                       filteredProducts = filteredProducts.filter(productItem => {
                             return productItem.discount > 0;
@@ -694,12 +717,11 @@
                  }
                
                 if (checkedDiscount.includes("priceHighToLow")){
-                   filteredProducts = filteredProducts.sort((a, b) => b.unit_price - a.unit_price);
+                    filteredProducts = filteredProducts.sort((a, b) => b.unit_price - a.unit_price);
                 }else if(checkedDiscount.includes("priceLowToHigh")){
                       filteredProducts = filteredProducts.sort((a, b) => a.unit_price - b.unit_price);
-                } 
-
-                // ✅ Render selected price filters
+                }  
+        
                 checkedPrice.forEach(price => {
                     const display = price.includes('-') ? price : `${price}-above`;
                     filter_html += `
@@ -712,7 +734,6 @@
                     `;
                 });
 
-                // ✅ Render selected color filters
                 checkedColor.forEach(color => {
                     filter_html += `
                         <li>
@@ -724,7 +745,6 @@
                     `;
                 });
 
-                // ✅ Render selected color filters
                 checkedDiscount.forEach(discount =>{
                      filter_html += `
                         <li>
@@ -738,7 +758,7 @@
 
                 filterList_container.innerHTML = filter_html;
 
-                // ✅ Remove filter logic
+         
                 document.querySelectorAll('.delete_filter_items').forEach(deleteItem => {
                     deleteItem.addEventListener('click', function (e) {
                         const valueToRemove = e.currentTarget.dataset.value;
@@ -773,6 +793,7 @@
             document.querySelectorAll('.filterWith_price, .filterWith_sortDiscount').forEach(checkBox =>{
                 checkBox.addEventListener('change', filterByuser);
             });  
+          
        
         $(document).ready(function () { 
             fetchApiData();
@@ -806,7 +827,7 @@
                 filterByuser();
          });
 
-          $(".loader_product").hide();
+       
 
  </script> 
 

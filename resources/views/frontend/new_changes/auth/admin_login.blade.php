@@ -7,17 +7,17 @@
     <section class="bg-white overflow-hidden" style="min-height:100vh;">
         <div class="row no-gutters" style="min-height:100vh;">
             <!-- Left Side Image-->
-            <div class="col-xxl-6 col-lg-7">
+            <div class="col-xxl-7 col-lg-7">
                 <div class="h-100">
                     <img src="{{ uploaded_asset(get_setting('admin_login_page_image')) }}" alt="" class="img-fit h-100">
                 </div>
             </div>
             
             <!-- Right Side -->
-            <div class="col-xxl-6 col-lg-5">
+            <div class="col-xxl-5 col-lg-5">
                 <div class="right-content">
                     <div class="row align-items-center justify-content-center justify-content-lg-start h-100">
-                        <div class="col-xxl-6 p-4 p-lg-5">
+                        <div class="col-12 p-4 p-lg-5">
                             <!-- Site Icon -->
                             <div class="size-48px mb-3 mx-auto mx-lg-0">
                                 <img src="{{ uploaded_asset(get_setting('site_icon')) }}" alt="{{ translate('Site Icon')}}" class="img-fit h-100">

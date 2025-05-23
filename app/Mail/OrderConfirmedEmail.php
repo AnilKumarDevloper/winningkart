@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Attachment;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -12,19 +13,24 @@ use Illuminate\Queue\SerializesModels;
 class OrderConfirmedEmail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $array;
-
+    public $array; 
+    public $file;
+    public $path;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($array)
+    public function __construct($array, $path, $file)
     {
          $this->view($array['view'])
          ->subject($array['subject'])
          ->from($array['from'])
-         ->with(['order' => $array['order']]);
+         ->with([
+            'order' => $array['order'], 
+            ]);
+            $this->file = $file;
+            $this->path = $path;
     }
 
     /**
@@ -58,6 +64,10 @@ class OrderConfirmedEmail extends Mailable
      */
     public function attachments()
     {
-        return [];
+        return [
+            Attachment::fromPath($this->path)
+                ->as($this->file)
+                ->withMime('application/pdf'),  
+        ];
     }
 }
