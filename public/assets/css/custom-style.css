@@ -3097,8 +3097,7 @@ button.tab-link.tab_link.active {
   .carousel-control-prev, .carousel-control-next {
     width: 5% !important; /* Adjust button size */
 }
-.backgroundimg{
-
+.backgroundimg{ 
 	background-image: 
 	linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), /* semi-transparent black overlay */
 	url("https://images-static.nykaa.com/prod-review/1581619963396_45cd456c-7b94-4292-8716-249d9507268a_1.jpg?tr=w-145,h-145,cm-pad_resize");

@@ -196,16 +196,18 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function destroy($id)
-    // {
-    //     $address = Address::findOrFail($id); 
-    //     if (!$address->set_default) {
-    //         $address->delete();
-    //         return back();
-    //     }
-    //     flash(translate('Default address cannot be deleted'))->warning();
-    //     return back();
-    // }
+    public function destroy($id)
+    {
+        $address = Address::findOrFail($id); 
+        if (!$address->set_default) {
+            $address->delete();
+            flash(translate('Address Deleted.'))->success();
+
+            return back();
+        }
+        flash(translate('Default address cannot be deleted'))->warning();
+        return back();
+    }
 
     public function getStates(Request $request)
     {
@@ -245,6 +247,35 @@ class AddressController extends Controller
         return back();
     }
 
+    public function addNewAddress(Request $request){
+        $validate = $request->validate([
+            "postal_code" => ["required"],
+            "area" => ["required"],
+            "state" => ["required"],
+            "house_number" => ["required"],
+            "address" => ["required"],
+            "name" => ["required"],
+            "email" => ["required", "email"],
+            "phone" => ["required", "digits:10"]
+        ]);
+        try{
+            $new_address = new Address();
+            $new_address->user_id = Auth::user()->id;
+            $new_address->postal_code = $request->postal_code;
+            $new_address->area = $request->area;
+            $new_address->state = $request->state;
+            $new_address->house_number = $request->house_number;
+            $new_address->address = $request->address;
+            $new_address->name = $request->name;
+            $new_address->email = $request->email;
+            $new_address->phone = $request->phone;
+            $new_address->save(); 
+            flash(translate('Address info Stored successfully'))->success();
+            return redirect()->back();
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
 
 
 }

@@ -20,6 +20,7 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerPackageController;
 use App\Http\Controllers\CustomerProductController;
+use App\Http\Controllers\DeliveryLocationController;
 use App\Http\Controllers\DigitalProductController;
 use App\Http\Controllers\FlashDealController;
 use App\Http\Controllers\LanguageController;
@@ -48,6 +49,7 @@ use App\Http\Controllers\TaxController;
 use App\Http\Controllers\UpdateController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\ZoneController;
+use App\Models\DeliveryLocation;
 
 /*
   |--------------------------------------------------------------------------
@@ -523,4 +525,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'prevent-ba
     Route::get('/clear-cache', [AdminController::class, 'clearCache'])->name('cache.clear');
 
     Route::get('/admin-permissions', [RoleController::class, 'create_admin_permissions']);
+
+     Route::get('/delivery-location', [DeliveryLocationController::class, 'index'])->name('admin.delivery_location');
+     Route::get('/delivery-location/create', [DeliveryLocationController::class, 'create'])->name('admin.delivery_location.create');
+     Route::get('/delivery-location/edit', [DeliveryLocationController::class, 'edit'])->name('admin.delivery_location.edit');
+     Route::post('/delivery-location/store', [DeliveryLocationController::class, 'store'])->name('admin.delivery_location.store');
 });

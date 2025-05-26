@@ -620,7 +620,8 @@
                         <div class="px-1"> 
                                     
                         <!--- new product design start --->
-                            <div class="row">  
+                            <!-- <div class="row">  
+
                                 <div class="col-sm-4">
                                     <div class="pr_height bg-white">
                                         <div class="productWrapper d-flex flex-column justify-content-between">
@@ -650,7 +651,7 @@
                                                             </a>
                                                         </div>
                                                 </div>
-                                                <!--product size and colors start -->
+                                              
                                                 <div class="select_size_color hiddenCartElement">
                                                     <div class="header_select">
                                                             <span>Select a Size(6)</span>
@@ -748,8 +749,7 @@
                                                         </div> 
                                                     </div>
 
-                                                </div>
-                                                <!--product size and colors end --> 
+                                                </div> 
 
                                                 <div class="actionSection"> 
                                                     <div class="actionSection_1">
@@ -769,15 +769,12 @@
                                                         <button type="button" class="addToCart_button">
                                                             <span>Add to Cart</span>
                                                         </button>
-                                                </div> 
-
-
+                                                </div>  
                                         </div>
                                     </div> 
-                                </div>  
+                                </div>   
 
-
-                            </div>
+                            </div> -->
                         <!--- new product design end --->
 
                             <!-- <div class="row gutters-16 row-cols-xxl-4 row-cols-xl-3 row-cols-lg-4 row-cols-md-3 row-cols-2 border-top1 border-left1"> -->

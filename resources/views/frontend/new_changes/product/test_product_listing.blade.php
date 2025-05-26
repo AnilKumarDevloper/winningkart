@@ -816,8 +816,7 @@
                        addToCart_btn.disabled= false;
                        addToCart_btn.textContent= "Add to Cart" 
                 }  
-         }
-     
+         } 
   
          document.getElementById('clearAllFilter').addEventListener('click', function(){
                  document.querySelectorAll('.filterWith_sortDiscount, .filterWith_price, .filterWith_color').forEach(checkbox => {

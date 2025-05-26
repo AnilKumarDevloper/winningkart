@@ -302,12 +302,13 @@
                 window.location.href = url;
                 // $('#login_modal').modal('show');
             @endif
-        }
-
-
-
-
+        }  
 </script>
+
+<script> 
+        let is_reviews_page = true; 
+</script>
+
 @endsection
  
 @endsection

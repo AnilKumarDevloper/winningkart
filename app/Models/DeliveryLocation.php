@@ -10,8 +10,10 @@ class DeliveryLocation extends Model
     use HasFactory;
 
     protected $fillable = [
-        "name",
         "pincode",
+        "area",
+        "city",
+        "state",
         "status",
     ];
 }

@@ -211,7 +211,7 @@
                             </div> 
                             <div>
                                 <label for="inp" class="inp mb-1">
-                                    <input type="number" id="postalcode" name="postal_code" placeholder="&nbsp;" required>
+                                    <input type="number" class="postalcode" id="postalcode" name="postal_code" placeholder="&nbsp;" required>
                                     <span class="label">Pincode</span>
                                 </label>
                                 <p class="errorSixdigit text-danger" id="errorSixdigit"></p>
@@ -287,6 +287,8 @@
  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" ></script>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <script src="{{ url('public\assets\js\custom_new_changes.js') }}"></script>
+    
     <script>
         $(document).ready(function(){
             $("#error_number").hide();
@@ -342,35 +344,37 @@
 
             $('#errorSixdigit').hide();
             $('#postalArea').hide(); 
-            document.getElementById('postalcode').addEventListener('change', async function(){
-                let postalcode = document.getElementById('postalcode').value; 
-                let postalUrl = `https://api.zippopotam.us/IN/${postalcode}`; 
-                if(postalcode.length < 6){
-                    $('#errorSixdigit').text('Please enter a 6-digit pincode').show();
-                }else{
-                    $('#errorSixdigit').hide(); 
-                }
-                try{
-                    let response = await fetch(postalUrl);
-                    if(!response.ok){
-                        if(postalcode.length >= 6){
-                            $('#errorSixdigit').text('Invalid Pincode').show(); 
-                        } 
-                        $('#postalArea').hide();
-                    }else{
-                        $('#errorSixdigit').hide();
-                        let data = await response.json();
-                        let myplaces = data.places;
-                        console.log(myplaces)
-                        $('#area').val(myplaces[0]['place name']);
-                        $('#state').val(myplaces[0].state);
-                        $('#postalArea').show();
-                    } 
-                }catch(error){
-                    console.log(error);
-                }
-            }); 
-        }); 
+            
+            // document.getElementById('postalcode').addEventListener('change', async function(){
+            //     let postalcode = document.getElementById('postalcode').value; 
+            //     let postalUrl = `https://api.zippopotam.us/IN/${postalcode}`; 
+            //     if(postalcode.length < 6){
+            //         $('#errorSixdigit').text('Please enter a 6-digit pincode').show();
+            //     }else{
+            //         $('#errorSixdigit').hide(); 
+            //     }
+            //     try{
+            //         let response = await fetch(postalUrl);
+            //         if(!response.ok){
+            //             if(postalcode.length >= 6){
+            //                 $('#errorSixdigit').text('Invalid Pincode').show(); 
+            //             } 
+            //             $('#postalArea').hide();
+            //         }else{
+            //             $('#errorSixdigit').hide();
+            //             let data = await response.json();
+            //             let myplaces = data.places;
+            //             console.log(myplaces)
+            //             $('#area').val(myplaces[0]['place name']);
+            //             $('#state').val(myplaces[0].state);
+            //             $('#postalArea').show();
+            //         } 
+            //     }catch(error){
+            //         console.log(error);
+            //     }
+            //  }); 
+
+           }); 
         
     </script> 
     <script>

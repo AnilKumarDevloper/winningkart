@@ -8,117 +8,87 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="form-default" role="form" action="{{ route('addresses.store') }}" method="POST">
-                @csrf
+            <form class="form-default" role="form" action="{{ route('add_new_address') }}" method="POST">
+             @csrf
                 <div class="modal-body c-scrollbar-light">
-                    <div class="p-3">
-                        <!-- Address -->
+                    <div class="p-3"> 
                         <div class="row">
-                            <div class="col-md-2">
-                                <label>{{ translate('Address')}}</label>
+                            <div class="col-md-3">
+                                <label> Pincode</label>
                             </div>
-                            <div class="col-md-10">
-                                <textarea class="form-control mb-3 rounded-0" placeholder="{{ translate('Your Address')}}" rows="2" name="address" required></textarea>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control mb-3 rounded-0 number_input postalcode" 
+                                  placeholder="Pincode"  required id="postalcode" name="postal_code">
+                                 <p class="errorSixdigit text-danger" id="errorSixdigit"></p>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label> Area</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" name="area" class="form-control mb-3 rounded-0 number_input" placeholder="Area"   id="area" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label> State</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" name="state" class="form-control mb-3 rounded-0 number_input" placeholder="State" id="state" required>
                             </div>
                         </div>
 
-                        <!-- Country -->
                         <div class="row">
-                            <div class="col-md-2">
-                                <label>{{ translate('Country')}}</label>
+                            <div class="col-md-3">
+                                <label>House/Flat/office No</label>
                             </div>
-                            <div class="col-md-10">
-                                <div class="mb-3">
-                                    <select class="form-control aiz-selectpicker rounded-0" data-live-search="true" data-placeholder="{{ translate('Select your country') }}" name="country_id" required>
-                                        <option value="">{{ translate('Select your country') }}</option>
-                                        @foreach (get_active_countries() as $key => $country)
-                                            <option value="{{ $country->id }}">{{ $country->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                            <div class="col-md-9">
+                                <input class="form-control mb-3 rounded-0" name="house_number" placeholder="House/Flat/office No" rows="2"  required></input>
                             </div>
                         </div>
 
-                        <!-- State -->
                         <div class="row">
-                            <div class="col-md-2">
-                                <label>{{ translate('State')}}</label>
+                            <div class="col-md-3">
+                                <label>Road Name/ Area/ Colony</label>
                             </div>
-                            <div class="col-md-10">
-                                <select class="form-control mb-3 aiz-selectpicker rounded-0" data-live-search="true" name="state_id" required>
-
-                                </select>
+                            <div class="col-md-9">
+                                <textarea class="form-control mb-3 rounded-0" name="address" placeholder="Road Name/ Area/ Colony" rows="2"  required></textarea>
                             </div>
                         </div>
 
-                        <!-- City -->
                         <div class="row">
-                            <div class="col-md-2">
-                                <label>{{ translate('City')}}</label>
+                            <div class="col-md-3">
+                                <label>Name</label>
                             </div>
-                            <div class="col-md-10">
-                                <select class="form-control mb-3 aiz-selectpicker rounded-0" data-live-search="true" name="city_id" required>
-
-                                </select>
+                            <div class="col-md-9">
+                                <input class="form-control mb-3 rounded-0" placeholder="Name" rows="2" name="name" required></input>
                             </div>
                         </div>
 
-                        @if (get_setting('google_map') == 1)
-                            <!-- Google Map -->
-                            <div class="row mt-3 mb-3">
-                                <input id="searchInput" class="controls" type="text" placeholder="{{translate('Enter a location')}}">
-                                <div id="map"></div>
-                                <ul id="geoData">
-                                    <li style="display: none;">Full Address: <span id="location"></span></li>
-                                    <li style="display: none;">Postal Code: <span id="postal_code"></span></li>
-                                    <li style="display: none;">Country: <span id="country"></span></li>
-                                    <li style="display: none;">Latitude: <span id="lat"></span></li>
-                                    <li style="display: none;">Longitude: <span id="lon"></span></li>
-                                </ul>
+                         <div class="row">
+                            <div class="col-md-3">
+                                <label> Phone</label>
                             </div>
-                            <!-- Longitude -->
-                            <div class="row">
-                                <div class="col-md-2" id="">
-                                    <label for="exampleInputuname">{{ translate('Longitude')}}</label>
-                                </div>
-                                <div class="col-md-10" id="">
-                                    <input type="text" class="form-control mb-3 rounded-0" id="longitude" name="longitude" readonly="">
-                                </div>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control mb-3 rounded-0 number_input" placeholder="Number" name="phone" required id="number">
                             </div>
-                            <!-- Latitude -->
-                            <div class="row">
-                                <div class="col-md-2" id="">
-                                    <label for="exampleInputuname">{{ translate('Latitude')}}</label>
-                                </div>
-                                <div class="col-md-10" id="">
-                                    <input type="text" class="form-control mb-3 rounded-0" id="latitude" name="latitude" readonly="">
-                                </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label> Email</label>
                             </div>
-                        @endif
+                            <div class="col-md-9">
+                                <input type="email" class="form-control mb-3 rounded-0 number_input" placeholder="Email" name="email" value="" required>
+                            </div>
+                        </div>
+
+                         <div class="form-group text-right">
+                            <button type="submit" class="btn btn-primary rounded-0 w-150px">Save</button>
+                        </div>
                         
-                        <!-- Postal code -->
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>{{ translate('Postal code')}}</label>
-                            </div>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control mb-3 rounded-0" placeholder="{{ translate('Your Postal Code')}}" name="postal_code" value="" required>
-                            </div>
-                        </div>
-
-                        <!-- Phone -->
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>{{ translate('Phone')}}</label>
-                            </div>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control mb-3 rounded-0" placeholder="{{ translate('+880')}}" name="phone" value="" required>
-                            </div>
-                        </div>
-                        <!-- Save button -->
-                        <div class="form-group text-right">
-                            <button type="submit" class="btn btn-primary rounded-0 w-150px">{{translate('Save')}}</button>
-                        </div>
+                        
                     </div>
                 </div>
             </form>
@@ -131,12 +101,11 @@
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{ translate('New Address') }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ translate('Edit Address') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-            
+            </div> 
             <div class="modal-body c-scrollbar-light" id="edit_modal_body">
 
             </div>
@@ -155,9 +124,10 @@
         }
 
         function edit_address(address) {
+            console.log(address);
             var url = '{{ route("addresses.edit", ":id") }}';
             url = url.replace(':id', address);
-            
+            console.log(url);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -167,8 +137,7 @@
                 success: function (response) {
                     $('#edit_modal_body').html(response.html);
                     $('#edit-address-modal').modal('show');
-                    AIZ.plugins.bootstrapSelect('refresh');
-
+                    AIZ.plugins.bootstrapSelect('refresh'); 
                     @if (get_setting('google_map') == 1)
                         var lat     = -33.8688;
                         var long    = 151.2195;
@@ -234,10 +203,58 @@
                     }
                 }
             });
-        }
+        }  
     </script>
 
-    
+    <script>
+        $(document).ready(function () { 
+            $("#number").on('input', function(){
+                let numberVal = $(this).val();
+                numberVal = numberVal.replace(/\D/g, '').slice(0, 10);
+                $(this).val(numberVal); 
+            })
+         });
+    </script>
+
+     
+
+
+    <script>
+        $(document).on("change", "#postalcode_edit", async function(){
+
+           // console.log("testing")
+           let postalcode = document.getElementById('postalcode_edit').value; 
+           console.log(postalcode)
+            let postalUrl = `https://api.zippopotam.us/IN/${postalcode}`; 
+            if(postalcode.length < 6){
+                $('#errorSixdigit').text('Please enter a 6-digit pincode').show();
+            }else{
+                $('#errorSixdigit').hide(); 
+            }
+            try{
+                let response = await fetch(postalUrl);
+                if(!response.ok){
+                    if(postalcode.length >= 6){
+                        $('#errorSixdigit').text('Invalid Pincode').show(); 
+                    } 
+                    //$('#postalArea').hide();
+                }else{
+                    $('#errorSixdigit').hide();
+                    let data = await response.json();
+                    let myplaces = data.places;
+                
+                    $('#edit_area').val(myplaces[0]['place name']);
+                    $('#edit_state').val(myplaces[0].state);
+                  //  $('#postalArea').show();
+                } 
+            }catch(error){
+                console.log(error);
+            }
+        });
+
+       
+</script>
+
     @if (get_setting('google_map') == 1)
         @include('frontend.'.get_setting('homepage_select').'.partials.google_map')
     @endif

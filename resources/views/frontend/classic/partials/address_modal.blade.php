@@ -161,10 +161,9 @@
                 url: url,
                 type: 'GET',
                 success: function (response) {
-                    $('#edit_modal_body').html(response.html);
+                    $('#').html(response.html);
                     $('#edit-address-modal').modal('show');
                     AIZ.plugins.bootstrapSelect('refresh');
-
                     @if (get_setting('google_map') == 1)
                         var lat     = -33.8688;
                         var long    = 151.2195;

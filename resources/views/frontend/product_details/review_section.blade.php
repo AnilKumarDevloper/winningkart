@@ -123,8 +123,8 @@
 
             @if(count($reviews) > 0)
             <div class="customerallreviews">
-            <div class="photosFromCustomers p-3">
-                    <div class="photoscustomerstext">Photos From Customers</div>
+              <div class="photosFromCustomers p-3">
+                    <div class="photoscustomerstext">Photos From Customers </div>
                     <div class="row">
                         <ul class="revSection main_parent_review_element" id="reviewImages" > 
                             @foreach ($all_reviews_images as $index => $photo)
@@ -209,25 +209,120 @@
             </div>
         </div>
         @endif
+
+
+
+
+
+
+        <!---- new add on elements --->
+        <div class="customerallreviews" id="customer_allreview_elements">
+
+            <!-- <div class="element_container"> 
+           
+                <div class="photosFromCustomers p-3">
+                        <div class="photoscustomerstext" >Photos From Customers </div>
+                        <div class="row">
+                            <ul class="revSection" id="all_customer" > 
+                                
+                                    <li class="parant_review_element">
+                                        <div class="review_img rew_3">
+                                            <img class="img-fit h-100 lazyload border" src="https://192.168.1.12/winningkart/public/uploads/all/4JF5f8XGIwSwrux3adICijFY4lbdAsXp1Pvc3cqk.webp">
+                                        </div>
+                                    </li>  
+                        
+                                    <li>
+                                        <div class="review_img">
+                                            <div class="morereviews">
+                                                <a href="" class="text-white">
+                                                    <h4 class="text-center m-0" >+  More</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li> 
+                            </ul> 
+                        </div>
+                </div>
+    
+                <div class="photosFromCustomers p-3">
+                        <div class="photoscustomerstext">Photos From Customers</div>
+                        <div class="row">
+                            <div class="col-sm-4 col-12">
+                                <div class="d-flex align-items-center" style="gap:5px">
+                                <img class="lazyload mw-100 size-60px mx-auto border p-1 customerImage"
+                                    src="https://192.168.1.12/winningkart/public/uploads/all/4JF5f8XGIwSwrux3adICijFY4lbdAsXp1Pvc3cqk.webp" >
+                                    <div>
+                                        <div class="css-c customerName">Mr Deepak </div>
+                                        <div class="verifytx"><i class="ri-verified-badge-line"></i> Verified Buyers</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8 col-12">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="customerReview- ">5 <i class="ri-star-line"></i></span>
+                                    <span class="verifytx"></span>
+                                </div>
+                                <div class="customerComments">
+                                    
+                                    <p class="css-c"> this product is good</p> 
+                                    <ul class="revSection main_parent_review_element"> 
+                                            <li class="parant_review_element">
+                                                <div class="review_img rew_3">
+                                                    <img class="img-fit h-100 lazyload border " src="https://192.168.1.12/winningkart/public/uploads/all/4JF5f8XGIwSwrux3adICijFY4lbdAsXp1Pvc3cqk.webp">
+                                                </div>
+                                            </li> 
+                                            <li class="parant_review_element">
+                                                <div class="review_img rew_3">
+                                                    <img class="img-fit h-100 lazyload border " src="https://192.168.1.12/winningkart/public/uploads/all/4JF5f8XGIwSwrux3adICijFY4lbdAsXp1Pvc3cqk.webp">
+                                                </div>
+                                            </li> 
+                                            <li class="parant_review_element">
+                                                <div class="review_img rew_3">
+                                                    <img class="img-fit h-100 lazyload border " src="https://192.168.1.12/winningkart/public/uploads/all/4JF5f8XGIwSwrux3adICijFY4lbdAsXp1Pvc3cqk.webp">
+                                                </div>
+                                            </li> 
+                                    </ul>  
+                                </div>
+                            </div>
+                        </div>
+                </div> 
+            
+                <div class="p-2 d-flex justify-content-center" style="border-top: 1px solid rgba(111, 121, 129, 0.22);;">
+                        <a href="" class="readMore"><span >Read More Reviews</span> <i class="ri-arrow-right-s-line"></i></a> 
+                </div>
+
+            </div> -->
+            
+        </div>
+        <!---- new add on elements end ---> 
+
         
        </div>
     </div>
  </section>
 
-{{-- 
+ 
 <div class="modal fade bd-example-modal-lg" id="customerImgView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
   <div class="modal-dialog modalDilogbox modal-dialog-centered ">  
     <div class="modal-content modalcontentHeight">
         <div class="d-flex h-100" >
-            <div class="col8 d-flex align-items-center backgroundimg" id="customerImgBG">
-                <div id="customerReviewImg" class="carousel slide crouselControls" data-ride="false" >
-                    <div class="carousel-inner" id="modalAllReviewImage">
+            <div class="col8 d-flex align-items-center backgroundimg">
+                <div id="customerReviewImg" class="carousel crouselControls" data-ride="carousel" data-interval="false" >
+                    <div class="carousel-inner" >
 
-                        <!-- <div class="carousel-item active">
+                        <div class="carousel-item active">
+                          <img class="d-block w-100" src="https://images-static.nykaa.com/prod-review/1694407033478_c5bf7b7b-1fe9-4011-8dca-8be4cd513955_1.png?tr=w-550,h-550,cm-pad_resize"
+                           alt="First slide">
+                        </div>
+                        <div class="carousel-item ">
                           <img class="d-block w-100" src="https://images-static.nykaa.com/prod-review/1741979077544_433fd8b1-3862-4c97-9a8a-a09779546535_1.jpeg?tr=w-145,h-145,cm-pad_resize"
                            alt="First slide">
-                        </div> -->
-
+                        </div> 
+                        
+                         <div class="carousel-item ">
+                          <img class="d-block w-100" src="https://images-static.nykaa.com/prod-review/1694407023721_a072fa4a-5ff8-4d82-9505-8e1702dd3e74_1.png?tr=w-550,h-550,cm-pad_resize"
+                           alt="second slide">
+                        </div>
                     </div>
 
                         <a class="carousel-control-prev nextPrevBtn" href="#customerReviewImg" role="button" data-slide="prev">
@@ -292,8 +387,113 @@
     </div> 
   </div>
 </div>
+ 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customerImgView">
+  Open Customer Image Modal
+</button>
+
+ <!-- Trigger/Open Modal Button -->
+
+ {{-- 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customerImgView">
+  Open Customer Image Modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="customerImgView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modalDilogbox modal-dialog-centered">  
+    <div class="modal-content modalcontentHeight">
+      <div class="d-flex h-100">
+        <div class="col8 d-flex align-items-center backgroundimg">
+          <div class="carousel slide crouselControls" data-ride="false">
+            <div class="carousel-inner" id="modalAllReviewImage">
+
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="https://images-static.nykaa.com/prod-review/1741979077544_433fd8b1-3862-4c97-9a8a-a09779546535_1.jpeg?tr=w-145,h-145,cm-pad_resize" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="/prod-review/1741979077544_433fd8b1-3862-4c97-9a8a-a09779546535_1.jpeg?tr=w-145,h-145,cm-pad_resize" alt="Second slide">
+                </div>
+
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="https://images-static.nykaa.com/media/catalog/product/tr:w-220,h-220,cm-pad_resize/a/3/a398c606902395739647-newadd_1.jpg" alt="Second slide">
+                </div>
+
+
+            </div>
+
+            <!-- Carousel Controls -->
+            <a class="carousel-control-prev nextPrevBtn" href="#customerReviewImg" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon prevAndNext" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next nextPrevBtn" href="#customerReviewImg" role="button" data-slide="next">
+              <span class="carousel-control-next-icon prevAndNext" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a> 
+          </div>
+        </div>
+
+        <!-- Right Side Content -->
+        <div class="col4 p-4" style="width: 40%;"> 
+          <div class="d-flex align-items-center" style="gap:5px">
+            <img src="https://images-static.nykaa.com/prod-review/pro_review_profile_image.png" class="customerImage">
+            <div>
+              <div class="css-c customerName">Ramakrishnan</div>
+              <div class="verifytx"><i class="ri-verified-badge-line"></i> Verified Buyers</div>
+            </div>
+          </div>
+
+          <div class="d-flex mt-4 justify-content-between align-items-center">
+            <span class="customerReview-">5 <i class="ri-star-line"></i></span>
+            <span class="verifytx">23/10/2021</span>
+          </div>
+
+          <h6 class="mt-3">"Best"</h6>
+          <p class="css-c">
+            This product is best duraline makeup mixing. This use professional also put in gel liner if liner is dry and mix any makeup products. Its very usable product.
+          </p>
+
+          <button type="button" class="write_review mt-2 mb-4"><i class="ri-thumb-up-line"></i> Helpful</button>
+
+          <!-- Product Card -->
+          <div class="d-none d-lg-block w-75 m-auto">
+            <div class="bg-white border"> 
+              <div class="addExtrapProduct">
+                <div class="addExtrapProduct-s">
+                  <a href="#">
+                    <div class="productImg mb-2">
+                      <img src="https://images-static.nykaa.com/media/catalog/product/tr:h-800,w-800,cm-pad_resize/4/c/4cb9e6fTP053042_1.jpg" class="w-100" alt="">
+                    </div> 
+                    <h5 class="productTitle">Yves Saint Laurent Loveshine Lipstick - 44</h5>
+                    <div class="d-flex justify-content-center align-items-center">
+                      <span class="mrpText">MRP:</span>
+                      <del class="fw-600 text-secondary d-inline">₹1,000</del>
+                      <span class="productMrp">₹4000</span>
+                    </div> 
+                    <h6 class="text-center itemoff">60% off</h6>
+                  </a>
+                </div>
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                  <button type="button" class="AddToCart w-100">Add To Cart</button>
+                </div>
+              </div> 
+            </div> 
+          </div> 
+
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
  --}}
 
+
+
 @include('frontend.new_changes.customer_review_modal')
+
+<script>
+    let is_reviews_page = false;
+</script>
 
 <!-- new review section start--->

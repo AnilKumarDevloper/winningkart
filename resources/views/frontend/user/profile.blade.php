@@ -77,26 +77,27 @@
             @foreach (Auth::user()->addresses as $key => $address)
                 <div class="">
                     <div class="border p-4 mb-4 position-relative">
+                          <div class="row fs-14 mb-2 mb-md-0">
+                            <span class="col-md-2 text-secondary">{{ translate('Name') }}:</span>
+                            <span class="col-md-8 text-dark">{{ $address->name }}</span>
+                        </div>
+                        <div class="row fs-14 mb-2 mb-md-0">
+                            <span class="col-md-2 text-secondary">{{ translate('Email') }}:</span>
+                            <span class="col-md-8 text-dark">{{ $address->email }}</span>
+                        </div>  
                         <div class="row fs-14 mb-2 mb-md-0">
                             <span class="col-md-2 text-secondary">{{ translate('Address') }}:</span>
-                            <span class="col-md-8 text-dark">{{ $address->address }}</span>
+                            <span class="col-md-8 text-dark">{{ $address->house_number }} {{ $address->address }}</span>
                         </div>
+                         <div class="row fs-14 mb-2 mb-md-0">
+                            <span class="col-md-2 text-secondary">{{ translate('State') }}:</span>
+                            <span class="col-md-8 text-dark">{{ $address->state }}</span>
+                        </div>
+
                         <div class="row fs-14 mb-2 mb-md-0">
                             <span class="col-md-2 text-secondary">{{ translate('Postal Code') }}:</span>
                             <span class="col-md-10 text-dark">{{ $address->postal_code }}</span>
-                        </div>
-                        <div class="row fs-14 mb-2 mb-md-0">
-                            <span class="col-md-2 text-secondary">{{ translate('City') }}:</span>
-                            <span class="col-md-10 text-dark">{{ optional($address->city)->name }}</span>
-                        </div>
-                        <div class="row fs-14 mb-2 mb-md-0">
-                            <span class="col-md-2 text-secondary">{{ translate('State') }}:</span>
-                            <span class="col-md-10 text-dark">{{ optional($address->state)->name }}</span>
-                        </div>
-                        <div class="row fs-14 mb-2 mb-md-0">
-                            <span class="col-md-2 text-secondary">{{ translate('Country') }}:</span>
-                            <span class="col-md-10 text-dark">{{ optional($address->country)->name }}</span>
-                        </div>
+                        </div> 
                         <div class="row fs-14 mb-2 mb-md-0">
                             <span class="col-md-2 text-secondary text-secondary">{{ translate('Phone') }}:</span>
                             <span class="col-md-10 text-dark">{{ $address->phone }}</span>
@@ -135,7 +136,7 @@
 
 
     <!-- Change Email -->
-    <form action="{{ route('user.change.email') }}" method="POST">
+    <!-- <form action="{{ route('user.change.email') }}" method="POST">
         @csrf
         <div class="card rounded-0 shadow-none border">
           <div class="card-header pt-4 border-bottom-0">
@@ -165,7 +166,7 @@
               </div>
           </div>
         </div>
-    </form>
+    </form> -->
 
 @endsection
 
@@ -193,9 +194,13 @@
                     AIZ.plugins.notify('danger', data.message);
             });
         });
+
+    
     </script>
 
-    @if (get_setting('google_map') == 1)
+        
+
+    @if(get_setting('google_map') == 1)
         @include('frontend.'.get_setting('homepage_select').'.partials.google_map')
     @endif
 

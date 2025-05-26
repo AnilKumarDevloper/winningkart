@@ -12,6 +12,7 @@ use App\Models\Product;
 use App\Models\Review;
 use App\Models\Upload;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Auth;
@@ -51,6 +52,7 @@ class NewChangesController extends Controller
         }
             return view('frontend.new_changes.address' , compact('addresses'));
         }catch(\Exception $e){
+            return $e->getMessage();
             abort('404');
         }
     }
@@ -70,8 +72,7 @@ class NewChangesController extends Controller
         }else{
              return redirect('/');
         }
-
-        }catch(\Exception $e){ 
+        }catch(\Exception $e){
             abort('404');
         }
     }
@@ -350,17 +351,23 @@ class NewChangesController extends Controller
            $reviews = Review::with('user')->where('product_id', $product_id)->where('status', 1)->get();
            foreach($reviews as $review){ 
             $photosArray = explode(',', $review->photos);
-            $photos = Upload::select('file_name')->whereIn('id', $photosArray)->get();
+            $photos = Upload::select('id', 'file_name')->whereIn('id', $photosArray)->get();
+            $profile = '';
+            if($review->user->avatar_original != NULL){
+                $profile_photo = Upload::select()->where('id', $review->user->avatar_original)->first();
+                $profile = $profile_photo->file_name;
+            }
             $data[] = [
                 "id" => $review->id,
                 "user" =>  $review->user->name,
+                "user_profile" => $profile,
                 "review" => $review->comment,
-                "created_at" => $review->created_at,
+                "created_at" => Carbon::parse($review->created_at)->format('d-m-Y'),
                 "rating" => $review->rating,
                 "photos" => $photos,
             ];
            }
-             return response()->json([
+            return response()->json([
                 "status" => "success",
                 "data" => $data
             ], 200);
@@ -370,7 +377,5 @@ class NewChangesController extends Controller
                 "error" => $e->getMessage()
             ], 500);
         }
-    }
-
-    
+    } 
 }

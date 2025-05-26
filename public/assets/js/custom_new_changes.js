@@ -67,12 +67,48 @@
                 $("#apply_coupon_errror").text("Something went wrong. Please try again.");
             }
         });
-    }
+    } 
 
-    $('#customerReviewImg').carousel({
-        interval: false
-    }); 
+//    $('#customerReviewImg').carousel({
+//         interval: false
+//     });
+
+    /// address pincode functions   
+
+    document.getElementById('postalcode').addEventListener('change', async function(){
+    
+    let postalcode = document.getElementById('postalcode').value; 
+    let postalUrl = `https://api.zippopotam.us/IN/${postalcode}`; 
+    if(postalcode.length < 6){
+        $('#errorSixdigit').text('Please enter a 6-digit pincode').show();
+    }else{
+        $('#errorSixdigit').hide(); 
+    }
+    try{
+        let response = await fetch(postalUrl);
+        if(!response.ok){
+            if(postalcode.length >= 6){
+                $('#errorSixdigit').text('Invalid Pincode').show(); 
+            } 
+           // $('#postalArea').hide();
+        }else{
+            $('#errorSixdigit').hide();
+            let data = await response.json();
+            let myplaces = data.places;
+           
+            $('#area').val(myplaces[0]['place name']);
+            $('#state').val(myplaces[0].state);
+           // $('#postalArea').show();
+        } 
+    }catch(error){
+        console.log(error);
+    }
+    });
+
+     
+
 })(jQuery);
+
 
     // product detail function check address with pinchod
     document.getElementById('delivery_option_pincode').addEventListener('submit', async function(e){
@@ -121,6 +157,11 @@
         $('#Shipping_thisPincode').hide();
         $('#pincode_element').show();
     });  
+
+
+
+
+
 
 
 

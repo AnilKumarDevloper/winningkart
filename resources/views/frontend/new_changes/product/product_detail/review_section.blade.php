@@ -73,11 +73,14 @@
 
             @if(count($reviews) > 0)
             <div class="customerallreviews">
-            <div class="photosFromCustomers p-3">
+              <div class="photosFromCustomers p-3">
                     <div class="photoscustomerstext">Photos From Customers</div>
+
+                    <!--- before  code---->
                     <div class="row">
                         <ul class="revSection main_parent_review_element" id="reviewImages" > 
                             @foreach ($all_reviews_images as $index => $photo)
+
                                 <li class="parant_review_element">
                                     <div class="review_img rew_3">
                                         <img class="img-fit h-100 lazyload border customerImages customerReviewIMG customerReview" src="{{ static_asset('assets/img/placeholder.jpg') }}"
@@ -85,23 +88,47 @@
                                         onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">
                                     </div>
                                 </li>
+
                                 @if($index == 8)
                                 @break
                                 @endif
                             @endforeach 
-                       @if(count($all_reviews_images) > 8)
-                        <li>
-                            <div class="review_img">
-                                 <div class="morereviews">
-                                    <a href="{{ route('product.review_images', [$detailedProduct->slug]) }}" class="text-white">
-                                          <h4 class="text-center m-0" >+ {{ count($all_reviews_images)-8 }} More</h4>
-                                    </a>
-                                 </div>
-                            </div>
-                        </li>
-                        @endif
+                            @if(count($all_reviews_images) > 8)
+                                <li>
+                                    <div class="review_img">
+                                        <div class="morereviews">
+                                            <a href="{{ route('product.review_images', [$detailedProduct->slug]) }}" class="text-white">
+                                                <h4 class="text-center m-0" >+ {{ count($all_reviews_images)-8 }} More</h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                @endif
                         </ul> 
                     </div>
+
+                    <div class="row">
+                        <ul class="revSection main_parent_review_element" id="reviewImages" >   
+                                <li class="parant_review_element">
+                                    <div class="review_img rew_3">
+                                        <img class="img-fit h-100 lazyload border customerImages customerReviewIMG customerReview" src=""
+                                         data-src="">
+                                    </div>
+                                </li>  
+                       
+                                <li>
+                                    <div class="review_img">
+                                        <div class="morereviews">
+                                            <a href=" " class="text-white">
+                                                <h4 class="text-center m-0" >+ More</h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li> 
+                        </ul> 
+                    </div>
+
+
             </div>
 
 
@@ -158,16 +185,12 @@
             <div class="p-2 d-flex justify-content-center" style="border-top: 1px solid rgba(111, 121, 129, 0.22);;">
                      <a href="{{ route('frontend.view_all_review', [$detailedProduct->slug] )}}" class="readMore"><span >Read More Reviews</span> <i class="ri-arrow-right-s-line"></i></a> 
             </div>
-        </div>
+           </div>
         @endif
         
        </div>
     </div>
  </section>
-
- <script>
-      const review_url = "{{route('get_all_review_of_product')}}" ;
- </script>
   
 @include('frontend.new_changes.customer_review_modal') 
  

@@ -340,6 +340,7 @@
                                     <label>{{ translate('Postal code')}}</label>
                                 </div>
                                 <div class="col-md-10">
+                                
                                     <input type="text" class="form-control mb-3" placeholder="{{ translate('Your Postal Code')}}" name="postal_code" value="" required>
                                 </div>
                             </div>

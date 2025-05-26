@@ -1278,7 +1278,7 @@
                             @endcan  
                              @can('delivery_location')
                                 <li class="aiz-side-nav-item">
-                                    <a href="{{route('general_setting.index')}}" class="aiz-side-nav-link">
+                                    <a href="{{route('admin.delivery_location')}}" class="aiz-side-nav-link">
                                         <span class="aiz-side-nav-text">{{translate('Delevery Location')}}</span>
                                     </a>
                                 </li>

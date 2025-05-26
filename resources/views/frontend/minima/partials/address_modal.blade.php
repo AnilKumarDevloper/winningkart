@@ -149,11 +149,9 @@
         function add_new_address(){
             $('#new-address-modal').modal('show');
         }
-
         function edit_address(address) {
             var url = '{{ route("addresses.edit", ":id") }}';
             url = url.replace(':id', address);
-            
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -161,6 +159,7 @@
                 url: url,
                 type: 'GET',
                 success: function (response) {
+                    console.log(response.html);
                     $('#edit_modal_body').html(response.html);
                     $('#edit-address-modal').modal('show');
                     AIZ.plugins.bootstrapSelect('refresh');
@@ -173,7 +172,6 @@
                             lat     = parseFloat(response.data.address_data.latitude);
                             long    = parseFloat(response.data.address_data.longitude);
                         }
-
                         initialize(lat, long, 'edit_');
                     @endif
                 }

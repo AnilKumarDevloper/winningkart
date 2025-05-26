@@ -188,11 +188,11 @@
             </div>
         </div>
 
-        <!-- Order Ammount -->
+        <!-- Order Amount -->
         <div class="col-md-3">
             <div class="card rounded-0 shadow-none border mt-2">
                 <div class="card-header p-0 border-bottom-0">
-                    <b class="fs-16 fw-700 text-dark">{{ translate('Order Ammount') }}</b>
+                    <b class="fs-16 fw-700 text-dark">{{ translate('Order Amount') }}</b>
                 </div>
                 <div class="card-body p-0 pb-0">
                     <table class="table-borderless table">

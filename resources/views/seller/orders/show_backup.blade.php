@@ -195,7 +195,7 @@ $payment_status = $order->orderDetails->where('seller_id', Auth::user()->id)->fi
         <div class="col-lg-3">
             <div class="card mt-4">
                 <div class="card-header">
-                    <b class="fs-15">{{ translate('Order Ammount') }}</b>
+                    <b class="fs-15">{{ translate('Order Amount') }}</b>
                 </div>
                 <div class="card-body pb-0">
                     <table class="table-borderless table">
