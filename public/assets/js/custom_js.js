@@ -1,4 +1,57 @@
 
+
+
+   // product detail function check address with pinchod
+    document.getElementById('delivery_option_pincode').addEventListener('submit', async function(e){
+        
+        e.preventDefault();
+        const delivery_pincode = document.getElementById('delivery_pincode').value;
+        const response = await fetch(`https://api.zippopotam.us/IN/${delivery_pincode}`); 
+        delivery_pincode.value 
+
+        if(delivery_pincode.length === 6){
+            try{
+                if(!response.ok){ 
+                    $('#validPincode').show();
+                    $('#validPincode').text('Please enter valid pincode');
+                    $('#notShipping_pincode').show();
+                    $('#pincode_element').hide();
+                    $('#Shipping_thisPincode').hide();
+                    $('.pincodeDetails').show();
+                    $('.tooltiptext').show();
+                    $('#userPincode').text(delivery_pincode);
+                }else{
+                    $('#validPincode').hide();
+                    const responseData = await response.json();
+                    $('#Shipping_thisPincode').show();
+                    $('#pincode_element').hide();
+                    $('.pincodeDetails').show();
+                    $('.tooltiptext').show();
+                    $('#placeName').text(responseData.places[0]['place name']+', '+ responseData.places[0].state)
+                    $('#userPincode').text(delivery_pincode);
+                }
+    
+            }catch(error){
+                console.log(error)
+            }
+        }else{
+            $('#validPincode').show();
+            $('#validPincode').text('Please enter valid pincode');
+        }
+
+    }); 
+    /// change pincode function 
+    document.getElementById('changepincode').addEventListener('click', function(){
+        // console.log('change function work..!')
+        $('.pincodeDetails').hide();
+        $('.tooltiptext').hide();
+        $('#notShipping_pincode').hide();
+        $('#Shipping_thisPincode').hide();
+        $('#pincode_element').show();
+    }); 
+
+
+
 // product customer image view function\
 
 let arraysource = [];
@@ -59,12 +112,12 @@ document.addEventListener("DOMContentLoaded", function () {
         let responseData = response.data; 
         allData = responseData;
         
-        console.log(responseData, "responseData");
+        // console.log(responseData, "responseData");
 
          customerallreviews_elements(responseData);  
     
      }catch(error){
-        console.log(error)
+        console.error(error)
      }
  };
  

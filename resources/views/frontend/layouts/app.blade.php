@@ -392,6 +392,9 @@
     <script src="{{ static_asset('assets/js/custom_new_changes.js') }}"></script>
     <script src="{{ static_asset('assets/js/custom_js.js') }}"></script>
  
+    <script>
+        let is_reviews_page = false;
+    </script>
         <script>
             $(document).ready(function(){
                 $('#liveToastBtn').on('click', function(){ 
@@ -529,6 +532,12 @@
                 // $("#item_qty_"+item_id).html(p_qty);
             });
 
+            $('#signup_with_otp').on('input', function(){
+                let number_val = $(this).val();
+                let reg = number_val.slice(0, 10);
+                $(this).val(reg);
+               
+            });
             $(document).ready(function() {
                 $('#toggle_signin_btn').on('click', function(event){
                     event.stopPropagation();
@@ -636,14 +645,7 @@
             });
         </script>
 
-        <script>
-            // document.querySelectorAll('.offerDetails').forEach(function(viewDetails){
-            //     viewDetails.addEventListener('click', function(){
-            //         $('#coupan_info').show();
-            //     });
-            // });
-          
-        </script>
+     
         <script>
             
             // tab function in product page
@@ -660,18 +662,23 @@
                 // Set the default tab to open (optional)
                 document.querySelector('.tab-link').click(); 
                  
-                $('#readMore').on('click', function(){  
-                    const content_details = $('#content_details'); 
-                    const readMore = $('#readMore');
-                    content_details.toggleClass('wr_height');
-                    $('#arrow1').toggleClass('ri-arrow-up-s-line'); 
-                    if(readMore.text() === 'Read More'){
-                        readMore.text('Read Less');
+
+                $("#readMore").on('click', function(){
+                   
+                    let detailsContainer  = $('.detailsContainer').toggleClass('maxHeights');
+                    let isvisibleclass = $('.maxHeights').is(":visible");
+                    let readMore = isvisibleclass === false ? "Read Less" : "Read More";
+                    $('#readMore').text(readMore);
+
+                    if(isvisibleclass === false){
+                          $('#arrowclass').removeClass('ri-arrow-down-s-line');
+                          $('#arrowclass').addClass('ri-arrow-up-s-line'); 
                     }else{
-                        readMore.text('Read More');
-                    }  
-                });  
-                
+                          $('#arrowclass').removeClass('ri-arrow-up-s-line');
+                          $('#arrowclass').addClass('ri-arrow-down-s-line');
+                    } 
+                });
+             
                 document.querySelectorAll('.itemSizeList').forEach(function(element){
                     element.addEventListener('click', function(){
                         const itemSizeList = document.querySelectorAll('.itemSizeList');
@@ -1331,6 +1338,7 @@
     @yield('script')
 
     @php
+        echo "testing00";
         echo get_setting('footer_script');
     @endphp
 

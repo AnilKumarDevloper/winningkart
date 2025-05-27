@@ -2,6 +2,9 @@
 
 @section('content')
 
+<style>
+    .hg11{fill: #85b567 !important;}
+</style>
     <!-- Steps -->
     <section class="pt-5 mb-0">
         <div class="container">
@@ -35,16 +38,16 @@
                             </div>
                         </div>
                         <div class="col active">
-                            <div class="text-center border border-bottom-6px p-2 text-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32.001" viewBox="0 0 32 32.001" class="cart-rotate mb-3 mt-1">
+                            <div class="text-center border p-2 text-primary" style="border-bottom:6px solid #85b567 !important">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32.001" viewBox="0 0 32 32.001" class="cart-rotate mb-3 mt-1" style="color: #85b567;">
                                     <g id="Group_23976" data-name="Group 23976" transform="translate(-282 -404.889)">
-                                      <path class="cart-ok has-transition" id="Path_28723" data-name="Path 28723" d="M313.283,409.469a1,1,0,0,0-1.414,0l-14.85,14.85-5.657-5.657a1,1,0,1,0-1.414,1.414l6.364,6.364a1,1,0,0,0,1.414,0l.707-.707,14.85-14.849A1,1,0,0,0,313.283,409.469Z" fill="#ffffff"/>
+                                      <path class="cart-ok has-transition hg11" style="fill: #85b567;" id="Path_28723" data-name="Path 28723" d="M313.283,409.469a1,1,0,0,0-1.414,0l-14.85,14.85-5.657-5.657a1,1,0,1,0-1.414,1.414l6.364,6.364a1,1,0,0,0,1.414,0l.707-.707,14.85-14.849A1,1,0,0,0,313.283,409.469Z" fill="#ffffff"/>
                                       <g id="LWPOLYLINE">
-                                        <path id="Path_28724" data-name="Path 28724" d="M313.372,416.451,311.72,418.1a14,14,0,1,1-5.556-8.586l1.431-1.431a16,16,0,1,0,5.777,8.365Z" fill="#d43533"/>
+                                        <path id="Path_28724" data-name="Path 28724" d="M313.372,416.451,311.72,418.1a14,14,0,1,1-5.556-8.586l1.431-1.431a16,16,0,1,0,5.777,8.365Z" fill="#85b567"/>
                                       </g>
                                     </g>
                                 </svg>
-                                <h3 class="fs-14 fw-600 d-none d-lg-block">{{ translate('5. Confirmation') }}
+                                <h3 class="fs-14 fw-600 d-none d-lg-block" style="color: #85b567;">{{ translate('5. Confirmation') }}
                                 </h3>
                             </div>
                         </div>
@@ -74,7 +77,8 @@
                             </g>
                         </svg>
                         <h1 class="mb-2 fs-28 fw-500 text-success">{{ translate('Thank You for Your Order!')}}</h1>
-                        <p class="fs-13 text-soft-dark">{{  translate('A copy or your order summary has been sent to') }} <strong>{{ json_decode($first_order->shipping_address)->email }}</strong></p>
+                        <p class="fs-13 text-soft-dark">{{  translate('A copy or your order summary has been sent to') }} <strong>
+                        {{Auth::user()->email != null ? Auth::user()->email : json_decode($first_order->shipping_address)->email }}</strong></p>
                     </div>
                     <!-- Order Summary -->
                     <div class="mb-4 bg-white p-4 border">

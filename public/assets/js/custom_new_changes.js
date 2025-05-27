@@ -74,87 +74,86 @@
 //     });
 
     /// address pincode functions   
-
     document.getElementById('postalcode').addEventListener('change', async function(){
-    
-    let postalcode = document.getElementById('postalcode').value; 
-    let postalUrl = `https://api.zippopotam.us/IN/${postalcode}`; 
-    if(postalcode.length < 6){
-        $('#errorSixdigit').text('Please enter a 6-digit pincode').show();
-    }else{
-        $('#errorSixdigit').hide(); 
-    }
-    try{
-        let response = await fetch(postalUrl);
-        if(!response.ok){
-            if(postalcode.length >= 6){
-                $('#errorSixdigit').text('Invalid Pincode').show(); 
-            } 
-           // $('#postalArea').hide();
+        let postalcode = document.getElementById('postalcode').value; 
+        let postalUrl = `https://api.zippopotam.us/IN/${postalcode}`; 
+        if(postalcode.length < 6){
+            $('#errorSixdigit').text('Please enter a 6-digit pincode').show();
         }else{
-            $('#errorSixdigit').hide();
-            let data = await response.json();
-            let myplaces = data.places;
-           
-            $('#area').val(myplaces[0]['place name']);
-            $('#state').val(myplaces[0].state);
-           // $('#postalArea').show();
-        } 
-    }catch(error){
-        console.log(error);
-    }
+            $('#errorSixdigit').hide(); 
+        }
+        try{
+            let response = await fetch(postalUrl);
+            if(!response.ok){
+                if(postalcode.length >= 6){
+                    $('#errorSixdigit').text('Invalid Pincode').show(); 
+                } 
+            // $('#postalArea').hide();
+            }else{
+                $('#errorSixdigit').hide();
+                let data = await response.json();
+                let myplaces = data.places;
+            
+                $('#area').val(myplaces[0]['place name']);
+                $('#state').val(myplaces[0].state);
+            // $('#postalArea').show();
+            } 
+        }catch(error){
+            console.error(error);
+        }
     });
 
 })(jQuery);
 
 
     // product detail function check address with pinchod
-    document.getElementById('delivery_option_pincode').addEventListener('submit', async function(e){
-        e.preventDefault();
-        const delivery_pincode = document.getElementById('delivery_pincode').value;
-        const response = await fetch(`https://api.zippopotam.us/IN/${delivery_pincode}`); 
-        delivery_pincode.value 
+    // document.getElementById('delivery_option_pincode').addEventListener('submit', async function(e){
+        
+    //     e.preventDefault();
+    //     const delivery_pincode = document.getElementById('delivery_pincode').value;
+    //     const response = await fetch(`https://api.zippopotam.us/IN/${delivery_pincode}`); 
+    //     delivery_pincode.value 
 
-        if(delivery_pincode.length === 6){
-            try{
-                if(!response.ok){ 
-                    $('#validPincode').show();
-                    $('#validPincode').text('Please enter valid pincode');
-                    $('#notShipping_pincode').show();
-                    $('#pincode_element').hide();
-                    $('#Shipping_thisPincode').hide();
-                    $('.pincodeDetails').show();
-                    $('.tooltiptext').show();
-                    $('#userPincode').text(delivery_pincode);
-                }else{
-                    $('#validPincode').hide();
-                    const responseData = await response.json();
-                    $('#Shipping_thisPincode').show();
-                    $('#pincode_element').hide();
-                    $('.pincodeDetails').show();
-                    $('.tooltiptext').show();
-                    $('#placeName').text(responseData.places[0]['place name']+', '+ responseData.places[0].state)
-                    $('#userPincode').text(delivery_pincode);
-                }
+    //     if(delivery_pincode.length === 6){
+    //         try{
+    //             if(!response.ok){ 
+    //                 $('#validPincode').show();
+    //                 $('#validPincode').text('Please enter valid pincode');
+    //                 $('#notShipping_pincode').show();
+    //                 $('#pincode_element').hide();
+    //                 $('#Shipping_thisPincode').hide();
+    //                 $('.pincodeDetails').show();
+    //                 $('.tooltiptext').show();
+    //                 $('#userPincode').text(delivery_pincode);
+    //             }else{
+    //                 $('#validPincode').hide();
+    //                 const responseData = await response.json();
+    //                 $('#Shipping_thisPincode').show();
+    //                 $('#pincode_element').hide();
+    //                 $('.pincodeDetails').show();
+    //                 $('.tooltiptext').show();
+    //                 $('#placeName').text(responseData.places[0]['place name']+', '+ responseData.places[0].state)
+    //                 $('#userPincode').text(delivery_pincode);
+    //             }
     
-            }catch(error){
-                console.log(error)
-            }
-        }else{
-            $('#validPincode').show();
-            $('#validPincode').text('Please enter valid pincode');
-        }
+    //         }catch(error){
+    //             console.log(error)
+    //         }
+    //     }else{
+    //         $('#validPincode').show();
+    //         $('#validPincode').text('Please enter valid pincode');
+    //     }
 
-    }); 
-    /// change pincode function 
-    document.getElementById('changepincode').addEventListener('click', function(){
-        // console.log('change function work..!')
-        $('.pincodeDetails').hide();
-        $('.tooltiptext').hide();
-        $('#notShipping_pincode').hide();
-        $('#Shipping_thisPincode').hide();
-        $('#pincode_element').show();
-    });  
+    // }); 
+    // /// change pincode function 
+    // document.getElementById('changepincode').addEventListener('click', function(){
+    //     // console.log('change function work..!')
+    //     $('.pincodeDetails').hide();
+    //     $('.tooltiptext').hide();
+    //     $('#notShipping_pincode').hide();
+    //     $('#Shipping_thisPincode').hide();
+    //     $('#pincode_element').show();
+    // });  
 
 
 

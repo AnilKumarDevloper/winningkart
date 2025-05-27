@@ -77,7 +77,7 @@ class OTPController extends Controller
     *.env file overwrite
     */
     public function overWriteEnvFile($type, $val)
-    {
+    {   
         $path = base_path('.env');
         if (file_exists($path)) {
             $val = '"'.trim($val).'"';

@@ -441,7 +441,7 @@
                                     </div>
                                 </div> -->
                                 <!-- Attributes -->
-                                <!-- <div class="form-group row gutters-5">
+                                 <div class="form-group row gutters-5">
                                     <div class="col-md-3">
                                         <input type="text" class="form-control" value="{{translate('Attributes')}}" disabled>
                                     </div>
@@ -452,7 +452,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                </div> -->
+                                </div>  
                                 <div>
                                     <!-- <p>{{ translate('Choose the attributes of this product and then input values of each attribute') }}</p> -->
                                     <br>
@@ -812,9 +812,7 @@
 
     function show_hide_shipping_div() {
         var shipping_val = $("[name=shipping_type]:checked").val();
-
         $(".flat_rate_shipping_div").hide();
-
         if(shipping_val == 'flat_rate'){
             $(".flat_rate_shipping_div").show();
         }
@@ -832,6 +830,7 @@
             },
             success: function(data) {
                 var obj = JSON.parse(data);
+                
                 $('#customer_choice_options').append('\
                 <div class="form-group row">\
                     <div class="col-md-3">\
@@ -911,16 +910,18 @@
     });
 
     $('#choice_attributes').on('change', function() {
+        $('#customer_choice_options').html(null);
         $.each($("#choice_attributes option:selected"), function(j, attribute){
-            flag = false;
+            flag = false; 
             $('input[name="choice_no[]"]').each(function(i, choice_no) {
                 if($(attribute).val() == $(choice_no).val()){
                     flag = true;
                 }
-            });
+            }); 
             if(!flag){
                 add_more_customer_choice_option($(attribute).val(), $(attribute).text());
             }
+            
         });
 
         var str = @php echo $product->attributes @endphp;

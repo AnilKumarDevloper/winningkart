@@ -55,8 +55,10 @@ class NotificationUtility
         $path = $publicPath;
              
         try {
-            if ($order->user->email != null) {
+            if($order->user->email != null){
                 Mail::to($order->user->email)->queue(new OrderConfirmedEmail($array, $path, $file_name));
+            }else{
+                Mail::to(json_decode($order->shipping_address)->email)->queue(new OrderConfirmedEmail($array, $path, $file_name));
             }
             Mail::to($order->orderDetails->first()->product->user->email)->queue(new OrderConfirmedEmail($array, $path, $file_name));
         }catch (\Exception $e){

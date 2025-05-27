@@ -113,7 +113,10 @@ class OTPVerificationController extends Controller
      * @return void
      */
     public function send_order_code($order){
-        $phone = json_decode($order->shipping_address)->phone;
+        $phone = $order->user->phone;
+        if($phone == null){
+            $phone = json_decode($order->shipping_address)->phone;
+        }
         if($phone != null){
             SmsUtility::order_placement($phone, $order);
         }

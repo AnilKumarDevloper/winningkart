@@ -2,6 +2,47 @@
 
 @section('content')
 <style>
+    .vd_radius001{
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+    .vd_radius00{ 
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        border-radius: 5px !important;
+    }
+
+    .proVideoSec .aiz-carousel .slick-arrow{
+        width: 30px !important;
+        height: 30px !important;
+        line-height: normal !important;
+    }
+   .proVideoSec .aiz-carousel .slick-next{
+        right: -10px !important;
+   }
+
+   .best_seller_product{
+     padding-left: 5px;
+     padding-right: 5px;
+   }
+    .best_sellter_img{overflow: hidden;}
+   .best_sellter_img img{
+    border-radius: 5px;
+    height: 100%;
+    max-height: 415px;
+    transition: ease-in-out .4s;
+   }
+    .best_sellter_img img:hover{
+        scale: 1.05;
+    }
+/* .best_seller_product:hover .productTitle{
+    color: #333;
+} */
+ 
+  .slick-slide img{
+    width: 100%;
+    height: 100% !important;
+}
     .sub-cat-menu{
         position: absolute;
         top: 10;;
@@ -16,6 +57,9 @@
     }
     
     @media screen and (max-width: 768px) {
+        .proVideoSec .aiz-carousel .slick-next{
+        right: 0px !important;
+   }
         .cate-mob-sz .slick-list .slick-track .slick-slide {
             width: 160px !important;
             margin-inline: 0rem !important;
@@ -33,6 +77,7 @@
             box-shadow: none !important;
             margin: 0rem;
         }
+      
         .home-category-name {
             border-radius: 2px;
             margin-right: 0rem;
@@ -782,171 +827,65 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 
 <!-- shop by concern end -->
 
-
-<!-- Top Sellers -->
-@if (get_setting('vendor_system_activation') == 1)
-@php
-$best_selers = get_best_sellers(5);
-@endphp
-@if (count($best_selers) > 0)
-<section class="mb-2 mb-md-3 mt-2 mt-md-3 top_seller_list">
-    <div class="container px-md-0">
-        <!-- Top Section -->
-        <div class="d-flex mb-2 mb-md-3 align-items-baseline justify-content-between">
-            <!-- Title -->
-            <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0">
-                <div class="top_heading to_h_mob">
-                    <span class="">{{ translate('Top Sellers') }}</span>
-                    <span></span>
-                </div>
-            </h3>
-            <!-- Links -->
-            <div class="d-md-flex ">
-                <a class="text-blue fs-10 fs-md-12 fw-700 hov-text-primary animate-underline-primary"
-                    href="{{ route('sellers') }}">{{ translate('View All Sellers') }}</a>
-            </div>
-        </div>
-        <!-- Sellers Section -->
-        <div class="aiz-carousel aiz-carousel1 arrow-x-0 arrow-inactive-none" data-items="4" data-xxl-items="4"
-            data-xl-items="4" data-lg-items="3.4" data-md-items="2.5" data-sm-items="2" data-xs-items="5"
-            data-arrows="true" data-dots="false" data-infinite="true">
-            @foreach ($best_selers as $key => $seller)
-            @if ($seller->user != null)
-            <div class="carousel-box h-100 position-relative text-center @if ($key == 0) @endif has-transition">
-                <div class="seller_cards mob_top_seller">
-                    <!-- Shop logo & Verification Status -->
-                    <div class="position-relative mx-auto size-100px size-md-120px">
-                        <a href="{{ route('shop.visit', $seller->slug) }}"
-                            class="d-flex mx-auto justify-content-center align-item-center size-100px size-md-120px border overflow-hidden hov-scale-img sell_sec_aizcarouselbox"
-                            tabindex="0">
-                            <img src="{{ asset('public/assets/img/P_img.png') }}"
-                                data-src="{{ uploaded_asset($seller->logo) }}" alt="{{ $seller->name }}"
-                                class="img-fit lazyload has-transition"
-                                onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';">
-                        </a>
-                        <div class="absolute-top-right z-1 mr-md-2 mt-1 rounded-content bg-white">
-                            @if ($seller->verification_status == 1)
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24.001" height="24"
-                                viewBox="0 0 24.001 24">
-                                <g id="Group_25929" data-name="Group 25929"
-                                    transform="translate(-480 -345)">
-                                    <circle id="Ellipse_637" data-name="Ellipse 637" cx="12"
-                                        cy="12" r="12" transform="translate(480 345)"
-                                        fill="#fff" />
-                                    <g id="Group_25927" data-name="Group 25927"
-                                        transform="translate(480 345)">
-                                        <path id="Union_5" data-name="Union 5"
-                                            d="M0,12A12,12,0,1,1,12,24,12,12,0,0,1,0,12Zm1.2,0A10.8,10.8,0,1,0,12,1.2,10.812,10.812,0,0,0,1.2,12Zm1.2,0A9.6,9.6,0,1,1,12,21.6,9.611,9.611,0,0,1,2.4,12Zm5.115-1.244a1.083,1.083,0,0,0,0,1.529l3.059,3.059a1.081,1.081,0,0,0,1.529,0l5.1-5.1a1.084,1.084,0,0,0,0-1.53,1.081,1.081,0,0,0-1.529,0L11.339,13.05,9.045,10.756a1.082,1.082,0,0,0-1.53,0Z"
-                                            transform="translate(0 0)" fill="#3490f3" />
-                                    </g>
-                                </g>
-                            </svg>
-                            @else
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24.001" height="24"
-                                viewBox="0 0 24.001 24">
-                                <g id="Group_25929" data-name="Group 25929"
-                                    transform="translate(-480 -345)">
-                                    <circle id="Ellipse_637" data-name="Ellipse 637" cx="12"
-                                        cy="12" r="12" transform="translate(480 345)"
-                                        fill="#fff" />
-                                    <g id="Group_25927" data-name="Group 25927"
-                                        transform="translate(480 345)">
-                                        <path id="Union_5" data-name="Union 5"
-                                            d="M0,12A12,12,0,1,1,12,24,12,12,0,0,1,0,12Zm1.2,0A10.8,10.8,0,1,0,12,1.2,10.812,10.812,0,0,0,1.2,12Zm1.2,0A9.6,9.6,0,1,1,12,21.6,9.611,9.611,0,0,1,2.4,12Zm5.115-1.244a1.083,1.083,0,0,0,0,1.529l3.059,3.059a1.081,1.081,0,0,0,1.529,0l5.1-5.1a1.084,1.084,0,0,0,0-1.53,1.081,1.081,0,0,0-1.529,0L11.339,13.05,9.045,10.756a1.082,1.082,0,0,0-1.53,0Z"
-                                            transform="translate(0 0)" fill="red" />
-                                    </g>
-                                </g>
-                            </svg>
-                            @endif
-                        </div>
-                    </div>
-                    <!-- Shop name -->
-                    <h2 class="seller_name">
-                        <a href="{{ route('shop.visit', $seller->slug) }}"
-                            class="text-reset hov-text-primary " tabindex="0">{{ $seller->name }}</a>
-                    </h2>
-                    <!-- Shop Rating -->
-                    <div class="rating rating-mr-1 text-dark mb-3">
-                        <div class="rating_star">
-                            {{ renderStarRating($seller->rating) }}
-                        </div>
-                        <span class="opacity-60 fs-14 fw-600">{{ $seller->num_of_reviews }}
-                            {{ translate('Reviews') }}</span>
-                    </div>
-                    <!-- Visit Button -->
-                    <a href="{{ route('shop.visit', $seller->slug) }}" class="btn-visit">
-                        <span class="button-textt">{{ translate('Visit Store') }} <i class="las la-arrow-right ml-2"></i> </span>
-                       
-                    </a>
-                </div>
-            </div>
-            @endif
-            @endforeach
-        </div>
-    </div>
-</section>
-@endif
-@endif
-
 <!-- video slider start -->
-<section class="proVideoSec mt-5">
+<section class="proVideoSec mb-5">
     <div class="container">
-        <div class="aiz-carousel aiz-carousel1 sm-gutters-17" data-items="6.5" data-xxl-items="6" data-xl-items="5"
-        data-lg-items="5" data-md-items="4" data-sm-items="3" data-xs-items="2" data-arrows="true"
+        <div class="aiz-carousel aiz-carousel1 sm-gutters-17" data-items="7" data-xxl-items="7" data-xl-items="7"
+          data-lg-items="7" data-md-items="4" data-sm-items="3" data-xs-items="2" data-arrows="true"
                     data-dots="false" data-autoplay="true" data-infinite="true">
 
-           <div class="carousel-box position-relative p-0 has-transition">
-                <video class="col-md-12 vd_radius23"  width="100%" height="100%" autoplay muted playsinline>
+           <div class="carousel-box position-relative p-0 has-transition vd_radius001">
+                <video class="  vd_radius00"  width="100%" height="100%" autoplay muted playsinline>
                     <source src="{{ static_asset('assets/img/i1.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i1.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div> 
             
-            <div class="carousel-box position-relative p-0 has-transition">
-                <video class="col-md-12 vd_radius23"  width="100%" height="100%"  autoplay muted playsinline>
+            <div class="carousel-box position-relative p-0 has-transition vd_radius001">
+                <video class="  vd_radius00"  width="100%" height="100%"  autoplay muted playsinline>
                     <source src="{{ static_asset('assets/img/i2.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i2.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
-            <div class="carousel-box position-relative p-0 has-transition">
-                <video class="col-md-12 vd_radius23"  width="100%" height="100%"   autoplay muted playsinline>
+            <div class="carousel-box position-relative p-0 has-transition vd_radius001">
+                <video class="  vd_radius00"  width="100%" height="100%"   autoplay muted playsinline>
                     <source src="{{ static_asset('assets/img/i3.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i3.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
-            <div class="carousel-box position-relative p-0 has-transition">
-                <video class="col-md-12 vd_radius23"  width="100%" height="100%"   autoplay muted playsinline>
+            <div class="carousel-box position-relative p-0 has-transition vd_radius001">
+                <video class="  vd_radius00"  width="100%" height="100%"   autoplay muted playsinline>
                     <source src="{{ static_asset('assets/img/i4.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i4.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
-            <div class="carousel-box position-relative p-0 has-transition">
-                <video class="col-md-12 vd_radius23" width="100%" height="100%"   autoplay muted playsinline>
+            <div class="carousel-box position-relative p-0 has-transition vd_radius001">
+                <video class="  vd_radius00" width="100%" height="100%"   autoplay muted playsinline>
                     <source src="{{ static_asset('assets/img/i5.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i5.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
-            <div class="carousel-box position-relative p-0 has-transition">
-                <video class="col-md-12 vd_radius23" width="100%" height="100%"   autoplay muted playsinline>
+            <div class="carousel-box position-relative p-0 has-transition vd_radius001">
+                <video class="  vd_radius00" width="100%" height="100%" autoplay muted playsinline>
                     <source src="{{ static_asset('assets/img/i6.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i6.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
-             <div class="carousel-box position-relative p-0 has-transition">
-                <video class="col-md-12 vd_radius23"  width="100%" height="100%"   autoplay muted playsinline>
+             <div class="carousel-box position-relative p-0 has-transition vd_radius001">
+                <video class="  vd_radius00"  width="100%" height="100%"   autoplay muted playsinline>
                     <source src="{{ static_asset('assets/img/i3.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i3.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
-            <div class="carousel-box position-relative p-0 has-transition">
-                <video class="col-md-12 vd_radius23"  width="100%" height="100%"   autoplay muted playsinline>
+            <div class="carousel-box position-relative p-0 has-transition vd_radius001">
+                <video class="  vd_radius00"  width="100%" height="100%"   autoplay muted playsinline>
                     <source src="{{ static_asset('assets/img/i2.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i2.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
@@ -956,6 +895,287 @@ $best_selers = get_best_sellers(5);
     </div>
 </section>
 <!-- video slider end -->
+
+<!-- Top Sellers -->
+
+<section class="mb-2 mb-md-3 mt-2 mt-md-3 top_seller_list">
+    <div class="container px-md-0">
+        <div class="d-flex mb-2 mb-md-3 align-items-baseline justify-content-between">
+            <!-- Title -->
+            <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0">
+                <div class="top_heading to_h_mob">
+                    <span class="">Best Sellers</span>
+                    <span></span>
+                </div>
+            </h3>
+            <!-- Links -->
+            <div class="d-md-flex ">
+                <!-- <a class="text-blue fs-10 fs-md-12 fw-700 hov-text-primary animate-underline-primary" href="#">View All Sellers</a> -->
+            </div>
+        </div>   
+
+        <div class="aiz-carousel aiz-carousel1 sm-gutters-17" data-items="5" data-xxl-items="5" data-xl-items="5"
+          data-lg-items="5" data-md-items="4" data-sm-items="3" data-xs-items="2" data-arrows="true"
+                    data-dots="false" data-autoplay="true" data-infinite="true">
+
+        <!-- Item1 Starts -->
+ 
+            <div class="best_seller_product">
+                 <a href="#">
+                    <div class="best_sellter_img">
+                        <img src="https://glamwiz.com/cdn/shop/files/2_846661e6-3d1a-4b20-9c51-924c956fbd1c_300x.png?v=1738254504" class="w-100 ">
+                    </div>
+                    <dtv class="detail_best_product">
+                            <div class="productAllDetails">
+                                <div class="productTitle mb-0 mt-2"  >Pure Chikankari Work Faux Georgette Kurti Palazzo Set</div>
+                                <div class="reviews_div d-flex justify-content-center flex-wrap mb-1">  
+                                        <span class="product_mrp_">MRP: 
+                                            <span><del>₹ 2000</del></span>  
+                                        </span>
+                                        <span class="current_mrp">₹1500</span>   
+                                            <!-- <span class="price_off">25% Off </span> -->
+                                </div>
+                                <div class="row no-gutters mb-3">
+                                    <div class="col-12 relevents">  
+                                        <span class="rating rating-mr-1"> 
+                                            <i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i> (0)
+                                        </span>
+                                    </div> 
+                                </div> 
+                            </div>   
+                    </dtv>
+                 </a>
+            </div>
+              
+             <div class="best_seller_product">
+                 <a href="#">
+                    <div class="best_sellter_img">
+                        <img src="https://glamwiz.com/cdn/shop/files/73_d313310d-c7b5-42c7-9212-14dfd1ffe40e_300x.png?v=1738252793" class="w-100">
+                    </div>
+                    <dtv class="detail_best_product">
+                            <div class="productAllDetails">
+                                <div class="productTitle mb-0 mt-2"  >Work Faux Georgette Kurti Palazzo Set</div>
+                                <div class="reviews_div d-flex justify-content-center flex-wrap mb-1">  
+                                        <span class="product_mrp_">MRP: 
+                                            <span><del>₹ 2000</del></span>  
+                                        </span>
+                                        <span class="current_mrp">₹1500</span>   
+                                            <!-- <span class="price_off">25% Off </span> -->
+                                </div>
+                                <div class="row no-gutters mb-3">
+                                    <div class="col-12 relevents">  
+                                        <span class="rating rating-mr-1"> 
+                                            <i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i> (0)
+                                        </span>
+                                    </div> 
+                                </div> 
+                            </div>   
+                    </dtv>
+                 </a>
+            </div>
+
+            <div class="best_seller_product">
+                 <a href="#">
+                    <div class="best_sellter_img">
+                        <img src="https://glamwiz.com/cdn/shop/files/DSC_6218copy_300x.jpg?v=1740215475" class="w-100">
+                    </div>
+                    <dtv class="detail_best_product">
+                            <div class="productAllDetails">
+                                <div class="productTitle mb-0 mt-1"  >Pure Chikankari Work Faux Georgette Kurti Palazzo Set</div>
+                                <div class="reviews_div d-flex justify-content-center flex-wrap mb-1">  
+                                        <span class="product_mrp_">MRP: 
+                                            <span><del>₹ 2000</del></span>  
+                                        </span>
+                                        <span class="current_mrp">₹1500</span>   
+                                            <!-- <span class="price_off">25% Off </span> -->
+                                </div>
+                                <div class="row no-gutters mb-3">
+                                    <div class="col-12 relevents">  
+                                        <span class="rating rating-mr-2"> 
+                                            <i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i> (0)
+                                        </span>
+                                    </div> 
+                                </div> 
+                            </div>   
+                    </dtv>
+                 </a>
+            </div>
+
+            <div class="best_seller_product">
+                 <a href="#">
+                    <div class="best_sellter_img">
+                        <img src="https://glamwiz.com/cdn/shop/files/3_ec3b3b21-bff2-47a0-813e-bff08bad22a7_300x.jpg?v=1740211514" class="w-100">
+                    </div>
+                    <dtv class="detail_best_product">
+                            <div class="productAllDetails">
+                                <div class="productTitle mb-0 mt-1"  >Pure Chikankari Work Kurti Palazzo Set</div>
+                                <div class="reviews_div d-flex justify-content-center flex-wrap mb-1">  
+                                        <span class="product_mrp_">MRP: 
+                                            <span><del>₹ 2000</del></span>  
+                                        </span>
+                                        <span class="current_mrp">₹1500</span>   
+                                            <!-- <span class="price_off">25% Off </span> -->
+                                </div>
+                                <div class="row no-gutters mb-3">
+                                    <div class="col-12 relevents">  
+                                        <span class="rating rating-mr-2"> 
+                                            <i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i> (0)
+                                        </span>
+                                    </div> 
+                                </div> 
+                            </div>   
+                    </dtv>
+                 </a>
+            </div>
+
+            <div class="best_seller_product">
+                 <a href="#">
+                    <div class="best_sellter_img">
+                        <img src="https://glamwiz.com/cdn/shop/files/1_e93a29af-5bfa-4356-87eb-8332cd25eb36_300x.jpg?v=1741718414" class="w-100">
+                    </div>
+                    <dtv class="detail_best_product">
+                            <div class="productAllDetails">
+                                <div class="productTitle mb-0 mt-2" >Pure Chikankari Work Faux Georgette</div>
+                                <div class="reviews_div d-flex justify-content-center flex-wrap mb-1">  
+                                        <span class="product_mrp_">MRP: 
+                                            <span><del>₹ 2000</del></span>  
+                                        </span>
+                                        <span class="current_mrp">₹1500</span>   
+                                            <!-- <span class="price_off">25% Off </span> -->
+                                </div>
+                                <div class="row no-gutters mb-3">
+                                    <div class="col-12 relevents">  
+                                        <span class="rating rating-mr-1"> 
+                                            <i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i> (0)
+                                        </span>
+                                    </div> 
+                                </div> 
+                            </div>   
+                    </dtv>
+                 </a>
+            </div>
+
+            
+ 
+
+        <!-- Item1 Ends -->
+
+      </div>
+    </div>
+</section>
+
+
+        
+{{-- 
+        @if (get_setting('vendor_system_activation') == 1)
+        @php
+        $best_selers = get_best_sellers(5);
+        @endphp
+        @if (count($best_selers) > 0)
+        <section class="mb-2 mb-md-3 mt-2 mt-md-3 top_seller_list">
+            <div class="container px-md-0">
+                <!-- Top Section -->
+                <div class="d-flex mb-2 mb-md-3 align-items-baseline justify-content-between">
+                    <!-- Title -->
+                    <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0">
+                        <div class="top_heading to_h_mob">
+                            <span class="">{{ translate('Top Sellers') }}</span>
+                            <span></span>
+                        </div>
+                    </h3>
+                    <!-- Links -->
+                    <div class="d-md-flex ">
+                        <a class="text-blue fs-10 fs-md-12 fw-700 hov-text-primary animate-underline-primary"
+                            href="{{ route('sellers') }}">{{ translate('View All Sellers') }}</a>
+                    </div>
+                </div>
+                <!-- Sellers Section -->
+                <div class="aiz-carousel aiz-carousel1 arrow-x-0 arrow-inactive-none" data-items="4" data-xxl-items="4"
+                    data-xl-items="4" data-lg-items="3.4" data-md-items="2.5" data-sm-items="2" data-xs-items="5"
+                    data-arrows="true" data-dots="false" data-infinite="true">
+                    @foreach ($best_selers as $key => $seller)
+                    @if ($seller->user != null)
+                    <div class="carousel-box h-100 position-relative text-center @if ($key == 0) @endif has-transition">
+                        <div class="seller_cards mob_top_seller">
+                            <!-- Shop logo & Verification Status -->
+                            <div class="position-relative mx-auto size-100px size-md-120px">
+                                <a href="{{ route('shop.visit', $seller->slug) }}"
+                                    class="d-flex mx-auto justify-content-center align-item-center size-100px size-md-120px border overflow-hidden hov-scale-img sell_sec_aizcarouselbox"
+                                    tabindex="0">
+                                    <img src="{{ asset('public/assets/img/P_img.png') }}"
+                                        data-src="{{ uploaded_asset($seller->logo) }}" alt="{{ $seller->name }}"
+                                        class="img-fit lazyload has-transition"
+                                        onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';">
+                                </a>
+                                <div class="absolute-top-right z-1 mr-md-2 mt-1 rounded-content bg-white">
+                                    @if ($seller->verification_status == 1)
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24.001" height="24"
+                                        viewBox="0 0 24.001 24">
+                                        <g id="Group_25929" data-name="Group 25929"
+                                            transform="translate(-480 -345)">
+                                            <circle id="Ellipse_637" data-name="Ellipse 637" cx="12"
+                                                cy="12" r="12" transform="translate(480 345)"
+                                                fill="#fff" />
+                                            <g id="Group_25927" data-name="Group 25927"
+                                                transform="translate(480 345)">
+                                                <path id="Union_5" data-name="Union 5"
+                                                    d="M0,12A12,12,0,1,1,12,24,12,12,0,0,1,0,12Zm1.2,0A10.8,10.8,0,1,0,12,1.2,10.812,10.812,0,0,0,1.2,12Zm1.2,0A9.6,9.6,0,1,1,12,21.6,9.611,9.611,0,0,1,2.4,12Zm5.115-1.244a1.083,1.083,0,0,0,0,1.529l3.059,3.059a1.081,1.081,0,0,0,1.529,0l5.1-5.1a1.084,1.084,0,0,0,0-1.53,1.081,1.081,0,0,0-1.529,0L11.339,13.05,9.045,10.756a1.082,1.082,0,0,0-1.53,0Z"
+                                                    transform="translate(0 0)" fill="#3490f3" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24.001" height="24"
+                                        viewBox="0 0 24.001 24">
+                                        <g id="Group_25929" data-name="Group 25929"
+                                            transform="translate(-480 -345)">
+                                            <circle id="Ellipse_637" data-name="Ellipse 637" cx="12"
+                                                cy="12" r="12" transform="translate(480 345)"
+                                                fill="#fff" />
+                                            <g id="Group_25927" data-name="Group 25927"
+                                                transform="translate(480 345)">
+                                                <path id="Union_5" data-name="Union 5"
+                                                    d="M0,12A12,12,0,1,1,12,24,12,12,0,0,1,0,12Zm1.2,0A10.8,10.8,0,1,0,12,1.2,10.812,10.812,0,0,0,1.2,12Zm1.2,0A9.6,9.6,0,1,1,12,21.6,9.611,9.611,0,0,1,2.4,12Zm5.115-1.244a1.083,1.083,0,0,0,0,1.529l3.059,3.059a1.081,1.081,0,0,0,1.529,0l5.1-5.1a1.084,1.084,0,0,0,0-1.53,1.081,1.081,0,0,0-1.529,0L11.339,13.05,9.045,10.756a1.082,1.082,0,0,0-1.53,0Z"
+                                                    transform="translate(0 0)" fill="red" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    @endif
+                                </div>
+                            </div>
+                            <!-- Shop name -->
+                            <h2 class="seller_name">
+                                <a href="{{ route('shop.visit', $seller->slug) }}"
+                                    class="text-reset hov-text-primary " tabindex="0">{{ $seller->name }}</a>
+                            </h2>
+                            <!-- Shop Rating -->
+                            <div class="rating rating-mr-1 text-dark mb-3">
+                                <div class="rating_star">
+                                    {{ renderStarRating($seller->rating) }}
+                                </div>
+                                <span class="opacity-60 fs-14 fw-600">{{ $seller->num_of_reviews }}
+                                    {{ translate('Reviews') }}</span>
+                            </div>
+                            <!-- Visit Button -->
+                            <a href="{{ route('shop.visit', $seller->slug) }}" class="btn-visit">
+                                <span class="button-textt">{{ translate('Visit Store') }} <i class="las la-arrow-right ml-2"></i> </span>
+                            
+                            </a>
+                        </div>
+                    </div>
+                    @endif
+                    @endforeach
+                </div>
+            </div>
+        </section>
+        @endif
+        @endif
+
+     --}}
+
+
+
+
 
 <!-- Winning Kart Products -->
 @if (count($featured_categories) > 0)
@@ -977,8 +1197,8 @@ $best_selers = get_best_sellers(5);
         </div>
 
         <!-- Categories -->
-        <div class="col-md-11 m-auto winnig_container_card">
-            <div class="px-sm-3">
+        <div class="col-md-12 p-0 m-auto winnig_container_card">
+            <div class="">
                 <div class="aiz-carousel cate-mob-sz sm-gutters-17 mob_selectors" data-items="3" data-xxl-items="3" data-xl-items="3"
                     data-lg-items="3" data-md-items="2" data-sm-items="2" data-xs-items="1" data-arrows="true"
                     data-dots="false" data-autoplay="false" data-infinite="true">
@@ -1024,6 +1244,92 @@ $best_selers = get_best_sellers(5);
 
 <!-- Today's deal -->
 
+<!--- wedding collactions start --->
+<section class="mb-2 mb-md-3 mt-2 mt-md-3 top_seller_list">
+    <div class="container px-md-0">
+        <div class="d-flex mb-2 mb-md-3 align-items-baseline justify-content-between">
+            <!-- Title -->
+            <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0">
+                <div class="top_heading to_h_mob">
+                    <span class="">Wedding Collection</span>
+                    <span></span>
+                </div>
+            </h3>
+            <!-- Links -->
+            <div class="d-md-flex ">
+                <!-- <a class="text-blue fs-10 fs-md-12 fw-700 hov-text-primary animate-underline-primary" href="#">View All Sellers</a> -->
+            </div>
+        </div>   
+        
+        
+        <!-- Item1 Starts -->
+ 
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="best_seller_product">
+                    <a href="#">
+                        <div class="best_sellter_img">
+                            <img src="https://glamwiz.com/cdn/shop/files/Frame_42_360x.webp?v=1738341963" class="w-100 ">
+                        </div>
+                        <dtv class="detail_best_product">
+                                <div class="productAllDetails">
+                                    <div class="productTitle mb-0 mt-2">Haldi Ceremony </div> 
+                                </div>   
+                        </dtv>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="best_seller_product">
+                    <a href="#">
+                        <div class="best_sellter_img">
+                            <img src="https://glamwiz.com/cdn/shop/files/Frame_38_360x.webp?v=1738341963" class="w-100 ">
+                        </div>
+                        <dtv class="detail_best_product">
+                                <div class="productAllDetails">
+                                    <div class="productTitle mb-0 mt-2">Mehndi Ceremony </div> 
+                                </div>   
+                        </dtv>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="best_seller_product">
+                    <a href="#">
+                        <div class="best_sellter_img">
+                            <img src="https://glamwiz.com/cdn/shop/files/Frame_43_360x.webp?v=1738341964" class="w-100 ">
+                        </div>
+                        <dtv class="detail_best_product">
+                                <div class="productAllDetails">
+                                    <div class="productTitle mb-0 mt-2">Bridesmaid</div> 
+                                </div>   
+                        </dtv>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="best_seller_product">
+                    <a href="#">
+                        <div class="best_sellter_img">
+                            <img src="https://glamwiz.com/cdn/shop/files/Frame_44_360x.webp?v=1738341964" class="w-100 ">
+                        </div>
+                        <dtv class="detail_best_product">
+                                <div class="productAllDetails">
+                                    <div class="productTitle mb-0 mt-2 text-left">Sangeet Ceremony </div> 
+                                </div>   
+                        </dtv>
+                    </a>
+                </div>
+            </div>
+        </div>  
+        <!-- Item1 Ends -->
+         
+    </div>
+</section>
+<!--- wedding collactions end --->
 <!-- Featured Products -->
 
 <!-- Banner section 2 -->
@@ -1059,6 +1365,8 @@ $best_selers = get_best_sellers(5);
 
 
 <!-- Top Brands, Banner section 5, Banner section 6 -->
+
+{{-- 
 @if (get_setting('top_brands') != null)
     @php
         $top_brands = json_decode(get_setting('top_brands'));
@@ -1179,6 +1487,8 @@ $best_selers = get_best_sellers(5);
 </section>
 @endif
 
+ --}}
+
 <!-- testimonial start -->
 <section class="testimonials-section">
 
@@ -1205,17 +1515,18 @@ $best_selers = get_best_sellers(5);
                     <i class="fa fa-quote-left"></i>
                 </div>
                
-                <p class="text-center"> WinningKart has quickly become my favorite shopping destination! I recently bought a kurta and a few shirts, and they’ve become my go-to outfits. The quality is fantastic, and I love that I can find something stylish without breaking the bank. Plus, the compliments I’ve been getting don’t hurt either! I’m so glad I found a brand that just gets my style. </p>
+                <p class="text-center"> I ordered a designer saree for my cousin’s wedding and it exceeded my expectations. The fabric was soft, the embroidery was intricate, and it looked even better in person than in the pictures. I received so many compliments – definitely coming back for more! </p>
                    
                 <div class="profile-desc text-center">
-                    <span class="">Rajesh Mehta</span>
+                    <span class="">Ritika Sharma</span>
                 </div>
                 <div class="ratings text-center">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
+                    <!-- <i class="fa fa-star-half-stroke"></i> -->
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-stroke"></i>
+                    <i class="fa fa-star"></i>
                 </div>
             </main>
 
@@ -1233,17 +1544,18 @@ $best_selers = get_best_sellers(5);
                     <i class="fa fa-quote-left"></i>
                 </div>
                
-                <p class="text-center" >I’m someone who loves making my home cozy and inviting, and WinningKart helped me do just that. I ordered a few decor pieces, and they’ve completely transformed my living room. The quality is great, and the designs are even better in person. It feels so good to walk into a space that reflects my style. I’m definitely going back for more!</p>
+                <p class="text-center" >I was looking for a handbag that I could carry to work daily, and this one turned out to be a gem. It’s stylish, spacious, and durable. The finish looks premium and the inside compartments are very practical. Worth every rupee!</p>
                    
                 <div class="profile-desc text-center">
-                    <span class="">Anjali Sharma</span>
+                    <span class="">Anjali Mehta</span>
                 </div>
                 <div class="ratings text-center">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
+                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-stroke"></i>
+                    <!-- <i class="fa fa-star-half-stroke"></i> -->
                 </div>
             </main>
 
@@ -1259,19 +1571,18 @@ $best_selers = get_best_sellers(5);
                     <i class="fa fa-quote-left"></i>
                 </div>
                 
-                <p class="text-center">I’m really picky about where I shop, especially online, but WinningKart impressed me. The variety is fantastic—I found both clothes and decor that I love—and the quality is even better than I expected. It’s not often you find an online store where everything just works, but WinningKart really nailed it. I’m already planning my next order!</p>
+                <p class="text-center">This suit is absolutely gorgeous! The embroidery is very fine and delicate, and the material feels so rich. It fits me like it was custom-made. I wore it for a family get-together and everyone kept asking where I got it from</p>
                   
-                 
 
                 <div class="profile-desc text-center">
-                    <span class="">Vikram Singh</span>
+                    <span class="">Pooja Iyer</span>
                 </div>
                 <div class="ratings text-center">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-stroke"></i>
+                    <i class="fas fa-star-half-stroke"></i> 
                 </div>
             </main>
 
@@ -1287,10 +1598,10 @@ $best_selers = get_best_sellers(5);
                     <i class="fa fa-quote-left"></i>
                 </div>
                
-                <p class="text-center">Shopping online can be a bit of a gamble, but my experience with WinningKart was nothing short of amazing. I had a few questions about sizing, and their customer service team was so helpful and patient. When my order arrived, everything fit perfectly, and the decor items were just as beautiful as I’d hoped. It’s rare to find a company that cares this much about its customers.</p>
+                <p class="text-center">I bought this saree for a festive event and it was the perfect choice. Lightweight, easy to drape, and looked very graceful. The color combination was stunning. Also, it was delivered in such neat packaging – impressed by the service!</p>
                  
                 <div class="profile-desc text-center">
-                    <span class="">Priya Desai</span>
+                    <span class="">Neha Bansal</span>
                 </div>
                 <div class="ratings text-center">
                     <i class="fa fa-star"></i>
@@ -1312,10 +1623,10 @@ $best_selers = get_best_sellers(5);
                     <i class="fa fa-quote-left"></i>
                 </div>
                  
-                <p class="text-center">I’ve shopped at many online stores, but the quality at WinningKart really stands out. I ordered both clothing and decor, and I was impressed with everything I received. The fabrics are soft yet durable, and the decor pieces are so well-crafted. It’s clear that WinningKart puts a lot of thought into their products. I’ll definitely be back for more!</p>
+                <p class="text-center">This clutch bag added a touch of glam to my entire outfit. It's compact but fits in all essentials like my phone, lipstick, and cards. It has a beautiful shimmer and the quality is top-notch. Will definitely recommend Winning Kart accessories!</p>
                  
                 <div class="profile-desc text-center">
-                    <span class="">Riya Sen</span>
+                    <span class="">Simran Kapoor</span>
                 </div>
                 <div class="ratings text-center">
                     <i class="fa fa-star"></i>
@@ -1324,8 +1635,123 @@ $best_selers = get_best_sellers(5);
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star-half-stroke"></i>
                 </div>
-            </main>
+            </main> 
+        </div>
 
+        <div class="item testimonial-card">
+            <main class="test-card-body">
+                <div class="profile-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNJ_kKCThnq6TXdzkZQGy_OdsvnNtOdLgXMWb5j_bZ4aKwq-5oZmgDj217QQnqELL9vE&usqp=CAU" alt="Riya Sen">
+                </div>
+                <div class="quote">
+                    <i class="fa fa-quote-left"></i>
+                </div>
+                 
+                <p class="text-center"> I wanted something comfortable yet stylish for everyday wear, and this cotton suit set was perfect. The fit is excellent, the design is minimal and classy, and the fabric feels great even in humid weather. Definitely value for money!</p>
+                 
+                <div class="profile-desc text-center">
+                    <span class="">Shreya Nair</span>
+                </div>
+                <div class="ratings text-center">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-stroke"></i>
+                </div>
+            </main> 
+        </div>
+         <div class="item testimonial-card">
+            <main class="test-card-body">
+                <div class="profile-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNJ_kKCThnq6TXdzkZQGy_OdsvnNtOdLgXMWb5j_bZ4aKwq-5oZmgDj217QQnqELL9vE&usqp=CAU" alt="Riya Sen">
+                </div>
+                <div class="quote">
+                    <i class="fa fa-quote-left"></i>
+                </div>
+                 
+                <p class="text-center">The Kanjeevaram saree I ordered is stunning! The silk has a lovely sheen and the zari border is beautifully woven. It gave a very traditional and elegant look during the pooja at home. Thank you for keeping the authenticity alive!</p>
+                 
+                <div class="profile-desc text-center">
+                    <span class="">Aarti Verma</span>
+                </div>
+                <div class="ratings text-center">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-stroke"></i>
+                </div>
+            </main> 
+        </div>
+
+        <div class="item testimonial-card">
+            <main class="test-card-body">
+                <div class="profile-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNJ_kKCThnq6TXdzkZQGy_OdsvnNtOdLgXMWb5j_bZ4aKwq-5oZmgDj217QQnqELL9vE&usqp=CAU" alt="Riya Sen">
+                </div>
+                <div class="quote">
+                    <i class="fa fa-quote-left"></i>
+                </div>
+                 
+                <p class="text-center">This bag is my go-to now! It’s trendy, has enough space for all my daily stuff, and the color goes with almost every outfit. The strap is strong and the zip quality is excellent. Loved the quick delivery too!</p>
+                 
+                <div class="profile-desc text-center">
+                    <span class="">Mitali Joshi</span>
+                </div>
+                <div class="ratings text-center">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-stroke"></i>
+                </div>
+            </main> 
+        </div>
+        <div class="item testimonial-card">
+            <main class="test-card-body">
+                <div class="profile-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNJ_kKCThnq6TXdzkZQGy_OdsvnNtOdLgXMWb5j_bZ4aKwq-5oZmgDj217QQnqELL9vE&usqp=CAU" alt="Riya Sen">
+                </div>
+                <div class="quote">
+                    <i class="fa fa-quote-left"></i>
+                </div>
+                 
+                <p class="text-center">I absolutely loved the flair of this Anarkali suit. The material flows beautifully and the embroidery work looks regal. It came with a matching dupatta which completed the look. Took a day extra to arrive, but the wait was worth it!</p>
+                 
+                <div class="profile-desc text-center">
+                    <span class="">Divya Chauhan</span>
+                </div>
+                <div class="ratings text-center">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-stroke"></i>
+                </div>
+            </main> 
+        </div>
+        <div class="item testimonial-card">
+            <main class="test-card-body">
+                <div class="profile-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNJ_kKCThnq6TXdzkZQGy_OdsvnNtOdLgXMWb5j_bZ4aKwq-5oZmgDj217QQnqELL9vE&usqp=CAU" alt="Riya Sen">
+                </div>
+                <div class="quote">
+                    <i class="fa fa-quote-left"></i>
+                </div>
+                 
+                <p class="text-center">Winning Kart surprised me with the quality of this saree. The georgette is flowy and comfortable, and the blouse was stitched exactly to my size. I wore it for an engagement function and felt super confident. Highly recommended!</p>
+                 
+                <div class="profile-desc text-center">
+                    <span class="">Tanvi Deshmukh</span>
+                </div>
+                <div class="ratings text-center">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star-half-stroke"></i>
+                </div>
+            </main> 
         </div>
 
         <!-- Item1 Ends -->

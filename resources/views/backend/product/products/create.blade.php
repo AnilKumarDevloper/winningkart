@@ -435,7 +435,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 col-from-label">{{translate('Unit price')}} <span class="text-danger">*</span></label>
                                     <div class="col-md-6">
-                                        <input type="number" lang="en" min="0" value="0" step="0.01" placeholder="{{ translate('Unit price') }}" name="unit_price" class="form-control">
+                                        <input type="number" lang="en" min="0" value="0" step="0.01" placeholder="{{ translate('Unit price') }}" name="unit_price" class="form-control" value="{{ old('unit_price') }}">
                                     </div>
                                 </div>
                                 <!-- Discount Date Range -->
@@ -449,7 +449,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 col-from-label">{{translate('Discount')}} <span class="text-danger">*</span></label>
                                     <div class="col-md-6">
-                                        <input type="number" lang="en" min="0" value="0" step="0.01" placeholder="{{ translate('Discount') }}" name="discount" class="form-control">
+                                        <input type="number" lang="en" min="0" value="0" step="0.01" placeholder="{{ translate('Discount') }}" name="discount" class="form-control" value="{{ old('discount') }}">
                                     </div>
                                     <div class="col-md-3">
                                         <select class="form-control aiz-selectpicker" name="discount_type">

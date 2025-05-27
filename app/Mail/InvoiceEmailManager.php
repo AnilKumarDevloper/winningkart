@@ -32,6 +32,4 @@ class InvoiceEmailManager extends Mailable{
             'order' => $this->array['order']
         ]);
     }
-
-
 }

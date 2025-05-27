@@ -249,7 +249,7 @@
                             <div id="deliveryPincode" style="display: nne;">
                                 <div class="areaDetails pincodeDetails textsizeisSame">
                                     <span style="margin-right: 0.25rem;"><i class="ri-map-pin-line"></i></span>
-                                    <span>Delivery options for<span style="color:#f60;" id="userPincode"></span></span>
+                                    <span>Delivery options for <span style="color:#f60;" id="userPincode"></span></span>
                                     <button class="changepincode" id="changepincode">Change</button>
                                 </div> 
                                 <div class="shipping-2">

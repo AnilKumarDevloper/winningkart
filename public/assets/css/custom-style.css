@@ -375,7 +375,7 @@
 
 .winnig_card {
 	width: 92%;
-	height: 180px;
+	height: 280px;
 	border-radius: 1rem;
 	overflow: hidden;
 	box-shadow: rgba(0, 0, 0, .24) 0 3px 8px;
@@ -409,11 +409,13 @@
 }
 
 .winnig_container_card .aiz-carousel .slick-prev {
-	left: -43px
+	/* left: -43px */
+	left: 0px;
 }
 
 .winnig_container_card .aiz-carousel .slick-next {
-	right: -53px
+	/* right: -53px */
+	right: 0px;
 }
 
 .winnig_container_card .aiz-carousel .slick-arrow {
@@ -2509,7 +2511,7 @@
 }
 
 .validPincode{
-	font-size: 11px; 
+	font-size: 13px; 
 	margin: 0px;
 	display: none;
 }
@@ -2879,8 +2881,17 @@
 	color: rgb(0 19 37 / 72%);
 	font-size: 16px;
 }
+
+.detailsContainer p, .detailsContainer ul li, .detailsContainer ul li b{
+	font-size: 14.5px;
+	color: #555;
+}
+.tab-container .tab_link{
+	font-size: 14.5px;
+	color: #555;
+}
  
-.h2hh{ 
+.maxHeights{ 
 	height: 200px;
 	overflow: hidden;
 }

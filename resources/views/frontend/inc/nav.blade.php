@@ -728,7 +728,7 @@ $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)
                                         <div class="mt-3">
                                             <form action="{{ route('user.login') }}" method="POST">
                                                 <div class="d-flex justify-content-between">
-                                                    <span><input type="number" placeholder="Mobile Number" class="registerInputWithOtp" name="phone"></span>
+                                                    <span><input type="number" placeholder="Mobile Number" class="registerInputWithOtp" id="signup_with_otp" name="phone"></span>
                                                     <input type="hidden" name="country_code" id="country_code_signIn"  value=""> 
                                                     <button type="submit" class="send_otp_button">Send OTP</button>
                                                 </div>

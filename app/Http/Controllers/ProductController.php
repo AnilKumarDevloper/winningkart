@@ -325,7 +325,6 @@ class ProductController extends Controller
         //Product categories
         $product->categories()->sync($request->category_ids);
 
-
         //Product Stock
         $product->stocks()->delete();
         $this->productStockService->store($request->only([

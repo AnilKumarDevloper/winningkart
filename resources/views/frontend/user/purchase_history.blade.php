@@ -34,9 +34,11 @@
                                 <!-- Delivery Status -->
                                 <td class="fw-700">
                                     {{ translate(ucfirst(str_replace('_', ' ', $order->delivery_status))) }}
-                                    @if($order->delivery_viewed == 0)
+
+                                    <!-- @if($order->delivery_viewed == 0)
                                         <span class="ml-2" style="color:green"><strong>*</strong></span>
-                                    @endif
+                                    @endif -->
+
                                 </td>
                                 <!-- Payment Status -->
                                 <td>
@@ -45,9 +47,11 @@
                                     @else
                                         <span class="badge badge-inline badge-danger p-3 fs-12" style="border-radius: 25px; min-width: 80px !important;">{{translate('Unpaid')}}</span>
                                     @endif
-                                    @if($order->payment_status_viewed == 0)
+
+                                    <!-- @if($order->payment_status_viewed == 0)
                                         <span class="ml-2" style="color:green"><strong>*</strong></span>
-                                    @endif
+                                    @endif -->
+
                                 </td>
                                 <!-- Options -->
                                 <td class="text-right pr-0">
