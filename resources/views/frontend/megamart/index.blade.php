@@ -891,12 +891,12 @@ $best_selers = get_best_sellers(5);
 <!-- video slider start -->
 <section class="proVideoSec mt-5">
     <div class="container">
-        <div class="aiz-carousel aiz-carousel1 sm-gutters-17" data-items="4" data-xxl-items="3" data-xl-items="3"
-        data-lg-items="3" data-md-items="2" data-sm-items="2" data-xs-items="1" data-arrows="true"
+        <div class="aiz-carousel aiz-carousel1 sm-gutters-17" data-items="6.5" data-xxl-items="6" data-xl-items="5"
+        data-lg-items="5" data-md-items="4" data-sm-items="3" data-xs-items="2" data-arrows="true"
                     data-dots="false" data-autoplay="true" data-infinite="true">
 
            <div class="carousel-box position-relative p-0 has-transition">
-                <video class="col-md-12 vd_radius23"  width="100%" height="100%" controls autoplay muted playsinline>
+                <video class="col-md-12 vd_radius23"  width="100%" height="100%" autoplay muted playsinline>
                     <source src="{{ static_asset('assets/img/i1.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i1.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
@@ -904,37 +904,51 @@ $best_selers = get_best_sellers(5);
             </div> 
             
             <div class="carousel-box position-relative p-0 has-transition">
-                <video class="col-md-12 vd_radius23"  width="100%" height="100%" controls autoplay muted playsinline>
+                <video class="col-md-12 vd_radius23"  width="100%" height="100%"  autoplay muted playsinline>
                     <source src="{{ static_asset('assets/img/i2.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i2.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="carousel-box position-relative p-0 has-transition">
-                <video class="col-md-12 vd_radius23"  width="100%" height="100%" controls autoplay muted playsinline>
+                <video class="col-md-12 vd_radius23"  width="100%" height="100%"   autoplay muted playsinline>
                     <source src="{{ static_asset('assets/img/i3.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i3.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="carousel-box position-relative p-0 has-transition">
-                <video class="col-md-12 vd_radius23"  width="100%" height="100%" controls autoplay muted playsinline>
+                <video class="col-md-12 vd_radius23"  width="100%" height="100%"   autoplay muted playsinline>
                     <source src="{{ static_asset('assets/img/i4.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i4.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="carousel-box position-relative p-0 has-transition">
-                <video class="col-md-12 vd_radius23" width="100%" height="100%" controls autoplay muted playsinline>
+                <video class="col-md-12 vd_radius23" width="100%" height="100%"   autoplay muted playsinline>
                     <source src="{{ static_asset('assets/img/i5.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i5.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="carousel-box position-relative p-0 has-transition">
-                <video class="col-md-12 vd_radius23" width="100%" height="100%" controls autoplay muted playsinline>
+                <video class="col-md-12 vd_radius23" width="100%" height="100%"   autoplay muted playsinline>
                     <source src="{{ static_asset('assets/img/i6.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i6.mp4') }}" type="video/ogg">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+             <div class="carousel-box position-relative p-0 has-transition">
+                <video class="col-md-12 vd_radius23"  width="100%" height="100%"   autoplay muted playsinline>
+                    <source src="{{ static_asset('assets/img/i3.mp4') }}" type="video/mp4">
+                    <source src="{{ static_asset('assets/img/i3.mp4') }}" type="video/ogg">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="carousel-box position-relative p-0 has-transition">
+                <video class="col-md-12 vd_radius23"  width="100%" height="100%"   autoplay muted playsinline>
+                    <source src="{{ static_asset('assets/img/i2.mp4') }}" type="video/mp4">
+                    <source src="{{ static_asset('assets/img/i2.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>

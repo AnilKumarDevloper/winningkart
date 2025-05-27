@@ -58,8 +58,8 @@
              <div class="tab-container">
                     <div class="tabs bg-white">
                         <button class="tab-link tab_link" onclick="openTab(event, 'description')">Description</button>
-                          <!-- <button class="tab-link tab_link" onclick="openTab(event, 'ingredients')">Ingredients</button>
-                        <button class="tab-link tab_link" onclick="openTab(event, 'howToUse')">How To Use</button> -->
+                          <button class="tab-link tab_link" onclick="openTab(event, 'ingredients')">Ingredients</button>
+                        <button class="tab-link tab_link" onclick="openTab(event, 'howToUse')">How To Use</button>
                     </div>  
                     <div class="detailsContainer">
                         <div class="tab-contents" id="description"> 

@@ -210,6 +210,7 @@
         }
 
         function showSizeChartDetail(id, name){
+            console.log('testing');
             $('#size-chart-show-modal .modal-title').html('');
             $('#size-chart-show-modal .modal-body').html('');
             if (id == 0) {

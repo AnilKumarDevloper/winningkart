@@ -1,4 +1,4 @@
-<form class="form-default" role="form" action="{{ route('addresses.update', $address_data->id) }}" method="POST">
+<form class="form-default" role="form" action="{{ route('update_add_from_profile', $address_data->id) }}" method="POST">
     @csrf
     <div class="p-3">
         <div class="row">

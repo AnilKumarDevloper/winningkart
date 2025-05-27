@@ -277,5 +277,36 @@ class AddressController extends Controller
         }
     }
 
+    public function updateAddressFromProfile(Request $request, $id){
+         $validate = $request->validate([
+            "postal_code" => ["required"],
+            "area" => ["required"],
+            "state" => ["required"],
+            "house_number" => ["required"],
+            "address" => ["required"],
+            "name" => ["required"],
+            "email" => ["required", "email"],
+            "phone" => ["required", "digits:10"]
+        ]); 
+        try{
+            $new_address = Address::findOrFail($id); 
+            $new_address->postal_code = $request->postal_code;
+            $new_address->area = $request->area;
+            $new_address->state = $request->state;
+            $new_address->house_number = $request->house_number;
+            $new_address->address = $request->address;
+            $new_address->name = $request->name;
+            $new_address->email = $request->email;
+            $new_address->phone = $request->phone;
+            $new_address->save(); 
+            flash(translate('Address info Updated successfully'))->success();
+            return redirect()->back();
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+
+
+
 
 }

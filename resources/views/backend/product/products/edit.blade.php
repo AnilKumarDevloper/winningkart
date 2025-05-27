@@ -441,20 +441,20 @@
                                     </div>
                                 </div> -->
                                 <!-- Attributes -->
-                                <div class="form-group row gutters-5">
+                                <!-- <div class="form-group row gutters-5">
                                     <div class="col-md-3">
                                         <input type="text" class="form-control" value="{{translate('Attributes')}}" disabled>
                                     </div>
                                     <div class="col-md-8">
-                                        <select name="choice_attributes[]" id="choice_attributes" data-selected-text-format="count" data-live-search="true" class="form-control aiz-selectpicker" multiple data-placeholder="{{ translate('Choose Attributes') }}">
+                                        <select name="choice_attributes[]" id="choice_attributes" data-selected-text-format="count" data-live-search="true" class="form-control aiz-selectpicker"  data-placeholder="{{ translate('Choose Attributes') }}">
                                             @foreach (\App\Models\Attribute::all() as $key => $attribute)
                                             <option value="{{ $attribute->id }}" @if($product->attributes != null && in_array($attribute->id, json_decode($product->attributes, true))) selected @endif>{{ $attribute->getTranslation('name') }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div>
-                                    <p>{{ translate('Choose the attributes of this product and then input values of each attribute') }}</p>
+                                    <!-- <p>{{ translate('Choose the attributes of this product and then input values of each attribute') }}</p> -->
                                     <br>
                                 </div>
         
@@ -905,7 +905,6 @@
 
     $(document).ready(function(){
         update_sku();
-
         $('.remove-files').on('click', function(){
             $(this).parents(".col-md-4").remove();
         });

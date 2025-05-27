@@ -531,7 +531,7 @@
                                         ${ischecked} 
                                        value="${each.variant}" onchange="variantSelect(this, ${element.id}, ${selected_price}, '${selected_parcent_discount}', ${each.id}, '${qty}', ${stockText} )"
                                     > 
-                                    <label class="form-check-label" for="sizeM"> ${each.sku}</label>
+                                    <label class="form-check-label" for="sizeM"> ${each.variant}</label>
                                 </div> 
                             </li> `
                      });  

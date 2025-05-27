@@ -351,6 +351,7 @@ Route::controller(AddressController::class)->group(function () {
     Route::post('/get-states', 'getStates')->name('get-state');
     Route::post('/get-cities', 'getCities')->name('get-city');
     Route::post('/add-new-address', 'addNewAddress')->name('add_new_address');
+    Route::post('/update-address-from-profile/{id}', 'updateAddressFromProfile')->name('update_add_from_profile');
 });
     //Address
     Route::resource('addresses', AddressController::class);
