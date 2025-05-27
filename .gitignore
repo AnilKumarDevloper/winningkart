@@ -25,6 +25,7 @@ composer.lock
 *.lock
 resources/lang/en.json
 .env
+.env*
 .htaccess
 updates.zip
 ecommerce.zip
