@@ -725,14 +725,16 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                     </div>
                 </h3>
             </div> 
-  
+            
 
             <div class="col-md-12 my-md-4 my-3 ">
                 <div class="row">
+
                     <div class="col">
                         <div class="row justify-content-end">
                             <div class="img_col1 shoBy"> 
                                 <img src=" {{asset('public/assets/img/decor-1.webp')}}" alt="" class="img-fluid img1">
+                                <!-- <img src=" {{asset('public/assets/img/decor-1.webp')}}" alt="" class="img-fluid img1"> -->
                                 <span><a href="{{ route('products.category', "decor-2jywo") }}" class="text-white">Decor</a></span>
                             </div>
                             <div class=" img_co2l shoBy">
@@ -745,6 +747,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                             </div>
                         </div>
                     </div>
+
                     <div class="col">
                         <div class="row">
                                 <div class=" img_col4 shoBy sbc_parent_div">
@@ -763,6 +766,8 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
@@ -782,6 +787,19 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                     </div>
                 </h3>
             </div> 
+
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{asset('public/assets/img/lady-1.jpg')}}" class="w-100" alt="DECOR">
+                        <span class="shop_Concern"><a href="#">DECOR</a></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+
+            </div>
 
             <div class="col-md-12 my-md-4 my-3 d-none">
                 <div class="row justify-content-center mobShoBy">
@@ -1508,8 +1526,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                    <img src="public/assets/img/istockphoto-1248743262-170667a.jpg" alt="Rajesh Mehta">
-                    
+                    <img src="public/assets/img\placeholde-female.webp" alt="Ritika Sharma"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1537,8 +1554,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                     <img src="public/assets/img/Srinita_2_tcm100-36560444.webp" alt="Anjali Sharma">
-                    
+                     <img src="public/assets/img\placeholde-female.webp" alt="Anjali Mehta"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1565,7 +1581,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                    <img src="public/assets/img/smiling-young-indian-freelancer-posing-at-home-office-free-photo1.webp" alt="Vikram Singh">
+                      <img src="public/assets/img\placeholde-female.webp" alt="Pooja Iyer"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1592,7 +1608,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                    <img src="public/assets/img/depositphotos_81211808-stock-photo-young-woman-at-outdoors.jpg" alt="Priya Desai">
+                      <img src="public/assets/img\placeholde-female.webp" alt="Neha Bansal"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1617,7 +1633,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
           <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNJ_kKCThnq6TXdzkZQGy_OdsvnNtOdLgXMWb5j_bZ4aKwq-5oZmgDj217QQnqELL9vE&usqp=CAU" alt="Riya Sen">
+                      <img src="public/assets/img\placeholde-female.webp" alt="Simran Kapoor"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1641,7 +1657,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNJ_kKCThnq6TXdzkZQGy_OdsvnNtOdLgXMWb5j_bZ4aKwq-5oZmgDj217QQnqELL9vE&usqp=CAU" alt="Riya Sen">
+                      <img src="public/assets/img\placeholde-female.webp" alt="Shreya Nair"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1664,7 +1680,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
          <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNJ_kKCThnq6TXdzkZQGy_OdsvnNtOdLgXMWb5j_bZ4aKwq-5oZmgDj217QQnqELL9vE&usqp=CAU" alt="Riya Sen">
+                    <img src="public/assets/img\placeholde-female.webp" alt="Aarti Verma"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1688,7 +1704,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNJ_kKCThnq6TXdzkZQGy_OdsvnNtOdLgXMWb5j_bZ4aKwq-5oZmgDj217QQnqELL9vE&usqp=CAU" alt="Riya Sen">
+                      <img src="public/assets/img\placeholde-female.webp" alt="Mitali Joshi"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1711,7 +1727,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNJ_kKCThnq6TXdzkZQGy_OdsvnNtOdLgXMWb5j_bZ4aKwq-5oZmgDj217QQnqELL9vE&usqp=CAU" alt="Riya Sen">
+                     <img src="public/assets/img\placeholde-female.webp" alt="Divya Chauhan"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1734,7 +1750,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVNJ_kKCThnq6TXdzkZQGy_OdsvnNtOdLgXMWb5j_bZ4aKwq-5oZmgDj217QQnqELL9vE&usqp=CAU" alt="Riya Sen">
+                      <img src="public/assets/img\placeholde-female.webp" alt="Tanvi Deshmukh"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
