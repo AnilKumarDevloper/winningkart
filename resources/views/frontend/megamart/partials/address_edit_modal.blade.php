@@ -58,7 +58,7 @@
                 <label> Phone</label>
             </div>
             <div class="col-md-9">
-                <input type="number" class="form-control mb-3 rounded-0 number_input" placeholder="Number" name="phone" required id="number" value="{{ $address_data->phone }}">
+                <input type="number" class="form-control mb-3 rounded-0 number_input" placeholder="Number" name="phone" required id="edit_number" value="{{ $address_data->phone }}">
             </div>
         </div>
         <div class="row">
@@ -195,6 +195,14 @@
 
 @section('script')
 
-
+    <script>
+        $(document).ready(function () { 
+            $("#edit_number").on('input', function(){
+                let numberVal = $(this).val();
+                numberVal = numberVal.replace(/\D/g, '').slice(0, 10);
+                $(this).val(numberVal); 
+            })
+         });
+    </script>
 
 @endsection

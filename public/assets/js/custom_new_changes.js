@@ -105,7 +105,6 @@
 
 })(jQuery);
 
-
     // product detail function check address with pinchod
     // document.getElementById('delivery_option_pincode').addEventListener('submit', async function(e){
         

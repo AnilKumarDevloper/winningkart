@@ -374,7 +374,8 @@ class SearchController extends Controller
                 return response()->json([
                     "status" =>  'success',
                     "status_code" => 200,
-                    "data" => $product_data
+                    "data" => $product_data,    
+                    "category" =>  $category->name
                 ], 200);
             }else{
                 return response()->json([

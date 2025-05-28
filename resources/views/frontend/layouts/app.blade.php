@@ -405,6 +405,7 @@
                 });
             })
         </script>
+      
         <script>
             $(document).ready(function () {  
                 $("body").on("click", "#toggleSidebar", function () {  

@@ -483,7 +483,7 @@
 <!-- ----------------------------------------------------- -->
  
  
-<div>
+ 
     <section class="py-md-5 py-sm-3">
         <div class="container-fluid">
             <div class="row justify-content-evenly">
@@ -557,6 +557,7 @@
                                             @foreach (get_cached_products($category->id) as $product_key => $product)
                                             <div class=""> 
                                                 @include('frontend.new_changes.partials.single_product_box', ['product' => $product]) 
+                                                 
                                             </div>
                                             @endforeach
                                         </div>
@@ -574,7 +575,7 @@
             </div>
         </div>
     </section>
-</div>
+ 
 
 
 <section class="marqueeSection">
@@ -720,7 +721,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
             <div class="col pl-0 col-12">
                 <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0 ">
                     <div class="top_heading">
-                        <span class="">Shop By Concern</span>
+                        <span class="">Shop By Concern </span>
                         <span></span>
                     </div>
                 </h3>
@@ -733,16 +734,16 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                     <div class="col">
                         <div class="row justify-content-end">
                             <div class="img_col1 shoBy"> 
-                                <img src=" {{asset('public/assets/img/decor-1.webp')}}" alt="" class="img-fluid img1">
+                                <img src=" {{asset('public/assets/img/lady-1.jpg')}}" alt="" class="img-fluid img1">
                                 <!-- <img src=" {{asset('public/assets/img/decor-1.webp')}}" alt="" class="img-fluid img1"> -->
                                 <span><a href="{{ route('products.category', "decor-2jywo") }}" class="text-white">Decor</a></span>
                             </div>
                             <div class=" img_co2l shoBy">
-                                <img src="https://img.freepik.com/premium-photo/woman-with-yellow-coat-red-background-with-yellow-background_972478-15634.jpg" alt="" class="img-fluid d-flex img2" >
+                                <img src="{{asset('public/assets/img/lady-2.jpg')}}" alt="" class="img-fluid d-flex img2" >
                                 <span><a href="{{ route('products.category', "women-clothings") }}" class="text-white">Women Clothing</a></span>
                             </div>
                             <div class=" img_col3 shoBy">
-                                <img src="{{asset('public/assets/img/beg_2.jpg')}}" alt="" class="img-fluid img3">
+                                <img src="{{asset('public/assets/img/lady-3.jpg')}}" alt="" class="img-fluid img3">
                                 <span><a href="{{ route('products.category', "demo-category-3") }}" class="text-white"> Handbags</a></span>
                             </div>
                         </div>
@@ -751,16 +752,16 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                     <div class="col">
                         <div class="row">
                                 <div class=" img_col4 shoBy sbc_parent_div">
-                                    <img src="{{ asset('public/assets/img/kids_1.jpg') }}" alt="" class="img-fluid img4">
+                                    <img src="{{ asset('public/assets/img/lady-4.jpg') }}" alt="" class="img-fluid img4">
                                     <span><a href="{{ route('products.category', "demo-category-2") }}" class="text-white">Kids clothings</a></span>
                                 </div>
                             <div class="row flex-column">
                                 <div class=" img_col5 shoBy">
-                                    <img src="{{ asset('public/assets/img/gadgets1.webp') }}" alt="" class="img-fluid img5">
+                                    <img src="{{ asset('public/assets/img/lady-5.jpg') }}" alt="" class="img-fluid img5">
                                     <span><a href="{{ route('products.category', "gadgets-md7fv") }}" class="text-white">Gadgets</a></span>
                                 </div>
                                 <div class=" img_col6 shoBy">
-                                    <img src="{{ asset('public/assets/img/daily.webp') }}" alt="" class="img-fluid img6">
+                                    <img src="{{ asset('public/assets/img/lady-6.jpg') }}" alt="" class="img-fluid img6">
                                     <span><a href="{{ route('products.category', "Daily-Essentials-CtrQg") }}" class="text-white">Daily Essentials</a></span>
                                 </div>
                             </div>
@@ -782,41 +783,28 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
             <div class="col">
                 <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0 ">
                     <div class="top_heading">
-                        <span class="">Shop By Concern</span>
+                        <span class="">Shop By Concern </span>
                         <span></span>
                     </div>
                 </h3>
-            </div> 
-
-            <div class="col-6">
-                <div class="row">
-                    <div class="col-md-6">
-                        <img src="{{asset('public/assets/img/lady-1.jpg')}}" class="w-100" alt="DECOR">
-                        <span class="shop_Concern"><a href="#">DECOR</a></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6">
-
-            </div>
+            </div>  
 
             <div class="col-md-12 my-md-4 my-3 d-none">
                 <div class="row justify-content-center mobShoBy">
                     <div class="img_col1 shoBy">
-                        <img src=" {{asset('public/assets/img/decor-1.jpg')}}" alt="" class="img-fluid img1">
+                        <img src="{{asset('public/assets/img/lady-1.jpg')}}" alt="" class="img-fluid img1">
                         <span><a href="{{ route('products.category', "decor-2jywo") }}" class="text-white">Decor</a></span>
                     </div>
 
                     <div class="img_co2l shoBy">
-                        <img src="https://img.freepik.com/premium-photo/woman-with-yellow-coat-red-background-with-yellow-background_972478-15634.jpg" alt="" class="img-fluid d-flex img2">
+                        <img src="{{asset('public/assets/img/lady-2.jpg')}}" alt="" class="img-fluid d-flex img2">
                         <span><a href="{{ route('products.category', "women-clothings") }}" class="text-white">Women Clothing</a></span>
                     </div>
                 </div>
 
                 <div class="row justify-content-center">
                     <div class=" img_col4 shoBy mob-img-box">
-                        <img src="{{ asset('public/assets/img/kids3.jpg') }}" alt="" class="img-fluid img4">
+                        <img src="{{asset('public/assets/img/lady-3.jpg')}}" alt="" class="img-fluid img4">
                         <span><a href="{{ route('products.category', "demo-category-2") }}" class="text-white"> Kids clothings</a></span>
                     </div>
                 </div>
@@ -824,17 +812,17 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 
                 <div class="row justify-content-center ">
                     <div class="img_col3 shoBy mob-img-box">
-                        <img src="{{ asset('public/assets/img/beg_2.jpg') }}" alt="" class="img-fluid img3">
+                        <img src="{{asset('public/assets/img/lady-4.jpg')}}" alt="" class="img-fluid img3">
                         <span><a href="{{ route('products.category', "demo-category-3") }}" class="text-white">Handbags</a></span>
                     </div>
                 </div>
                 <div class="row justify-content-center mobShoBy">
                     <div class="img_col5 shoBy">
-                        <img src="{{ asset('public/assets/img/gadgets1.png') }}" alt="" class="img-fluid img5">
+                        <img src="{{asset('public/assets/img/lady-5.jpg')}}" alt="" class="img-fluid img5">
                         <span><a href="{{ route('products.category', "gadgets-md7fv") }}" class="text-white">Gadgets</a></span>
                     </div>
                     <div class=" img_col6 shoBy">
-                        <img src="{{ asset('public/assets/img/daily.png') }}" alt="" class="img-fluid img6">
+                        <img src="{{asset('public/assets/img/lady-6.jpg')}}" alt="" class="img-fluid img6">
                         <span><a href="{{ route('products.category', "Daily-Essentials-CtrQg") }}" class="text-white">Daily Essentials</a></span>
                     </div>
                 </div>
@@ -1073,6 +1061,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                  </a>
             </div>
 
+            
             
  
 
@@ -1874,49 +1863,77 @@ $classified_products = get_home_page_classified_products(6);
 <script>
     
 
-    const links = document.querySelectorAll('.city-btn');
-    const contents = document.querySelectorAll('.city-content');
+    // const links = document.querySelectorAll('.city-btn');
+    // const contents = document.querySelectorAll('.city-content');
 
-    links.forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent the default action of the link
-            const city = link.getAttribute('data-city');
+    // links.forEach(link => {
+    //     link.addEventListener('click', (event) => {
+    //         event.preventDefault(); // Prevent the default action of the link
+    //         const city = link.getAttribute('data-city');
 
-            // Remove 'active' class from all links and contents
-            links.forEach(l => l.classList.remove('active'));
-            contents.forEach(content => {
-                content.classList.remove('active');
-                content.style.display = 'none'; // Hide all content sections
-            });
+    //         // Remove 'active' class from all links and contents
+    //         links.forEach(l => l.classList.remove('active'));
+    //         contents.forEach(content => {
+    //             content.classList.remove('active');
+    //             content.style.display = 'none'; // Hide all content sections
+    //         });
 
-            // Add 'active' class to the clicked link
-            link.classList.add('active');
+    //         // Add 'active' class to the clicked link
+    //         link.classList.add('active');
 
-            // Show the selected city content and add 'active' class
-            const selectedContent = document.getElementById(city);
-            selectedContent.style.display = 'flex'; // Set display to block (or inline-block, depending on your layout)
-            selectedContent.classList.add('active');
+    //         // Show the selected city content and add 'active' class
+    //         const selectedContent = document.getElementById(city);
+    //         selectedContent.style.display = 'flex'; // Set display to block (or inline-block, depending on your layout)
+    //         selectedContent.classList.add('active');
 
-            document.querySelectorAll('.slick-arrow').forEach(function(element) {
-                element.click();
-            });
+    //         document.querySelectorAll('.slick-arrow').forEach(function(element) {
+    //             element.click();
+    //         });
             
 
-        });
-    });
+    //     });
+    // });
 
-    // Initially display the first city and set it as active
-    const initialCity = document.querySelector('.city-btn.active');
-    if (initialCity) {
-        const initialCityId = initialCity.getAttribute('data-city');
-        const initialContent = document.getElementById(initialCityId);
-        if (initialContent) {
-            initialContent.style.display = 'flex'; // Set display to block (or inline-block)
-            initialContent.classList.add('active');
-        }
-    }
+    // // Initially display the first city and set it as active
+    // const initialCity = document.querySelector('.city-btn.active');
+    // if (initialCity) {
+    //     const initialCityId = initialCity.getAttribute('data-city');
+    //     const initialContent = document.getElementById(initialCityId);
+    //     if (initialContent) {
+    //         initialContent.style.display = 'flex'; // Set display to block (or inline-block)
+    //         initialContent.classList.add('active');
+    //     }
+    // }
 
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cityButtons = document.querySelectorAll('.city-btn');
+        const cityContents = document.querySelectorAll('.city-content');
+
+        cityButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Remove 'active' class from all buttons and contents
+                cityButtons.forEach(btn => btn.classList.remove('active'));
+                cityContents.forEach(content => content.style.display = 'none');
+
+                // Add 'active' to clicked button
+                this.classList.add('active');
+
+                // Show the corresponding city content
+                const cityName = this.getAttribute('data-city');
+                const targetContent = document.getElementById(cityName);
+                if (targetContent) {
+                    targetContent.style.display = 'flex'; // use 'block' or 'flex' depending on your layout
+                }
+            });
+        });
+    });
+</script>
+
 @endsection
 
 

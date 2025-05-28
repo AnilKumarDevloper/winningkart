@@ -187,15 +187,9 @@
                 <div class="col-xl-9">
 
                      <div class="col-12">
-                                <h1 class="fs-20 fs-md-24 fw-700 text-dark text=center">
-                                    @if(isset($category_id))
-                                        {{ $category->getTranslation('name') }}
-                                    @elseif(isset($query))
-                                        {{ translate('Search result for ') }}"{{ $query }}"
-                                    @else
-                                        {{ translate('All Products') }}
-                                    @endif
-                                </h1>                  
+                                <h1 class="fs-20 fs-md-24 fw-700 text-dark text=center" id="cotegory_name">
+                                  
+                                </h1> 
                         </div>
                     <div class="row" id="products">  
                          
@@ -376,17 +370,20 @@
         let AllProduct = [];
         
         const fetchApiData = async () => {  
+            let cotegory_name = document.getElementById('cotegory_name');
             try{
                 let response = await fetch(productApiUrl);
                 if(!response){
                     console.log('your response is not ok!');
                     return;
                 }
-                let responseData = await response.json();   
-                AllProduct = responseData.data;   
-                renderProduct(AllProduct); 
+                let responseData = await response.json();  
 
-                console.log(AllProduct, "AllProduct")
+                cotegory_name.textContent  =  responseData.category; 
+
+                AllProduct = responseData.data; 
+
+                renderProduct(AllProduct);  
                
             }catch(error){
                 console.log(error)
@@ -649,7 +646,6 @@
                         </div> 
                     </form>
                     </div>
-                
                 `
             });  
             product_container.innerHTML = html;

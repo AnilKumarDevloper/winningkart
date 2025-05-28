@@ -17,7 +17,6 @@ class ProductService
 {
     public function store(array $data){
         $collection = collect($data);
-
         $approved = 1;
         if(auth()->user()->user_type == 'seller'){
             $user_id = auth()->user()->id;
