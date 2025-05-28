@@ -34,6 +34,7 @@ class DeliveryLocationController extends Controller
             ]);
             return view('backend.delivery_location.index');
         }catch(\Exception $e){
+            return $e->getMessage();
             abort('500');
         }
     }

@@ -10,6 +10,7 @@
             <input type="radio" name="color" value="{{ get_single_color_name($color) }}"
             @if ($key == 0) checked @endif hidden>                                      
         @endforeach
+        
     <div class="col-md-12 col-6">
         <div class="pr_height bg-white">
             <div class="productWrapper d-flex flex-column justify-content-between">

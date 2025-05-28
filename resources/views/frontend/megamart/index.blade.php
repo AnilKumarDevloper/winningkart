@@ -41,7 +41,6 @@
  
   .slick-slide img{
     width: 100%;
-    height: 100% !important;
 }
     .sub-cat-menu{
         position: absolute;
@@ -549,18 +548,20 @@
                                     </div>
                                 </div>
                                 <!--  carousel -->
+
                                 <div class="col-lg-9 col-md-8 col-sm-6 col-xs-6 product_card_contianer">
-                                    <div class="w-100 h-100 overflow-hidden">
-                                        <div class="aiz-carousel aiz-carousell2 aiz-web-resp arrow-x-0 arrow-inactive-none homeSlider" data-items="3.5"
+                                    <div class="w-100 h-100 overflow-hidden"> 
+
+                                         <div class="aiz-carousel aiz-carousell2 aiz-web-resp arrow-x-0 arrow-inactive-none homeSlider" data-items="3.5"
                                             data-xxl-items="3" data-xl-items="2.8" data-lg-items="2" data-md-items="1.5" data-sm-items="1"
                                             data-xs-items="1.2" data-arrows='true' data-infinite='false'>
                                             @foreach (get_cached_products($category->id) as $product_key => $product)
                                             <div class=""> 
-                                                @include('frontend.new_changes.partials.single_product_box', ['product' => $product]) 
-                                                 
+                                                @include('frontend.new_changes.partials.single_product_box', ['product' => $product])   
                                             </div>
                                             @endforeach
-                                        </div>
+                                        </div>    
+                                        
                                     </div>
                                 </div>
 
@@ -575,6 +576,8 @@
             </div>
         </div>
     </section>
+
+ 
  
 
 
@@ -734,17 +737,17 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                     <div class="col">
                         <div class="row justify-content-end">
                             <div class="img_col1 shoBy"> 
-                                <img src=" {{asset('public/assets/img/lady-1.jpg')}}" alt="" class="img-fluid img1">
+                                <img src=" {{asset('public/assets/img/lady-3.png')}}" alt="" class="img-fluid img1">
                                 <!-- <img src=" {{asset('public/assets/img/decor-1.webp')}}" alt="" class="img-fluid img1"> -->
-                                <span><a href="{{ route('products.category', "decor-2jywo") }}" class="text-white">Decor</a></span>
+                                <span><a href="{{ route('products.category', "decor-2jywo") }}" class="text-white">saree</a></span>
                             </div>
                             <div class=" img_co2l shoBy">
-                                <img src="{{asset('public/assets/img/lady-2.jpg')}}" alt="" class="img-fluid d-flex img2" >
-                                <span><a href="{{ route('products.category', "women-clothings") }}" class="text-white">Women Clothing</a></span>
+                                <img src="{{asset('public/assets/img/lady-4.png')}}" alt="" class="img-fluid d-flex img2" >
+                                <span><a href="{{ route('products.category', "women-clothings") }}" class="text-white">1-minute sarees</a></span>
                             </div>
                             <div class=" img_col3 shoBy">
-                                <img src="{{asset('public/assets/img/lady-3.jpg')}}" alt="" class="img-fluid img3">
-                                <span><a href="{{ route('products.category', "demo-category-3") }}" class="text-white"> Handbags</a></span>
+                                <img src="{{asset('public/assets/img/lady-1.png')}}" alt="" class="img-fluid img3">
+                                <span><a href="{{ route('products.category', "demo-category-3") }}" class="text-white"> best seller</a></span>
                             </div>
                         </div>
                     </div>
@@ -752,17 +755,17 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                     <div class="col">
                         <div class="row">
                                 <div class=" img_col4 shoBy sbc_parent_div">
-                                    <img src="{{ asset('public/assets/img/lady-4.jpg') }}" alt="" class="img-fluid img4">
-                                    <span><a href="{{ route('products.category', "demo-category-2") }}" class="text-white">Kids clothings</a></span>
+                                    <img src="{{ asset('public/assets/img/lady-2.png') }}" alt="" class="img-fluid img4">
+                                    <span><a href="{{ route('products.category', "demo-category-2") }}" class="text-white">suits</a></span>
                                 </div>
                             <div class="row flex-column">
                                 <div class=" img_col5 shoBy">
-                                    <img src="{{ asset('public/assets/img/lady-5.jpg') }}" alt="" class="img-fluid img5">
-                                    <span><a href="{{ route('products.category', "gadgets-md7fv") }}" class="text-white">Gadgets</a></span>
+                                    <img src="{{ asset('public/assets/img/lady-5.png') }}" alt="" class="img-fluid img5">
+                                    <span><a href="{{ route('products.category', "gadgets-md7fv") }}" class="text-white">bags</a></span>
                                 </div>
                                 <div class=" img_col6 shoBy">
-                                    <img src="{{ asset('public/assets/img/lady-6.jpg') }}" alt="" class="img-fluid img6">
-                                    <span><a href="{{ route('products.category', "Daily-Essentials-CtrQg") }}" class="text-white">Daily Essentials</a></span>
+                                    <img src="{{ asset('public/assets/img/lady-6.png') }}" alt="" class="img-fluid img6">
+                                    <span><a href="{{ route('products.category', "Daily-Essentials-CtrQg") }}" class="text-white">Winningkart</a></span>
                                 </div>
                             </div>
                         </div>
@@ -841,7 +844,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                     data-dots="false" data-autoplay="true" data-infinite="true">
 
            <div class="carousel-box position-relative p-0 has-transition vd_radius001">
-                <video class="  vd_radius00"  width="100%" height="100%" autoplay muted playsinline>
+                <video class="  vd_radius00"  width="100%" height="100%" autoplay muted playsinline loop>
                     <source src="{{ static_asset('assets/img/i1.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i1.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
@@ -849,49 +852,49 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
             </div> 
             
             <div class="carousel-box position-relative p-0 has-transition vd_radius001">
-                <video class="  vd_radius00"  width="100%" height="100%"  autoplay muted playsinline>
+                <video class="  vd_radius00"  width="100%" height="100%"  autoplay muted playsinline loop>
                     <source src="{{ static_asset('assets/img/i2.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i2.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="carousel-box position-relative p-0 has-transition vd_radius001">
-                <video class="  vd_radius00"  width="100%" height="100%"   autoplay muted playsinline>
+                <video class="  vd_radius00"  width="100%" height="100%"   autoplay muted playsinline loop>
                     <source src="{{ static_asset('assets/img/i3.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i3.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="carousel-box position-relative p-0 has-transition vd_radius001">
-                <video class="  vd_radius00"  width="100%" height="100%"   autoplay muted playsinline>
+                <video class="  vd_radius00"  width="100%" height="100%"   autoplay muted playsinline loop>
                     <source src="{{ static_asset('assets/img/i4.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i4.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="carousel-box position-relative p-0 has-transition vd_radius001">
-                <video class="  vd_radius00" width="100%" height="100%"   autoplay muted playsinline>
+                <video class="  vd_radius00" width="100%" height="100%"   autoplay muted playsinline loop>
                     <source src="{{ static_asset('assets/img/i5.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i5.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="carousel-box position-relative p-0 has-transition vd_radius001">
-                <video class="  vd_radius00" width="100%" height="100%" autoplay muted playsinline>
+                <video class="  vd_radius00" width="100%" height="100%" autoplay muted playsinline loop>
                     <source src="{{ static_asset('assets/img/i6.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i6.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
              <div class="carousel-box position-relative p-0 has-transition vd_radius001">
-                <video class="  vd_radius00"  width="100%" height="100%"   autoplay muted playsinline>
+                <video class="  vd_radius00"  width="100%" height="100%"   autoplay muted playsinline loop>
                     <source src="{{ static_asset('assets/img/i3.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i3.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="carousel-box position-relative p-0 has-transition vd_radius001">
-                <video class="  vd_radius00"  width="100%" height="100%"   autoplay muted playsinline>
+                <video class="  vd_radius00"  width="100%" height="100%"   autoplay muted playsinline loop>
                     <source src="{{ static_asset('assets/img/i2.mp4') }}" type="video/mp4">
                     <source src="{{ static_asset('assets/img/i2.mp4') }}" type="video/ogg">
                     Your browser does not support the video tag.
@@ -904,6 +907,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 
 <!-- Top Sellers -->
 
+{{-- 
 <section class="mb-2 mb-md-3 mt-2 mt-md-3 top_seller_list">
     <div class="container px-md-0">
         <div class="d-flex mb-2 mb-md-3 align-items-baseline justify-content-between">
@@ -924,7 +928,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
           data-lg-items="5" data-md-items="4" data-sm-items="3" data-xs-items="2" data-arrows="true"
                     data-dots="false" data-autoplay="true" data-infinite="true">
 
-        <!-- Item1 Starts -->
+        <!-- Item1 Starts --> 
  
             <div class="best_seller_product">
                  <a href="#">
@@ -951,126 +955,473 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                             </div>   
                     </dtv>
                  </a>
-            </div>
-              
-             <div class="best_seller_product">
-                 <a href="#">
-                    <div class="best_sellter_img">
-                        <img src="https://glamwiz.com/cdn/shop/files/73_d313310d-c7b5-42c7-9212-14dfd1ffe40e_300x.png?v=1738252793" class="w-100">
-                    </div>
-                    <dtv class="detail_best_product">
-                            <div class="productAllDetails">
-                                <div class="productTitle mb-0 mt-2"  >Work Faux Georgette Kurti Palazzo Set</div>
-                                <div class="reviews_div d-flex justify-content-center flex-wrap mb-1">  
-                                        <span class="product_mrp_">MRP: 
-                                            <span><del>₹ 2000</del></span>  
-                                        </span>
-                                        <span class="current_mrp">₹1500</span>   
-                                            <!-- <span class="price_off">25% Off </span> -->
-                                </div>
-                                <div class="row no-gutters mb-3">
-                                    <div class="col-12 relevents">  
-                                        <span class="rating rating-mr-1"> 
-                                            <i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i> (0)
-                                        </span>
-                                    </div> 
-                                </div> 
-                            </div>   
-                    </dtv>
-                 </a>
-            </div>
+            </div>  
+        <!-- Item1 Ends -->
 
-            <div class="best_seller_product">
-                 <a href="#">
-                    <div class="best_sellter_img">
-                        <img src="https://glamwiz.com/cdn/shop/files/DSC_6218copy_300x.jpg?v=1740215475" class="w-100">
-                    </div>
-                    <dtv class="detail_best_product">
-                            <div class="productAllDetails">
-                                <div class="productTitle mb-0 mt-1"  >Pure Chikankari Work Faux Georgette Kurti Palazzo Set</div>
-                                <div class="reviews_div d-flex justify-content-center flex-wrap mb-1">  
-                                        <span class="product_mrp_">MRP: 
-                                            <span><del>₹ 2000</del></span>  
-                                        </span>
-                                        <span class="current_mrp">₹1500</span>   
-                                            <!-- <span class="price_off">25% Off </span> -->
-                                </div>
-                                <div class="row no-gutters mb-3">
-                                    <div class="col-12 relevents">  
-                                        <span class="rating rating-mr-2"> 
-                                            <i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i> (0)
-                                        </span>
-                                    </div> 
-                                </div> 
-                            </div>   
-                    </dtv>
-                 </a>
+      </div>
+    </div>
+</section>  --}}
+
+
+<section class="mb-2 mb-md-3 mt-2 mt-md-3 top_seller_list">
+    <div class="container px-md-0">
+        <div class="d-flex mb-2 mb-md-3 align-items-baseline justify-content-between">
+            <!-- Title -->
+            <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0">
+                <div class="top_heading to_h_mob">
+                    <span class="">Best Sellers</span>
+                    <span></span>
+                </div>
+            </h3>
+            <!-- Links -->
+            <div class="d-md-flex ">
+                <!-- <a class="text-blue fs-10 fs-md-12 fw-700 hov-text-primary animate-underline-primary" href="#">View All Sellers</a> -->
             </div>
+        </div>   
 
-            <div class="best_seller_product">
-                 <a href="#">
-                    <div class="best_sellter_img">
-                        <img src="https://glamwiz.com/cdn/shop/files/3_ec3b3b21-bff2-47a0-813e-bff08bad22a7_300x.jpg?v=1740211514" class="w-100">
-                    </div>
-                    <dtv class="detail_best_product">
-                            <div class="productAllDetails">
-                                <div class="productTitle mb-0 mt-1"  >Pure Chikankari Work Kurti Palazzo Set</div>
-                                <div class="reviews_div d-flex justify-content-center flex-wrap mb-1">  
-                                        <span class="product_mrp_">MRP: 
-                                            <span><del>₹ 2000</del></span>  
-                                        </span>
-                                        <span class="current_mrp">₹1500</span>   
-                                            <!-- <span class="price_off">25% Off </span> -->
-                                </div>
-                                <div class="row no-gutters mb-3">
-                                    <div class="col-12 relevents">  
-                                        <span class="rating rating-mr-2"> 
-                                            <i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i> (0)
-                                        </span>
-                                    </div> 
-                                </div> 
-                            </div>   
-                    </dtv>
-                 </a>
-            </div>
+        <div class="aiz-carousel aiz-carousel1 sm-gutters-17" data-items="5" data-xxl-items="5" data-xl-items="5"
+          data-lg-items="5" data-md-items="4" data-sm-items="3" data-xs-items="2" data-arrows="true"
+                    data-dots="false" data-autoplay="true" data-infinite="true">
 
-            <div class="best_seller_product">
-                 <a href="#">
-                    <div class="best_sellter_img">
-                        <img src="https://glamwiz.com/cdn/shop/files/1_e93a29af-5bfa-4356-87eb-8332cd25eb36_300x.jpg?v=1741718414" class="w-100">
-                    </div>
-                    <dtv class="detail_best_product">
-                            <div class="productAllDetails">
-                                <div class="productTitle mb-0 mt-2" >Pure Chikankari Work Faux Georgette</div>
-                                <div class="reviews_div d-flex justify-content-center flex-wrap mb-1">  
-                                        <span class="product_mrp_">MRP: 
-                                            <span><del>₹ 2000</del></span>  
-                                        </span>
-                                        <span class="current_mrp">₹1500</span>   
-                                            <!-- <span class="price_off">25% Off </span> -->
-                                </div>
-                                <div class="row no-gutters mb-3">
-                                    <div class="col-12 relevents">  
-                                        <span class="rating rating-mr-1"> 
-                                            <i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i> (0)
-                                        </span>
-                                    </div> 
-                                </div> 
-                            </div>   
-                    </dtv>
-                 </a>
-            </div>
+        <!-- Item1 Starts -->
+      
+            <div class="col-md-12 p-2" >
+                     <form>
+                       <!-- <input type="hidden" name="_token">
+                       <input type="hidden" name="id" value="${element.id}">
+                        <input type="hidden" name="quantity" value="1"> -->
 
-            
-            
- 
-
+                        <div class="pr_height bg-white">
+                            <div class="productWrapper d-flex flex-column justify-content-between">
+                                <div class="productDetails productDetail_element"> 
+                                    <div class="bestsell"> 
+                                        <a href="${single_p_url}">
+                                            <div class="productImages">
+                                                <img src="https://glamwiz.com/cdn/shop/files/2_846661e6-3d1a-4b20-9c51-924c956fbd1c_300x.png?v=1738254504"
+                                                alt=" " class="css-11gn9r6">
+                                            </div>
+                                            <div class="productAllDetails">
+                                                <div class="productTitle" >Pure Chikankari Work Faux Georgette Kurti Palazzo Set</div>
+                                                    <div class="reviews_div d-flex justify-content-center flex-wrap">  
+                                                            <span class="product_mrp_">MRP: 
+                                                                 <span><del>₹ 864</del></span> 
+                                                            </span>
+                                                            <span class="current_mrp">₹562</span>   
+                                                             <span class="price_off">10% Off </span>
+                                                    </div>
+                                                    <div class="row no-gutters mb-3">
+                                                        <div class="col-12 relevents">  
+                                                                <span class="rating rating-mr-1"> 
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star half"></i> 
+                                                                    <i class="las la-star"></i>
+                                                                </span>
+                                                        </div>
+                                                    
+                                                </div> 
+                                            </div>
+                                         </a>
+                                    </div>
+                                </div>    
+                                         
+                                    <div class="select_size_color hiddenCartElement"> 
+                                           <div> 
+                                                <div class="header_select">
+                                                    <span>Select a </span>
+                                                    <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
+                                                </div> 
+                                                <div class="select_customSize">
+                                                    <ul class="selectYourSize">  
+                                                         <li class="select_customSize_list">
+                                                            <div class="form-check d-flex align-items-center">
+                                                                <input class="form-check-input sizeWise"  
+                                                                  type="radio" name="attribute_id_"> 
+                                                                <label class="form-check-label" for="sizeM">  variant name</label>
+                                                            </div> 
+                                                        </li> 
+                                                    </ul>
+                                                </div>
+                                                <div class="sizeContainer"> 
+                                                    <div class="reviews_div d-flex justify-content-center flex-wrap"> 
+                                                        <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2" >₹364</del></span></span>
+                                                        <span class="current_mrp mrp_m_${element.id}">₹ 451</span>     
+                                                        <span class="price_off" >  545 % Off</span>      
+                                                    </div> 
+                                                </div> 
+                                            </div>
+                                    </div>  
+                                        
+                                    <div class="hover_content variant_preview_btn "  > 
+                                      <div class="actionSection_1">
+                                          <button type="button" class="wishlist_button_text">
+                                              <span><i class="ri-heart-line"></i></span>
+                                          </button>
+                                          <button type="button" class="preview_button">Preview Size</button>
+                                      </div>  
+                                  </div> 
+                                  <div class="hover_content variant_add_to_cart_btn" style="display:none">
+                                      <div class="detail_and_addToCart">
+                                          <a href="#" class="view_detail_2"><button class="" type="button" >View Details</button></a>
+                                          <button type="button" class="addToCart_button">add to cart</button>
+                                      </div>
+                                  </div>  
+                                
+                           </div>
+                        </div> 
+                    </form>
+            </div> 
+            <div class="col-md-12 p-2" >
+                     <form id="option-choice-form_${element.id}">
+                       <input type="hidden" name="_token" value="${csrfToken}">
+                           <input type="hidden" name="id" value="${element.id}">
+                            <input type="hidden" name="quantity" value="1">
+                        <div class="pr_height bg-white">
+                            <div class="productWrapper d-flex flex-column justify-content-between">
+                                <div class="productDetails productDetail_element"> 
+                                    <div class="bestsell"> 
+                                        <a href="${single_p_url}">
+                                            <div class="productImages">
+                                                <img src="https://glamwiz.com/cdn/shop/files/73_d313310d-c7b5-42c7-9212-14dfd1ffe40e_300x.png?v=1738252793"
+                                                alt=" " class="css-11gn9r6">
+                                            </div>
+                                            <div class="productAllDetails">
+                                                <div class="productTitle" >Pure Chikankari Work Faux Georgette Kurti...</div>
+                                                    <div class="reviews_div d-flex justify-content-center flex-wrap">  
+                                                            <span class="product_mrp_">MRP: 
+                                                                 <span><del>₹ 364</del></span> 
+                                                            </span>
+                                                            <span class="current_mrp">₹262</span>   
+                                                             <span class="price_off">15% Off </span>
+                                                    </div>
+                                                    <div class="row no-gutters mb-3">
+                                                        <div class="col-12 relevents">  
+                                                                <span class="rating rating-mr-1"> 
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star half"></i> 
+                                                                    <i class="las la-star"></i>
+                                                                </span>
+                                                        </div>
+                                                    
+                                                </div> 
+                                            </div>
+                                         </a>
+                                    </div>
+                                </div>    
+                                         
+                                    <div class="select_size_color hiddenCartElement"> 
+                                           <div> 
+                                                <div class="header_select">
+                                                    <span>Select a </span>
+                                                    <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
+                                                </div> 
+                                                <div class="select_customSize">
+                                                    <ul class="selectYourSize">  
+                                                         <li class="select_customSize_list" id="${each.id}">
+                                                            <div class="form-check d-flex align-items-center">
+                                                                <input class="form-check-input sizeWise" id="${each.variant}"
+                                                                  type="radio" name="attribute_id_"> 
+                                                                <label class="form-check-label" for="sizeM">  variant name</label>
+                                                            </div> 
+                                                        </li> 
+                                                    </ul>
+                                                </div>
+                                                <div class="sizeContainer"> 
+                                                    <div class="reviews_div d-flex justify-content-center flex-wrap"> 
+                                                        <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2" id="main_price_${element.id}">₹364</del></span></span>
+                                                        <span class="current_mrp mrp_m_${element.id}">₹ 451</span>     
+                                                        <span class="price_off" id="selected_off_parcent_${element.id}">  545 % Off</span>      
+                                                    </div> 
+                                                </div> 
+                                            </div>
+                                    </div>  
+                                        
+                                    <div class="hover_content variant_preview_btn "  > 
+                                      <div class="actionSection_1">
+                                          <button type="button" class="wishlist_button_text">
+                                              <span><i class="ri-heart-line"></i></span>
+                                          </button>
+                                          <button type="button" class="preview_button">Preview Size</button>
+                                      </div>  
+                                  </div> 
+                                  <div class="hover_content variant_add_to_cart_btn" style="display:none">
+                                      <div class="detail_and_addToCart">
+                                          <a href="${single_p_url}" class="view_detail_2"><button class="" type="button" >View Details</button></a>
+                                          <button type="button" class="addToCart_button">add to cart</button>
+                                      </div>
+                                  </div>  
+                                
+                           </div>
+                        </div> 
+                    </form>
+            </div> 
+            <div class="col-md-12 p-2" >
+                     <form id="option-choice-form_${element.id}">
+                       <input type="hidden" name="_token" value="${csrfToken}">
+                           <input type="hidden" name="id" value="${element.id}">
+                            <input type="hidden" name="quantity" value="1">
+                        <div class="pr_height bg-white">
+                            <div class="productWrapper d-flex flex-column justify-content-between">
+                                <div class="productDetails productDetail_element"> 
+                                    <div class="bestsell"> 
+                                        <a href="${single_p_url}">
+                                            <div class="productImages">
+                                                <img src="https://glamwiz.com/cdn/shop/files/DSC_6218copy_300x.jpg?v=1740215475"
+                                                alt=" " class="css-11gn9r6">
+                                            </div>
+                                            <div class="productAllDetails">
+                                                <div class="productTitle" >Chikankari Work Faux Georgette Kurti Palazzo Set product</div>
+                                                    <div class="reviews_div d-flex justify-content-center flex-wrap">  
+                                                            <span class="product_mrp_">MRP: 
+                                                                 <span><del>₹ 864</del></span> 
+                                                            </span>
+                                                            <span class="current_mrp">₹262</span>   
+                                                             <span class="price_off">5% Off </span>
+                                                    </div>
+                                                    <div class="row no-gutters mb-3">
+                                                        <div class="col-12 relevents">  
+                                                                <span class="rating rating-mr-1"> 
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star half"></i> 
+                                                                    <i class="las la-star"></i>
+                                                                </span>
+                                                        </div>
+                                                    
+                                                </div> 
+                                            </div>
+                                         </a>
+                                    </div>
+                                </div>    
+                                         
+                                    <div class="select_size_color hiddenCartElement"> 
+                                           <div> 
+                                                <div class="header_select">
+                                                    <span>Select a </span>
+                                                    <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
+                                                </div> 
+                                                <div class="select_customSize">
+                                                    <ul class="selectYourSize">  
+                                                         <li class="select_customSize_list" id="${each.id}">
+                                                            <div class="form-check d-flex align-items-center">
+                                                                <input class="form-check-input sizeWise" id="${each.variant}"
+                                                                  type="radio" name="attribute_id_"> 
+                                                                <label class="form-check-label" for="sizeM">  variant name</label>
+                                                            </div> 
+                                                        </li> 
+                                                    </ul>
+                                                </div>
+                                                <div class="sizeContainer"> 
+                                                    <div class="reviews_div d-flex justify-content-center flex-wrap"> 
+                                                        <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2" id="main_price_${element.id}">₹364</del></span></span>
+                                                        <span class="current_mrp mrp_m_${element.id}">₹ 451</span>     
+                                                        <span class="price_off" id="selected_off_parcent_${element.id}">  545 % Off</span>      
+                                                    </div> 
+                                                </div> 
+                                            </div>
+                                    </div>  
+                                        
+                                    <div class="hover_content variant_preview_btn "  > 
+                                      <div class="actionSection_1">
+                                          <button type="button" class="wishlist_button_text">
+                                              <span><i class="ri-heart-line"></i></span>
+                                          </button>
+                                          <button type="button" class="preview_button">Preview Size</button>
+                                      </div>  
+                                  </div> 
+                                  <div class="hover_content variant_add_to_cart_btn" style="display:none">
+                                      <div class="detail_and_addToCart">
+                                          <a href="${single_p_url}" class="view_detail_2"><button class="" type="button" >View Details</button></a>
+                                          <button type="button" class="addToCart_button">add to cart</button>
+                                      </div>
+                                  </div>  
+                                
+                           </div>
+                        </div> 
+                    </form>
+            </div> 
+            <div class="col-md-12 p-2" >
+                     <form id="option-choice-form_${element.id}">
+                       <input type="hidden" name="_token" value="${csrfToken}">
+                           <input type="hidden" name="id" value="${element.id}">
+                            <input type="hidden" name="quantity" value="1">
+                        <div class="pr_height bg-white">
+                            <div class="productWrapper d-flex flex-column justify-content-between">
+                                <div class="productDetails productDetail_element"> 
+                                    <div class="bestsell"> 
+                                        <a href="${single_p_url}">
+                                            <div class="productImages">
+                                                <img src="https://glamwiz.com/cdn/shop/files/3_ec3b3b21-bff2-47a0-813e-bff08bad22a7_300x.jpg?v=1740211514"
+                                                alt=" " class="css-11gn9r6">
+                                            </div>
+                                            <div class="productAllDetails">
+                                                <div class="productTitle" >Chikankari Work Faux Georgette Kurti</div>
+                                                    <div class="reviews_div d-flex justify-content-center flex-wrap">  
+                                                            <span class="product_mrp_">MRP: 
+                                                                 <span><del>₹ 864</del></span> 
+                                                            </span>
+                                                            <span class="current_mrp">₹562</span>   
+                                                             <span class="price_off">15% Off </span>
+                                                    </div>
+                                                    <div class="row no-gutters mb-3">
+                                                        <div class="col-12 relevents">  
+                                                                <span class="rating rating-mr-1"> 
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star half"></i> 
+                                                                    <i class="las la-star"></i>
+                                                                </span>
+                                                        </div>
+                                                    
+                                                </div> 
+                                            </div>
+                                         </a>
+                                    </div>
+                                </div>    
+                                         
+                                    <div class="select_size_color hiddenCartElement"> 
+                                           <div> 
+                                                <div class="header_select">
+                                                    <span>Select a </span>
+                                                    <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
+                                                </div> 
+                                                <div class="select_customSize">
+                                                    <ul class="selectYourSize">  
+                                                         <li class="select_customSize_list" id="${each.id}">
+                                                            <div class="form-check d-flex align-items-center">
+                                                                <input class="form-check-input sizeWise" id="${each.variant}"
+                                                                  type="radio" name="attribute_id_"> 
+                                                                <label class="form-check-label" for="sizeM"> Work Faux Georgette Kurti Palazzo Set</label>
+                                                            </div> 
+                                                        </li> 
+                                                    </ul>
+                                                </div>
+                                                <div class="sizeContainer"> 
+                                                    <div class="reviews_div d-flex justify-content-center flex-wrap"> 
+                                                        <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2" id="main_price_${element.id}">₹364</del></span></span>
+                                                        <span class="current_mrp mrp_m_${element.id}">₹ 451</span>     
+                                                        <span class="price_off" id="selected_off_parcent_${element.id}">  545 % Off</span>      
+                                                    </div> 
+                                                </div> 
+                                            </div>
+                                    </div>  
+                                        
+                                    <div class="hover_content variant_preview_btn "  > 
+                                      <div class="actionSection_1">
+                                          <button type="button" class="wishlist_button_text">
+                                              <span><i class="ri-heart-line"></i></span>
+                                          </button>
+                                          <button type="button" class="preview_button">Preview Size</button>
+                                      </div>  
+                                  </div> 
+                                  <div class="hover_content variant_add_to_cart_btn" style="display:none">
+                                      <div class="detail_and_addToCart">
+                                          <a href="${single_p_url}" class="view_detail_2"><button class="" type="button" >View Details</button></a>
+                                          <button type="button" class="addToCart_button">add to cart</button>
+                                      </div>
+                                  </div>  
+                                
+                           </div>
+                        </div> 
+                    </form>
+            </div> 
+            <div class="col-md-12 p-2" >
+                     <form id="option-choice-form_${element.id}">
+                       <input type="hidden" name="_token" value="${csrfToken}">
+                           <input type="hidden" name="id" value="${element.id}">
+                            <input type="hidden" name="quantity" value="1">
+                        <div class="pr_height bg-white">
+                            <div class="productWrapper d-flex flex-column justify-content-between">
+                                <div class="productDetails productDetail_element"> 
+                                    <div class="bestsell"> 
+                                        <a href="${single_p_url}">
+                                            <div class="productImages">
+                                                <img src="https://glamwiz.com/cdn/shop/files/1_e93a29af-5bfa-4356-87eb-8332cd25eb36_300x.jpg?v=1741718414"
+                                                alt=" " class="css-11gn9r6">
+                                            </div>
+                                            <div class="productAllDetails">
+                                                <div class="productTitle">Work Faux Georgette Kurti Palazzo Set</div>
+                                                    <div class="reviews_div d-flex justify-content-center flex-wrap">  
+                                                            <span class="product_mrp_">MRP: 
+                                                                 <span><del>₹ 864</del></span> 
+                                                            </span>
+                                                            <span class="current_mrp">₹562</span>   
+                                                             <span class="price_off">10% Off </span>
+                                                    </div>
+                                                    <div class="row no-gutters mb-3">
+                                                        <div class="col-12 relevents">  
+                                                                <span class="rating rating-mr-1"> 
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star active"></i>
+                                                                    <i class="las la-star half"></i> 
+                                                                    <i class="las la-star"></i>
+                                                                </span>
+                                                        </div>
+                                                    
+                                                </div> 
+                                            </div>
+                                         </a>
+                                    </div>
+                                </div>    
+                                         
+                                    <div class="select_size_color hiddenCartElement"> 
+                                           <div> 
+                                                <div class="header_select">
+                                                    <span>Select a </span>
+                                                    <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
+                                                </div> 
+                                                <div class="select_customSize">
+                                                    <ul class="selectYourSize">  
+                                                         <li class="select_customSize_list" id="${each.id}">
+                                                            <div class="form-check d-flex align-items-center">
+                                                                <input class="form-check-input sizeWise" id="${each.variant}"
+                                                                  type="radio" name="attribute_id_"> 
+                                                                <label class="form-check-label" for="sizeM">  variant name</label>
+                                                            </div> 
+                                                        </li> 
+                                                    </ul>
+                                                </div>
+                                                <div class="sizeContainer"> 
+                                                    <div class="reviews_div d-flex justify-content-center flex-wrap"> 
+                                                        <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2" id="main_price_${element.id}">₹364</del></span></span>
+                                                        <span class="current_mrp mrp_m_${element.id}">₹ 451</span>     
+                                                        <span class="price_off" id="selected_off_parcent_${element.id}">  545 % Off</span>      
+                                                    </div> 
+                                                </div> 
+                                            </div>
+                                    </div>  
+                                        
+                                    <div class="hover_content variant_preview_btn "  > 
+                                      <div class="actionSection_1">
+                                          <button type="button" class="wishlist_button_text">
+                                              <span><i class="ri-heart-line"></i></span>
+                                          </button>
+                                          <button type="button" class="preview_button">Preview Size</button>
+                                      </div>  
+                                  </div> 
+                                  <div class="hover_content variant_add_to_cart_btn" style="display:none">
+                                      <div class="detail_and_addToCart">
+                                          <a href="${single_p_url}" class="view_detail_2"><button class="" type="button" >View Details</button></a>
+                                          <button type="button" class="addToCart_button">add to cart</button>
+                                      </div>
+                                  </div>  
+                                
+                           </div>
+                        </div> 
+                    </form>
+            </div> 
+         
         <!-- Item1 Ends -->
 
       </div>
     </div>
 </section>
-
 
         
 {{-- 
@@ -1504,7 +1855,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
     </header>
 
     <div class="aiz-carousel aiz-caro-mob overflow-hidden arrow-inactive-none arrow-dark arrow-x-0"
-        data-items="4" data-xxl-items="4"
+        data-items="4" data-xxl-items="3"
         data-xl-items="3" data-lg-items="2" data-md-items="2" data-sm-items="1" data-xs-items="1"
         data-arrows="false" data-dots="true" data-infinite="true">
 
@@ -1908,31 +2259,49 @@ $classified_products = get_home_page_classified_products(6);
 </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const cityButtons = document.querySelectorAll('.city-btn');
-        const cityContents = document.querySelectorAll('.city-content');
+document.addEventListener('DOMContentLoaded', function () {
+    const cityButtons = document.querySelectorAll('.city-btn');
+    const cityContents = document.querySelectorAll('.city-content');
 
-        cityButtons.forEach(button => {
-            button.addEventListener('click', function (e) {
-                e.preventDefault();
+    function activateTab(button) {
+        const cityName = button.getAttribute('data-city');
+        const targetContent = document.getElementById(cityName);
 
-                // Remove 'active' class from all buttons and contents
-                cityButtons.forEach(btn => btn.classList.remove('active'));
-                cityContents.forEach(content => content.style.display = 'none');
+        if (!targetContent) return;
 
-                // Add 'active' to clicked button
-                this.classList.add('active');
+        // Remove 'active' class and hide all content
+        cityButtons.forEach(btn => btn.classList.remove('active'));
+        cityContents.forEach(content => {
+            content.classList.remove('active');
+            content.style.display = 'none';
+        });
 
-                // Show the corresponding city content
-                const cityName = this.getAttribute('data-city');
-                const targetContent = document.getElementById(cityName);
-                if (targetContent) {
-                    targetContent.style.display = 'flex'; // use 'block' or 'flex' depending on your layout
-                }
-            });
+        // Add 'active' class to clicked button and show target content
+        button.classList.add('active');
+        targetContent.classList.add('active');
+        targetContent.style.display = 'flex';
+
+        // Refresh slick carousel inside the active tab (if needed)
+        $(targetContent).find('.aiz-carousel').slick('setPosition');
+    }
+
+    // Add click event listener to each button
+    cityButtons.forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            activateTab(this);
         });
     });
+
+    // Activate the initially active tab on page load
+    const initialButton = document.querySelector('.city-btn.active');
+    if (initialButton) {
+        activateTab(initialButton);
+    }
+});
 </script>
+
+ 
 
 @endsection
 
