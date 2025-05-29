@@ -84,17 +84,17 @@
                             </div>
                         <div class="sizeContainer">
                             <div class="productTitle selectedSize mb-2 mt-2">{{ $choice->values[0] }}</div>
-                            <div class="reviews_div d-flex justify-content-center flex-wrap">
-                                @if(home_price_new($product) != home_discounted_price_new($product)) 
-                                    <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2">{{ home_price_new($product) }}</del></span></span>
-                                    <span class="current_mrp">{{ home_discounted_price_new($product) }}</span>
-                                    @if(discount_in_percentage($product) > 0)
-                                        <span class="price_off">{{ discount_in_percentage($product) }}% Off</span>
+                                <div class="reviews_div d-flex justify-content-center flex-wrap">
+                                    @if(home_price_new($product) != home_discounted_price_new($product)) 
+                                        <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2">{{ home_price_new($product) }}</del></span></span>
+                                        <span class="current_mrp">{{ home_discounted_price_new($product) }}</span>
+                                        @if(discount_in_percentage($product) > 0)
+                                            <span class="price_off">{{ discount_in_percentage($product) }}% Off</span>
+                                        @endif
+                                        @else
+                                        <span class="product_mrp_">MRP: <span>{{ home_discounted_price_new($product) }}</span></span> 
                                     @endif
-                                    @else
-                                    <span class="product_mrp_">MRP: <span>{{ home_discounted_price_new($product) }}</span></span> 
-                                @endif
-                            </div> 
+                                </div> 
                         </div> 
                     </div>
                     @if($key > 0)

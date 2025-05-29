@@ -285,7 +285,7 @@
 @endif -->
 
 <!-- Sliders -->
-<div class="home-banner-area mb-3 web_home_banner" style="background-color: {{ get_setting('slider_section_bg_color', '#dedede') }}">
+<div class="home-banner-area web_home_banner" style="background-color: {{ get_setting('slider_section_bg_color', '#dedede') }}">
 
     <div class="sub-cat-menu sub-cat-menu-new more c-scrollbar-light border p-4 shadow-none d-none">
         <div class="c-preloader text-center absolute-center">
@@ -479,11 +479,9 @@
 </section>
 
 <!-- Category wise Products -->
-<!-- ----------------------------------------------------- -->
+<!-- ----------------------------------------------------- --> 
  
- 
- 
-    <section class="py-md-5 py-sm-3">
+    <section class="py-md-2 py-sm-3">
         <div class="container-fluid">
             <div class="row justify-content-evenly">
                 <div class="col-12">
@@ -517,7 +515,7 @@
                     </div>
                 </div>
                 <!-- container of cites -->
-                <div class="city_container col-md-12 mt-4">
+                <div class="city_container col-md-12 mt-2">
                    
                     @if (get_setting('home_categories') != null)
                         @php
@@ -526,6 +524,7 @@
                             $i = 0;
                         @endphp
                         @foreach ($categories as $category_key => $category)
+                            <input type="hidden" class="cat_slug" value="{{ $category->slug }}">
                             @php
                                 $category_name = $category->getTranslation('name');
                             @endphp
@@ -550,8 +549,9 @@
                                 <!--  carousel -->
 
                                 <div class="col-lg-9 col-md-8 col-sm-6 col-xs-6 product_card_contianer">
-                                    <div class="w-100 h-100 overflow-hidden"> 
+                                    <div class="w-100 h-100 overflow-hidden" id="city_wise_cotegory_{{ $category->slug }}"> 
 
+                                        {{--  
                                          <div class="aiz-carousel aiz-carousell2 aiz-web-resp arrow-x-0 arrow-inactive-none homeSlider" data-items="3.5"
                                             data-xxl-items="3" data-xl-items="2.8" data-lg-items="2" data-md-items="1.5" data-sm-items="1"
                                             data-xs-items="1.2" data-arrows='true' data-infinite='false'>
@@ -560,7 +560,9 @@
                                                 @include('frontend.new_changes.partials.single_product_box', ['product' => $product])   
                                             </div>
                                             @endforeach
-                                        </div>    
+                                        </div>  
+                                    --}}
+                                    
                                         
                                     </div>
                                 </div>
@@ -731,7 +733,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
             </div> 
             
 
-            <div class="col-md-12 my-md-4 my-3 ">
+            <div class="col-md-12 my-md-4 my-2 ">
                 <div class="row">
 
                     <div class="col">
@@ -792,7 +794,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                 </h3>
             </div>  
 
-            <div class="col-md-12 my-md-4 my-3 d-none">
+            <div class="col-md-12 my-md-4 my-2 d-none">
                 <div class="row justify-content-center mobShoBy">
                     <div class="img_col1 shoBy">
                         <img src="{{asset('public/assets/img/lady-1.jpg')}}" alt="" class="img-fluid img1">
@@ -837,7 +839,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 <!-- shop by concern end -->
 
 <!-- video slider start -->
-<section class="proVideoSec mb-5">
+<section class="proVideoSec mb-2">
     <div class="container">
         <div class="aiz-carousel aiz-carousel1 sm-gutters-17" data-items="7" data-xxl-items="7" data-xl-items="7"
           data-lg-items="7" data-md-items="4" data-sm-items="3" data-xs-items="2" data-arrows="true"
@@ -907,61 +909,6 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 
 <!-- Top Sellers -->
 
-{{-- 
-<section class="mb-2 mb-md-3 mt-2 mt-md-3 top_seller_list">
-    <div class="container px-md-0">
-        <div class="d-flex mb-2 mb-md-3 align-items-baseline justify-content-between">
-            <!-- Title -->
-            <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0">
-                <div class="top_heading to_h_mob">
-                    <span class="">Best Sellers</span>
-                    <span></span>
-                </div>
-            </h3>
-            <!-- Links -->
-            <div class="d-md-flex ">
-                <!-- <a class="text-blue fs-10 fs-md-12 fw-700 hov-text-primary animate-underline-primary" href="#">View All Sellers</a> -->
-            </div>
-        </div>   
-
-        <div class="aiz-carousel aiz-carousel1 sm-gutters-17" data-items="5" data-xxl-items="5" data-xl-items="5"
-          data-lg-items="5" data-md-items="4" data-sm-items="3" data-xs-items="2" data-arrows="true"
-                    data-dots="false" data-autoplay="true" data-infinite="true">
-
-        <!-- Item1 Starts --> 
- 
-            <div class="best_seller_product">
-                 <a href="#">
-                    <div class="best_sellter_img">
-                        <img src="https://glamwiz.com/cdn/shop/files/2_846661e6-3d1a-4b20-9c51-924c956fbd1c_300x.png?v=1738254504" class="w-100 ">
-                    </div>
-                    <dtv class="detail_best_product">
-                            <div class="productAllDetails">
-                                <div class="productTitle mb-0 mt-2"  >Pure Chikankari Work Faux Georgette Kurti Palazzo Set</div>
-                                <div class="reviews_div d-flex justify-content-center flex-wrap mb-1">  
-                                        <span class="product_mrp_">MRP: 
-                                            <span><del>₹ 2000</del></span>  
-                                        </span>
-                                        <span class="current_mrp">₹1500</span>   
-                                            <!-- <span class="price_off">25% Off </span> -->
-                                </div>
-                                <div class="row no-gutters mb-3">
-                                    <div class="col-12 relevents">  
-                                        <span class="rating rating-mr-1"> 
-                                            <i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i><i class="las la-star"></i> (0)
-                                        </span>
-                                    </div> 
-                                </div> 
-                            </div>   
-                    </dtv>
-                 </a>
-            </div>  
-        <!-- Item1 Ends -->
-
-      </div>
-    </div>
-</section>  --}}
-
 
 <section class="mb-2 mb-md-3 mt-2 mt-md-3 top_seller_list">
     <div class="container px-md-0">
@@ -991,7 +938,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                        <input type="hidden" name="id" value="${element.id}">
                         <input type="hidden" name="quantity" value="1"> -->
 
-                        <div class="pr_height bg-white">
+                        <div class="pr_height bg-white mb-0">
                             <div class="productWrapper d-flex flex-column justify-content-between">
                                 <div class="productDetails productDetail_element"> 
                                     <div class="bestsell"> 
@@ -1073,11 +1020,9 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                     </form>
             </div> 
             <div class="col-md-12 p-2" >
-                     <form id="option-choice-form_${element.id}">
-                       <input type="hidden" name="_token" value="${csrfToken}">
-                           <input type="hidden" name="id" value="${element.id}">
-                            <input type="hidden" name="quantity" value="1">
-                        <div class="pr_height bg-white">
+                     <form>
+                      
+                        <div class="pr_height bg-white mb-0">
                             <div class="productWrapper d-flex flex-column justify-content-between">
                                 <div class="productDetails productDetail_element"> 
                                     <div class="bestsell"> 
@@ -1159,11 +1104,9 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                     </form>
             </div> 
             <div class="col-md-12 p-2" >
-                     <form id="option-choice-form_${element.id}">
-                       <input type="hidden" name="_token" value="${csrfToken}">
-                           <input type="hidden" name="id" value="${element.id}">
-                            <input type="hidden" name="quantity" value="1">
-                        <div class="pr_height bg-white">
+                     <form>
+                  
+                        <div class="pr_height bg-white mb-0">
                             <div class="productWrapper d-flex flex-column justify-content-between">
                                 <div class="productDetails productDetail_element"> 
                                     <div class="bestsell"> 
@@ -1245,11 +1188,9 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                     </form>
             </div> 
             <div class="col-md-12 p-2" >
-                     <form id="option-choice-form_${element.id}">
-                       <input type="hidden" name="_token" value="${csrfToken}">
-                           <input type="hidden" name="id" value="${element.id}">
-                            <input type="hidden" name="quantity" value="1">
-                        <div class="pr_height bg-white">
+                     <form>
+                   
+                        <div class="pr_height bg-white mb-0">
                             <div class="productWrapper d-flex flex-column justify-content-between">
                                 <div class="productDetails productDetail_element"> 
                                     <div class="bestsell"> 
@@ -1331,11 +1272,9 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                     </form>
             </div> 
             <div class="col-md-12 p-2" >
-                     <form id="option-choice-form_${element.id}">
-                       <input type="hidden" name="_token" value="${csrfToken}">
-                           <input type="hidden" name="id" value="${element.id}">
-                            <input type="hidden" name="quantity" value="1">
-                        <div class="pr_height bg-white">
+                     <form>
+                     
+                        <div class="pr_height bg-white mb-0">
                             <div class="productWrapper d-flex flex-column justify-content-between">
                                 <div class="productDetails productDetail_element"> 
                                     <div class="bestsell"> 
@@ -1421,119 +1360,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 
       </div>
     </div>
-</section>
-
-        
-{{-- 
-        @if (get_setting('vendor_system_activation') == 1)
-        @php
-        $best_selers = get_best_sellers(5);
-        @endphp
-        @if (count($best_selers) > 0)
-        <section class="mb-2 mb-md-3 mt-2 mt-md-3 top_seller_list">
-            <div class="container px-md-0">
-                <!-- Top Section -->
-                <div class="d-flex mb-2 mb-md-3 align-items-baseline justify-content-between">
-                    <!-- Title -->
-                    <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0">
-                        <div class="top_heading to_h_mob">
-                            <span class="">{{ translate('Top Sellers') }}</span>
-                            <span></span>
-                        </div>
-                    </h3>
-                    <!-- Links -->
-                    <div class="d-md-flex ">
-                        <a class="text-blue fs-10 fs-md-12 fw-700 hov-text-primary animate-underline-primary"
-                            href="{{ route('sellers') }}">{{ translate('View All Sellers') }}</a>
-                    </div>
-                </div>
-                <!-- Sellers Section -->
-                <div class="aiz-carousel aiz-carousel1 arrow-x-0 arrow-inactive-none" data-items="4" data-xxl-items="4"
-                    data-xl-items="4" data-lg-items="3.4" data-md-items="2.5" data-sm-items="2" data-xs-items="5"
-                    data-arrows="true" data-dots="false" data-infinite="true">
-                    @foreach ($best_selers as $key => $seller)
-                    @if ($seller->user != null)
-                    <div class="carousel-box h-100 position-relative text-center @if ($key == 0) @endif has-transition">
-                        <div class="seller_cards mob_top_seller">
-                            <!-- Shop logo & Verification Status -->
-                            <div class="position-relative mx-auto size-100px size-md-120px">
-                                <a href="{{ route('shop.visit', $seller->slug) }}"
-                                    class="d-flex mx-auto justify-content-center align-item-center size-100px size-md-120px border overflow-hidden hov-scale-img sell_sec_aizcarouselbox"
-                                    tabindex="0">
-                                    <img src="{{ asset('public/assets/img/P_img.png') }}"
-                                        data-src="{{ uploaded_asset($seller->logo) }}" alt="{{ $seller->name }}"
-                                        class="img-fit lazyload has-transition"
-                                        onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';">
-                                </a>
-                                <div class="absolute-top-right z-1 mr-md-2 mt-1 rounded-content bg-white">
-                                    @if ($seller->verification_status == 1)
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24.001" height="24"
-                                        viewBox="0 0 24.001 24">
-                                        <g id="Group_25929" data-name="Group 25929"
-                                            transform="translate(-480 -345)">
-                                            <circle id="Ellipse_637" data-name="Ellipse 637" cx="12"
-                                                cy="12" r="12" transform="translate(480 345)"
-                                                fill="#fff" />
-                                            <g id="Group_25927" data-name="Group 25927"
-                                                transform="translate(480 345)">
-                                                <path id="Union_5" data-name="Union 5"
-                                                    d="M0,12A12,12,0,1,1,12,24,12,12,0,0,1,0,12Zm1.2,0A10.8,10.8,0,1,0,12,1.2,10.812,10.812,0,0,0,1.2,12Zm1.2,0A9.6,9.6,0,1,1,12,21.6,9.611,9.611,0,0,1,2.4,12Zm5.115-1.244a1.083,1.083,0,0,0,0,1.529l3.059,3.059a1.081,1.081,0,0,0,1.529,0l5.1-5.1a1.084,1.084,0,0,0,0-1.53,1.081,1.081,0,0,0-1.529,0L11.339,13.05,9.045,10.756a1.082,1.082,0,0,0-1.53,0Z"
-                                                    transform="translate(0 0)" fill="#3490f3" />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                    @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24.001" height="24"
-                                        viewBox="0 0 24.001 24">
-                                        <g id="Group_25929" data-name="Group 25929"
-                                            transform="translate(-480 -345)">
-                                            <circle id="Ellipse_637" data-name="Ellipse 637" cx="12"
-                                                cy="12" r="12" transform="translate(480 345)"
-                                                fill="#fff" />
-                                            <g id="Group_25927" data-name="Group 25927"
-                                                transform="translate(480 345)">
-                                                <path id="Union_5" data-name="Union 5"
-                                                    d="M0,12A12,12,0,1,1,12,24,12,12,0,0,1,0,12Zm1.2,0A10.8,10.8,0,1,0,12,1.2,10.812,10.812,0,0,0,1.2,12Zm1.2,0A9.6,9.6,0,1,1,12,21.6,9.611,9.611,0,0,1,2.4,12Zm5.115-1.244a1.083,1.083,0,0,0,0,1.529l3.059,3.059a1.081,1.081,0,0,0,1.529,0l5.1-5.1a1.084,1.084,0,0,0,0-1.53,1.081,1.081,0,0,0-1.529,0L11.339,13.05,9.045,10.756a1.082,1.082,0,0,0-1.53,0Z"
-                                                    transform="translate(0 0)" fill="red" />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                    @endif
-                                </div>
-                            </div>
-                            <!-- Shop name -->
-                            <h2 class="seller_name">
-                                <a href="{{ route('shop.visit', $seller->slug) }}"
-                                    class="text-reset hov-text-primary " tabindex="0">{{ $seller->name }}</a>
-                            </h2>
-                            <!-- Shop Rating -->
-                            <div class="rating rating-mr-1 text-dark mb-3">
-                                <div class="rating_star">
-                                    {{ renderStarRating($seller->rating) }}
-                                </div>
-                                <span class="opacity-60 fs-14 fw-600">{{ $seller->num_of_reviews }}
-                                    {{ translate('Reviews') }}</span>
-                            </div>
-                            <!-- Visit Button -->
-                            <a href="{{ route('shop.visit', $seller->slug) }}" class="btn-visit">
-                                <span class="button-textt">{{ translate('Visit Store') }} <i class="las la-arrow-right ml-2"></i> </span>
-                            
-                            </a>
-                        </div>
-                    </div>
-                    @endif
-                    @endforeach
-                </div>
-            </div>
-        </section>
-        @endif
-        @endif
-
-     --}}
-
-
-
-
+</section> 
 
 <!-- Winning Kart Products -->
 @if (count($featured_categories) > 0)
@@ -1543,7 +1370,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
             <div class="col-md-12">
                 <div class="bg-white">
                     <!-- Top Section -->
-                    <div class="d-flex mt-2 mt-md-3 mb-2 mb-md-3 align-items-baseline justify-content-between">
+                    <div class="d-flex mt-0 mt-md-0 mb-2 mb-md-3 align-items-baseline justify-content-between">
                         <!-- Title -->
                         <h3 class="fs-16 fs-md-20 fw-600 mb-2 mb-sm-0 shead">
                             <span class="">{{ translate('Winning Kart Products') }}</span>
@@ -1691,6 +1518,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 <!-- Featured Products -->
 
 <!-- Banner section 2 -->
+ {{-- 
 @php $homeBanner2Images = get_setting('home_banner2_images', null, $lang); @endphp
 @if ($homeBanner2Images != null)
 <div class="mb-2 mb-md-3 mt-2 mt-md-3">
@@ -1720,132 +1548,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
     </div>
 </div>
 @endif
-
-
-<!-- Top Brands, Banner section 5, Banner section 6 -->
-
-{{-- 
-@if (get_setting('top_brands') != null)
-    @php
-        $top_brands = json_decode(get_setting('top_brands'));
-        $brands = get_brands($top_brands);
-        $homeBanner5Images = get_setting('home_banner5_images', null, $lang);
-        $homeBanner6Images = get_setting('home_banner6_images', null, $lang);
-        $col_val = 'col-xl-4';
-        $data_rows = 3;
-        $xxl_items = 2;
-        $xl_items = 2;
-        $lg_items = 3;
-        $md_items = 2;
-        $sm_items = 1;
-        $xs_items = 1;
-        if ($homeBanner5Images == null && $homeBanner6Images == null){
-            $data_rows = 1;
-            $xxl_items = 3;
-            $xl_items = 3;
-        } elseif ($homeBanner5Images == null || $homeBanner6Images == null) {
-            $col_val = 'col-xxl-8 col-xl-6';
-            $data_rows = 3;
-            $xxl_items = 2;
-            $xl_items = 3;
-        }
-    @endphp
-
-
-<section class="mb-2 mb-md-3 mt-2 mt-md-3">
-    <div class="container">
-        <div class="row">
-
-            <!-- Top Brands -->
-            <div class="col py-3 py-lg-0 mx-md-0">
-                <div class="h-100" id="section_top_brands">
-                    <div class="pt-3">
-                        <!-- Top Section -->
-                        <div class="d-flex mb-3 mb-md-4 align-items-baseline justify-content-between">
-                            <!-- Title -->
-                            <h3 class="top_heading">
-                                <span class="">{{ translate('Best of The Winning Kart') }}</span>
-                                <span></span>
-                            </h3>
-                            <!-- Links -->
-                            
-                        </div>
-                        <!-- Brands Section -->
-                        <div class="aiz-carousel aiz-carousel1 gutters-16 gutterss1 overflow-hidden arrow-inactive-none arrow-dark arrow-x-15" data-rows="{{ $data_rows }}" data-items="{{ $xxl_items }}" data-xxl-items="{{ $xxl_items }}" data-xl-items="{{ $xl_items }}" data-lg-items="{{ $lg_items }}" data-md-items="{{ $md_items }}" data-sm-items="{{ $sm_items }}" data-xs-items="{{ $xs_items }}" data-arrows="false" data-dots="true">
-                            @foreach ($brands as $brand)
-                            <div class="carousel-box hov-scale-img  my-2 mob_bwk">
-                                <a href="{{ route('products.brand', $brand->slug) }}" class="winnigKart_box mob_best_wk" aria-current="true">
-                                    <img src="{{ isset($brand->brandLogo->file_name) ? my_asset($brand->brandLogo->file_name) : static_asset('assets/img/placeholder.jpg') }}" alt="{{ $brand->getTranslation('name') }}" width="32" height="32" class="rounded-circle flex-shrink-0 border border-dark-subtle" onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">
-                                    <div class="winnig_kart_Con">
-                                        <div>
-                                            <h6 class="mb-0 listgtitle">{{ $brand->getTranslation('name') }}</h6>
-                                            <p class="mb-0 listgsubtitle">Get 60% off on first order</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Banner section 5 -->
-            @if ($homeBanner5Images != null)
-            @php
-            $banner_5_imags = json_decode($homeBanner5Images);
-            $home_banner5_links = get_setting('home_banner5_links', null, $lang);
-            @endphp
-            <div class="{{ $col_val }} d-none d-xl-block">
-                <div class="aiz-carousel overflow-hidden arrow-inactive-none arrow-dark arrow-x-0"
-                    data-items="1" data-arrows="true" data-dots="false" data-autoplay="true">
-                    @foreach ($banner_5_imags as $key => $value)
-                    <div class="carousel-box overflow-hidden hov-scale-img">
-                        <a href="{{ isset(json_decode($home_banner5_links, true)[$key]) ? json_decode($home_banner5_links, true)[$key] : '' }}"
-                            class="d-block text-reset overflow-hidden" style="height: 605px;">
-                            <img src="{{ static_asset('assets/img/placeholder-rect.jpg') }}"
-                                data-src="{{ uploaded_asset($value) }}" alt="{{ env('APP_NAME') }} promo"
-                                class="img-fit h-100 lazyload has-transition"
-                                onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';">
-                        </a>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-            @endif
-
-            <!-- Banner section 6 -->
-            @if ($homeBanner6Images != null)
-            @php
-            $banner_6_imags = json_decode($homeBanner6Images);
-            $home_banner6_links = get_setting('home_banner6_links', null, $lang);
-            @endphp
-            <div class="{{ $col_val }} d-none d-xl-block">
-                <div class="aiz-carousel overflow-hidden arrow-inactive-none arrow-dark arrow-x-0"
-                    data-items="1" data-arrows="true" data-dots="false" data-autoplay="true">
-                    @foreach ($banner_6_imags as $key => $value)
-                    <div class="carousel-box overflow-hidden hov-scale-img">
-                        <a href="{{ isset(json_decode($home_banner6_links, true)[$key]) ? json_decode($home_banner6_links, true)[$key] : '' }}"
-                            class="d-block text-reset overflow-hidden" style="height: 605px;">
-                            <img src="{{ static_asset('assets/img/placeholder-rect.jpg') }}"
-                                data-src="{{ uploaded_asset($value) }}" alt="{{ env('APP_NAME') }} promo"
-                                class="img-fit h-100 lazyload has-transition"
-                                onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';">
-                        </a>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-            @endif
-
-        </div>
-    </div>
-</section>
-@endif
-
- --}}
+  --}}
 
 <!-- testimonial start -->
 <section class="testimonials-section">
@@ -1857,11 +1560,9 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
     <div class="aiz-carousel aiz-caro-mob overflow-hidden arrow-inactive-none arrow-dark arrow-x-0"
         data-items="4" data-xxl-items="3"
         data-xl-items="3" data-lg-items="2" data-md-items="2" data-sm-items="1" data-xs-items="1"
-        data-arrows="false" data-dots="true" data-infinite="true">
+        data-arrows="false" data-dots="false" data-infinite="true">
 
-        <!-- Item1 Starts -->
-
- 
+        <!-- Item1 Starts --> 
        
         <div class="item testimonial-card">
             <main class="test-card-body">
