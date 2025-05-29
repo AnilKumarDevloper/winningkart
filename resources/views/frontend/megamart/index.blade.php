@@ -1567,7 +1567,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                    <img src="public/assets/img\placeholde-female.webp" alt="Ritika Sharma"> 
+                    <img src="{{ asset('public/assets/img/review-1.png') }}" alt="Ritika Sharma"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1595,7 +1595,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                     <img src="public/assets/img\placeholde-female.webp" alt="Anjali Mehta"> 
+                     <img src="{{ asset('public/assets/img/review-2.png') }}" alt="Anjali Mehta"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1622,7 +1622,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                      <img src="public/assets/img\placeholde-female.webp" alt="Pooja Iyer"> 
+                      <img src="{{ asset('public/assets/img/review-3.png') }}" alt="Pooja Iyer"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1649,7 +1649,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                      <img src="public/assets/img\placeholde-female.webp" alt="Neha Bansal"> 
+                      <img src="{{ asset('public/assets/img/review-4.png') }}" alt="Neha Bansal"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1674,7 +1674,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
           <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                      <img src="public/assets/img\placeholde-female.webp" alt="Simran Kapoor"> 
+                      <img src="{{ asset('public/assets/img/review5.png') }}" alt="Simran Kapoor"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1698,7 +1698,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                      <img src="public/assets/img\placeholde-female.webp" alt="Shreya Nair"> 
+                      <img src="{{ asset('public/assets/img/review6.png') }}" alt="Shreya Nair"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1721,7 +1721,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
          <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                    <img src="public/assets/img\placeholde-female.webp" alt="Aarti Verma"> 
+                    <img src="{{ asset('public/assets/img/review-7.png') }}" alt="Aarti Verma"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>
@@ -1745,7 +1745,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="item testimonial-card">
             <main class="test-card-body">
                 <div class="profile-image">
-                      <img src="public/assets/img\placeholde-female.webp" alt="Mitali Joshi"> 
+                      <img src="{{ asset('public/assets/img/review-8.png') }}" alt="Mitali Joshi"> 
                 </div>
                 <div class="quote">
                     <i class="fa fa-quote-left"></i>

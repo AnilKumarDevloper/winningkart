@@ -326,6 +326,7 @@ class SearchController extends Controller
 
     public function apitestProductList($category_slug = ''){
         $product_data = [];
+        $thumbnail_img = '';
         if($category_slug != ''){
             $category = Category::where('slug', $category_slug)->first();
             if($category != null){
@@ -333,7 +334,7 @@ class SearchController extends Controller
                 $category_ids = CategoryUtility::children_ids($category->id);
                 $category_ids[] = $category->id;
                 $category = Category::with('childrenCategories')->find($category->id);
-                $products = $category->products()->select('id','name','unit_price','current_stock','unit','discount','discount_type','discount_start_date','discount_end_date','slug','rating', 'photos', 'colors', 'choice_options');
+                $products = $category->products()->select('id','name','unit_price','current_stock','unit','discount','discount_type','discount_start_date','discount_end_date','slug','rating', 'photos', 'colors', 'choice_options', 'thumbnail_img');
                 $products = filter_products($products)->with('reviews')->get();
                 foreach($products as $product){
                     $photo_ids = explode(',', $product->photos);
@@ -353,6 +354,10 @@ class SearchController extends Controller
                             ];
                         }
                     }
+                    if($product->thumbnail_img != null){
+                        $thumbnail = Upload::where('id', $product->thumbnail_img)->first();
+                        $thumbnail_img = $thumbnail->file_name;
+                    }
                     $product_data[] = [
                         'id' => $product->id,
                         'name' => $product->name,
@@ -368,6 +373,7 @@ class SearchController extends Controller
                         'reviews' => count($product->reviews),
                         'photos' => $photos,
                         'choice_options' => $choice_options, 
+                        "thumbnail" => $thumbnail_img
                         // 'stock' => $product->stocks
                     ];  
                 }

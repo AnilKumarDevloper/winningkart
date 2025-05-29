@@ -1354,11 +1354,13 @@
             console.log(responseData)
             const data = responseData.data; 
          
-            data.forEach((element) =>{
-                let product_img_url = element.photos[0];
-                let product_img = `${base_url}Public/${product_img_url}`
 
-              
+            let isvariants = "";
+            data.forEach((element) =>{
+                let product_img_url = element.thumbnail;
+                let product_img = `${base_url}Public/${product_img_url}` 
+
+                console.log(product_img_url, "images")
                 
               let ratingHTML = "";
                 let rating = element.rating;  
@@ -1371,7 +1373,13 @@
                     } else {
                         ratingHTML += '<i class="las la-star"></i>';
                     }
-                    rating -= 1; // reduce for next iteration
+                    rating -= 1; 
+                } 
+               
+                if(element.choice_options.length > 0){ 
+                    console.log("variant is thare");
+                }else{
+                    console.log("not variants");
                 }
                  
                 city_slider_html += ` 
@@ -1407,7 +1415,7 @@
                                         </div>
                                     </div>    
                                         <div class="select_size_color hiddenCartElement"> 
-                                            <div> 
+                                                <div> 
                                                     <div class="header_select">
                                                         <span>Select a </span>
                                                         <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
@@ -1432,21 +1440,21 @@
                                                     </div> 
                                                 </div>
                                         </div>  
-                                        <div class="hover_content variant_preview_btn "  > 
-                                        <div class="actionSection_1">
-                                            <button type="button" class="wishlist_button_text">
-                                                <span><i class="ri-heart-line"></i></span>
-                                            </button>
-                                            <button type="button" class="preview_button">Preview Size</button>
-                                        </div>  
-                                    </div> 
-                                    <div class="hover_content variant_add_to_cart_btn" style="display:none">
-                                        <div class="detail_and_addToCart">
-                                            <a href="#" class="view_detail_2"><button class="" type="button" >View Details</button></a>
-                                            <button type="button" class="addToCart_button">add to cart</button>
-                                        </div>
-                                    </div>   
-                            </div>
+                                        <div class="hover_content variant_preview_btn"> 
+                                            <div class="actionSection_1">
+                                                <button type="button" class="wishlist_button_text">
+                                                    <span><i class="ri-heart-line"></i></span>
+                                                </button>
+                                                <button type="button" class="preview_button">Preview Size</button>
+                                            </div>  
+                                        </div> 
+                                        <div class="hover_content variant_add_to_cart_btn" style="display:none">
+                                            <div class="detail_and_addToCart">
+                                                <a href="#" class="view_detail_2"><button class="" type="button" >View Details</button></a>
+                                                <button type="button" class="addToCart_button">add to cart</button>
+                                            </div>
+                                        </div>   
+                                </div>
                             </div> 
                         </form>
                 </div>  
