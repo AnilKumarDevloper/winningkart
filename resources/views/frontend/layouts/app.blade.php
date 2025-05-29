@@ -1358,7 +1358,7 @@
             let isvariants = "";
             data.forEach((element) =>{
                 let product_img_url = element.thumbnail;
-                let product_img = `${base_url}Public/${product_img_url}` 
+                let product_img = `${base_url}public/${product_img_url}` 
 
                 console.log(product_img_url, "images")
                 
@@ -1440,20 +1440,23 @@
                                                     </div> 
                                                 </div>
                                         </div>  
-                                        <div class="hover_content variant_preview_btn"> 
-                                            <div class="actionSection_1">
-                                                <button type="button" class="wishlist_button_text">
-                                                    <span><i class="ri-heart-line"></i></span>
-                                                </button>
-                                                <button type="button" class="preview_button">Preview Size</button>
-                                            </div>  
-                                        </div> 
-                                        <div class="hover_content variant_add_to_cart_btn" style="display:none">
-                                            <div class="detail_and_addToCart">
-                                                <a href="#" class="view_detail_2"><button class="" type="button" >View Details</button></a>
-                                                <button type="button" class="addToCart_button">add to cart</button>
-                                            </div>
-                                        </div>   
+
+                                        <div>
+                                            <div class="hover_content variant_preview_btn"> 
+                                                <div class="actionSection_1">
+                                                    <button type="button" class="wishlist_button_text">
+                                                        <span><i class="ri-heart-line"></i></span>
+                                                    </button>
+                                                    <button type="button" class="preview_button">Preview Size</button>
+                                                </div>  
+                                            </div> 
+                                            <div class="hover_content variant_add_to_cart_btn" style="display:none">
+                                                <div class="detail_and_addToCart">
+                                                    <a href="#" class="view_detail_2"><button class="" type="button" >View Details</button></a>
+                                                    <button type="button" class="addToCart_button">add to cart</button>
+                                                </div>
+                                            </div> 
+                                        </div>  
                                 </div>
                             </div> 
                         </form>
