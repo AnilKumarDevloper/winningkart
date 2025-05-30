@@ -383,6 +383,8 @@
 
                 AllProduct = responseData.data; 
 
+                console.log(AllProduct);
+
                 renderProduct(AllProduct);  
                
             }catch(error){
@@ -447,7 +449,7 @@
                 if (element.choice_options.length > 0) { 
                     
                     let sizeColor_select = element.choice_options[0].values; 
-                    selectText = element.choice_options[0].attribute_name;  
+                    selectText = element.choice_options[0].attribute_name;   
 
                     let selected_after_discount=""; 
                     let selected_parcent_discount = "";
@@ -570,7 +572,7 @@
                                 <button type="button" class="wishlist_button_text" onclick="addToWishList(${element.id})" >
                                     <span><i class="ri-heart-line"></i></span>
                                 </button>
-                                <button type="button" class="preview_button">Preview Size</button>
+                                <button type="button" class="preview_button">Preview ${selectText}</button>
                             </div>  
                         </div> 
                         <div class="hover_content variant_add_to_cart_btn" style="display:none">
@@ -601,8 +603,8 @@
                
                     <div class="col-md-4" id="${element.id}">
                      <form id="option-choice-form_${element.id}">
-                       <input type="hidden" name="_token" value="${csrfToken}">
-                           <input type="hidden" name="id" value="${element.id}">
+                            <input type="hidden" name="_token" value="${csrfToken}">
+                            <input type="hidden" name="id" value="${element.id}">
                             <input type="hidden" name="quantity" value="1">
                         <div class="pr_height bg-white">
                             <div class="productWrapper d-flex flex-column justify-content-between">
@@ -624,11 +626,10 @@
                                                     </div>
                                                     <div class="row no-gutters mb-3">
                                                         <div class="col-12 relevents">  
-                                                                <span class="rating rating-mr-1"> 
-                                                                     ${ratingHtml} (${element.reviews})
-                                                                </span>
-                                                        </div>
-                                                    
+                                                            <span class="rating rating-mr-1"> 
+                                                                ${ratingHtml} (${element.reviews})
+                                                            </span>
+                                                        </div> 
                                                 </div> 
                                             </div>
                                          </a>
@@ -815,7 +816,7 @@
          } 
   
          document.getElementById('clearAllFilter').addEventListener('click', function(){
-                 document.querySelectorAll('.filterWith_sortDiscount, .filterWith_price, .filterWith_color').forEach(checkbox => {
+                document.querySelectorAll('.filterWith_sortDiscount, .filterWith_price, .filterWith_color').forEach(checkbox => {
                     checkbox.checked = false;
                 });
                 filterByuser();

@@ -715,6 +715,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 <!-- New Products -->
 <!-- ----------------------------------------------------- -->
 <!--<div id="section_newest"></div>-->
+<input type="hidden" class="cat_slug" value="Best-Sellers-8uXA2">
 <!-- ----------------------------------------------------- -->
 
 <!-- shop by concern start -->
@@ -733,7 +734,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
             </div> 
             
 
-            <div class="col-md-12 my-md-4 my-2 ">
+            <div class="col-md-12  my-2 ">
                 <div class="row">
 
                     <div class="col">
@@ -924,20 +925,22 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
             <div class="d-md-flex ">
                 <!-- <a class="text-blue fs-10 fs-md-12 fw-700 hov-text-primary animate-underline-primary" href="#">View All Sellers</a> -->
             </div>
+
+            
         </div>   
 
+        <div id="city_wise_cotegory_Best-Sellers-8uXA2">
+
+        </div>
+
+    {{-- 
         <div class="aiz-carousel aiz-carousel1 sm-gutters-17" data-items="5" data-xxl-items="5" data-xl-items="5"
           data-lg-items="5" data-md-items="4" data-sm-items="3" data-xs-items="2" data-arrows="true"
                     data-dots="false" data-autoplay="true" data-infinite="true">
 
-        <!-- Item1 Starts -->
-      
+        <!-- Item1 Starts --> 
             <div class="col-md-12 p-2" >
-                     <form>
-                       <!-- <input type="hidden" name="_token">
-                       <input type="hidden" name="id" value="${element.id}">
-                        <input type="hidden" name="quantity" value="1"> -->
-
+                     <form> 
                         <div class="pr_height bg-white mb-0">
                             <div class="productWrapper d-flex flex-column justify-content-between">
                                 <div class="productDetails productDetail_element"> 
@@ -1018,347 +1021,10 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                            </div>
                         </div> 
                     </form>
-            </div> 
-            <div class="col-md-12 p-2" >
-                     <form>
-                      
-                        <div class="pr_height bg-white mb-0">
-                            <div class="productWrapper d-flex flex-column justify-content-between">
-                                <div class="productDetails productDetail_element"> 
-                                    <div class="bestsell"> 
-                                        <a href="${single_p_url}">
-                                            <div class="productImages">
-                                                <img src="https://glamwiz.com/cdn/shop/files/73_d313310d-c7b5-42c7-9212-14dfd1ffe40e_300x.png?v=1738252793"
-                                                alt=" " class="css-11gn9r6">
-                                            </div>
-                                            <div class="productAllDetails">
-                                                <div class="productTitle" >Pure Chikankari Work Faux Georgette Kurti...</div>
-                                                    <div class="reviews_div d-flex justify-content-center flex-wrap">  
-                                                            <span class="product_mrp_">MRP: 
-                                                                 <span><del>₹ 364</del></span> 
-                                                            </span>
-                                                            <span class="current_mrp">₹262</span>   
-                                                             <span class="price_off">15% Off </span>
-                                                    </div>
-                                                    <div class="row no-gutters mb-3">
-                                                        <div class="col-12 relevents">  
-                                                                <span class="rating rating-mr-1"> 
-                                                                    <i class="las la-star active"></i>
-                                                                    <i class="las la-star active"></i>
-                                                                    <i class="las la-star active"></i>
-                                                                    <i class="las la-star half"></i> 
-                                                                    <i class="las la-star"></i>
-                                                                </span>
-                                                        </div>
-                                                    
-                                                </div> 
-                                            </div>
-                                         </a>
-                                    </div>
-                                </div>    
-                                         
-                                    <div class="select_size_color hiddenCartElement"> 
-                                           <div> 
-                                                <div class="header_select">
-                                                    <span>Select a </span>
-                                                    <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
-                                                </div> 
-                                                <div class="select_customSize">
-                                                    <ul class="selectYourSize">  
-                                                         <li class="select_customSize_list" id="${each.id}">
-                                                            <div class="form-check d-flex align-items-center">
-                                                                <input class="form-check-input sizeWise" id="${each.variant}"
-                                                                  type="radio" name="attribute_id_"> 
-                                                                <label class="form-check-label" for="sizeM">  variant name</label>
-                                                            </div> 
-                                                        </li> 
-                                                    </ul>
-                                                </div>
-                                                <div class="sizeContainer"> 
-                                                    <div class="reviews_div d-flex justify-content-center flex-wrap"> 
-                                                        <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2" id="main_price_${element.id}">₹364</del></span></span>
-                                                        <span class="current_mrp mrp_m_${element.id}">₹ 451</span>     
-                                                        <span class="price_off" id="selected_off_parcent_${element.id}">  545 % Off</span>      
-                                                    </div> 
-                                                </div> 
-                                            </div>
-                                    </div>  
-                                        
-                                    <div class="hover_content variant_preview_btn "  > 
-                                      <div class="actionSection_1">
-                                          <button type="button" class="wishlist_button_text">
-                                              <span><i class="ri-heart-line"></i></span>
-                                          </button>
-                                          <button type="button" class="preview_button">Preview Size</button>
-                                      </div>  
-                                  </div> 
-                                  <div class="hover_content variant_add_to_cart_btn" style="display:none">
-                                      <div class="detail_and_addToCart">
-                                          <a href="${single_p_url}" class="view_detail_2"><button class="" type="button" >View Details</button></a>
-                                          <button type="button" class="addToCart_button">add to cart</button>
-                                      </div>
-                                  </div>  
-                                
-                           </div>
-                        </div> 
-                    </form>
-            </div> 
-            <div class="col-md-12 p-2" >
-                     <form>
-                  
-                        <div class="pr_height bg-white mb-0">
-                            <div class="productWrapper d-flex flex-column justify-content-between">
-                                <div class="productDetails productDetail_element"> 
-                                    <div class="bestsell"> 
-                                        <a href="${single_p_url}">
-                                            <div class="productImages">
-                                                <img src="https://glamwiz.com/cdn/shop/files/DSC_6218copy_300x.jpg?v=1740215475"
-                                                alt=" " class="css-11gn9r6">
-                                            </div>
-                                            <div class="productAllDetails">
-                                                <div class="productTitle" >Chikankari Work Faux Georgette Kurti Palazzo Set product</div>
-                                                    <div class="reviews_div d-flex justify-content-center flex-wrap">  
-                                                            <span class="product_mrp_">MRP: 
-                                                                 <span><del>₹ 864</del></span> 
-                                                            </span>
-                                                            <span class="current_mrp">₹262</span>   
-                                                             <span class="price_off">5% Off </span>
-                                                    </div>
-                                                    <div class="row no-gutters mb-3">
-                                                        <div class="col-12 relevents">  
-                                                                <span class="rating rating-mr-1"> 
-                                                                    <i class="las la-star active"></i>
-                                                                    <i class="las la-star active"></i>
-                                                                    <i class="las la-star active"></i>
-                                                                    <i class="las la-star half"></i> 
-                                                                    <i class="las la-star"></i>
-                                                                </span>
-                                                        </div>
-                                                    
-                                                </div> 
-                                            </div>
-                                         </a>
-                                    </div>
-                                </div>    
-                                         
-                                    <div class="select_size_color hiddenCartElement"> 
-                                           <div> 
-                                                <div class="header_select">
-                                                    <span>Select a </span>
-                                                    <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
-                                                </div> 
-                                                <div class="select_customSize">
-                                                    <ul class="selectYourSize">  
-                                                         <li class="select_customSize_list" id="${each.id}">
-                                                            <div class="form-check d-flex align-items-center">
-                                                                <input class="form-check-input sizeWise" id="${each.variant}"
-                                                                  type="radio" name="attribute_id_"> 
-                                                                <label class="form-check-label" for="sizeM">  variant name</label>
-                                                            </div> 
-                                                        </li> 
-                                                    </ul>
-                                                </div>
-                                                <div class="sizeContainer"> 
-                                                    <div class="reviews_div d-flex justify-content-center flex-wrap"> 
-                                                        <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2" id="main_price_${element.id}">₹364</del></span></span>
-                                                        <span class="current_mrp mrp_m_${element.id}">₹ 451</span>     
-                                                        <span class="price_off" id="selected_off_parcent_${element.id}">  545 % Off</span>      
-                                                    </div> 
-                                                </div> 
-                                            </div>
-                                    </div>  
-                                        
-                                    <div class="hover_content variant_preview_btn "  > 
-                                      <div class="actionSection_1">
-                                          <button type="button" class="wishlist_button_text">
-                                              <span><i class="ri-heart-line"></i></span>
-                                          </button>
-                                          <button type="button" class="preview_button">Preview Size</button>
-                                      </div>  
-                                  </div> 
-                                  <div class="hover_content variant_add_to_cart_btn" style="display:none">
-                                      <div class="detail_and_addToCart">
-                                          <a href="${single_p_url}" class="view_detail_2"><button class="" type="button" >View Details</button></a>
-                                          <button type="button" class="addToCart_button">add to cart</button>
-                                      </div>
-                                  </div>  
-                                
-                           </div>
-                        </div> 
-                    </form>
-            </div> 
-            <div class="col-md-12 p-2" >
-                     <form>
-                   
-                        <div class="pr_height bg-white mb-0">
-                            <div class="productWrapper d-flex flex-column justify-content-between">
-                                <div class="productDetails productDetail_element"> 
-                                    <div class="bestsell"> 
-                                        <a href="${single_p_url}">
-                                            <div class="productImages">
-                                                <img src="https://glamwiz.com/cdn/shop/files/3_ec3b3b21-bff2-47a0-813e-bff08bad22a7_300x.jpg?v=1740211514"
-                                                alt=" " class="css-11gn9r6">
-                                            </div>
-                                            <div class="productAllDetails">
-                                                <div class="productTitle" >Chikankari Work Faux Georgette Kurti</div>
-                                                    <div class="reviews_div d-flex justify-content-center flex-wrap">  
-                                                            <span class="product_mrp_">MRP: 
-                                                                 <span><del>₹ 864</del></span> 
-                                                            </span>
-                                                            <span class="current_mrp">₹562</span>   
-                                                             <span class="price_off">15% Off </span>
-                                                    </div>
-                                                    <div class="row no-gutters mb-3">
-                                                        <div class="col-12 relevents">  
-                                                                <span class="rating rating-mr-1"> 
-                                                                    <i class="las la-star active"></i>
-                                                                    <i class="las la-star active"></i>
-                                                                    <i class="las la-star active"></i>
-                                                                    <i class="las la-star half"></i> 
-                                                                    <i class="las la-star"></i>
-                                                                </span>
-                                                        </div>
-                                                    
-                                                </div> 
-                                            </div>
-                                         </a>
-                                    </div>
-                                </div>    
-                                         
-                                    <div class="select_size_color hiddenCartElement"> 
-                                           <div> 
-                                                <div class="header_select">
-                                                    <span>Select a </span>
-                                                    <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
-                                                </div> 
-                                                <div class="select_customSize">
-                                                    <ul class="selectYourSize">  
-                                                         <li class="select_customSize_list" id="${each.id}">
-                                                            <div class="form-check d-flex align-items-center">
-                                                                <input class="form-check-input sizeWise" id="${each.variant}"
-                                                                  type="radio" name="attribute_id_"> 
-                                                                <label class="form-check-label" for="sizeM"> Work Faux Georgette Kurti Palazzo Set</label>
-                                                            </div> 
-                                                        </li> 
-                                                    </ul>
-                                                </div>
-                                                <div class="sizeContainer"> 
-                                                    <div class="reviews_div d-flex justify-content-center flex-wrap"> 
-                                                        <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2" id="main_price_${element.id}">₹364</del></span></span>
-                                                        <span class="current_mrp mrp_m_${element.id}">₹ 451</span>     
-                                                        <span class="price_off" id="selected_off_parcent_${element.id}">  545 % Off</span>      
-                                                    </div> 
-                                                </div> 
-                                            </div>
-                                    </div>  
-                                        
-                                    <div class="hover_content variant_preview_btn "  > 
-                                      <div class="actionSection_1">
-                                          <button type="button" class="wishlist_button_text">
-                                              <span><i class="ri-heart-line"></i></span>
-                                          </button>
-                                          <button type="button" class="preview_button">Preview Size</button>
-                                      </div>  
-                                  </div> 
-                                  <div class="hover_content variant_add_to_cart_btn" style="display:none">
-                                      <div class="detail_and_addToCart">
-                                          <a href="${single_p_url}" class="view_detail_2"><button class="" type="button" >View Details</button></a>
-                                          <button type="button" class="addToCart_button">add to cart</button>
-                                      </div>
-                                  </div>  
-                                
-                           </div>
-                        </div> 
-                    </form>
-            </div> 
-            <div class="col-md-12 p-2" >
-                     <form>
-                     
-                        <div class="pr_height bg-white mb-0">
-                            <div class="productWrapper d-flex flex-column justify-content-between">
-                                <div class="productDetails productDetail_element"> 
-                                    <div class="bestsell"> 
-                                        <a href="${single_p_url}">
-                                            <div class="productImages">
-                                                <img src="https://glamwiz.com/cdn/shop/files/1_e93a29af-5bfa-4356-87eb-8332cd25eb36_300x.jpg?v=1741718414"
-                                                alt=" " class="css-11gn9r6">
-                                            </div>
-                                            <div class="productAllDetails">
-                                                <div class="productTitle">Work Faux Georgette Kurti Palazzo Set</div>
-                                                    <div class="reviews_div d-flex justify-content-center flex-wrap">  
-                                                            <span class="product_mrp_">MRP: 
-                                                                 <span><del>₹ 864</del></span> 
-                                                            </span>
-                                                            <span class="current_mrp">₹562</span>   
-                                                             <span class="price_off">10% Off </span>
-                                                    </div>
-                                                    <div class="row no-gutters mb-3">
-                                                        <div class="col-12 relevents">  
-                                                                <span class="rating rating-mr-1"> 
-                                                                    <i class="las la-star active"></i>
-                                                                    <i class="las la-star active"></i>
-                                                                    <i class="las la-star active"></i>
-                                                                    <i class="las la-star half"></i> 
-                                                                    <i class="las la-star"></i>
-                                                                </span>
-                                                        </div>
-                                                    
-                                                </div> 
-                                            </div>
-                                         </a>
-                                    </div>
-                                </div>    
-                                         
-                                    <div class="select_size_color hiddenCartElement"> 
-                                           <div> 
-                                                <div class="header_select">
-                                                    <span>Select a </span>
-                                                    <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
-                                                </div> 
-                                                <div class="select_customSize">
-                                                    <ul class="selectYourSize">  
-                                                         <li class="select_customSize_list" id="${each.id}">
-                                                            <div class="form-check d-flex align-items-center">
-                                                                <input class="form-check-input sizeWise" id="${each.variant}"
-                                                                  type="radio" name="attribute_id_"> 
-                                                                <label class="form-check-label" for="sizeM">  variant name</label>
-                                                            </div> 
-                                                        </li> 
-                                                    </ul>
-                                                </div>
-                                                <div class="sizeContainer"> 
-                                                    <div class="reviews_div d-flex justify-content-center flex-wrap"> 
-                                                        <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2" id="main_price_${element.id}">₹364</del></span></span>
-                                                        <span class="current_mrp mrp_m_${element.id}">₹ 451</span>     
-                                                        <span class="price_off" id="selected_off_parcent_${element.id}">  545 % Off</span>      
-                                                    </div> 
-                                                </div> 
-                                            </div>
-                                    </div>  
-                                        
-                                    <div class="hover_content variant_preview_btn "  > 
-                                      <div class="actionSection_1">
-                                          <button type="button" class="wishlist_button_text">
-                                              <span><i class="ri-heart-line"></i></span>
-                                          </button>
-                                          <button type="button" class="preview_button">Preview Size</button>
-                                      </div>  
-                                  </div> 
-                                  <div class="hover_content variant_add_to_cart_btn" style="display:none">
-                                      <div class="detail_and_addToCart">
-                                          <a href="${single_p_url}" class="view_detail_2"><button class="" type="button" >View Details</button></a>
-                                          <button type="button" class="addToCart_button">add to cart</button>
-                                      </div>
-                                  </div>  
-                                
-                           </div>
-                        </div> 
-                    </form>
-            </div> 
-         
-        <!-- Item1 Ends -->
-
+            </div>   
+        <!-- Item1 Ends --> 
       </div>
+       --}}
     </div>
 </section> 
 

@@ -1337,7 +1337,8 @@
     @endif
 
     <script>
-    $(document).ready(function () {  
+          // handalVariant functions  
+    $(document).ready(function () {   
         document.querySelectorAll('.cat_slug').forEach( async (item) => {    
             let cat_slug_value = item.value;
             let city_slider = document.getElementById(`city_wise_cotegory_${cat_slug_value}`);
@@ -1346,24 +1347,40 @@
             let city_slider_html = ""; 
             let cityApi_url =  "{{route('api_test_product_list', [':category_slug'])}}"; 
             cityApi_url = cityApi_url.replace(':category_slug', cat_slug_value); 
-
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const response = await fetch(cityApi_url);
-            const responseData = await response.json();
-           
+            const responseData = await response.json(); 
 
             console.log(responseData)
-            const data = responseData.data; 
-         
+            const data = responseData.data;  
 
-            let isvariants = "";
+            let isvariants = ""; 
+
             data.forEach((element) =>{
                 let product_img_url = element.thumbnail;
                 let product_img = `${base_url}public/${product_img_url}` 
-
-                console.log(product_img_url, "images")
-                
-              let ratingHTML = "";
+                let total_unit_price = element.unit_price;  
+                let ratingHTML = "";
                 let rating = element.rating;  
+                let variant_data = element.choice_options;
+                let discount = element.discount;
+                let price = "";
+                let discount_type = 0;
+
+                if(discount > 0){ 
+                     if(element.discount_type === "percent"){ 
+                       discount_type = discount; 
+                       let discount_amount = Math.round((discount * total_unit_price) / 100); 
+                       price = total_unit_price - discount_amount;
+                     }else if(element.discount_type === "amount"){ 
+                        discount_type = Math.round(discount / total_unit_price * 100); 
+                        price =  total_unit_price - discount;   
+                     }
+
+                }else{
+                     price = total_unit_price;
+                }
+    
 
                 for (let i = 1; i <= 5; i++) {
                     if (rating >= 1) {
@@ -1374,34 +1391,110 @@
                         ratingHTML += '<i class="las la-star"></i>';
                     }
                     rating -= 1; 
-                } 
-               
-                if(element.choice_options.length > 0){ 
-                    console.log("variant is thare");
-                }else{
-                    console.log("not variants");
                 }
+                
+
+                let single_p_url = "{{ route('product', [':slug']) }}";
+                    single_p_url = single_p_url.replace(':slug', element.slug);
+                    
+                let  variant_elementHtml = "";  
+                let cartHtml = ""; 
+
+                if(variant_data.length > 0){  
+
+                   let selectText = element.choice_options[0].attribute_name; 
+                    /// variant element  forEach
+                   let total_variant_price = "";
+                   let variant_price = "";
+                   let attributs_id = element.choice_options[0].attribute_id;
+                    variant_data[0].values.forEach((variantItem) =>{  
+
+                          total_variant_price = variantItem.price;
+
+                          if(discount > 0){ 
+                                if(element.discount_type === "percent"){ 
+                                  discount_type = discount; 
+                                  let discount_amount = Math.round((discount * total_variant_price) / 100); 
+                                  variant_price = total_variant_price - discount_amount; 
+                                  
+                                  console.log(variant_price, "variant_price");
+
+                                }else if(element.discount_type === "amount"){ 
+                                    discount_type = Math.round(discount / total_variant_price * 100); 
+                                    variant_price = total_variant_price - discount;  
+                                    
+                                    console.log(variant_price, "variant_price");
+                                } 
+                            }else{
+                                variant_price = total_variant_price;
+                            }
+                         
+                        variant_elementHtml += `
+                            <li class="select_customSize_list" >
+                                <div class="form-check d-flex align-items-center">
+                                    <input class="form-check-input sizeWise" id="${variantItem.id}"
+                                        type="radio" name="attribute_id_${attributs_id}" 
+                                        value="${variantItem.variant}"
+                                        onchange="handalVariant(${element.id}, ${total_variant_price}, ${variant_price}, ${discount_type})"> 
+                                    <label class="form-check-label" for="sizeM">${variantItem.variant}</label>
+                                </div> 
+                            </li>
+                        `
+                    }); 
+                    
+                    // cart buttons elements
+                    cartHtml += `
+                         <div class="hover_content variant_preview_btn"> 
+                            <div class="actionSection_1">
+                                <button type="button" class="wishlist_button_text">
+                                    <span><i class="ri-heart-line"></i></span>
+                                </button>
+                                <button type="button" class="preview_button">Preview ${selectText}</button>
+                            </div>  
+                        </div> 
+                        <div class="hover_content variant_add_to_cart_btn" style="display:none">
+                            <div class="detail_and_addToCart">
+                                <a href="${single_p_url}" class="view_detail_2"><button class="" type="button" >View Details</button></a>
+                                <button type="button" class="addToCart_button" onclick="addToCart(${element.id})" id="addToCart_btn_${element.id}" >Add to Cart</button>
+                            </div>
+                        </div> 
+                    `
+                     
+                }else{ 
+                    cartHtml += `
+                        <div class="hover_content variant_add_to_cart_btn" style="display:">
+                            <div class="detail_and_addToCart">
+                                <a href="${single_p_url}" class="view_detail_2"><button class="" type="button" >View Details</button></a>
+                                <button type="button" class="addToCart_button" onclick="addToCart(${element.id})" >Add to Cart</button>
+                            </div>
+                        </div> 
+                    `
+                } 
                  
                 city_slider_html += ` 
-                    <div class="col-md-12 p-2" >
-                        <form>
+                    <div class="col-12 p-2" >
+                        <form id="option-choice-form_${element.id}"> 
+                            <input type="hidden" name="_token" value="${csrfToken}">
+                            <input type="hidden" name="id" value="${element.id}">
+                            <input type="hidden" name="quantity" value="1">
+
                             <div class="pr_height bg-white">
                                 <div class="productWrapper d-flex flex-column justify-content-between">
                                     <div class="productDetails productDetail_element"> 
                                         <div class="bestsell"> 
-                                            <a href=" ">
+                                            <a href="${single_p_url}">
                                                 <div class="productImages">
                                                     <img src="${product_img}"
                                                     alt=" " class="css-11gn9r6">
                                                 </div>
                                                 <div class="productAllDetails">
                                                     <div class="productTitle" >${element.name}</div>
-                                                    <div class="reviews_div d-flex justify-content-center flex-wrap">  
+                                                    <div class="reviews_div d-flex justify-content-center flex-wrap">   
                                                             <span class="product_mrp_">MRP: 
-                                                                <span><del>₹ 864</del></span> 
+                                                                ${discount ? `<span><del>₹ ${total_unit_price}</del></span> ` : ''}
                                                             </span>
-                                                            <span class="current_mrp">₹562</span>   
-                                                            <span class="price_off">10% Off </span>
+                                                            <span class="current_mrp">₹${price}</span>   
+                                                            ${discount > 0 ? ` <span class="price_off">${discount_type}% Off </span>` : ''} 
                                                     </div>
                                                     <div class="row no-gutters mb-3">
                                                         <div class="col-12 relevents">  
@@ -1415,48 +1508,28 @@
                                         </div>
                                     </div>    
                                         <div class="select_size_color hiddenCartElement"> 
-                                                <div> 
-                                                    <div class="header_select">
-                                                        <span>Select a </span>
-                                                        <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
-                                                    </div> 
-                                                    <div class="select_customSize">
-                                                        <ul class="selectYourSize">  
-                                                            <li class="select_customSize_list">
-                                                                <div class="form-check d-flex align-items-center">
-                                                                    <input class="form-check-input sizeWise"  
-                                                                    type="radio" name="attribute_id_"> 
-                                                                    <label class="form-check-label" for="sizeM">  variant name</label>
-                                                                </div> 
-                                                            </li> 
-                                                        </ul>
-                                                    </div>
-                                                    <div class="sizeContainer"> 
-                                                        <div class="reviews_div d-flex justify-content-center flex-wrap"> 
-                                                            <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2" >₹364</del></span></span>
-                                                            <span class="current_mrp mrp_m_${element.id}">₹ 451</span>     
-                                                            <span class="price_off" >  545 % Off</span>      
-                                                        </div> 
-                                                    </div> 
+                                            <div> 
+                                                <div class="header_select">
+                                                    <span>Select a </span>
+                                                    <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
+                                                </div> 
+                                                <div class="select_customSize">
+                                                    <ul class="selectYourSize">  
+                                                        ${variant_elementHtml} 
+                                                    </ul>
                                                 </div>
-                                        </div>  
 
-                                        <div>
-                                            <div class="hover_content variant_preview_btn"> 
-                                                <div class="actionSection_1">
-                                                    <button type="button" class="wishlist_button_text">
-                                                        <span><i class="ri-heart-line"></i></span>
-                                                    </button>
-                                                    <button type="button" class="preview_button">Preview Size</button>
+                                                <div class="sizeContainer"> 
+                                                    <div class="reviews_div d-flex justify-content-center flex-wrap"> 
+                                                        <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2" id="main_price_${element.id}" >₹364</del></span></span>
+                                                        <span class="current_mrp mrp_m_${element.id}">₹ 5452</span>     
+                                                        <span class="price_off" id="selected_off_parcent_${element.id}"> ${discount_type} % Off</span>      
+                                                    </div> 
                                                 </div>  
-                                            </div> 
-                                            <div class="hover_content variant_add_to_cart_btn" style="display:none">
-                                                <div class="detail_and_addToCart">
-                                                    <a href="#" class="view_detail_2"><button class="" type="button" >View Details</button></a>
-                                                    <button type="button" class="addToCart_button">add to cart</button>
-                                                </div>
-                                            </div> 
-                                        </div>  
+
+                                            </div>
+                                        </div>   
+                                        ${cartHtml} 
                                 </div>
                             </div> 
                         </form>
@@ -1468,15 +1541,25 @@
                                     data-xs-items="1.2" data-arrows='true' data-infinite='false' > 
                                     ${city_slider_html}
                             </div> `;
-            city_slider.innerHTML = main_html; 
-        });
-})
+            city_slider.innerHTML = main_html;  
+                
+        }); 
+    });
+
+
+    // handalVariant functions
+    const handalVariant = (id, total_variant_price, variant_price, discount_type) =>{
+          console.log("change functions ",id, variant_price, discount_type, variant_price, "discount_type");
+          document.querySelector(`.mrp_m_${id}`).textContent = `₹ ${variant_price}`; 
+          document.getElementById(`main_price_${id}`).textContent = total_variant_price; 
+
+    }
+
 </script>
 
     @yield('script')
 
-    @php
-        echo "testing00";
+    @php 
         echo get_setting('footer_script');
     @endphp
 
