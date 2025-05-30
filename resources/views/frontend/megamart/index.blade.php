@@ -715,7 +715,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 <!-- New Products -->
 <!-- ----------------------------------------------------- -->
 <!--<div id="section_newest"></div>-->
-<input type="hidden" class="cat_slug" value="Best-Sellers-8uXA2">
+<input type="hidden" class="cat_slug" value="Best-Sellers-mxaa2">
 <!-- ----------------------------------------------------- -->
 
 <!-- shop by concern start -->

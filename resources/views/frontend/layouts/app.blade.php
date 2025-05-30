@@ -1356,7 +1356,7 @@
 
             let isvariants = ""; 
 
-            data.forEach((element) =>{
+            data.forEach( element =>{
                 let product_img_url = element.thumbnail;
                 let product_img = `${base_url}public/${product_img_url}` 
                 let total_unit_price = element.unit_price;  
@@ -1379,8 +1379,7 @@
 
                 }else{
                      price = total_unit_price;
-                }
-    
+                } 
 
                 for (let i = 1; i <= 5; i++) {
                     if (rating >= 1) {
