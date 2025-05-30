@@ -929,7 +929,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
             
         </div>   
 
-        <div id="city_wise_cotegory_Best-Sellers-8uXA2">
+        <div id="city_wise_cotegory_Best-Sellers-mxaa2">
 
         </div>
 
