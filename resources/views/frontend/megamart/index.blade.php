@@ -126,7 +126,8 @@
         background-color:#1e1e1e08!important;
     }
     .sbc_parent_div{
-        margin-right: 25px;
+        margin-right: 31px;
+        margin-left: 9px;
     }
     .sell_sec_aizcarouselbox{
         border: 1px solid #e5e5e5 !important;
@@ -488,7 +489,7 @@
                     <div class="col-lg-8 col-md-8 my-md-8 my-3 mx-auto cities">
                         <!-- Title --> 
                         <div class="aiz-carousel " data-items="8"
-                            data-xxl-items="4" data-xl-items="4" data-lg-items="3" data-md-items="3" data-sm-items="3"
+                            data-xxl-items="5" data-xl-items="5" data-lg-items="3" data-md-items="3" data-sm-items="3"
                             data-xs-items="3" data-arrows='false' data-infinite='false'>
 
                             @if (get_setting('home_categories') != null)
@@ -1067,19 +1068,19 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                                         onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">
                                 </div>
                                 <div class="winnig_tag">
-                                    <div class="w-100">
+                                    <div class="w-100 mb-2">
                                         <a class=" text-white home-category-name"
                                             href="{{ route('products.category', $category->slug) }}">
                                             {{ $category_name }}&nbsp;
                                             <i class="las la-arrow-right"></i>
                                         </a>
-                                        <div class="d-flex flex-wrap h-0px overflow-hidden mt-2">
+                                        <!-- <div class="d-flex flex-wrap h-0px overflow-hidden mt-2">
                                             @foreach ($category->childrenCategories->take(6) as $key => $child_category)
                                             <a href="{{ route('products.category', $child_category->slug) }}" class="fs-13 fw-300 hov-text-white pr-3 pt-1" style="color: transparent;">
                                                 {{ $child_category->getTranslation('name') }}
                                             </a>
                                             @endforeach
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>

@@ -403,9 +403,10 @@
 
 .home-category-name {
 	border-radius: 20px;
-	margin-right: 1rem;
+	margin-right: 1rem; 
 	background: #ef7528;
-	padding: .5rem
+	padding: .5rem;
+	margin-bottom: -15px;
 }
 
 .winnig_container_card .aiz-carousel .slick-prev {

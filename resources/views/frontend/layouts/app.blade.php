@@ -1338,6 +1338,7 @@
 
     <script>
           // handalVariant functions  
+     {{-- 
     $(document).ready(function () {   
         document.querySelectorAll('.cat_slug').forEach( async (item) => {    
             let cat_slug_value = item.value;
@@ -1358,7 +1359,7 @@
 
             data.forEach( element =>{
                 let product_img_url = element.thumbnail;
-                let product_img = `${base_url}public/${product_img_url}` 
+                let product_img = `${base_url}public/${product_img_url}`;
                 let total_unit_price = element.unit_price;  
                 let ratingHTML = "";
                 let rating = element.rating;  
@@ -1396,49 +1397,101 @@
                 let single_p_url = "{{ route('product', [':slug']) }}";
                     single_p_url = single_p_url.replace(':slug', element.slug);
                     
-                let  variant_elementHtml = "";  
+                let select_sizeColorHtml = "";  
+                 let colorSize_elemetHtml ="";
                 let cartHtml = ""; 
 
                 if(variant_data.length > 0){  
 
                    let selectText = element.choice_options[0].attribute_name; 
+                   let sizeColor_select = variant_data[0].values;
                     /// variant element  forEach
                    let total_variant_price = "";
                    let variant_price = "";
                    let attributs_id = element.choice_options[0].attribute_id;
-                    variant_data[0].values.forEach((variantItem) =>{  
+                   let firstPrice = "";
+                   let select_zeroindex_mainPrice ="";
+                   let select_zeroindex_parcent_discount = "";
 
-                          total_variant_price = variantItem.price;
+                   // index check if qut > 0 
+                    let ischeckedArray =  new Array(sizeColor_select.length).fill("");
+                    
+                    if(sizeColor_select[0].qty > 0 && sizeColor_select[0]?.qty > 0){
+                        ischeckedArray[0] = "checked";
+                    }else{
+                        for(let check = 1; check < sizeColor_select.length; check++){
+                            if(sizeColor_select[check]?.qty > 0){
+                                ischeckedArray[check] = "checked";
+                                break;
+                            }
+                        }
+                    } 
+                   
+                    sizeColor_select.forEach((each, index) =>{  
+
+                          let ischecked = ischeckedArray[index]; 
+
+                          total_variant_price = each.price;
+
 
                           if(discount > 0){ 
-                                if(element.discount_type === "percent"){ 
-                                  discount_type = discount; 
-                                  let discount_amount = Math.round((discount * total_variant_price) / 100); 
-                                  variant_price = total_variant_price - discount_amount; 
-                                  
-                                  console.log(variant_price, "variant_price");
-
-                                }else if(element.discount_type === "amount"){ 
+                                if(element.discount_type === "amount"){  
                                     discount_type = Math.round(discount / total_variant_price * 100); 
-                                    variant_price = total_variant_price - discount;  
-                                    
-                                    console.log(variant_price, "variant_price");
+                                    variant_price = total_variant_price - discount; 
+
+                                }else if(element.discount_type === "percent"){  
+
+                                    let discount_amount = Math.round((discount * total_variant_price) / 100); 
+                                    variant_price = total_variant_price - discount_amount;
+                                    discount_type = discount; 
                                 } 
                             }else{
                                 variant_price = total_variant_price;
                             }
+                            
+                            if(ischecked === "checked"){
+                                firstPrice = variant_price;  
+                                select_zeroindex_mainPrice = total_variant_price;
+                                select_zeroindex_parcent_discount = discount_type;
+                            }  
                          
-                        variant_elementHtml += `
+                        select_sizeColorHtml += `
                             <li class="select_customSize_list" >
                                 <div class="form-check d-flex align-items-center">
-                                    <input class="form-check-input sizeWise" id="${variantItem.id}"
+                                    <input class="form-check-input sizeWise" id="${each.id}"
                                         type="radio" name="attribute_id_${attributs_id}" 
-                                        value="${variantItem.variant}"
+                                        data-price="${variant_price}"
+                                        ${ischecked}
+                                        value="${each.variant}"
                                         onchange="handalVariant(${element.id}, ${total_variant_price}, ${variant_price}, ${discount_type})"> 
-                                    <label class="form-check-label" for="sizeM">${variantItem.variant}</label>
+                                    <label class="form-check-label" for="sizeM">${each.variant}</label>
                                 </div> 
                             </li>
                         `
+
+                         colorSize_elemetHtml = `
+                            <div> 
+                                <div class="header_select">
+                                    <span>Select a </span>
+                                    <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
+                                </div> 
+                                <div class="select_customSize">
+                                    <ul class="selectYourSize">  
+                                        ${select_sizeColorHtml} 
+                                    </ul>
+                                </div>
+
+                                <div class="sizeContainer"> 
+                                    <div class="reviews_div d-flex justify-content-center flex-wrap"> 
+                                        <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2" id="main_price_${element.id}" >₹ ${select_zeroindex_mainPrice}</del></span></span>
+                                        <span class="current_mrp mrp_m_${element.id}">₹ ${firstPrice}</span>     
+                                        
+                                        ${select_zeroindex_parcent_discount > 0 ? `<span class="price_off" id="selected_off_parcent_${element.id}"> ${select_zeroindex_parcent_discount} % Off</span>` : ''}      
+                                    </div> 
+                                </div>   
+                            </div>
+                        `
+
                     }); 
                     
                     // cart buttons elements
@@ -1507,26 +1560,9 @@
                                         </div>
                                     </div>    
                                         <div class="select_size_color hiddenCartElement"> 
-                                            <div> 
-                                                <div class="header_select">
-                                                    <span>Select a </span>
-                                                    <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
-                                                </div> 
-                                                <div class="select_customSize">
-                                                    <ul class="selectYourSize">  
-                                                        ${variant_elementHtml} 
-                                                    </ul>
-                                                </div>
+                                            
+                                            ${colorSize_elemetHtml}
 
-                                                <div class="sizeContainer"> 
-                                                    <div class="reviews_div d-flex justify-content-center flex-wrap"> 
-                                                        <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2" id="main_price_${element.id}" >₹364</del></span></span>
-                                                        <span class="current_mrp mrp_m_${element.id}">₹ 5452</span>     
-                                                        <span class="price_off" id="selected_off_parcent_${element.id}"> ${discount_type} % Off</span>      
-                                                    </div> 
-                                                </div>  
-
-                                            </div>
                                         </div>   
                                         ${cartHtml} 
                                 </div>
@@ -1548,11 +1584,294 @@
 
     // handalVariant functions
     const handalVariant = (id, total_variant_price, variant_price, discount_type) =>{
-          console.log("change functions ",id, variant_price, discount_type, variant_price, "discount_type");
-          document.querySelector(`.mrp_m_${id}`).textContent = `₹ ${variant_price}`; 
-          document.getElementById(`main_price_${id}`).textContent = total_variant_price; 
+        
+        //   document.querySelector(`.mrp_m_${id}`).textContent = `₹ ${variant_price}`; 
+          $(`.mrp_m_${id}`).text(`₹ ${variant_price}`); 
+        //   document.getElementById(`main_price_${id}`).textContent = total_variant_price; 
+         $(`#main_price_${id}`).text(total_variant_price); 
+            console.log("change functions ",id, variant_price, discount_type, variant_price, "discount_type");
 
     }
+ --}}
+
+ 
+
+ $(document).ready(function () {
+    document.querySelectorAll('.cat_slug').forEach(async (item) => {
+        let cat_slug_value = item.value;
+        let city_slider = document.getElementById(`city_wise_cotegory_${cat_slug_value}`);
+        let base_url = document.querySelector('meta[name="app-url"]').getAttribute('content');
+        let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        let city_slider_html = "";
+
+        let cityApi_url = "{{route('api_test_product_list', [':category_slug'])}}";
+        cityApi_url = cityApi_url.replace(':category_slug', cat_slug_value);
+
+        const response = await fetch(cityApi_url);
+        const responseData = await response.json();
+        const data = responseData.data;
+
+        data.forEach(element => {
+            let product_img_url = element.thumbnail;
+            let product_img = "";
+            if(element.thumbnail === ""){
+               product_img = `${base_url}public/${element.photos[0]}`;
+            }else{
+              product_img = `${base_url}public/${product_img_url}`;
+            }
+            let unit_total_price = element.unit_price;
+            let discount = element.discount;
+            let parcent_discount = "";
+            let after_discount = "";
+            let discount_percentage_By_amount = "";
+            let ratingHtml = "";
+
+            if (discount > 0) {
+                if (element.discount_type === "amount") {
+                    parcent_discount = Math.round(discount / unit_total_price * 100);
+                    after_discount = unit_total_price - discount;
+                } else if (element.discount_type === "percent") {
+                    discount_percentage_By_amount = Math.round((discount / 100) * unit_total_price);
+                    after_discount = unit_total_price - discount_percentage_By_amount;
+                    parcent_discount = discount;
+                }
+            } else {
+                after_discount = unit_total_price;
+            }
+
+            let rating = element.rating;
+            for (let i = 1; i <= 5; i++) {
+                if (rating >= 1) {
+                    ratingHtml += '<i class="las la-star active"></i>';
+                } else if (rating >= 0.5) {
+                    ratingHtml += '<i class="las la-star half"></i>';
+                } else {
+                    ratingHtml += '<i class="las la-star"></i>';
+                }
+                rating -= 1;
+            }
+
+            let single_p_url = "{{ route('product', [':slug']) }}".replace(':slug', element.slug);
+
+            let select_sizeColorHtml = "";
+            let colorSize_elemetHtml = "";
+            let select_sizeColor = "";
+            let add_cart = "";
+
+             let stockOutText = "Out of Stock";
+             let addCartText = "Add to Cart";
+
+            if (element.choice_options.length > 0) {
+                let selectText = element.choice_options[0].attribute_name;
+                let attributs_id = element.choice_options[0].attribute_id;
+                let sizeColor_select = element.choice_options[0].values;
+
+                let firstPrice = "";
+                let select_zeroindex_mainPrice = "";
+                let select_zeroindex_parcent_discount = "";
+                let qty = "";
+                let disabledQty = "";
+                let allZero = true;  
+                let ischeckedArray = new Array(sizeColor_select.length).fill("");
+
+                if (sizeColor_select[0].qty > 0 && sizeColor_select[0]?.qty > 0) {
+                    ischeckedArray[0] = "checked";
+                } else {
+                    for (let check = 1; check < sizeColor_select.length; check++) {
+                        if (sizeColor_select[check]?.qty > 0) {
+                            ischeckedArray[check] = "checked";
+                            break;
+                        }
+                    }
+                }
+
+                sizeColor_select.forEach((each, index) => {
+                    let ischecked = ischeckedArray[index];
+                    let selected_price = each.price;
+                    let selected_after_discount_price = "";
+                    let selected_parcent_discount = "";
+
+                     qty = each.qty; 
+                     disabledQty = qty <= 0 ? "disabled" : ""; 
+                     if(each.qty && each.qty >= 0){
+                            allZero = false;  
+                      }  
+
+                    if (discount > 0) {
+                        if (element.discount_type === "amount") {
+                            selected_parcent_discount = Math.round(discount / selected_price * 100);
+                            selected_after_discount_price = selected_price - discount;
+                        } else if (element.discount_type === "percent") {
+                            let discount_by_percent = Math.round((discount / 100) * selected_price);
+                            selected_after_discount_price = selected_price - discount_by_percent;
+                            selected_parcent_discount = discount;
+                        }
+                    } else {
+                        selected_after_discount_price = selected_price;
+                        selected_parcent_discount = 0;
+                    }
+
+                    if (ischecked === "checked") {
+                        firstPrice = selected_after_discount_price;
+                        select_zeroindex_mainPrice = selected_price;
+                        select_zeroindex_parcent_discount = selected_parcent_discount;
+                    }
+
+                    select_sizeColorHtml += `
+                        <li class="select_customSize_list">
+                            <div class="form-check d-flex align-items-center">
+                                <input class="form-check-input sizeWise" id="${each.variant}"
+                                    type="radio" name="attribute_id_${attributs_id}" 
+                                    data-price="${selected_after_discount_price}"
+                                    ${ischecked}
+                                    value="${each.variant}"
+                                    onchange="variantSelect(this, ${element.id}, ${selected_price}, '${selected_parcent_discount}', ${each.id}, '${each.qty}', '')">
+                                <label class="form-check-label">${each.variant}</label>
+                            </div> 
+                        </li>
+                    `;
+                });
+
+                if(allZero){
+                        stockText = stockOutText;
+                        disabledQty = "disabled";
+
+                }else{
+                    stockText = addCartText;  
+                    disabledQty = "";
+                }
+                
+                colorSize_elemetHtml = `
+                    <div>
+                        <div class="header_select">
+                            <span>Select a ${selectText}</span>
+                            <button type="button" class="close_selectseciton"><i class="ri-close-large-line"></i></button> 
+                        </div>
+                        <div class="select_customSize">
+                            <ul class="selectYourSize">
+                                ${select_sizeColorHtml}
+                            </ul>
+                        </div>
+                        <div class="sizeContainer">
+                            <div class="reviews_div d-flex justify-content-center flex-wrap">
+                                <span class="product_mrp_">MRP: <span><del class="opacity-70 fs-16 mr-2 main_price_${element.id}" id="main_price_${element.id}">₹ ${select_zeroindex_mainPrice}</del></span></span>
+                                <span class="current_mrp mrp_m_${element.id}">₹ ${firstPrice}</span>
+                                ${select_zeroindex_parcent_discount > 0 ? `<span class="price_off" id="selected_off_parcent_${element.id}"> ${select_zeroindex_parcent_discount} % Off</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                select_sizeColor += `
+                    <div class="hover_content variant_preview_btn">
+                        <div class="actionSection_1">
+                            <button type="button" class="wishlist_button_text"><span><i class="ri-heart-line"></i></span></button>
+                            <button type="button" class="preview_button">Preview ${selectText}</button>
+                        </div>
+                    </div>
+                    <div class="hover_content variant_add_to_cart_btn" style="display:none">
+                        <div class="detail_and_addToCart">
+                            <a href="${single_p_url}" class="view_detail_2"><button class="" type="button">View Details</button></a>
+                            <button type="button" class="addToCart_button" onclick="addToCart(${element.id})" id="addToCart_btn_${element.id}">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                let stockzero = element.current_stock <= 0 ? "disabled" : "";
+                stockText = element.current_stock <= 0 ? stockOutText : addCartText;
+                add_cart += `
+                    <div class="hover_content variant_add_to_cart_btn">
+                        <div class="detail_and_addToCart">
+                            <a href="${single_p_url}" class="view_detail_2"><button class="" type="button">View Details</button></a>
+                            <button type="button" class="addToCart_button" onclick="addToCart(${element.id})"
+                            ${stockzero}
+                            ><span> ${stockText} </span></button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            city_slider_html += `
+                <div class="col-12 p-2">
+                    <form id="option-choice-form_${element.id}">
+                        <input type="hidden" name="_token" value="${csrfToken}">
+                        <input type="hidden" name="id" value="${element.id}">
+                        <input type="hidden" name="quantity" value="1">
+                        <div class="pr_height bg-white">
+                            <div class="productWrapper d-flex flex-column justify-content-between">
+                                <div class="productDetails productDetail_element">
+                                    <div class="bestsell">
+                                        <a href="${single_p_url}">
+                                            <div class="productImages">
+                                                <img src="${product_img}" alt="" class="css-11gn9r6">
+                                            </div>
+                                            <div class="productAllDetails">
+                                                <div class="productTitle">${element.name}</div>
+                                                <div class="reviews_div d-flex justify-content-center flex-wrap">
+                                                    <span class="product_mrp_">MRP: ${discount ? `<span><del>₹ ${unit_total_price}</del></span>` : ''}</span>
+                                                    <span class="current_mrp">₹${after_discount}</span>
+                                                    ${parcent_discount ? `<span class="price_off">${parcent_discount}% Off </span>` : ''}
+                                                </div>
+                                                <div class="row no-gutters mb-3">
+                                                    <div class="col-12 relevents">
+                                                        <span class="rating rating-mr-1">${ratingHtml} (${element.reviews})</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="select_size_color hiddenCartElement">
+                                    ${colorSize_elemetHtml}
+                                </div>
+                                ${select_sizeColor}
+                                ${add_cart}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            `;
+        });
+
+        let main_html = `
+            <div class="aiz-carousel aiz-carousell2 aiz-web-resp arrow-x-0 arrow-inactive-none homeSlider"
+                data-items="3.5" data-xxl-items="3" data-xl-items="2.8" data-lg-items="2"
+                data-md-items="1.5" data-sm-items="1" data-xs-items="1.2"
+                data-arrows="true" data-infinite="false">
+                ${city_slider_html}
+            </div>
+        `;
+
+        city_slider.innerHTML = main_html;
+    });
+});
+
+function variantSelect(el, id, selected_price, selected_parcent_discount, selectId, qty, stockText) {
+
+      const wrapper = el.closest('.productWrapper'); 
+      console.log(wrapper)
+      if (!wrapper) return;
+
+    let price = el.getAttribute('data-price'); 
+
+    wrapper.querySelector(`.mrp_m_${id}`).textContent = `₹ ${price}`;
+    wrapper.querySelector(`.main_price_${id}`).textContent = `₹ ${selected_price}`;
+
+    let addToCart_btn = document.getElementById(`addToCart_btn_${id}`);
+    
+    if (qty <= 0) {
+        addToCart_btn.disabled = true;
+        addToCart_btn.textContent = "Out of Stock";
+    } else {
+        addToCart_btn.disabled = false;
+        addToCart_btn.textContent = "Add to Cart";
+    }
+
+    if (selected_parcent_discount > 0) {
+        document.getElementById(`selected_off_parcent_${id}`).textContent = `${selected_parcent_discount} % Off`;
+    }
+}
 
 </script>
 

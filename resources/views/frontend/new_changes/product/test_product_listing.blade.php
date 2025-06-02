@@ -147,6 +147,18 @@
                                                     </span>
                                                 </div> 
                                             </li>
+                                             <li class="filterPadding">
+                                                <div class="form-check p-0 d-flex justify-content-between"> 
+                                                    <label class="form-check-label">Rs. 2999 - Rs. 3999 </label>
+                                                    <span>
+                                                        <input class="form-check-input checkboxFilter filterWith_price filterWith_element" 
+                                                            type="checkbox" 
+                                                            value="2999-3999"
+                                                            data-value="Rs. 2999 - Rs. 3999"  
+                                                            >
+                                                    </span>
+                                                </div> 
+                                            </li>
                                             <li class="filterPadding">
                                                 <div class="form-check p-0 d-flex justify-content-between"> 
                                                     <label class="form-check-label">Rs. 4000 & Above 
@@ -176,10 +188,76 @@
                                     </div> 
                                     <div id="color" class="collapse">
                                         <ul class="listStyles p-0" id="color_container"> 
-    
+                                                
                                         </ul>
                                     </div>  
                                 </div>  
+
+                                 <!---size filter start --->
+                                <div class="bg-white leftfilterItems">
+                                    <div class="fs-16 bg-white border filterPadding filterBorders">
+                                        <a href="#size"   class="selectorElement filter-section text-dark d-flex align-items-center justify-content-between" data-toggle="collapse">
+                                            <span> Size</span> 
+                                            <span  class="downArrowIcon"><i class="ri-arrow-down-s-line text-mute text-muted" style="font-size:27px; color:#666;"></i></span>
+                                            <span style="display: none;" class="closesIcons"><i class="ri-close-circle-line"></i></span>
+                                        </a>
+                                    </div> 
+                                    <div id="size" class="collapse">
+                                        <ul class="listStyles p-0"> 
+                                            <li class="filterPadding">
+                                                <div class="form-check p-0 d-flex justify-content-between"> 
+                                                    <div class="d-flex align-items-center"> 
+                                                        <label class="form-check-label" >
+                                                             S
+                                                        </label>
+                                                    </div>
+                                                    <span><input class="form-check-input checkboxFilter filterWith_size filterWith_element" type="checkbox" value="S" ></span>
+                                                </div> 
+                                            </li>
+                                            <li class="filterPadding">
+                                                <div class="form-check p-0 d-flex justify-content-between"> 
+                                                    <div class="d-flex align-items-center"> 
+                                                        <label class="form-check-label" >
+                                                             M
+                                                        </label>
+                                                    </div>
+                                                    <span><input class="form-check-input checkboxFilter filterWith_size filterWith_element" type="checkbox" value="M" ></span>
+                                                </div> 
+                                            </li>
+                                            <li class="filterPadding">
+                                                <div class="form-check p-0 d-flex justify-content-between"> 
+                                                    <div class="d-flex align-items-center"> 
+                                                        <label class="form-check-label" >
+                                                             L
+                                                        </label>
+                                                    </div>
+                                                    <span><input class="form-check-input checkboxFilter filterWith_size filterWith_element" type="checkbox" value="L" ></span>
+                                                </div> 
+                                            </li>
+                                            <li class="filterPadding">
+                                                <div class="form-check p-0 d-flex justify-content-between"> 
+                                                    <div class="d-flex align-items-center"> 
+                                                        <label class="form-check-label" >
+                                                             XL
+                                                        </label>
+                                                    </div>
+                                                    <span><input class="form-check-input checkboxFilter filterWith_size filterWith_element" type="checkbox" value="XL" ></span>
+                                                </div> 
+                                            </li>
+                                            <li class="filterPadding">
+                                                <div class="form-check p-0 d-flex justify-content-between"> 
+                                                    <div class="d-flex align-items-center"> 
+                                                        <label class="form-check-label" >
+                                                             XXl
+                                                        </label>
+                                                    </div>
+                                                    <span><input class="form-check-input checkboxFilter filterWith_size filterWith_element" type="checkbox" value="XXl" ></span>
+                                                </div> 
+                                            </li>
+                                        </ul>
+                                    </div>  
+                                </div>  
+                                <!--- size filter end --->
                         </div>
                     </div> 
                     <!--- new sidebar filter end ---> 
@@ -336,8 +414,9 @@
             try{
                 let response = await fetch(colorUrl);
                 let responseData = await response.json();
+                console.log(responseData);
+
                 if(responseData.status != "success") return;
-             
 
                 responseData.data.forEach((colorElement) => { 
                     colorHTML += ` 
@@ -401,8 +480,17 @@
             let html = '';
             product.forEach((element) => {
                 
-                const product_url = document.querySelector('meta[name="app-url"]').getAttribute('content');
-                const product_img = element.photos[0]; 
+                const base_url = document.querySelector('meta[name="app-url"]').getAttribute('content');
+                // const product_img = element.photos[0]; 
+                let product_img_url = element.thumbnail;
+                // let product_img = `${base_url}public/${product_img_url}`;
+                let product_img = "";
+                if(element.thumbnail === ""){
+                   product_img = `${base_url}public/${element.photos[0]}`;
+                }else{
+                  product_img = `${base_url}public/${product_img_url}`;
+                }
+
                 let unit_total_price = element.unit_price;
                 let discount = element.discount;
               
@@ -504,7 +592,7 @@
                             }else if(element.discount_type === "percent"){ 
                                 selected_discount_percentage_By_amount =  Math.round((selected_discount / 100) * selected_price);  
                                 selected_after_discount_price = selected_price - selected_discount_percentage_By_amount;   
-                               selected_parcent_discount = discount;
+                                selected_parcent_discount = discount;
                             } 
                         }
 
@@ -612,7 +700,7 @@
                                     <div class="bestsell"> 
                                         <a href="${single_p_url}">
                                             <div class="productImages">
-                                                <img src="${product_url}/public/${product_img}"
+                                                <img src="${product_img}"
                                                 alt=" " class="css-11gn9r6">
                                             </div>
                                             <div class="productAllDetails">
@@ -668,6 +756,8 @@
                 let checkedPrice = Array.from(document.querySelectorAll('.filterWith_price:checked')).map(el => el.value);
                 let checkedColor = Array.from(document.querySelectorAll('.filterWith_color:checked')).map(el => el.value);
                 let checkedDiscount = Array.from(document.querySelectorAll('.filterWith_sortDiscount:checked')).map(el => el.value); 
+                // let checkedSize = Array.from(document.querySelectorAll('.filterWith_size:checked')).map(el => el.value);
+                let checkedSize = Array.from(document.querySelectorAll('.filterWith_size:checked')).map(el => el.value); 
 
                 let filterList_container = document.getElementById('filterList');
                 let filter_html = '';

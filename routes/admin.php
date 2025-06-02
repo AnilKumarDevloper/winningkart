@@ -318,7 +318,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'prevent-ba
 
     // Flash Deal
     Route::resource('flash_deals', FlashDealController::class);
-    Route::controller(FlashDealController::class)->group(function () {
+    Route::controller(FlashDealController::class)->group(function (): void {
+        Route::get('/flash_deals_1', 'indexFlashDeal1')->name('flash_deals.index_flash_deal_1');
+        Route::get('/flash_deals_1/creat', 'createFlashDeal1')->name('flash_deals.index_flash_deal_1');
+        Route::get('/flash_deals_1/store', 'storeFlashDeal1')->name('flash_deals.index_flash_deal_1');
+        Route::get('/flash_deals_1/edit', 'editFlashDeal1')->name('flash_deals.index_flash_deal_1');
+        Route::get('/flash_deals_1/update', 'updateFlashDeal1')->name('flash_deals.index_flash_deal_1');
+         Route::post('/flash_deals_1/update_status', 'update_status')->name('flash_deals.update_status');
+
+
         Route::get('/flash_deals/edit/{id}', 'edit')->name('flash_deals.edit');
         Route::get('/flash_deals/destroy/{id}', 'destroy')->name('flash_deals.destroy');
         Route::post('/flash_deals/update_status', 'update_status')->name('flash_deals.update_status');
