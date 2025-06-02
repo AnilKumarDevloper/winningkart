@@ -1119,7 +1119,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="row">
             <div class="col-md-3 col-sm-6 col-12">
                 <div class="best_seller_product">
-                    <a href="#">
+                    <a href="/product/organza-saree">
                         <div class="best_sellter_img">
                             <img src="https://glamwiz.com/cdn/shop/files/Frame_42_360x.webp?v=1738341963" class="w-100 ">
                         </div>
@@ -1134,7 +1134,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 
             <div class="col-md-3 col-sm-6 col-12">
                 <div class="best_seller_product">
-                    <a href="#">
+                    <a href="/product/printed-saree">
                         <div class="best_sellter_img">
                             <img src="https://glamwiz.com/cdn/shop/files/Frame_38_360x.webp?v=1738341963" class="w-100 ">
                         </div>
@@ -1149,7 +1149,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 
             <div class="col-md-3 col-sm-6 col-12">
                 <div class="best_seller_product">
-                    <a href="#">
+                    <a href="/product/sequins">
                         <div class="best_sellter_img">
                             <img src="https://glamwiz.com/cdn/shop/files/Frame_43_360x.webp?v=1738341964" class="w-100 ">
                         </div>
@@ -1164,7 +1164,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 
             <div class="col-md-3 col-sm-6 col-12">
                 <div class="best_seller_product">
-                    <a href="#">
+                    <a href="/product/velvet-saree">
                         <div class="best_sellter_img">
                             <img src="https://glamwiz.com/cdn/shop/files/Frame_44_360x.webp?v=1738341964" class="w-100 ">
                         </div>
@@ -1218,7 +1218,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
   --}}
 
 <!-- testimonial start -->
-<section class="testimonials-section">
+<section class="testimonials-section" id="testimonials">
 
     <header class="section-header">
         <h1>Real People, Real Review</h1>
