@@ -1149,11 +1149,13 @@ $new_arrival_brands = Brand::with('brandLogo')->orderBy('id', 'desc')->limit(18)
                 @endforeach
 
             @endif
+            <li><a href="/#testimonials" class="headerSubMenu" >Testimonials</a></li>
                 <li>
                     <a href="{{route('payment.special_offer')}}">
                          <img src="{{ static_asset('/assets/img/offer1.PNG') }}"  class="" alt="offer img" style="width: 60px;">
                     </a>
                  </li>
+
 
             </ul>
         </div>
