@@ -55,12 +55,21 @@
         margin-right: 15%;
     }
     
+    /* @media screen and (max-width: 992px) {
+        
+            .sbc_parent_div {
+                margin-right: 43px;
+                margin-left: 15px;
+            } 
+       
+    }; */
+
     @media screen and (max-width: 768px) {
         .proVideoSec .aiz-carousel .slick-next{
-        right: 0px !important;
-   }
+             right: 0px !important;
+         }
         .cate-mob-sz .slick-list .slick-track .slick-slide {
-            width: 160px !important;
+            width: 190px !important;
             margin-inline: 0rem !important;
             padding-right: 0px !important;
         }
@@ -91,6 +100,19 @@
             height: 100% !important;
             object-fit: cover;
         }
+        .winnig_container_card .aiz-carousel .slick-prev {
+            left: -7px;
+        }
+        .winnig_container_card .aiz-carousel .slick-next {
+            right: -7px;
+        }
+        .best_seller_product{
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+            .section-header h1 {
+                font-size: 1.3rem;
+            }
     }
     .wishlist-icon {
         display: inline-flex !important;
@@ -327,6 +349,8 @@
 
 <!--Mobile Screen Banner Start-->
 <!-- Sliders -->
+
+{{-- 
  
 <div class="home-banner-area mb-3 mob_home_banner" style="background-color: {{ get_setting('slider_section_bg_color', '#dedede') }};">
 
@@ -437,7 +461,7 @@
         </div>
     </div>
 </div>
-
+ --}}
 <!--Mobile Sreen Banner End-->
 
  
@@ -486,7 +510,7 @@
         <div class="container-fluid">
             <div class="row justify-content-evenly">
                 <div class="col-12">
-                    <div class="col-lg-8 col-md-8 my-md-8 my-3 mx-auto cities">
+                    <div class="col-lg-6 col-md-8 my-md-8 my-3 mx-auto cities">
                         <!-- Title --> 
                         <div class="aiz-carousel " data-items="8"
                             data-xxl-items="5" data-xl-items="5" data-lg-items="3" data-md-items="3" data-sm-items="3"
@@ -1117,7 +1141,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <!-- Item1 Starts -->
  
         <div class="row">
-            <div class="col-md-3 col-sm-6 col-12">
+            <div class="col-md-3 col-sm-6 col-6">
                 <div class="best_seller_product">
                     <a href="/product/organza-saree">
                         <div class="best_sellter_img">
@@ -1132,7 +1156,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6 col-12">
+            <div class="col-md-3 col-sm-6 col-6">
                 <div class="best_seller_product">
                     <a href="/product/printed-saree">
                         <div class="best_sellter_img">
@@ -1147,7 +1171,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6 col-12">
+            <div class="col-md-3 col-sm-6 col-6">
                 <div class="best_seller_product">
                     <a href="/product/sequins">
                         <div class="best_sellter_img">
@@ -1162,7 +1186,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6 col-12">
+            <div class="col-md-3 col-sm-6 col-6">
                 <div class="best_seller_product">
                     <a href="/product/velvet-saree">
                         <div class="best_sellter_img">

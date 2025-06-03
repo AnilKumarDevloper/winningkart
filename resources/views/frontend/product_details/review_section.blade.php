@@ -53,12 +53,12 @@
 <!-- new review section start--->
  <section >
     <div class="productDescription">
-         <h2 class="css-description">Product Description</h2> 
-        <div class="card p-3">
+         <h2 class="css-description ">Product Description</h2> 
+        <div class="card p-lg-3 p-md-3 p-sm-0">
              <div class="tab-container">
                     <div class="tabs bg-white">
                         <button class="tab-link tab_link" onclick="openTab(event, 'description')">Description</button>
-                          <button class="tab-link tab_link" onclick="openTab(event, 'ingredients')">Ingredients</button>
+                         <button class="tab-link tab_link" onclick="openTab(event, 'ingredients')">Ingredients</button>
                         <button class="tab-link tab_link" onclick="openTab(event, 'howToUse')">How To Use</button>
                     </div>  
                     <div class="detailsContainer maxHeights">
@@ -128,7 +128,7 @@
 
     <div class="productDetails-r ">
        <h2 class="css-description">Product Description</h2> 
-       <div class="card p-3">
+       <div class="card p-lg-3 p-md-3 p-sm-0">
             <div class="tabs tabs2">
                 <button class="active">Ratings & reviews</button> 
             </div>
@@ -189,7 +189,7 @@
                 <div class="photoscustomerstext">Photos From Customers</div>
                     <div class="row">
                         <div class="col-sm-4 col-12">
-                            <div class="d-flex align-items-center" style="gap:5px">
+                            <div class="d-flex align-items-center " style="gap:5px">
                             <img class="lazyload mw-100 size-60px mx-auto border p-1 customerImage"
                             src="{{ static_asset('assets/img/placeholder.jpg') }}" data-src="{{ uploaded_asset($review->user->avatar_original) }}"
                             onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">

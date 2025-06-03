@@ -1,4 +1,4 @@
-<div class="text-left h-100 d-flex flex-column justify-content-between ">
+<div class="text-left h-100 heightProducts d-flex flex-column justify-content-between ">
     <div class="productallDetails">
     <div class="singleproductTitle mb-2">
         <h1>{{ $detailedProduct->getTranslation('name') }}</h1>
@@ -6,7 +6,7 @@
      
     <!-- Review -->
     @if ($detailedProduct->auction_product != 1)
-        <div class="row no-gutters mb-3">
+        <div class="row no-gutters mb-3 ">
             <div class="col-12 relevents">
                 @php
                     $total = 0;
@@ -114,7 +114,7 @@
     @else
     <!-- Without Wholesale -->
     @if (home_price_new($detailedProduct) != home_discounted_price_new($detailedProduct))
-        <div class="row no-gutters mb-3">
+        <div class="row no-gutters mb-lg-3 mb-sm-0">
             <div class="col-sm-10">
                 <div class="align-items-center">
                     <span class="opacity-70 fs-16 mr-2 fw-500">{{ translate('MRP') }}: </span>
@@ -236,15 +236,15 @@
                         <i class="la la-share"></i> {{ translate($detailedProduct->external_link_btn) }}
                     </a>
                 @else
-                <div class="row">
-                    <div class="col-sm-5 d-flex justify-content-center align-items-center">
+                <div class="row revercerow">
+                    <div class="col-sm-5 col-xs-5 d-flex justify-content-center align-items-center margin575">
                 
                         <button type="button" class="AddToCart add-to-cart {{ $qty < 1 ? "d-none":""}}" onclick="addToCart({{ $detailedProduct->id }})" >Add To Cart</button>
                 
                         <button type="button" class="btn btn-secondary out-of-stock fw-600 {{ $qty > 0 ? "d-none":""}}" disabled><i class="la la-cart-arrow-down"></i> {{ translate('Out of Stock') }}</button>
                 
                     </div>  
-                    <div class="col-sm-7" style="border-left: 1px solid rgb(111 121 129 / 22%);">
+                    <div class="col-sm-7 col-xs-7" style="border-left: 1px solid rgb(111 121 129 / 22%);">
                         <div class="delivery-container">
                             <div id="deliveryPincode" style="display: nne;">
                                 <div class="areaDetails pincodeDetails textsizeisSame">

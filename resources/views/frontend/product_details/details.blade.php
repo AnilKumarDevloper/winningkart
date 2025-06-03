@@ -1,4 +1,4 @@
-<div class="text-left h-100 d-flex flex-column justify-content-between ">
+<div class="text-left h-100  d-flex flex-column justify-content-between ">
     <div class="productallDetails">
     <!-- Product Name -->
     <div class="singleproductTitle mb-2">

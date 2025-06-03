@@ -402,9 +402,24 @@
                 </div>
             </div>
         `;
-     }  
-
+     }   
       
+        // ffilter attributs functons dynamic filter
+        const filterAttributs = async () => {
+            const attributs_url = "{{route('get_all_variants_list')}}";
+            console.og(attributs_url)
+
+            try{
+                // const response = await fetch(attributs_url).then(res => res.json());
+                // console.log(response)
+                
+
+            }catch(error){
+                console.error(error);
+            }
+        }
+        filterAttributs();
+
         const colorappend = async () =>{
 
             let colorUrl = "{{route('get_all_color_list')}}";
@@ -442,7 +457,6 @@
                 console.log(error);
             }
         }  
-     
        colorappend();  
  
         let productApiUrl = "{{route('api_test_product_list', [$category_slug])}}"; 
@@ -469,7 +483,7 @@
             }catch(error){
                 console.log(error)
             } 
-        } 
+        }; 
         
  
         const renderProduct = (product) =>{

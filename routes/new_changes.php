@@ -39,6 +39,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/api/brand-list', [NewChangesController::class, 'getBrandListFromFilter'])->name('get_brand_list_from_filter');
     Route::get('/api/color-list', [NewChangesController::class, 'getAllColorList'])->name('get_all_color_list');
     Route::get('/api/get-all-review-of-product/{product_id}', [NewChangesController::class, 'getAllReviewsOfProduct'])->name('get_all_review_of_product');
+    Route::get('/api/get-all-variants-list', [NewChangesController::class, 'getAllVariantList'])->name('get_all_variants_list');
     
     
     

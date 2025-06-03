@@ -35,8 +35,8 @@
             $photos = explode(',', $detailedProduct->photos);
         @endphp
     @endif
-    <!-- Gallery Images -->
-    <div class="col-2 mt-3 d-none d-lg-block">
+    <!-- Gallery Images jkh-->
+    <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12 d-none d-md-block  mt-3 ">
         <div class="aiz-carousel half-outside-arrow product-gallery-thumb" data-items='5' data-nav-for='.product-gallery' data-focus-select='true' data-arrows='true' data-vertical='true' data-auto-height='true' style="display: flex; flex-direction: column; ">
             @if($detailedProduct->digital == 0)
                 @foreach($detailedProduct->stocks as $key => $stock)
@@ -54,7 +54,8 @@
             @endforeach
         </div>
     </div>
-    <div class="col-10" style="overflow: hidden;">
+    
+    <div class="col-lg-10 col-xl-10 col-md-10 col-sm-12 col-12" style="overflow: hidden;">
         <div class="aiz-carousel product-gallery arrow-inactive-transparent arrow-lg-none" data-nav-for='.product-gallery-thumb' data-fade='true' data-auto-height='true' data-arrows='true'>
             @if($detailedProduct->digital == 0)
                 @foreach($detailedProduct->stocks as $key => $stock)

@@ -72,7 +72,6 @@ Route::controller(UpdateController::class)->group(function () {
 
 Route::get('/admin/dashboard', [AdminController::class, 'admin_dashboard'])->name('admin.dashboard')->middleware(['auth', 'admin', 'prevent-back-history']);
 
-
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'prevent-back-history']], function() {
     
     // category
@@ -307,7 +306,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'prevent-ba
     Route::controller(RoleController::class)->group(function () {
         Route::get('/roles/edit/{id}', 'edit')->name('roles.edit');
         Route::get('/roles/destroy/{id}', 'destroy')->name('roles.destroy');
-
         // Add Permissiom
         Route::post('/roles/add_permission', 'add_permission')->name('roles.permission');
     });
@@ -320,12 +318,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'prevent-ba
     Route::resource('flash_deals', FlashDealController::class);
     Route::controller(FlashDealController::class)->group(function (): void {
         Route::get('/flash_deals_1', 'indexFlashDeal1')->name('flash_deals.index_flash_deal_1');
-        Route::get('/flash_deals_1/creat', 'createFlashDeal1')->name('flash_deals.index_flash_deal_1');
-        Route::get('/flash_deals_1/store', 'storeFlashDeal1')->name('flash_deals.index_flash_deal_1');
-        Route::get('/flash_deals_1/edit', 'editFlashDeal1')->name('flash_deals.index_flash_deal_1');
-        Route::get('/flash_deals_1/update', 'updateFlashDeal1')->name('flash_deals.index_flash_deal_1');
-         Route::post('/flash_deals_1/update_status', 'update_status')->name('flash_deals.update_status');
+        Route::get('/flash_deals_1/create', 'createFlashDeal1')->name('flash_deals.create_flash_deal_1');
+        Route::get('/flash_deals_1/store', 'storeFlashDeal1')->name('flash_deals.store_flash_deal_1');
+        Route::get('/flash_deals_1/edit', 'editFlashDeal1')->name('flash_deals.edit_flash_deal_1');
+        Route::get('/flash_deals_1/update', 'updateFlashDeal1')->name('flash_deals.update_flash_deal_1');
+        Route::post('/flash_deals_1/update_status', 'update_status')->name('flash_deals.update_status');
 
+        Route::get('/flash_deals_2', 'indexFlashDeal2')->name('flash_deals.index_flash_deal_2');
+        Route::get('/flash_deals_2/create', 'createFlashDeal2')->name('flash_deals.create_flash_deal_2');
+        Route::get('/flash_deals_2/store', 'storeFlashDeal2')->name('flash_deals.store_flash_deal_2');
+        Route::get('/flash_deals_2/edit', 'editFlashDeal2')->name('flash_deals.edit_flash_deal_2');
+        Route::get('/flash_deals_2/update', 'updateFlashDeal2')->name('flash_deals.update_flash_deal_2');
+        Route::post('/flash_deals_2/update_status', 'update_status')->name('flash_deals.update_status');
 
         Route::get('/flash_deals/edit/{id}', 'edit')->name('flash_deals.edit');
         Route::get('/flash_deals/destroy/{id}', 'destroy')->name('flash_deals.destroy');

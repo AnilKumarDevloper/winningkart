@@ -6,7 +6,7 @@
   
  <section >
     <div class="productDescription">
-         <h2 class="css-description">Product Description</h2> 
+         <h2 class="css-description ">Product Description</h2> 
         <div class="card p-3">
              <div class="tab-container">
                     <div class="tabs bg-white">

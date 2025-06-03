@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\OtpEmailManager;
 use App\Models\Address;
+use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\Brand;
 use App\Models\Cart;
@@ -316,7 +317,7 @@ class NewChangesController extends Controller
         }
     }
 
-   public function getBrandListFromFilter(Request $request){
+    public function getBrandListFromFilter(Request $request){
         try{
             $brands = Brand::select('id', 'name', 'slug', )->where('name', 'LIKE', $request->brand.'%')->get();
              return response()->json([
@@ -378,4 +379,22 @@ class NewChangesController extends Controller
             ], 500);
         }
     } 
+
+    public function getAllVariantList(){
+        try{
+          $variant_list = (new Attribute)->newQueryWithoutRelationships()
+        ->select('id', 'name')
+        ->with(['attribute_values:id,attribute_id,value'])
+        ->get();
+             return response()->json([
+                "status" => "success",
+                "data" => $variant_list
+            ], 200);
+        }catch(\Exception $e){
+              return response()->json([
+                "status" => "failed",
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
 }

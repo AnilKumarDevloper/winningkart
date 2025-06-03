@@ -101,8 +101,8 @@ use App\Models\Coupon;
                                             <div class="cart_img">
                                                <img src="{{ static_asset('assets/img/placeholder.jpg') }}" data-src="{{ uploaded_asset($product->thumbnail_img) }}" class="img-fit lazyload size-60px has-transition" alt="{{ $product->getTranslation('name') }}" onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">
                                             </div>
-                                            <div>
-                                                <div class="d-flex gap-2">
+                                            <div class="w-100">
+                                                <div class="d-flex justify-content-between gap-2">
                                                     <div class="title_section">
                                                         <a href="{{ route('product', $product->slug) }}" style="text-decoration: none; color:#121416"><span class="titles_inCart">{{ $product->getTranslation('name') }}</span></a> 
                                                     </div>

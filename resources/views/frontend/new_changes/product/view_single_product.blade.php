@@ -54,11 +54,11 @@
 
 @section('content')
     <section class="mb-4"> 
-        <div class="w-100">
+        <div class="w-100 none575">
             <img class="w-100" src="https://images-static.nykaa.com/uploads/f8a7a511-fd88-4f0c-9bdd-8aa46c714a71.jpg?tr=cm-pad_resize,w-1200" alt="">
         </div>
         <div class="container">    
-            <div class="mt-2">
+            <div class="mt-2 none575">
                 <nav aria-label="breadcrumb">  
                     <ol class="breadcrumb d-flex bg-white mb-0 pt-0 pb-0" style="display: block; font-weight: 600;"> 
                         <li class=" text-black"><a href="#" class="text-dark">Home <i class="ri-arrow-right-s-line"></i></a></li>
@@ -72,14 +72,14 @@
                     <div class="col-xl-5 col-lg-6"> 
                         @include('frontend.new_changes.product.product_detail.image_gallery')
                     </div>
-                    <div class="col-xl-7 col-lg-6" style="border-left: 1px solid rgb(111 121 129 / 22%);">
+                    <div class="col-xl-7 col-lg-6 bnone550" style="border-left: 1px solid rgb(111 121 129 / 22%);">
                         @include('frontend.new_changes.product.product_detail.details')
                     </div>
                 </div>
             </div>
         </div>
     </section> 
-    <section class="mb-4 mt-4">
+    <section class="mb-4 mt-lg-4 mt-sm-0 ">
         <div class="container"> 
             <div class="row gutters-16"> 
                 <div class="col-lg-9">  

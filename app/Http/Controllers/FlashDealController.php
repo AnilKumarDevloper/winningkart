@@ -224,8 +224,7 @@ class FlashDealController extends Controller
         return 0;
     }
 
-    public function update_featured(Request $request)
-    {
+    public function update_featured(Request $request){
         foreach (FlashDeal::all() as $key => $flash_deal) {
             $flash_deal->featured = 0;
             $flash_deal->save();
@@ -249,4 +248,80 @@ class FlashDealController extends Controller
         $flash_deal_id = $request->flash_deal_id;
         return view('backend.marketing.flash_deals.flash_deal_discount_edit', compact('product_ids', 'flash_deal_id'));
     }
+
+    public function indexFlashDeal1(){
+        try{
+            return view('backend.marketing.new_flash_deals.flash_deal_1_index');
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+
+    public function createFlashDeal1(){
+        try{
+            return view('backend.marketing.new_flash_deals.flash_deal_1_create');
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+
+    public function storeFlashDeal1(){
+              try{ 
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+
+    public function editFlashDeal1(){
+        try{
+            return view('backend.marketing.new_flash_deals.flash_deal_1_edit');
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+
+    public function updateFlashDeal1(){
+        try{  
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+
+    public function indexFlashDeal2(){
+        try{
+            return view('backend.marketing.new_flash_deals.flash_deal_2_index');
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+
+    public function createFlashDeal2(){
+         try{
+            return view('backend.marketing.new_flash_deals.flash_deal_2_create');
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+
+    public function storeFlashDeal2(){
+        try{ 
+
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+    public function editFlashDeal2(){
+        try{
+            return view('backend.marketing.new_flash_deals.flash_deal_2_edit');
+        }catch(\Exception $e){
+            abort('500');
+        }
+    }
+    public function updateFlashDeal2(){
+        try{
+
+        }catch(\Exception $e){
+            abort('500');
+        }
+    } 
 }

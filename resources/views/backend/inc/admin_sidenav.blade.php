@@ -781,7 +781,7 @@
 
                              @can('view_all_flash_deals')
                                 <li class="aiz-side-nav-item">
-                                    <a href="{{ route('flash_deals.index') }}" class="aiz-side-nav-link {{ areActiveRoutes(['flash_deals.index', 'flash_deals.create', 'flash_deals.edit'])}}">
+                                    <a href="{{ route('flash_deals.index_flash_deal_1') }}" class="aiz-side-nav-link {{ areActiveRoutes(['flash_deals.index', 'flash_deals.create', 'flash_deals.edit'])}}">
                                         <span class="aiz-side-nav-text">{{ translate('Flash deals 1') }}</span>
                                     </a>
                                 </li>
@@ -789,7 +789,7 @@
 
                              @can('view_all_flash_deals')
                                 <li class="aiz-side-nav-item">
-                                    <a href="{{ route('flash_deals.index') }}" class="aiz-side-nav-link {{ areActiveRoutes(['flash_deals.index', 'flash_deals.create', 'flash_deals.edit'])}}">
+                                    <a href="{{ route('flash_deals.index_flash_deal_2') }}" class="aiz-side-nav-link {{ areActiveRoutes(['flash_deals.index', 'flash_deals.create', 'flash_deals.edit'])}}">
                                         <span class="aiz-side-nav-text">{{ translate('Flash deals 2') }}</span>
                                     </a>
                                 </li>
