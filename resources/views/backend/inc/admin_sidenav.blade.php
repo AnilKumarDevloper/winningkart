@@ -1294,13 +1294,13 @@
                                     </a>
                                 </li>
                             @endcan  
-                             @can('postcode')
+                             <!-- @can('postcode')
                                 <li class="aiz-side-nav-item">
                                     <a href="{{route('admin.postcode')}}" class="aiz-side-nav-link">
-                                        <span class="aiz-side-nav-text">{{translate('Delevery Location')}}</span>
+                                        <span class="aiz-side-nav-text">{{translate('Delivery Location')}}</span>
                                     </a>
                                 </li>
-                            @endcan  
+                            @endcan   -->
                             @can('features_activation')
                                 <li class="aiz-side-nav-item">
                                     <a href="{{route('activation.index')}}" class="aiz-side-nav-link">

@@ -4264,7 +4264,11 @@ button.tab-link.tab_link.active {
     flex: 0 0 auto;
 }
 .filterbox .leftfilterItems a{
-	
+	line-height: 15px;
+}
+.filterbox .filterPadding{
+	padding: 5px 10px;
+	border-radius: 20px
 }
 	
 	.topStickyfilter{padding: 0px;}
