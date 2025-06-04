@@ -8,7 +8,7 @@
                 <h5 class="mb-0 h6">{{translate('Add Delivery Location')}}</h5>
             </div>
             <div class="card-body">
-              <form class="form-horizontal" action="{{ route('admin.delivery_location.store') }}" method="POST" enctype="multipart/form-data">
+              <form class="form-horizontal" action="{{ route('admin.postcode.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf 
                 <div class="form-group row">
                     <label class="col-lg-3 col-from-label" for="name">{{translate('Pincode')}}</label>

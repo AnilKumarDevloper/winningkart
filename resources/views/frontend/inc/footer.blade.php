@@ -54,11 +54,11 @@
                     <form method="POST" action="{{ route('subscribers.store') }}">
                         @csrf
                         <div class="row gutters-10">
-                            <div class="col-8">
+                            <div class="col-md-5 col-sm-12">
                                 <input type="email" class="form-control border-secondary rounded-0 text-white w-100 bg-transparent" placeholder="{{ translate('Your Email Address') }}" name="email" required>
                             </div>
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-primary rounded-0 w-100" style="
+                            <div class="col-md-4 col-12 d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary rounded-0 w-100 w575" style="
                                         background: #EF7528;
                                         border-radius: 37px!important;
                                         border: none;
@@ -468,7 +468,7 @@
 <!-- footer top Bar -->
 <section class="bg-light mt-auto" style="background-color: #F3F3F3 !important;">
     <div class="container px-xs-0">
-        <div class="row no-gutters border-left border-soft-light">
+        <div class="row no-gutters border-left border-soft-light mt-lg-0 mt-md-0 mt-4">
             <!-- Terms & conditions -->
             <div class="col-lg-3 col-6 policy-file">
                 <a class="text-reset h-100  border-right border-bottom border-soft-light text-center p-2 p-md-4 d-block hov-ls-1" href="{{ route('terms') }}">
@@ -570,7 +570,7 @@
 
         <!-- Categories -->
         <div class="col">
-            <a href="{{ route('categories.all') }}" class="text-secondary d-block text-center pb-2 pt-3 {{ areActiveRoutes(['categories.all'],'svg-active')}}">
+            <a href="" class="text-secondary d-block text-center pb-2 pt-3 {{ areActiveRoutes(['categories.all'],'svg-active')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                     <g id="Group_25497" data-name="Group 25497" transform="translate(3373.432 -602)">
                       <path id="Path_2917" data-name="Path 2917" d="M126.713,0h-5V5a2,2,0,0,0,2,2h3a2,2,0,0,0,2-2V2a2,2,0,0,0-2-2m1,5a1,1,0,0,1-1,1h-3a1,1,0,0,1-1-1V1h4a1,1,0,0,1,1,1Z" transform="translate(-3495.144 602)" fill="#91919c"/>

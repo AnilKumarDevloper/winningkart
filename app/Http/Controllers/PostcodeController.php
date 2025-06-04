@@ -2,21 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DeliveryLocation;
+use App\Models\Postcode;
 use Illuminate\Http\Request;
 
-class DeliveryLocationController extends Controller
-{
+class PostcodeController extends Controller{
     public function index(){
-        return view('backend.delivery_location.index');
+        try{
+            $postcodes = Postcode::paginate(50); 
+            return view('backend.delivery_location.index', compact('postcodes'));
+        }catch(\Exception $e){
+            abort('500');
+        }
     }
 
     public function create(){
         return view('backend.delivery_location.create');
     }
 
-    public function edit(){
-        return view('backend.delivery_location.edit');
+    public function edit($id){
+          try{
+            $postcode = Postcode::where('id', $id)->first();
+            return view('backend.delivery_location.edit', compact('postcode'));
+        }catch(\Exception $e){
+            abort('500');
+        } 
     }
     public function store(Request $request){
             $validate = $request->validate([
@@ -26,16 +35,17 @@ class DeliveryLocationController extends Controller
                 "state" => ['required'],
             ]);
         try{
-            DeliveryLocation::create([
+            Postcode::create([
                 "pincode" => $request->pincode,
-                "area" => $request->area,
+                "area_name" => $request->area,
                 "city" => $request->city,
+                "district" => $request->district,
                 "state" => $request->state,
             ]);
             return view('backend.delivery_location.index');
         }catch(\Exception $e){
-            return $e->getMessage();
             abort('500');
         }
     }
+
 }

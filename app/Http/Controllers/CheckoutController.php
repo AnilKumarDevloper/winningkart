@@ -33,8 +33,7 @@ class CheckoutController extends Controller
     }
 
     //check the selected payment gateway and redirect to that controller accordingly
-    public function checkout(Request $request)
-    {
+    public function checkout(Request $request){
         // if guest checkout, create user
         if(auth()->user() == null){
             $guest_user = $this->createUser();
@@ -44,7 +43,7 @@ class CheckoutController extends Controller
             }
         }
         
-        if ($request->payment_option == null) {
+        if($request->payment_option == null){
             flash(translate('There is no payment option is selected.'))->warning();
             return redirect()->route('checkout.shipping_info');
         }
@@ -58,7 +57,7 @@ class CheckoutController extends Controller
                 $product = Product::find($cartItem['product_id']);
                 $subtotal += cart_product_price($cartItem, $product, false, false) * $cartItem['quantity'];
             }
-            if ($subtotal < get_setting('minimum_order_amount')) {
+            if($subtotal < get_setting('minimum_order_amount')){
                 flash(translate('You order amount is less than the minimum order amount'))->warning();
                 return redirect()->route('home');
             }
@@ -67,21 +66,20 @@ class CheckoutController extends Controller
         
         (new OrderController)->store($request);
         
-        if(count($carts) > 0){
-            Cart::where('user_id', $user->id)->delete();
-        }
+        // if(count($carts) > 0){
+        //     Cart::where('user_id', $user->id)->delete();
+        // }
         $request->session()->put('payment_type', 'cart_payment');
         
         $data['combined_order_id'] = $request->session()->get('combined_order_id');
         $request->session()->put('payment_data', $data);
-        if ($request->session()->get('combined_order_id') != null) {
+        if ($request->session()->get('combined_order_id') != null){
             // If block for Online payment, wallet and cash on delivery. Else block for Offline payment
             $decorator = __NAMESPACE__ . '\\Payment\\' . str_replace(' ', '', ucwords(str_replace('_', ' ', $request->payment_option))) . "Controller";
- 
-            if(class_exists($decorator)){ 
+
+            if(class_exists($decorator)){
                 return (new $decorator)->pay($request);
-            }
-            else{
+            }else{
                 $combined_order = CombinedOrder::findOrFail($request->session()->get('combined_order_id'));
                 $manual_payment_data = array(
                     'name'   => $request->payment_option,
@@ -93,8 +91,7 @@ class CheckoutController extends Controller
                     $order->manual_payment = 1;
                     $order->manual_payment_data = json_encode($manual_payment_data);
                     $order->save();
-                } 
-
+                }
                 flash(translate('Your order has been placed successfully. Please submit payment information from purchase history'))->success();
                 return redirect()->route('order_confirmed');
             }
@@ -165,8 +162,7 @@ class CheckoutController extends Controller
     }
 
     //redirects to this method after a successfull checkout
-    public function checkout_done($combined_order_id, $payment)
-    {
+    public function checkout_done($combined_order_id, $payment){
         $combined_order = CombinedOrder::findOrFail($combined_order_id);
 
         foreach ($combined_order->orders as $key => $order) {
@@ -177,6 +173,13 @@ class CheckoutController extends Controller
 
             calculateCommissionAffilationClubPoint($order);
         }
+ 
+              $carts = Cart::where('user_id', Auth::user()->id)->get();
+              if(count($carts) > 0){
+                Cart::where('user_id', Auth::user()->id)->delete();
+              }
+      
+
         Session::put('combined_order_id', $combined_order_id);
         return redirect()->route('order_confirmed');
     }

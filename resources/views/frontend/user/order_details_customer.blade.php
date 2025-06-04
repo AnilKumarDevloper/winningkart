@@ -53,7 +53,7 @@
                         </tr>
                         <tr>
                             <td class="w-50 fw-600">{{ translate('Order status') }}:</td>
-                            <td>{{ translate(ucfirst(str_replace('_', ' ', $order->delivery_status))) }}</td>
+                            <td>{{ translate(ucfirst(str_replace('_', ' ', $order->order_status))) }}</td>
                         </tr>
                         <tr>
                             <td class="w-50 fw-600">{{ translate('Total order amount') }}:</td>

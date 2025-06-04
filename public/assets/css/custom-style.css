@@ -1153,10 +1153,11 @@
 	position: fixed;
     right: -400px;  
     top: 0;
-    width: 400px;
+	width: 100%;
+    max-width: 400px;
     height: 100vh;
     background-color: #fff;
-    z-index: 200;
+    z-index: 9999;
     transition: right 0.3s ease-in-out;
 }
 
@@ -3794,6 +3795,30 @@ button.tab-link.tab_link.active {
 	.heightProducts{
 		height: auto !important;
 	}
+	.aiz-mobile-bottom-nav{
+		z-index: 999 !important;
+	}
+
+	.signin_user_element { 
+ 	   transform: translate(-80%, 0px); 
+   	   padding: 15px;
+ 	   width: 330px;
+	}
+	.loginTitle{font-size: 15px;}
+	.loginTitle2 {
+		font-size: 13px; 
+		line-height: 12px; 
+	}
+	.registerInputWithOtp, .send_otp_button { 
+  	   padding: 0.60rem .6rem; 
+	}
+	.signinButton{
+		font-size: 14px;
+		padding: 0.60rem 1rem;
+	}
+	.css-uzz1zj { 
+    	margin: .5rem 0.5rem;
+	}
 }
 
 @media(max-width:668px){
@@ -4133,6 +4158,13 @@ button.tab-link.tab_link.active {
 
 
 @media (max-width: 575px) {
+
+	.positionrelative575{
+	position: relative;
+	padding-bottom: 2rem !important;
+}
+
+
 	.select_size_color{
 		width: 100%;
 		top:0;
@@ -4144,7 +4176,7 @@ button.tab-link.tab_link.active {
 		height: 420px;
 	}
 	.view_detail_2 button, .addToCart_button, .preview_button {
-		font-size: 14px;
+		font-size: 13px;
 	}
 	.revercerow{
 		flex-direction: column-reverse;
@@ -4168,7 +4200,75 @@ button.tab-link.tab_link.active {
 	.areaCheckWith_pincode{max-width: 100%;}
 	.justifybetween575{justify-content: space-between !important;}
 	 .singleproductTitle h1{font-size: 17px;}
+	 
+	/* .right_sidebar{  
+		right: -575px;
+		width: 100%; 
+		max-width: 575px;
+	} */
+	.empty_text { 
+  	  font-size: 18px; 
+   	  line-height: 22px; 
+	}
+	.css-zpajky { 
+    font-size: 14px; 
+    line-height: 22px; 
+	}
+	.Start_shopping {
+  	 	 padding: 10px 20px; 
+     	  font-size: 14px; 
+	}
+	.w575{
+		margin-top: 1rem;
+		width: 150px !important;
+	}
+	.actionSection_1, .detail_and_addToCart{
+		height: 40px;
+	}
+
+
+.filterbox {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scroll */
+    width: 100%; /* Or a fixed width */
+    gap: 10px; /* Optional spacing between items */
+}
+.filterbox > div {
+    width: 150px;
+    flex: 0 0 auto; /* Prevent flex items from shrinking */
+    /* background: #f0f0f0; */
+    /* padding: 8px; */
+    text-align: center;
+    border: 1px solid #ccc;
+} 
+
+
+
+
+.collapse575{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	overflow-x: auto;
+	width: 100%;
+	padding: 0;
+	background-color: #fff;
+}
+.ul575{ 
+	 display: flex; 
+    list-style: none;
+    padding: 0; 
+}
+.ul575 li{ 
+	width: 150px;
+    flex: 0 0 auto;
+}
+.filterbox .leftfilterItems a{
 	
+}
+	
+	.topStickyfilter{padding: 0px;}
+ 
 }
 
 .mob_home_banner {

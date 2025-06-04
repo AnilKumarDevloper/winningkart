@@ -1294,9 +1294,9 @@
                                     </a>
                                 </li>
                             @endcan  
-                             @can('delivery_location')
+                             @can('postcode')
                                 <li class="aiz-side-nav-item">
-                                    <a href="{{route('admin.delivery_location')}}" class="aiz-side-nav-link">
+                                    <a href="{{route('admin.postcode')}}" class="aiz-side-nav-link">
                                         <span class="aiz-side-nav-text">{{translate('Delevery Location')}}</span>
                                     </a>
                                 </li>

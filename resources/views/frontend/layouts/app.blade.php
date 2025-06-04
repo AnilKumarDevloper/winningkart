@@ -22,6 +22,18 @@
     <meta name="description" content="@yield('meta_description', get_setting('meta_description'))" />
     <meta name="keywords" content="@yield('meta_keywords', get_setting('meta_keywords'))">
 
+        
+    <!-- Apple-specific meta tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Your App Name">
+
+    <!-- iPhone Home Screen Icon (Replace with your actual icon URL) -->
+    <link rel="apple-touch-icon" href="/path/to/icon.png">
+
+    <!-- iPhone Splash Screen (optional for PWA-like experience) -->
+    <link rel="apple-touch-startup-image" href="/path/to/splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+
     @yield('meta')
 
     @if (!isset($detailedProduct) && !isset($customer_product) && !isset($shop) && !isset($page) && !isset($blog))
@@ -927,7 +939,7 @@
                 _token  : AIZ.data.csrf,
                 id      :  key
             }, function(data){
-                // console.log(data);
+                
                 updateNavCart(data.nav_cart_view,data.cart_count);
                 $('#cart-summary').html(data.cart_view);
                 AIZ.plugins.notify('success', "{{ translate('Item has been removed from cart') }}");
@@ -1194,8 +1206,7 @@
                 id: key,
                 quantity: element
             }, function(data){
-                // console.log(key);
-                // console.log(data);
+                
                 // updateNavCart(data.nav_cart_view, data.cart_count);
                 // $('#cart-summary').html(data.cart_view);
                 updateNavCart(data.nav_cart_view,data.cart_count);
@@ -1352,7 +1363,7 @@
             const response = await fetch(cityApi_url);
             const responseData = await response.json(); 
 
-            console.log(responseData)
+            
             const data = responseData.data;  
 
             let isvariants = ""; 
@@ -1611,8 +1622,9 @@
         const response = await fetch(cityApi_url);
         const responseData = await response.json();
         const data = responseData.data;
+        console.log(data, 'data');
 
-        data.forEach(element => {
+        data.forEach(async (element) => {
             let product_img_url = element.thumbnail;
             let product_img = "";
             if(element.thumbnail === ""){
@@ -1838,7 +1850,7 @@
             <div class="aiz-carousel aiz-carousell2 aiz-web-resp arrow-x-0 arrow-inactive-none homeSlider"
                 data-items="3.5" data-xxl-items="3" data-xl-items="2.8" data-lg-items="2"
                 data-md-items="1.5" data-sm-items="1" data-xs-items="1.2"
-                data-arrows="true" data-infinite="false">
+                data-arrows="true" data-infinite="true">
                 ${city_slider_html}
             </div>
         `;
@@ -1850,7 +1862,6 @@
 function variantSelect(el, id, selected_price, selected_parcent_discount, selectId, qty, stockText) {
 
       const wrapper = el.closest('.productWrapper'); 
-      console.log(wrapper)
       if (!wrapper) return;
 
     let price = el.getAttribute('data-price'); 

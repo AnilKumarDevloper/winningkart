@@ -279,7 +279,7 @@ Route::group(['prefix' => 'checkout'], function () {
     Route::controller(CheckoutController::class)->group(function () {
         Route::get('/', 'get_shipping_info')->name('checkout.shipping_info');
         Route::any('/delivery-info', 'store_shipping_info')->name('checkout.store_shipping_infostore');
-        Route::post('/payment-select', 'store_delivery_info')->name('checkout.store_delivery_info');
+        Route::post('/payment-select', action: 'store_delivery_info')->name('checkout.store_delivery_info');
         Route::post('/payment', 'checkout')->name('payment.checkout');
         Route::get('/order-confirmed', 'order_confirmed')->name('order_confirmed');
         Route::post('/apply-coupon-code', 'apply_coupon_code')->name('checkout.apply_coupon_code');

@@ -163,6 +163,18 @@
     .homeSlider .slick-slide{
         width: 300px !important;
     }
+
+    @media (max-width: 575px){
+         .proVideoSec .aiz-carousel .slick-arrow{
+            width: 25px !important;
+            height: 25px !important; 
+        }
+        .top_seller_list .aiz-carousel.arrow-x-0 .slick-prev {
+            left: 1% !important;
+         }
+         .top_seller_list .aiz-carousel.arrow-x-0 .slick-next {
+        right: -4.5% !important;}
+    }
 </style>
 
 <!-- Fix Page menu -->
@@ -541,7 +553,7 @@
                 </div>
                 <!-- container of cites -->
                 <div class="city_container col-md-12 mt-2">
-                   
+                   <input type="hidden" class="cat_slug" value="Best-Sellers-mxaa2">
                     @if (get_setting('home_categories') != null)
                         @php
                             $home_categories = json_decode(get_setting('home_categories'));
@@ -740,7 +752,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 <!-- New Products -->
 <!-- ----------------------------------------------------- -->
 <!--<div id="section_newest"></div>-->
-<input type="hidden" class="cat_slug" value="Best-Sellers-mxaa2">
+
 <!-- ----------------------------------------------------- -->
 
 <!-- shop by concern start -->

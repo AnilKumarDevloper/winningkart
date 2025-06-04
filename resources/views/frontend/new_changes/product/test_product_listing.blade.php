@@ -8,9 +8,9 @@
         <div class="container"> 
            <div class="row"> 
 
-                <div class="col-xl-3"> 
+                <div class="col-xl-3 col-md-3 "> 
                     <!--- new sidebar filter start --->
-                    <div class="sticky-top z-0 topStickyfilter"> 
+                    <div class="sticky-top z-0 topStickyfilter positionrelative575"> 
                         <div class="filtersApplied card filterAppliedd">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="filterAppliedText">Filters Applied</span>
@@ -112,7 +112,18 @@
                             </div>  
                         </div>
 
-                        <div class="mt-3"> 
+                        <!-- <div class="filterbox">
+                            <div>list 1</div>
+                            <div>list 1</div>
+                            <div>list 1</div>
+                            <div>list 1</div>
+                            <div>list 1</div> 
+                        </div> -->
+
+                   
+
+                        <div class="mt-3 filterbox "> 
+                     
                                 <div class="bg-white leftfilterItems">
                                     <div class="fs-16 bg-white border filterPadding filterBorders">
                                         <a href="#category1" class="selectorElement filter-section text-dark d-flex align-items-center justify-content-between" data-toggle="collapse">
@@ -121,8 +132,8 @@
                                             <span style="display: none;" class="closesIcons"><i class="ri-close-circle-line"></i></span>
                                         </a>
                                     </div> 
-                                    <div id="category1" class="collapse">
-                                        <ul class="listStyles p-0">
+                                    <div id="category1" class="collapse collapse575">
+                                        <ul class="listStyles p-0 ul575">
                                             <li class="filterPadding">
                                                 <div class="form-check p-0 d-flex justify-content-between"> 
                                                     <label class="form-check-label">Rs. 500 - Rs. 999 </label>
@@ -175,9 +186,9 @@
                                         </ul> 
                                     </div>  
                                 </div> 
-                               
-
+                        
                                 <!--- Color filter --->
+                        
                                 <div class="bg-white leftfilterItems">
                                     <div class="fs-16 bg-white border filterPadding filterBorders">
                                         <a href="#color"   class="selectorElement filter-section text-dark d-flex align-items-center justify-content-between" data-toggle="collapse">
@@ -192,8 +203,9 @@
                                         </ul>
                                     </div>  
                                 </div>  
-
+                          
                                  <!---size filter start --->
+                 
                                 <div class="bg-white leftfilterItems">
                                     <div class="fs-16 bg-white border filterPadding filterBorders">
                                         <a href="#size"   class="selectorElement filter-section text-dark d-flex align-items-center justify-content-between" data-toggle="collapse">
@@ -257,12 +269,13 @@
                                         </ul>
                                     </div>  
                                 </div>  
+                      
                                 <!--- size filter end --->
                         </div>
                     </div> 
                     <!--- new sidebar filter end ---> 
                 </div> 
-                <div class="col-xl-9">
+                <div class="col-xl-9 col-md-9 ">
 
                      <div class="col-12">
                                 <h1 class="fs-20 fs-md-24 fw-700 text-dark text=center" id="cotegory_name">
@@ -703,7 +716,7 @@
               
                 html += ` 
                
-                    <div class="col-md-4" id="${element.id}">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 " id="${element.id}">
                      <form id="option-choice-form_${element.id}">
                             <input type="hidden" name="_token" value="${csrfToken}">
                             <input type="hidden" name="id" value="${element.id}">

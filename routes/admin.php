@@ -31,6 +31,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PickupPointController;
+use App\Http\Controllers\PostcodeController;
 use App\Http\Controllers\ProductBulkUploadController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductQueryController;
@@ -538,8 +539,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'prevent-ba
 
     Route::get('/admin-permissions', [RoleController::class, 'create_admin_permissions']);
 
-     Route::get('/delivery-location', [DeliveryLocationController::class, 'index'])->name('admin.delivery_location');
-     Route::get('/delivery-location/create', [DeliveryLocationController::class, 'create'])->name('admin.delivery_location.create');
-     Route::get('/delivery-location/edit', [DeliveryLocationController::class, 'edit'])->name('admin.delivery_location.edit');
-     Route::post('/delivery-location/store', [DeliveryLocationController::class, 'store'])->name('admin.delivery_location.store');
+    Route::get('/delivery-location', [PostcodeController::class, 'index'])->name('admin.postcode');
+    Route::get('/delivery-location/create', [PostcodeController::class, 'create'])->name('admin.postcode.create');
+    Route::get('/delivery-location/edit/{id}', [PostcodeController::class, 'edit'])->name('admin.postcode.edit');
+    Route::post('/delivery-location/store', [PostcodeController::class, 'store'])->name('admin.postcode.store');
 });

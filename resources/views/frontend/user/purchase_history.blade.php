@@ -12,8 +12,9 @@
                         <th class="pl-0">{{ translate('Code')}}</th>
                         <th data-breakpoints="md">{{ translate('Date')}}</th>
                         <th>{{ translate('Amount')}}</th>
-                        <th data-breakpoints="md">{{ translate('Delivery Status')}}</th>
+                        <th data-breakpoints="md">{{ translate('Order Status')}}</th>
                         <th data-breakpoints="md">{{ translate('Payment Status')}}</th>
+                        <th data-breakpoints="md">{{ translate('Delivery Status')}}</th>
                         <th class="text-right pr-0">{{ translate('Options')}}</th>
                     </tr>
                 </thead>
@@ -31,15 +32,13 @@
                                 <td class="fw-700">
                                     {{ single_price($order->grand_total) }}
                                 </td>
-                                <!-- Delivery Status -->
-                                <td class="fw-700">
-                                    {{ translate(ucfirst(str_replace('_', ' ', $order->delivery_status))) }}
-
-                                    <!-- @if($order->delivery_viewed == 0)
-                                        <span class="ml-2" style="color:green"><strong>*</strong></span>
-                                    @endif -->
-
-                                </td>
+                               <td>
+                                  @if ($order->order_status == 'confirmed')
+                                        <span class="badge badge-inline badge-success p-3 fs-12" style="border-radius: 25px; min-width: 80px !important;">{{translate('Confirmed')}}</span>
+                                    @else
+                                        <span class="badge badge-inline badge-danger p-3 fs-12" style="border-radius: 25px; min-width: 80px !important;">{{translate('Not Confirmed')}}</span>
+                                    @endif
+                               </td>
                                 <!-- Payment Status -->
                                 <td>
                                     @if ($order->payment_status == 'paid')
@@ -49,6 +48,16 @@
                                     @endif
 
                                     <!-- @if($order->payment_status_viewed == 0)
+                                        <span class="ml-2" style="color:green"><strong>*</strong></span>
+                                    @endif -->
+
+                                </td>
+
+                                 <!-- Delivery Status -->
+                                <td class="fw-700">
+                                    {{ translate(ucfirst(str_replace('_', ' ', $order->delivery_status))) }}
+
+                                    <!-- @if($order->delivery_viewed == 0)
                                         <span class="ml-2" style="color:green"><strong>*</strong></span>
                                     @endif -->
 
