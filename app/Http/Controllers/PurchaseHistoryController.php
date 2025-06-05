@@ -38,7 +38,7 @@ class PurchaseHistoryController extends Controller
             ->paginate(15);
         return view('frontend.user.digital_purchase_history', compact('orders'));
     }
-
+    
     public function purchase_history_details($id)
     {
         $order = Order::findOrFail(decrypt($id));

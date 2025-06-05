@@ -543,4 +543,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'prevent-ba
     Route::get('/delivery-location/create', [PostcodeController::class, 'create'])->name('admin.postcode.create');
     Route::get('/delivery-location/edit/{id}', [PostcodeController::class, 'edit'])->name('admin.postcode.edit');
     Route::post('/delivery-location/store', [PostcodeController::class, 'store'])->name('admin.postcode.store');
+    Route::post('/delivery-location/update/{id}', [PostcodeController::class, 'update'])->name('admin.postcode.update');
 });

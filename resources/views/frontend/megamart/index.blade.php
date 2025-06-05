@@ -524,7 +524,7 @@
                 <div class="col-12">
                     <div class="col-lg-6 col-md-8 my-md-8 my-3 mx-auto cities">
                         <!-- Title --> 
-                        <div class="aiz-carousel " data-items="8"
+                        <div class="aiz-carousel citystext" data-items="8"
                             data-xxl-items="5" data-xl-items="5" data-lg-items="3" data-md-items="3" data-sm-items="3"
                             data-xs-items="3" data-arrows='false' data-infinite='false'>
 
@@ -758,11 +758,11 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 <!-- shop by concern start -->
 
 <!-- for big devices -->
-<section class="shopbyconcern d-lg-block d-md-block d-sm-none d-none">
+<section class="shopbyconcern d-lg-block d-md-block ">
     <div class="container">
         <div class="row">
-            <div class="col pl-0 col-12">
-                <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0 ">
+            <div class="col pl-0 col-12 mb-4">
+                <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0  ">
                     <div class="top_heading">
                         <span class="">Shop By Concern </span>
                         <span></span>
@@ -771,10 +771,10 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
             </div> 
             
 
-            <div class="col-md-12  my-2 ">
+            <div class="col-md-12 my-2  d-none">
                 <div class="row">
 
-                    <div class="col">
+                    <div class="col-md-6 col-12">
                         <div class="row justify-content-end">
                             <div class="img_col1 shoBy"> 
                                 <img src=" {{asset('public/assets/img/lady-3.png')}}" alt="" class="img-fluid img1">
@@ -792,7 +792,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                         </div>
                     </div>
 
-                    <div class="col">
+                    <div class="col-md-6 col-12">
                         <div class="row">
                                 <div class=" img_col4 shoBy sbc_parent_div">
                                     <img src="{{ asset('public/assets/img/lady-2.png') }}" alt="" class="img-fluid img4">
@@ -814,6 +814,62 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
 
                 </div>
             </div>
+
+
+            <!--------new add-------->
+            <div class="col-md-6">
+                <div class="row h-100">
+                    <div class="col-6 p-0 plmd3">
+                        <div class="image_elements">
+                                <img src=" {{asset('public/assets/img/lady-3.png')}}" alt="" class="imimg1  position-relative">
+                                <!-- <img src=" {{asset('public/assets/img/decor-1.webp')}}" alt="" class="img-fluid img1"> -->
+                                <span class="textElemets"><a href="{{ route('products.category', "decor-2jywo") }}" class="text-white">saree</a></span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="image_elements h-100">  
+                               <img src="{{asset('public/assets/img/lady-4.png')}}" alt="" class="imimg1 position-relative" >
+                               <span  class="textElemets"><a href="{{ route('products.category', "women-clothings") }}" class="text-white">1-minute sarees</a></span>
+                        </div>
+                    </div>
+                    <div class="pl-0 col-12 mt-3 plmd3">
+                        <div class="image_elements h-100">
+                            <img src="{{asset('public/assets/img/lady-1.png')}}" alt="" class="imimg1 position-relative" >
+                            <span  class="textElemets"><a href="{{ route('products.category', "demo-category-3") }}" class="text-white">best seller</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6 col-6 pl-0 pleft575">
+                            <div class="image_elements h-100">
+                                <img src="{{ asset('public/assets/img/lady-2.png') }}" alt="" class="imimg1 position-relative" >
+                                <span  class="textElemets"><a href="{{ route('products.category', "demo-category-2") }}" class="text-white">suits</a></span>
+                            </div>
+                    </div>
+                    <div class="col-md-6 col-6 ptop557"> 
+                            
+                            <div class="row">
+                                <div class="col-lg-12 col-12 p-0 pright575">
+                                    <div class="image_elements">
+                                        <img src="{{ asset('public/assets/img/lady-5.png') }}" alt="" class="imimg1 position-relative" >
+                                        <span  class="textElemets"><a href="{{ route('products.category', "gadgets-md7fv") }}" class="text-white">bags</a></span>
+                                    </div> 
+                                </div>
+                                
+                                <div class="col-lg-12 col-12 p-0 pright575 ">
+                                    <div class="image_elements mt-3">
+                                        <img src="{{ asset('public/assets/img/lady-6.png') }}" alt="" class="imimg1 position-relative" >
+                                        <span  class="textElemets"><a href="{{ route('products.category', "Daily-Essentials-CtrQg") }}" class="text-white">Winningkart</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                    </div>
+                </div>
+            </div>
+            <!--------new end-------->
         </div>
     </div>
 </section>

@@ -5,7 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Postcode extends Model
-{
+class Postcode extends Model{
     use HasFactory;
+
+    protected $fillable = [
+        "area_name",
+        "pincode",
+        "city",
+        "district",
+        "state",
+        "status",
+    ];
 }

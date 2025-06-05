@@ -3761,11 +3761,36 @@ button.tab-link.tab_link.active {
   .breadcrumb li i{
 		color: #888888 !important;
   }
+
+  .imimg1 {
+	border-radius: 20px;
+	width: 100%;
+	height: 100%;
+  }
+  .textElemets{
+	position: absolute;
+    bottom: 15px;
+    left: 30px;
+    background: #353535c4;
+    color: #fff;
+    padding: .3rem .7rem;
+    border-radius: 8px;
+  }
+
+  .citystext .slick-track{
+	 width: auto !important; 
+   }
+  .citystext .slick-slide{
+	 width: auto !important; 
+  }
+  
 /****************** checkout section styles end***************************/
  
 
 
 @media(max-width:992px){
+
+
 	.heardeSearch_area{
 		flex-direction: row-reverse;
 		gap: 10px;
@@ -3843,6 +3868,11 @@ button.tab-link.tab_link.active {
 
 @media screen and (max-width:768px) {
 
+
+	.plmd3{
+		padding-left: 15px !important;
+	}
+	
 	.aiz-card-box,
 	.aiz-carousel1 .slick-list .slick-track .slick-slide,
 	.aiz-carousell2 .slick-list .slick-track .slick-slide {
@@ -4235,41 +4265,55 @@ button.tab-link.tab_link.active {
 }
 .filterbox > div {
     width: 150px;
-    flex: 0 0 auto; /* Prevent flex items from shrinking */
+    /* flex: 0 0 auto;   */
     /* background: #f0f0f0; */
     /* padding: 8px; */
+	padding: 7px;
     text-align: center;
-    border: 1px solid #ccc;
+    border: 1px solid #e86c00;
 	border-radius: 20px
 } 
 
 
 
 
-.collapse575{
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	overflow-x: auto;
-	width: 100%;
-	padding: 0;
-	background-color: #fff;
-}
-.ul575{ 
-	 display: flex; 
-    list-style: none;
-    padding: 0; 
-}
-.ul575 li{ 
-	width: 150px;
-    flex: 0 0 auto;
-}
-.filterbox .leftfilterItems a{
-	line-height: 15px;
-}
-.filterbox .filterPadding{
-	padding: 5px 10px; 
-}
+	.collapse575{
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		overflow-x: auto;
+		width: 100%;
+		padding: 0;
+		background-color: #fff;
+	}
+	.ul575{ 
+		display: flex; 
+		list-style: none;
+		padding: 0; 
+	}
+	.ul575 li{ 
+		width: 150px;
+		flex: 0 0 auto;
+	}
+	.filterbox .leftfilterItems a{
+		line-height: 15px;
+	}
+	.filterbox .filterPadding{
+		padding: 0px; 
+	}
+	.pleft575{
+		padding-left: 15px !important;
+	}
+	.pright575 {
+		padding-right: 15px !important;
+	}
+	.textElemets { 
+		bottom: 7px;
+		left: 21px;
+	}
+	.ptop557{
+		padding-top: 15px !important;
+	} 
 	
 	.topStickyfilter{padding: 0px;}
  

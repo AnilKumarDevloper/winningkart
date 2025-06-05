@@ -110,17 +110,7 @@
 
                                 </ul>
                             </div>  
-                        </div>
-
-                        <!-- <div class="filterbox">
-                            <div>list 1</div>
-                            <div>list 1</div>
-                            <div>list 1</div>
-                            <div>list 1</div>
-                            <div>list 1</div> 
-                        </div> -->
-
-                   
+                        </div>  
 
                         <div class="mt-3 filterbox "> 
                      
