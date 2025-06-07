@@ -8,7 +8,7 @@
         <div class="container"> 
            <div class="row"> 
 
-                <div class="col-xl-3 col-md-3 "> 
+                <div class="col-xl-3 col-md-3 fixedpadding575"> 
                     <!--- new sidebar filter start --->
                     <div class="sticky-top z-0 topStickyfilter positionrelative575"> 
                         <div class="filtersApplied card filterAppliedd">
@@ -112,9 +112,9 @@
                             </div>  
                         </div>  
 
-                        <div class="mt-3 filterbox "> 
+                        <div class="mt-3 filterbox " > 
                      
-                                <div class="bg-white leftfilterItems">
+                                <div class="bg-white leftfilterItems eachcollaps">
                                     <div class="fs-16 bg-white border filterPadding filterBorders">
                                         <a href="#category1" class="selectorElement filter-section text-dark d-flex align-items-center justify-content-between" data-toggle="collapse">
                                             <span> Price</span> 
@@ -138,7 +138,7 @@
                                             </li>
                                             <li class="filterPadding">
                                                 <div class="form-check p-0 d-flex justify-content-between"> 
-                                                    <label class="form-check-label">Rs. 1000 - Rs. 2999 </label>
+                                                    <span><label class="form-check-label">Rs. 1000 - Rs. 2999 </label></span>
                                                     <span>
                                                         <input class="form-check-input checkboxFilter filterWith_price filterWith_element" 
                                                             type="checkbox" 
@@ -179,16 +179,16 @@
                         
                                 <!--- Color filter --->
                         
-                                <div class="bg-white leftfilterItems">
+                                <div class="bg-white leftfilterItems eachcollaps">
                                     <div class="fs-16 bg-white border filterPadding filterBorders">
-                                        <a href="#color"   class="selectorElement filter-section text-dark d-flex align-items-center justify-content-between" data-toggle="collapse">
+                                        <a href="#color"   class="selectorElement filter-section text-dark d-flex align-items-center justify-content-between " data-toggle="collapse">
                                             <span> Color</span> 
                                             <span  class="downArrowIcon"><i class="ri-arrow-down-s-line text-mute text-muted" style="font-size:27px; color:#666;"></i></span>
                                             <span style="display: none;" class="closesIcons"><i class="ri-close-circle-line"></i></span>
                                         </a>
                                     </div> 
-                                    <div id="color" class="collapse">
-                                        <ul class="listStyles p-0" id="color_container"> 
+                                    <div id="color" class="collapse collapse575">
+                                        <ul class="listStyles p-0 ul575" id="color_container"> 
                                                 
                                         </ul>
                                     </div>  
@@ -196,16 +196,16 @@
                           
                                  <!---size filter start --->
                  
-                                <div class="bg-white leftfilterItems">
+                                <div class="bg-white leftfilterItems eachcollaps">
                                     <div class="fs-16 bg-white border filterPadding filterBorders">
-                                        <a href="#size"   class="selectorElement filter-section text-dark d-flex align-items-center justify-content-between" data-toggle="collapse">
+                                        <a href="#size" class="selectorElement filter-section text-dark d-flex align-items-center justify-content-between" data-toggle="collapse">
                                             <span> Size</span> 
                                             <span  class="downArrowIcon"><i class="ri-arrow-down-s-line text-mute text-muted" style="font-size:27px; color:#666;"></i></span>
                                             <span style="display: none;" class="closesIcons"><i class="ri-close-circle-line"></i></span>
                                         </a>
                                     </div> 
-                                    <div id="size" class="collapse">
-                                        <ul class="listStyles p-0"> 
+                                    <div id="size" class="collapse collapse575">
+                                        <ul class="listStyles p-0 ul575"> 
                                             <li class="filterPadding">
                                                 <div class="form-check p-0 d-flex justify-content-between"> 
                                                     <div class="d-flex align-items-center"> 
@@ -265,13 +265,13 @@
                     </div> 
                     <!--- new sidebar filter end ---> 
                 </div> 
-                <div class="col-xl-9 col-md-9 ">
+                <div class="col-xl-9 col-md-9 col9575 ">
 
-                     <div class="col-12">
+                     <div class="col-12 headingtext575">
                                 <h1 class="fs-20 fs-md-24 fw-700 text-dark text=center" id="cotegory_name">
                                   
                                 </h1> 
-                        </div>
+                    </div>
                     <div class="row" id="products">  
                          
                             <!-- <div class="col-md-4" id="loader">
@@ -706,7 +706,7 @@
               
                 html += ` 
                
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 " id="${element.id}">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-6 products575" id="${element.id}">
                      <form id="option-choice-form_${element.id}">
                             <input type="hidden" name="_token" value="${csrfToken}">
                             <input type="hidden" name="id" value="${element.id}">
@@ -928,10 +928,23 @@
                 });
                 filterByuser();
          });
+ 
 
-       
+ </script>  
 
- </script> 
+
+<script>
+    document.querySelectorAll('.eachcollaps').forEach(function (param) {
+        param.addEventListener('click', function (event) {  
+            let child = param.querySelector('.collapse575');  
+            child.classList.add('show'); 
+            document.querySelectorAll('.collapse575').forEach(function (el) {
+                el.classList.remove('show');
+            });
+        });
+    }); 
+</script>
+
 
 @endsection
 @endsection

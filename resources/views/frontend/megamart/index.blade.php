@@ -68,16 +68,17 @@
         .proVideoSec .aiz-carousel .slick-next{
              right: 0px !important;
          }
-        .cate-mob-sz .slick-list .slick-track .slick-slide {
+        /* .cate-mob-sz .slick-list .slick-track .slick-slide {
             width: 190px !important;
             margin-inline: 0rem !important;
             padding-right: 0px !important;
-        }
+        } */
         .cate-mob-sz .slick-list .slick-track{
             display: flex;
             gap: 0.3rem;
         }
         .winnig_card {
+            width: 100%;
             min-width: 160px;
             height: 160px;
             border-radius: 0.2rem;
@@ -160,20 +161,26 @@
         border-radius: 23px;
     }
    
-    .homeSlider .slick-slide{
+
+    /* .homeSlider .slick-slide{
         width: 300px !important;
-    }
+    } */
+
+    /* .bestSellers .slick-slide{
+         width: 300px !important;
+    } */
 
     @media (max-width: 575px){
+        .aiz-carousel .slick-arrow{width: 20px; height: 20px;}
          .proVideoSec .aiz-carousel .slick-arrow{
-            width: 25px !important;
-            height: 25px !important; 
+            width: 20px !important;
+            height: 20px !important; 
         }
         .top_seller_list .aiz-carousel.arrow-x-0 .slick-prev {
             left: 1% !important;
          }
          .top_seller_list .aiz-carousel.arrow-x-0 .slick-next {
-        right: -4.5% !important;}
+        right: -4.5% !important;} 
     }
 </style>
 
@@ -522,11 +529,11 @@
         <div class="container-fluid">
             <div class="row justify-content-evenly">
                 <div class="col-12">
-                    <div class="col-lg-6 col-md-8 my-md-8 my-3 mx-auto cities">
+                    <div class="col-lg-12 col-md-12 col-sm-11 my-md-8 my-3 mx-auto cities p-0" style="overflow-x: hidden;">
                         <!-- Title --> 
-                        <div class="aiz-carousel citystext" data-items="8"
-                            data-xxl-items="5" data-xl-items="5" data-lg-items="3" data-md-items="3" data-sm-items="3"
-                            data-xs-items="3" data-arrows='false' data-infinite='false'>
+                        <div class="aiz-carousel citystext" data-items="5"
+                            data-xxl-items="4" data-xl-items="4" data-lg-items="4" data-md-items="4" data-sm-items="3"
+                            data-xs-items="3" data-arrows='false' data-infinite='false' style="width: fit-content !important; margin: 0 auto !important;">
 
                             @if (get_setting('home_categories') != null)
                                 @php
@@ -763,7 +770,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="row">
             <div class="col pl-0 col-12 mb-4">
                 <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0  ">
-                    <div class="top_heading">
+                    <div class="top_heading plh575">
                         <span class="">Shop By Concern </span>
                         <span></span>
                     </div>
@@ -840,7 +847,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 ptop557">
                 <div class="row">
                     <div class="col-md-6 col-6 pl-0 pleft575">
                             <div class="image_elements h-100">
@@ -848,7 +855,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                                 <span  class="textElemets"><a href="{{ route('products.category', "demo-category-2") }}" class="text-white">suits</a></span>
                             </div>
                     </div>
-                    <div class="col-md-6 col-6 ptop557"> 
+                    <div class="col-md-6 col-6 "> 
                             
                             <div class="row">
                                 <div class="col-lg-12 col-12 p-0 pright575">
@@ -1022,7 +1029,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
             
         </div>   
 
-        <div id="city_wise_cotegory_Best-Sellers-mxaa2">
+        <div class="bestSellers" id="city_wise_cotegory_Best-Sellers-mxaa2">
 
         </div>
 
@@ -1144,7 +1151,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <div class="col-md-12 p-0 m-auto winnig_container_card">
             <div class="">
                 <div class="aiz-carousel cate-mob-sz sm-gutters-17 mob_selectors" data-items="3" data-xxl-items="3" data-xl-items="3"
-                    data-lg-items="3" data-md-items="2" data-sm-items="2" data-xs-items="1" data-arrows="true"
+                    data-lg-items="3" data-md-items="2" data-sm-items="2" data-xs-items="2" data-arrows="true"
                     data-dots="false" data-autoplay="false" data-infinite="true">
                     @foreach ($featured_categories as $key => $category)
                     @php
@@ -1209,7 +1216,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
         <!-- Item1 Starts -->
  
         <div class="row">
-            <div class="col-md-3 col-sm-6 col-6">
+            <div class="col-md-3 col-sm-6 col-6 colections">
                 <div class="best_seller_product">
                     <a href="/product/organza-saree">
                         <div class="best_sellter_img">
@@ -1224,7 +1231,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6 col-6">
+            <div class="col-md-3 col-sm-6 col-6 colections">
                 <div class="best_seller_product">
                     <a href="/product/printed-saree">
                         <div class="best_sellter_img">
@@ -1239,7 +1246,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6 col-6">
+            <div class="col-md-3 col-sm-6 col-6 colections">
                 <div class="best_seller_product">
                     <a href="/product/sequins">
                         <div class="best_sellter_img">
@@ -1254,7 +1261,7 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6 col-6">
+            <div class="col-md-3 col-sm-6 col-6 colections">
                 <div class="best_seller_product">
                     <a href="/product/velvet-saree">
                         <div class="best_sellter_img">
@@ -1267,7 +1274,8 @@ $flash_deal_banner_menu_text = ((get_setting('flash_deal_banner_menu_text') == '
                         </dtv>
                     </a>
                 </div>
-            </div>
+            </div> 
+
         </div>  
         <!-- Item1 Ends -->
          

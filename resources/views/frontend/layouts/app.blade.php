@@ -924,7 +924,7 @@
         $(document).on("click", function(event){
             var $trigger = $("#category-menu-bar");
             if($trigger !== event.target && !$trigger.has(event.target).length){
-                $("#click-category-menu").slideUp("fast");;
+                $("#click-category-menu").slideUp("fast");
                 $("#category-menu-bar-icon").removeClass('show');
             }
         });
@@ -947,7 +947,7 @@
             });
         }
 
-        function showLoginModal() {
+        function showLoginModal(){
             $('#login_modal').modal();
         }
 
@@ -1805,7 +1805,7 @@
             }
 
             city_slider_html += `
-                <div class="col-12 p-2">
+                <div class="col-12 p-2 psm1">
                     <form id="option-choice-form_${element.id}">
                         <input type="hidden" name="_token" value="${csrfToken}">
                         <input type="hidden" name="id" value="${element.id}">
@@ -1848,8 +1848,8 @@
 
         let main_html = `
             <div class="aiz-carousel aiz-carousell2 aiz-web-resp arrow-x-0 arrow-inactive-none homeSlider"
-                data-items="3.5" data-xxl-items="3" data-xl-items="2.8" data-lg-items="2"
-                data-md-items="1.5" data-sm-items="1" data-xs-items="1.2"
+                data-items="4" data-xxl-items="4" data-xl-items="4" data-lg-items="4"
+                data-md-items="3" data-sm-items="2" data-xs-items="2"
                 data-arrows="true" data-infinite="true">
                 ${city_slider_html}
             </div>

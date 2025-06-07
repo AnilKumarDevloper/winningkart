@@ -544,4 +544,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'prevent-ba
     Route::get('/delivery-location/edit/{id}', [PostcodeController::class, 'edit'])->name('admin.postcode.edit');
     Route::post('/delivery-location/store', [PostcodeController::class, 'store'])->name('admin.postcode.store');
     Route::post('/delivery-location/update/{id}', [PostcodeController::class, 'update'])->name('admin.postcode.update');
+    Route::post('/delivery-location/destroy', [PostcodeController::class, 'destroy'])->name('admin.postcode.destroy');
+    Route::post('/delivery-location/change-status', [PostcodeController::class, 'changeStatus'])->name('admin.postcode.change_status');
+    Route::post('/delivery-location/enable-all', [PostcodeController::class, 'enableAllPostcode'])->name('admin.postcode.enable_all_postcode');
+    Route::post('/delivery-location/disable-all', [PostcodeController::class, 'disableAllPostcode'])->name('admin.postcode.disable_all_postcode');
+    Route::post('/delivery-location/search-postcode', [PostcodeController::class, 'searchPostcode'])->name('admin.postcode.search_postcode');
 });

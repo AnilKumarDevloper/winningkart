@@ -3810,9 +3810,9 @@ button.tab-link.tab_link.active {
 	.user_signIn button{
 		padding-left: .6rem;
 		padding-right: .6rem;
-		padding-top: 0.425rem;
-		padding-bottom: 0.425rem;
-		font-size: 13px;
+		padding-top: 0.3rem;
+		padding-bottom: 0.3rem;
+		font-size: 12px;
 	}
 	.user_signIn{
 		min-width: 64px;
@@ -3852,10 +3852,13 @@ button.tab-link.tab_link.active {
 	}
 
 	.productWrapper{
-		padding: 10px 2.18%; 
+		padding: 8px 0%; 
 	}
 	.productWrapper .hover_content{
 		display: inline-block;
+	}
+	.productAllDetails{
+		padding: 0 5px;
 	}
 }
 
@@ -3868,6 +3871,13 @@ button.tab-link.tab_link.active {
 
 @media screen and (max-width:768px) {
 
+	.cities .aiz-carousel .carousel-link{
+		font-size: 0.7rem;
+		padding: .4rem .5rem;
+	}
+	.fbx575{
+		padding-bottom: 1rem !important
+	}
 
 	.plmd3{
 		padding-left: 15px !important;
@@ -3876,7 +3886,7 @@ button.tab-link.tab_link.active {
 	.aiz-card-box,
 	.aiz-carousel1 .slick-list .slick-track .slick-slide,
 	.aiz-carousell2 .slick-list .slick-track .slick-slide {
-		max-width: 190px !important
+		max-width: 190px;
 	}
 
 	.btn-visit .button-textt,
@@ -4069,17 +4079,17 @@ button.tab-link.tab_link.active {
 	.top_seller_list .aiz-carousel.arrow-x-0 .slick-prev {
 		left: 10% !important;
 		transform: translate(-50%, -44%);
-		width: 25px;
-		height: 25px;
-		line-height: 25px
+		width: 20px;
+		height: 20px;
+		line-height: 20px
 	}
 
 	.top_seller_list .aiz-carousel.arrow-x-0 .slick-next {
 		right: 0 !important;
 		transform: translate(-50%, -44%);
-		width: 25px;
-		height: 25px;
-		line-height: 25px
+		width: 20px;
+		height: 20px;
+		line-height: 20px
 	}
 
 	.mob_best_wk {
@@ -4188,26 +4198,31 @@ button.tab-link.tab_link.active {
 
 
 @media (max-width: 575px) {
+	
+
+	
+	.aiz-card-box, .aiz-carousel1 .slick-list .slick-track .slick-slide, .aiz-carousell2 .slick-list .slick-track .slick-slide {
+        max-width: 100% !important;
+    }
 
 	.positionrelative575{
-	position: relative;
-	padding-bottom: 2rem !important;
-}
+		position: relative;
+		padding-bottom: .5rem !important;
+	}
 
 
 	.select_size_color{
 		width: 100%;
 		top:0;
 	}
-	.aiz-card-box, .aiz-carousel1 .slick-list .slick-track .slick-slide, .aiz-carousell2 .slick-list .slick-track .slick-slide {
-        max-width: 250px !important;
-    }
+	
 	.pr_height{
-		height: 420px;
+		height: 410px;
 	}
 	.view_detail_2 button, .addToCart_button, .preview_button {
-		font-size: 13px;
+		font-size: 12px !important;
 	}
+	.view_detail_2 button{line-height: 15px;}
 	.revercerow{
 		flex-direction: column-reverse;
 	}
@@ -4231,11 +4246,7 @@ button.tab-link.tab_link.active {
 	.justifybetween575{justify-content: space-between !important;}
 	 .singleproductTitle h1{font-size: 17px;}
 	 
-	/* .right_sidebar{  
-		right: -575px;
-		width: 100%; 
-		max-width: 575px;
-	} */
+ 
 	.empty_text { 
   	  font-size: 18px; 
    	  line-height: 22px; 
@@ -4257,46 +4268,59 @@ button.tab-link.tab_link.active {
 	}
 
 
-.filterbox {
-    display: flex;
-    overflow-x: auto; /* Enable horizontal scroll */
-    width: 100%; /* Or a fixed width */
-    gap: 10px; /* Optional spacing between items */
-}
-.filterbox > div {
-    width: 150px;
-    /* flex: 0 0 auto;   */
-    /* background: #f0f0f0; */
-    /* padding: 8px; */
-	padding: 7px;
-    text-align: center;
-    border: 1px solid #e86c00;
-	border-radius: 20px
-} 
-
-
-
+	.filterbox {
+		display: flex;
+		overflow-x: auto; /* Enable horizontal scroll */
+		width: 100%; /* Or a fixed width */
+		gap: 10px; /* Optional spacing between items */
+	}
+	.filterbox > div {
+		width: 150px;
+		/* flex: 0 0 auto;   */
+		/* background: #f0f0f0; */
+		/* padding: 8px; */
+		padding: 7px;
+		text-align: center;
+		border: 1px solid #e86c00;
+		border-radius: 20px
+	} 
 
 	.collapse575{
 		position: absolute;
 		left: 0;
-		bottom: 0;
+		bottom: -37px;
 		overflow-x: auto;
 		width: 100%;
-		padding: 0;
-		background-color: #fff;
+		padding: 7px;
+		z-index: 999;
+	 
+	}
+
+	.checkboxFilter{
+		margin-top: 1px;
+		width: 16px;
+		height: 16px;
 	}
 	.ul575{ 
 		display: flex; 
 		list-style: none;
 		padding: 0; 
+		gap:10px;
 	}
 	.ul575 li{ 
-		width: 150px;
-		flex: 0 0 auto;
+		 /* width: 160px; */
+		flex: 0 0 auto; 
+		padding: 5px 5px !important;
+		border-radius: 20px;
+		border: 1px solid #ef7528;
+		background: #fff;
 	}
+	.ul575 li .form-check-label{
+		margin-right: 2rem !important;
+	} 
+	
 	.filterbox .leftfilterItems a{
-		line-height: 15px;
+		line-height: 14px;
 	}
 	.filterbox .filterPadding{
 		padding: 0px; 
@@ -4314,9 +4338,74 @@ button.tab-link.tab_link.active {
 	.ptop557{
 		padding-top: 15px !important;
 	} 
-	
+	.plh575{padding-left: 15px;}
 	.topStickyfilter{padding: 0px;}
- 
+
+	.citystext .slick-track{
+		 display: flex;
+   } 
+
+   .psm1{padding: .2rem !important;}
+
+
+   /* product  */
+   .productTitle, .product_mrp_, .current_mrp, .price_off, .header_select span {
+	    font-size: 13px;
+   }
+   .addToCart_button span{font-size: 12px !important;}
+   .reviews_div{
+	margin-bottom: .50rem;
+   }
+   .select_customSize_list{padding: 0.5rem;}
+   .rating i{font-size: .8rem;} 
+   .select_customSize_list>div label {
+   		 margin-left: 10px;
+  	     font-size: 12px;
+	}
+	.sizeWise {
+		width: 15px;
+		height: 15px;
+	}
+	.no-gutters{
+		margin-bottom: 0rem !important;
+	}
+	.colections:nth-of-type(1),
+	.colections:nth-of-type(3) {
+		 padding-right: 5px !important;
+	}
+	.colections:nth-of-type(2),
+	.colections:nth-of-type(4) {
+		 padding-left: 5px !important;
+	}
+
+	/* .slick-slide img{
+		height: 200px !important;
+		background-size: cover !important;
+		background-position: center center;
+	} */
+
+	.products575:nth-child(odd){ 
+		padding-right: 2px !important;
+		padding-left: 5px !important;
+	 
+	}
+	.products575:nth-child(even){ 
+		padding-left: 2px !important;
+		padding-right: 5px !important;
+	}
+
+	.fixedpadding575{
+		padding-left: 5px !important;
+		padding-right: 5px !important;
+	}
+
+	.headingtext575 h1{font-size: 15px !important; }
+	.headingtext575{padding-left: 0px !important;}
+	
+	.col9575{
+		margin-top: 2rem;
+		z-index: 0;
+	}
 }
 
 .mob_home_banner {
@@ -4544,20 +4633,7 @@ input[type=number]::-webkit-inner-spin-button {
 	color: #999;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 

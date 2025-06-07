@@ -15,7 +15,7 @@
                     <div class="col-lg-9">
                         <input type="text" value="{{ $postcode->pincode ?? '' }}" id="pincode" class="form-control aiz-selectpicker" name="pincode" required placeholder="Pincode">
                         @error('pincode')
-                        <p style="color:red;">{{ $message }}</p>
+                        <p style="color:red;"><b>{{ $message }}</b></p>
                         @enderror
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                     <div class="col-lg-9">
                         <input type="text" id="area_name" value="{{ $postcode->area_name ?? '' }}" class="form-control aiz-selectpicker" name="area_name" required placeholder="Area">
                         @error('area_name')
-                        <p style="color:red;">{{ $message }}</p>
+                        <p style="color:red;"><b>{{ $message }}</b></p>
                         @enderror
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="col-lg-9">
                         <input type="text" id="city" value="{{ $postcode->city ?? '' }}" class="form-control aiz-selectpicker" name="city" required placeholder="City">
                         @error('city')
-                        <p style="color:red;">{{ $message }}</p>
+                        <p style="color:red;"><b>{{ $message }}</b></p>
                         @enderror
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     <div class="col-lg-9">
                         <input type="text" id="district" value="{{ $postcode->district ?? '' }}" class="form-control aiz-selectpicker" name="district" required placeholder="District">
                         @error('district')
-                        <p style="color:red;">{{ $message }}</p>
+                        <p style="color:red;"><b>{{ $message }}</b></p>
                         @enderror
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <div class="col-lg-9">
                         <input type="text" id="state" value="{{ $postcode->state ?? '' }}" class="form-control aiz-selectpicker" name="state" required placeholder="State">
                         @error('state')
-                        <p style="color:red;">{{ $message }}</p>
+                        <p style="color:red;"><b>{{ $message }}</b></p>
                         @enderror
                     </div>
                 </div>
